@@ -1,0 +1,134 @@
+import React, { useState } from "react";
+import { useDispatch } from 'react-redux'
+
+import * as sessionActions from "../../store/session";
+
+function NewUser({ props }) {
+    const { setStep, handleCancel, setNewOwnerId } = props;
+    const dispatch = useDispatch();
+
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
+    const [number, setNumber] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
+    const [password, setPassword] = useState("");
+    const [errors, setErrors] = useState([]);
+
+    const handleNext = (e) => {
+        e.preventDefault();
+        if (password === confirmPassword) {
+            const phoneNumber = number.split("-").join("");
+            setErrors([]);
+            console.log(name);
+            return dispatch(sessionActions.signupUser({
+                name,
+                email,
+                phoneNumber,
+                admin: true,
+                farmer: false,
+                password,
+            }))
+                .then(async (res) => {
+                    const user = res.json();
+                    console.log("******* userId", user.id);
+                    setNewOwnerId(user.id);
+                    setStep(2.5);
+                })
+                .catch(async (res) => {
+                    const data = await res.json();
+                    if (data && data.errors) setErrors(data.errors);
+                });
+        }
+        return setErrors(['Confirm Password field must be the same as the Password field']);
+    };
+
+    return (
+        <>
+            <form className="signup-form" onSubmit={handleNext}>
+                {errors.map((error, idx) => (
+                    <div className="signup-error" key={idx}>{error}</div>)
+                )}
+
+                <input
+                    type="text"
+                    className="form-input"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    placeholder="Please enter your name"
+                    required
+                />
+
+                <input
+                    type="text"
+                    className="form-input"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="Please enter your email"
+                    required
+                />
+
+                <div className="phone-format">Please input in xxx-xxx-xxxx format.</div>
+                <input
+                    type="text"
+                    className="form-input"
+                    value={number}
+                    onChange={(e) => setNumber(e.target.value)}
+                    placeholder="Please enter your phone number"
+                    required
+                />
+
+                <input
+                    type="password"
+                    className="form-input"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    placeholder="Please enter a password"
+                    required
+                />
+
+                <input
+                    type="password"
+                    className="form-input"
+                    value={confirmPassword}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
+                    placeholder="Please confirm your password"
+                    required
+                />
+
+                <div className="fields-required">All fields are required</div>
+
+                <div className="signup-button-container">
+                    <button
+                        className="bb-wt signup-cancel-button"
+                        onClick={handleCancel}
+                    >
+                        Cancel
+                    </button>
+                    <div id="signup-buttons-right">
+                        <button
+                            className="basic-button"
+                            onClick={() => setStep(1)}
+                        >
+                            Back
+                        </button>
+                        <button
+                            type="submit"
+                            id="key-next-button"
+                            className="bb-wt"
+                            onClick={handleNext}
+                        >
+                            Next
+                        </button>
+                    </div>
+                </div>
+                <div
+                    id="newuser-login-redirect"
+                >
+                    Already have an account?
+                </div>
+            </form>
+        </>
+    )
+}
+
+export default NewUser;

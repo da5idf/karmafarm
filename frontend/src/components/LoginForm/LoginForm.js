@@ -33,7 +33,7 @@ function LoginForm() {
     return (
         <div id="login-hero">
             <FormBanner />
-            <div id="login-form-title"></div>
+            <div id="login-form-title">Welcome Back!</div>
             <form id="login-form" onSubmit={handleSubmit}>
                 <div id="login-errors">
                     {errors.map((error, idx) => (

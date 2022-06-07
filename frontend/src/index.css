@@ -93,3 +93,11 @@ form:invalid > button {
     color: rgb(175, 175, 175);
     cursor: not-allowed;
 }
+
+form input {
+    margin-bottom: 1rem;
+}
+
+form input:last-of-type {
+    margin-bottom: 0;
+}

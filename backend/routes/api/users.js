@@ -11,33 +11,31 @@ const router = express.Router();
 // Validate sign up
 const validateSignup = [
     check('email')
-        .exists({ checkFalsy: true })
         .isEmail()
         .withMessage('Please provide a valid email.'),
-    check('username')
-        .exists({ checkFalsy: true })
+    check('name')
         .isLength({ min: 4 })
-        .withMessage('Please provide a username with at least 4 characters.'),
-    check('username')
-        .not()
-        .isEmail()
-        .withMessage('Username cannot be an email.'),
+        .withMessage('Please provide a name with at least 4 characters.'),
     check('password')
-        .exists({ checkFalsy: true })
         .isLength({ min: 6 })
         .withMessage('Password must be 6 characters or more.'),
+    check('phoneNumber')
+        .isLength(10)
+        .withMessage('Please enter a 10-digit phone number'),
     handleValidationErrors
 ];
 
 router.post('/',
     validateSignup,
     asyncHandler(async (req, res) => {
-        const { username, email, password } = req.body;
-        const user = await User.signup({ username, email, password })
+        const { name, email, phoneNumber, admin, farmer, password } = req.body;
+
+        const user = await User.signup({ name, email, phoneNumber, admin, farmer, password })
 
         if (user) {
-            setTokenCookie(res, user)
-            return res.send({ user });
+            console.log(user);
+            // setTokenCookie(res, user)
+            return res.send({ userId: user.id });
         }
     })
 );

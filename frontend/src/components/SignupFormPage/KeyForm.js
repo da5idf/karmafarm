@@ -3,22 +3,24 @@ import { csrfFetch } from '../../store/csrf';
 
 
 function KeyForm({ props }) {
+    const { setStep, handleCancel, setRestaurant } = props
+
     const [key, setKey] = useState("");
     const [error, setError] = useState("");
 
-    const { setStep, handleCancel } = props
-
     const handleNext = async () => {
-        console.log("in handleNext")
-        csrfFetch('api/validatekey', {
+        setError("")
+        csrfFetch('api/key/validate', {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
                 key
             })
         })
-            .then(() => {
-                console.log("success!")
+            .then(async (res) => {
+                const restaurant = await res.json();
+                setRestaurant(restaurant);
+                setStep(4);
             })
             .catch(async (res) => {
                 const data = await res.json();
@@ -28,8 +30,8 @@ function KeyForm({ props }) {
 
     return (
         <>
-            <div id="key-error">{error}</div>
-            <form id="key-form">
+            <div className="signup-error">{error}</div>
+            <form className="signup-form">
                 <input
                     type="text"
                     className="form-input"
@@ -39,7 +41,7 @@ function KeyForm({ props }) {
                     required
                 />
             </form>
-            <div id='signup-button-container'>
+            <div className="signup-button-container">
                 <button
                     className="bb-wt signup-cancel-button"
                     onClick={handleCancel}

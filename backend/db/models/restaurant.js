@@ -17,8 +17,16 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: { model: 'Users' }
-    }
-  }, {});
+    },
+  },
+    {
+      scopes: {
+        basic: {
+          attributes: ["name", "address", "restaurantNumber"]
+        }
+      }
+    });
+
   Restaurant.associate = function (models) {
     Restaurant.belongsTo(models.User, { foreignKey: 'userId' })
     Restaurant.hasMany(models.Member, { foreignKey: 'restaurantId' })

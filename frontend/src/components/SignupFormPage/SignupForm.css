@@ -9,7 +9,6 @@
     width: 400px;
     display: flex;
     flex-direction: column;
-    align-items: center;
 }
 
 #signup-form-title-container {
@@ -28,10 +27,36 @@
     align-self: flex-start;
 }
 
+.signup-form {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+}
+
+.signup-button-container {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.signup-error {
+    height: 19px;
+    align-self: flex-start;
+    margin-bottom: 10px;
+}
+
+.fields-required {
+    margin-top: .25rem;
+    align-self: flex-end;
+}
+
 /* ********************************************** */
 /* Prompt */
 #prompt-buttons {
-    margin-top: 2rem;
+    margin-top: 1rem;
     margin-bottom: 2rem;
     display: flex;
     justify-content: space-between;
@@ -39,9 +64,6 @@
 }
 /* ********************************************** */
 /* Prompt */
-#key-form {
-    width: 100%;
-}
 
 #key-form:invalid ~ div * #key-next-button {
     background-color: #f6f6f6;
@@ -49,26 +71,23 @@
     cursor: not-allowed;
 }
 
-#key-error {
-    height: 19px;
-    align-self: flex-start;
-    margin-bottom: 10px;
-}
-
 /* ********************************************** */
-#signup-form {
-    margin-top: 1rem;
-    display: flex;
-    flex-direction: column;
-    width: 400px;
-    gap: 1rem;
+/* New User */
+#newuser-login-redirect {
+    width: 100%;
+    text-align: center;
+    background-color: #7EBEC5;
+    padding: .5rem;
+    border-radius: 5px;
+    font-size: 20px;
+    font-weight: 400;
+    color: white;
+    outline: 2px solid #7EBEC5;
 }
 
-#signup-button-container {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    margin-top: 1rem;
+#newuser-login-redirect:hover {
+    cursor: pointer;
+    outline: 2px solid black
 }
 
 #signup-buttons-right {
