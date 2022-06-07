@@ -1,0 +1,18 @@
+#form-banner-hero {
+    width: 100%;
+    padding: 1rem;
+    background-color: #7EBEC5;
+    display: flex;
+    gap: .75rem;
+}
+
+#form-banner-karma {
+    font-family: Arimo;
+    font-size: 40px;
+}
+
+#form-banner-farm {
+    font-family: Arimo;
+    font-size: 40px;
+    color: #187A4A;
+}

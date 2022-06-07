@@ -6,6 +6,7 @@ import SignupFormPage from "./components/SignupFormPage";
 import Navigation from "./components/Navigation";
 import * as sessionActions from "./store/session";
 import SplashPage from "./components/SplashPage";
+import LoginForm from "./components/LoginForm";
 
 function App() {
   const dispatch = useDispatch();
@@ -22,8 +23,11 @@ function App() {
       <div id="app-hero">
         {isLoaded && (
           <Switch>
-            <Route path="/">
+            <Route exact path="/">
               <SplashPage />
+            </Route>
+            <Route path="/login">
+              <LoginForm />
             </Route>
             <Route path="/signup">
               <SignupFormPage />
