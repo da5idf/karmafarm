@@ -35,6 +35,9 @@ module.exports = (sequelize, DataTypes) => {
     key: {
       type: DataTypes.STRING,
     },
+    phoneNumber: {
+      type: DataTypes.INTEGER,
+    },
     hashedPassword: {
       type: DataTypes.STRING.BINARY,
       allowNull: false,
@@ -103,7 +106,8 @@ module.exports = (sequelize, DataTypes) => {
   };
 
   User.associate = function (models) {
-    // associations can be defined here
+    User.hasMany(models.Restaurant, { foreignKey: 'userId' })
+    User.hasMany(models.Product, { foreignKey: 'userId' })
   };
 
   return User;

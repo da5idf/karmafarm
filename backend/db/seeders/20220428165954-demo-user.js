@@ -10,30 +10,39 @@ module.exports = {
         admin: true,
         farmer: true,
         key: 'k1k3naz92',
-        hashedPassword: bcrypt.hashSync('password')
+        hashedPassword: bcrypt.hashSync('password'),
+        phoneNumber: 123456789,
       },
       {
-        name: 'FakeUser1',
-        email: 'user1@user.io',
+        name: 'Jeremy Long',
+        email: 'jeremy@user.io',
         admin: true,
         farmer: false,
-        key: 'na7vkjz80',
-        hashedPassword: bcrypt.hashSync('password2')
+        key: 'k1k3naz91',
+        hashedPassword: bcrypt.hashSync('password2'),
+        phoneNumber: 123456788,
       },
       {
-        name: 'FakeUser2',
-        email: 'user2@user.io',
+        name: 'Scott Bakon',
+        email: 'scott@user.io',
+        admin: true,
+        farmer: false,
+        hashedPassword: bcrypt.hashSync('password3'),
+        phoneNumber: 123456789,
+      },
+      {
+        name: 'Kai Lineman',
+        email: 'kai@user.io',
         admin: false,
         farmer: false,
-        hashedPassword: bcrypt.hashSync('password3')
-      }
+        hashedPassword: bcrypt.hashSync('password3'),
+        phoneNumber: 123456789,
+      },
     ], {});
   },
 
   down: (queryInterface, Sequelize) => {
     const Op = Sequelize.Op;
-    return queryInterface.bulkDelete('Users', {
-      username: { [Op.in]: ['Demo-lition', 'FakeUser1', 'FakeUser2'] }
-    }, {});
+    return queryInterface.bulkDelete('Users', null, {});
   }
 };
