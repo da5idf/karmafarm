@@ -5,8 +5,7 @@
     min-height: 100vh;
 }
 
-#form-title {
-    margin-top: 5rem;
+#login-form-title {
     font-size: 30px;
     font-weight: 400;
 }
@@ -21,23 +20,6 @@
 
 #login-errors {
     height: 19px;
-}
-
-#login-form input {
-    background-color: #eee;
-    font-size: 18px;
-    width: 100%;
-    padding: 10px;
-}
-
-#login-form input:focus {
-    outline: 2px solid black;
-}
-
-#login-form:invalid > button {
-    background-color: #f6f6f6;
-    color: rgb(175, 175, 175);
-    cursor: not-allowed;
 }
 
 #login-button {

@@ -4,6 +4,7 @@
     background-color: #7EBEC5;
     display: flex;
     gap: .75rem;
+    margin-bottom: 5rem;
 }
 
 #form-banner-karma {

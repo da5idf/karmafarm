@@ -36,6 +36,14 @@ input:focus-visible {
     width: 100%;
 }
 
+.flex-button-container {
+    display: flex;
+    gap: 1rem;
+    margin: .5rem;
+    width: 50%;
+    justify-content: space-between;
+}
+
 .bb-wt {
     background-color: black;
     color: white;
@@ -66,4 +74,22 @@ input:focus-visible {
     right: 7px;
     top: 9px;
     width: 25px;
+}
+
+.form-input {
+    background-color: #eee;
+    font-size: 18px;
+    width: 100%;
+    padding: 10px;
+}
+
+.form-input:focus {
+    outline: 2px solid black;
+}
+
+
+form:invalid > button {
+    background-color: #f6f6f6;
+    color: rgb(175, 175, 175);
+    cursor: not-allowed;
 }

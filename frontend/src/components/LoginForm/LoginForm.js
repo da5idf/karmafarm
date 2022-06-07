@@ -33,7 +33,7 @@ function LoginForm() {
     return (
         <div id="login-hero">
             <FormBanner />
-            <div id="form-title">Welcome Back!</div>
+            <div id="login-form-title"></div>
             <form id="login-form" onSubmit={handleSubmit}>
                 <div id="login-errors">
                     {errors.map((error, idx) => (
@@ -43,6 +43,7 @@ function LoginForm() {
                 <div className="form-field">
                     <input
                         type="text"
+                        className="form-input"
                         value={credential}
                         onChange={(e) => setCredential(e.target.value)}
                         placeholder="Enter your email"
@@ -53,6 +54,7 @@ function LoginForm() {
 
                     <input
                         type={isPassword}
+                        className="form-input"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         placeholder="Enter your password"
