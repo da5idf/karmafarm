@@ -1,25 +1,33 @@
 import React, { useState } from "react";
-import * as sessionActions from "../../store/session";
 import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 
-import './LoginForm.css'
+import "./LoginForm.css"
 import FormBanner from "../FormBanner";
+import PasswordToggel from "../PasswordToggle"
+import * as sessionActions from "../../store/session";
 
 function LoginForm() {
     const dispatch = useDispatch();
+    const history = useHistory();
     const [credential, setCredential] = useState("");
     const [password, setPassword] = useState("");
+    const [isPassword, setIsPassword] = useState("password");
     const [errors, setErrors] = useState([]);
 
     const handleSubmit = (e) => {
         e.preventDefault();
         setErrors([]);
-        return dispatch(sessionActions.login({ credential, password })).catch(
-            async (res) => {
-                const data = await res.json();
-                if (data && data.errors) setErrors(data.errors);
-            }
-        );
+        dispatch(sessionActions.login({ credential, password }))
+            .then(() => {
+                history.push("/")
+            })
+            .catch(
+                async (res) => {
+                    const data = await res.json();
+                    if (data && data.errors) setErrors(data.errors)
+                }
+            );
     };
 
     return (
@@ -32,22 +40,26 @@ function LoginForm() {
                         <div key={idx}>{error}</div>
                     ))}
                 </div>
-                <input
-                    type="text"
-                    value={credential}
-                    onChange={(e) => setCredential(e.target.value)}
-                    placeholder="Enter your email"
-                    required
-                />
+                <div className="form-field">
+                    <input
+                        type="text"
+                        value={credential}
+                        onChange={(e) => setCredential(e.target.value)}
+                        placeholder="Enter your email"
+                        required
+                    />
+                </div>
+                <div className="form-field">
 
-                <input
-                    type="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    placeholder="Enter your password"
-                    required
-                />
-
+                    <input
+                        type={isPassword}
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        placeholder="Enter your password"
+                        required
+                    />
+                    <PasswordToggel isPassword={isPassword} setIsPassword={setIsPassword} />
+                </div>
                 <button
                     type="submit"
                     id="login-button"

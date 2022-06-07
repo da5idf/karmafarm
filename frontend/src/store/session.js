@@ -26,6 +26,7 @@ export const login = (user) => async (dispatch) => {
     );
     const data = await response.json();
     dispatch(setUserSession(data.user));
+    console.log("response in thunk", response)
     return response;
 };
 
