@@ -54,11 +54,11 @@ module.exports = (sequelize, DataTypes) => {
       },
       scopes: {
         currentUser: {
-          attributes: { exclude: ['hashedPassword'] }
+          attributes: { exclude: ['hashedPassword', 'key'] }
         },
-        loginUser: {
+        allScope: {
           attributes: {}
-        }
+        },
       }
     });
 
@@ -81,12 +81,9 @@ module.exports = (sequelize, DataTypes) => {
   // Static Method to login a User
   User.login = async function ({ credential, password }) {
     const { Op } = require('sequelize');
-    const user = await User.scope('loginUser').findOne({
+    const user = await User.scope('allScope').findOne({
       where: {
-        [Op.or]: {
-          username: credential,
-          email: credential
-        }
+        email: credential
       }
     });
     if (user && user.validatePassword(password)) {

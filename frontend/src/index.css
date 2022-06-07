@@ -1,1 +1,49 @@
-/* TODO Add site wide styles */
+@import url('https://fonts.googleapis.com/css2?family=Arimo:wght@500;600&family=Roboto:wght@300;400;500&display=swap');
+* {
+    box-sizing: border-box;
+    font-family: "Roboto", "sans-serif";
+    font-weight: 300;
+}
+
+root {
+    margin: 0;
+}
+
+body {
+    margin: 0;
+}
+
+button {
+    border: none;
+    background-color: transparent;
+    padding: .25rem .5rem;
+    font-size: 18px;
+    border-radius: 500px;
+    cursor: pointer;
+    font-weight: 400;
+}
+
+#app-hero {
+    background-color: #27B364;
+    min-height: 100vh;
+    width: 100%;
+}
+
+.bb-wt {
+    background-color: black;
+    color: white;
+}
+
+.bb-wt:hover {
+    background-color: #333;
+}
+
+.basic-button {
+    background-color: white;
+    border: 1px solid black;
+}
+
+.basic-button:hover {
+    background-color: #ccc;
+    border: 1px solid black;
+}
