@@ -8,6 +8,7 @@ import * as sessionActions from "./store/session";
 import SplashPage from "./components/SplashPage";
 import LoginForm from "./components/LoginForm";
 import HomePage from "./components/HomePage";
+import NewOrder from "./components/NewOrder/NewOrder";
 
 function App() {
   const dispatch = useDispatch();
@@ -41,6 +42,10 @@ function App() {
             </Route>
             <Route path="/signup">
               <SignupFormPage />
+            </Route>
+            <Route path="/restaurants/:restaurantId/orders/new">
+              <Navigation />
+              <NewOrder />
             </Route>
           </Switch>
         )}

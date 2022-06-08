@@ -40,6 +40,10 @@ input:focus-visible {
     display: flex;
 }
 
+.page-hero {
+    padding: 3rem;
+}
+
 .flex-button-container {
     display: flex;
     gap: 1rem;

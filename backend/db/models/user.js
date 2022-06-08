@@ -107,8 +107,14 @@ module.exports = (sequelize, DataTypes) => {
 
   User.associate = function (models) {
     User.hasMany(models.Restaurant, { foreignKey: 'userId' })
-    User.belongsToMany(models.Restaurant, { through: models.Member })
     User.hasMany(models.Product, { foreignKey: 'userId' })
+
+    const columnMapping = {
+      through: "Member",
+      otherKey: "restaurantId",
+      foreignKey: "userId"
+    }
+    User.belongsToMany(models.Restaurant, columnMapping)
   };
 
   return User;
