@@ -2,7 +2,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
-import LoginFormModal from '../LoginForm';
+import LoginForm from '../LoginForm';
 import './Navigation.css';
 
 function Navigation({ isLoaded }) {
@@ -16,7 +16,7 @@ function Navigation({ isLoaded }) {
     } else {
         sessionLinks = (
             <>
-                <LoginFormModal />
+                <LoginForm />
                 <NavLink to="/signup">Sign Up</NavLink>
             </>
         );

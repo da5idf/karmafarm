@@ -1,14 +1,16 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 
 import "./LoginForm.css"
 import FormBanner from "../FormBanner";
 import PasswordToggel from "../PasswordToggle"
 import * as sessionActions from "../../store/session";
+import HomePage from "../HomePage";
 
 function LoginForm() {
     const dispatch = useDispatch();
+    const user = useSelector(state => state.session.user)
     const history = useHistory();
     const [credential, setCredential] = useState("");
     const [password, setPassword] = useState("");
@@ -29,6 +31,10 @@ function LoginForm() {
                 }
             );
     };
+
+    if (user?.id) {
+        return <HomePage />
+    }
 
     return (
         <div id="login-hero">
