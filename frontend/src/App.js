@@ -18,14 +18,23 @@ function App() {
     dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
   }, [dispatch]);
 
+  const rootView = (
+    user ?
+      <>
+        <Navigation />
+        <HomePage />
+      </>
+      :
+      <SplashPage />
+  )
+
   return (
     <>
-      {user && <Navigation isLoaded={isLoaded} />}
       <div id="app-hero">
         {isLoaded && (
           <Switch>
             <Route exact path="/">
-              {user ? <HomePage /> : <SplashPage />}
+              {rootView}
             </Route>
             <Route path="/login">
               <LoginForm />

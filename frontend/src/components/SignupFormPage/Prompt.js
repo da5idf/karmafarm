@@ -2,7 +2,7 @@ import React from "react";
 
 function Prompt({ props }) {
 
-    const { setStep, handleCancel } = props
+    const { setStep, handleCancel, newUser, key } = props
 
     return (
         <>
@@ -10,7 +10,7 @@ function Prompt({ props }) {
                 <div id="prompt-left">
                     <button
                         className="basic-button"
-                        onClick={() => setStep(2)}
+                        onClick={() => setStep(newUser)}
                     >
                         New Restaurant?
                     </button>
@@ -18,7 +18,7 @@ function Prompt({ props }) {
                 <div id="prompt-right">
                     <button
                         className="basic-button"
-                        onClick={() => setStep(3)}
+                        onClick={() => setStep(key)}
                     >
                         Joining a team?
                     </button>

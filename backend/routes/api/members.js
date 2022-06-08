@@ -2,32 +2,31 @@ const express = require('express')
 const asyncHandler = require('express-async-handler');
 
 const router = express.Router();
-const { User, Restaurant } = require('../../db/models');
+const { User, Restaurant, Member } = require('../../db/models');
 
 // Add Member
 router.post(
     '/',
     asyncHandler(async (req, res, next) => {
-        const { key } = req.body;
+        const { userId, restaurantId } = req.body;
 
-        const user = await User.findOne({
-            where: { key }
-        })
+        // const user = await User.findOne({
+        //     where: { id: userId }
+        // })
 
-        if (user) {
-            const restaurant = await Restaurant.scope('basic').findOne({
-                where: { ownerId: user.id }
+        // const restaurant = await Restaurant.findOne({
+        //     where: { id: restaurantId }
+        // })
+
+        // if (user && restaurant) {
+        if (true) {
+            const member = await Member.create({
+                userId,
+                restaurantId
             })
-            return res.json(restaurant)
-
-        } else {
-            const err = new Error("Key match failure");
-            err.status = 401;
-            err.title = "Key submission failed";
-            err.errors = ["The key you provided does not match any team's key"];
-            return next(err);
+            return res.json({ member })
         }
-    }
-    ));
+    })
+);
 
 module.exports = router;

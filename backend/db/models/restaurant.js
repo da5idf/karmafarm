@@ -6,7 +6,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
     },
     restaurantNumber: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
       allowNull: false
     },
     address: {
@@ -22,7 +22,7 @@ module.exports = (sequelize, DataTypes) => {
     {
       scopes: {
         basic: {
-          attributes: ["name", "address", "restaurantNumber"]
+          attributes: ["id", "name", "address", "restaurantNumber"]
         }
       }
     });

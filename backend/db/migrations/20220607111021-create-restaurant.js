@@ -14,7 +14,7 @@ module.exports = {
       },
       restaurantNumber: {
         allowNull: false,
-        type: Sequelize.INTEGER
+        type: Sequelize.STRING
       },
       address: {
         allowNull: false,

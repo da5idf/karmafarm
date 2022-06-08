@@ -16,7 +16,7 @@ const validateSignup = [
 router.post(
     '/new',
     asyncHandler(async (req, res, next) => {
-        const { name, address, restaurantNumber } = req.body;
+        const { name, address, restaurantNumber, ownerId } = req.body;
 
         const restaurant = await Restaurant.scope('basic').findOne({
             where: {
@@ -27,17 +27,15 @@ router.post(
             }
         })
 
-        console.log("******* rest", restaurant);
-
         if (!restaurant) {
-            // needs ownerId
             const newRest = await Restaurant.create({
                 name,
                 address,
-                restaurantNumber
+                restaurantNumber,
+                ownerId
             });
 
-            console.log(newRest);
+            return res.json(newRest);
 
         } else {
             const err = new Error("Restaurant Error");
@@ -46,22 +44,6 @@ router.post(
             err.errors = ["Address and or number belong to another account."];
             return next(err);
         }
-
-
-
-        // if (user) {
-        //     const restaurant = await Restaurant.scope('basic').findOne({
-        //         where: { ownerId: user.id }
-        //     })
-        //     return res.json(restaurant)
-
-        // } else {
-        //     const err = new Error("Key match failure");
-        //     err.status = 401;
-        //     err.title = "Key submission failed";
-        //     err.errors = ["The key you provided does not match any team"];
-        //     return next(err);
-        // }
     }
     ));
 

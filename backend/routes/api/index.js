@@ -10,6 +10,6 @@ router.use('/session', sessionRouter);
 router.use('/users', usersRouter);
 router.use('/key', keyRouter);
 router.use('/restaurants', restaurantRouter);
-router.use('./members', memberRouter);
+router.use('/members', memberRouter);
 
 module.exports = router;

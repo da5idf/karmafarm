@@ -1,10 +1,12 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { csrfFetch } from "../../store/csrf";
 
 function NewRestaurant({ props }) {
-    const { newOwnerId, handleCancel } = props;
+    const { handleCancel } = props;
     const history = useHistory();
+    const user = useSelector(state => state.session.user);
 
     const [error, setError] = useState("");
     const [name, setName] = useState("");
@@ -22,10 +24,19 @@ function NewRestaurant({ props }) {
                 name,
                 address,
                 restaurantNumber,
-                ownerId: newOwnerId
+                ownerId: user.id
             })
         })
             .then(async (res) => {
+                const newRestaurant = await res.json();
+                csrfFetch('/api/members', {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        userId: user.id,
+                        restaurantId: newRestaurant.id
+                    })
+                })
                 history.push("/")
             })
             .catch(async (res) => {

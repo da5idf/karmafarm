@@ -1,11 +1,15 @@
 import React, { useState } from "react";
 import { useDispatch } from 'react-redux'
+import { useHistory } from 'react-router-dom';
+import { csrfFetch } from "../../store/csrf";
 
 import * as sessionActions from "../../store/session";
 
 function NewUser({ props }) {
-    const { setStep, handleCancel, setNewOwnerId } = props;
+    const { setStep, handleCancel, restaurant, back, next } = props;
+
     const dispatch = useDispatch();
+    const history = useHistory();
 
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
@@ -34,8 +38,24 @@ function NewUser({ props }) {
                 password,
             }))
                 .then(async (res) => {
-                    console.log("do we get in then?")
-                    setStep(2.5);
+                    // next if creating new account with restaurant
+                    // bring to homepage if joining a team
+                    if (next) {
+                        setStep(next);
+
+                    } else {
+                        // create new user <-> restaurant member record
+                        csrfFetch('/api/members', {
+                            method: "POST",
+                            headers: { "Content-Type": "application/json" },
+                            body: JSON.stringify({
+                                userId: res.user.id,
+                                restaurantId: restaurant.id
+                            })
+                        })
+
+                        history.push("/")
+                    }
                 })
                 .catch(async (res) => {
                     const data = await res.json();
@@ -115,7 +135,7 @@ function NewUser({ props }) {
                 <div id="signup-buttons-right">
                     <button
                         className="basic-button"
-                        onClick={() => setStep(1)}
+                        onClick={() => setStep(back)}
                     >
                         Back
                     </button>
