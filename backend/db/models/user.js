@@ -64,8 +64,8 @@ module.exports = (sequelize, DataTypes) => {
 
   // Instance Method to return an obj with User information OK to save to JWT Token
   User.prototype.toSafeObject = function () {
-    const { id, username, email } = this;
-    return { id, username, email };
+    const { id, name, admin, farmer, email } = this;
+    return { id, name, admin, farmer, email };
   };
 
   // Instance Method to validate password
@@ -107,6 +107,7 @@ module.exports = (sequelize, DataTypes) => {
 
   User.associate = function (models) {
     User.hasMany(models.Restaurant, { foreignKey: 'userId' })
+    User.belongsToMany(models.Restaurant, { through: models.Member })
     User.hasMany(models.Product, { foreignKey: 'userId' })
   };
 

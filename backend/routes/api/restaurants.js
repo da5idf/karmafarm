@@ -5,7 +5,7 @@ const { check } = require('express-validator');
 
 const { handleValidationErrors } = require('../../utils/validation');
 const router = express.Router();
-const { User, Restaurant } = require('../../db/models');
+const { User, Restaurant, Orders } = require('../../db/models');
 
 // Validate restaurant sign up
 const validateSignup = [
@@ -44,7 +44,20 @@ router.post(
             err.errors = ["Address and or number belong to another account."];
             return next(err);
         }
-    }
-    ));
+    })
+);
+
+router.get(
+    '/:restaurantId/orders',
+    asyncHandler(async (req, res, next) => {
+        const restaurantId = req.params;
+        console.log(restaurantId)
+        const orders = await Orders.findAll({
+            where: { restaurantId }
+        })
+
+        console.log(orders);
+    })
+)
 
 module.exports = router;

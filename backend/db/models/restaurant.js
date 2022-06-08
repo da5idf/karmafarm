@@ -29,6 +29,7 @@ module.exports = (sequelize, DataTypes) => {
 
   Restaurant.associate = function (models) {
     Restaurant.belongsTo(models.User, { foreignKey: 'userId' })
+    Restaurant.belongsToMany(models.User, { through: models.Member })
     Restaurant.hasMany(models.Member, { foreignKey: 'restaurantId' })
   };
   return Restaurant;

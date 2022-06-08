@@ -39,4 +39,12 @@ router.post('/',
     })
 );
 
+router.get('/:userId/restaurants',
+    asyncHandler(async (req, res) => {
+        const userId = req.params;
+
+    })
+)
+
+
 module.exports = router;

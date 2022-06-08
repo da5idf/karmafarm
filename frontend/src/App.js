@@ -21,7 +21,7 @@ function App() {
   const rootView = (
     user ?
       <>
-        <Navigation />
+        <Navigation isLoaded={isLoaded} />
         <HomePage />
       </>
       :
