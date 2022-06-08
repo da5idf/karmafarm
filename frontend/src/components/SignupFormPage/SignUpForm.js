@@ -45,8 +45,8 @@ function SignUpForm() {
             props = {
                 setStep, handleCancel, newOwnerId,
             }
-            title = "We can't wait to work with you"
-            subtitle = "Plase fill out your restaurant info"
+            title = "Excellent! Your personal account has been created"
+            subtitle = "Now, please fill out your restaurant info"
             view = <NewRestaurant props={props} />
             break;
         case 3:

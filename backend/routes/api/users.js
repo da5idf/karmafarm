@@ -35,7 +35,7 @@ router.post('/',
         if (user) {
             console.log(user);
             // setTokenCookie(res, user)
-            return res.send({ userId: user.id });
+            return res.send({ user });
         }
     })
 );

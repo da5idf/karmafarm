@@ -20,7 +20,7 @@ function NewUser({ props }) {
             const phoneNumber = number.split("-").join("");
             setErrors([]);
             console.log(name);
-            return dispatch(sessionActions.signupUser({
+            const data = dispatch(sessionActions.signupUser({
                 name,
                 email,
                 phoneNumber,
@@ -28,23 +28,27 @@ function NewUser({ props }) {
                 farmer: false,
                 password,
             }))
-                .then(async (res) => {
-                    const user = res.json();
-                    console.log("******* userId", user.id);
-                    setNewOwnerId(user.id);
-                    setStep(2.5);
-                })
+                // .then(async (res) => {
+                //     const user = res.json();
+                //     setNewOwnerId(user.id);
+                //     // dispatch(sessionActions.restoreUser());
+                //     setStep(2.5);
+                // })
                 .catch(async (res) => {
                     const data = await res.json();
                     if (data && data.errors) setErrors(data.errors);
                 });
+
+            if (data) {
+                return setStep(2.5);
+            }
         }
         return setErrors(['Confirm Password field must be the same as the Password field']);
     };
 
     return (
         <>
-            <form className="signup-form" onSubmit={handleNext}>
+            <form className="signup-form">
                 {errors.map((error, idx) => (
                     <div className="signup-error" key={idx}>{error}</div>)
                 )}
@@ -97,36 +101,35 @@ function NewUser({ props }) {
 
                 <div className="fields-required">All fields are required</div>
 
-                <div className="signup-button-container">
-                    <button
-                        className="bb-wt signup-cancel-button"
-                        onClick={handleCancel}
-                    >
-                        Cancel
-                    </button>
-                    <div id="signup-buttons-right">
-                        <button
-                            className="basic-button"
-                            onClick={() => setStep(1)}
-                        >
-                            Back
-                        </button>
-                        <button
-                            type="submit"
-                            id="key-next-button"
-                            className="bb-wt"
-                            onClick={handleNext}
-                        >
-                            Next
-                        </button>
-                    </div>
-                </div>
-                <div
-                    id="newuser-login-redirect"
-                >
-                    Already have an account?
-                </div>
             </form>
+            <div className="signup-button-container">
+                <button
+                    className="bb-wt signup-cancel-button"
+                    onClick={handleCancel}
+                >
+                    Cancel
+                </button>
+                <div id="signup-buttons-right">
+                    <button
+                        className="basic-button"
+                        onClick={() => setStep(1)}
+                    >
+                        Back
+                    </button>
+                    <button
+                        onClick={handleNext}
+                        id="key-next-button"
+                        className="bb-wt submit-button"
+                    >
+                        Next
+                    </button>
+                </div>
+            </div>
+            <div
+                id="newuser-login-redirect"
+            >
+                Already have an account?
+            </div>
         </>
     )
 }

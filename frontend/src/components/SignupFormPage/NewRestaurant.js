@@ -1,8 +1,10 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 import { csrfFetch } from "../../store/csrf";
 
 function NewRestaurant({ props }) {
-    const { setStep, handleCancel } = props;
+    const { newOwnerId, handleCancel } = props;
+    const history = useHistory();
 
     const [error, setError] = useState("");
     const [name, setName] = useState("");
@@ -19,11 +21,12 @@ function NewRestaurant({ props }) {
             body: JSON.stringify({
                 name,
                 address,
-                restaurantNumber
+                restaurantNumber,
+                ownerId: newOwnerId
             })
         })
             .then(async (res) => {
-
+                history.push("/")
             })
             .catch(async (res) => {
                 const data = await res.json();
@@ -34,7 +37,7 @@ function NewRestaurant({ props }) {
     return (
         <>
             <div className="signup-error">{error}</div>
-            <form className="signup-form">
+            <form className="signup-form" >
                 <input
                     type="text"
                     className="form-input"
@@ -60,8 +63,10 @@ function NewRestaurant({ props }) {
                     placeholder="Please enter your restaurant's phone number"
                     required
                 />
+                <div className="fields-required">All fields are required</div>
+
             </form>
-            <div id='signup-button-container'>
+            <div className='signup-button-container'>
                 <button
                     className="bb-wt signup-cancel-button"
                     onClick={handleCancel}
@@ -70,19 +75,19 @@ function NewRestaurant({ props }) {
                 </button>
                 <div id="signup-buttons-right">
                     <button
-                        className="basic-button"
-                        onClick={() => setStep(1)}
-                    >
-                        Back
-                    </button>
-                    <button
-                        id="key-next-button"
-                        className="bb-wt"
                         onClick={handleNext}
+                        id="key-next-button"
+                        className="bb-wt submit-button"
                     >
                         Next
                     </button>
                 </div>
+            </div>
+            <div
+                className="signup-redirect"
+                onClick={() => history.push("/")}
+            >
+                Go straight to dashboard
             </div>
         </>
     )

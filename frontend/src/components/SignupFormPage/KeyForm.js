@@ -56,9 +56,9 @@ function KeyForm({ props }) {
                         Back
                     </button>
                     <button
-                        id="key-next-button"
-                        className="bb-wt"
                         onClick={handleNext}
+                        id="key-next-button"
+                        className="bb-wt submit-button"
                     >
                         Next
                     </button>

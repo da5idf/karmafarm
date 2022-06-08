@@ -62,8 +62,6 @@
     justify-content: space-between;
     width: 400px;
 }
-/* ********************************************** */
-/* Prompt */
 
 #key-form:invalid ~ div * #key-next-button {
     background-color: #f6f6f6;
@@ -71,9 +69,7 @@
     cursor: not-allowed;
 }
 
-/* ********************************************** */
-/* New User */
-#newuser-login-redirect {
+.signup-redirect {
     width: 100%;
     text-align: center;
     background-color: #7EBEC5;

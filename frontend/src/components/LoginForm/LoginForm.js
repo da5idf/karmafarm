@@ -65,7 +65,7 @@ function LoginForm() {
                 <button
                     type="submit"
                     id="login-button"
-                    className="bb-wt"
+                    className="bb-wt submit-button"
                 >
                     Log In
                 </button>

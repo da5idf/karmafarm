@@ -88,7 +88,13 @@ input:focus-visible {
 }
 
 
-form:invalid > button {
+form:invalid ~ div .submit-button {
+    background-color: #f6f6f6;
+    color: rgb(175, 175, 175);
+    cursor: not-allowed;
+}
+
+form:invalid .submit-button {
     background-color: #f6f6f6;
     color: rgb(175, 175, 175);
     cursor: not-allowed;

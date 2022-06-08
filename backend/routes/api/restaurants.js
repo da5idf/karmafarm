@@ -1,11 +1,18 @@
 const express = require('express')
 const asyncHandler = require('express-async-handler');
 const { Op } = require('sequelize');
+const { check } = require('express-validator');
 
+const { handleValidationErrors } = require('../../utils/validation');
 const router = express.Router();
 const { User, Restaurant } = require('../../db/models');
 
-// Verify Key
+// Validate restaurant sign up
+const validateSignup = [
+    check('address')
+]
+
+
 router.post(
     '/new',
     asyncHandler(async (req, res, next) => {

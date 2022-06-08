@@ -57,7 +57,7 @@ export const signupUser = ({ name, email, phoneNumber, admin, farmer, password }
 
     const data = await response.json();
     dispatch(setUserSession(data.user));
-    return response;
+    return data;
 }
 
 export const logout = () => async (dispatch) => {
