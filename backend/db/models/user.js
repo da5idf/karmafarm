@@ -36,7 +36,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
     },
     phoneNumber: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
     },
     hashedPassword: {
       type: DataTypes.STRING.BINARY,
@@ -54,11 +54,11 @@ module.exports = (sequelize, DataTypes) => {
       },
       scopes: {
         currentUser: {
-          attributes: { exclude: ['hashedPassword'] }
+          attributes: { exclude: ['hashedPassword', 'key'] }
         },
-        loginUser: {
+        allScope: {
           attributes: {}
-        }
+        },
       }
     });
 
@@ -81,12 +81,9 @@ module.exports = (sequelize, DataTypes) => {
   // Static Method to login a User
   User.login = async function ({ credential, password }) {
     const { Op } = require('sequelize');
-    const user = await User.scope('loginUser').findOne({
+    const user = await User.scope('allScope').findOne({
       where: {
-        [Op.or]: {
-          username: credential,
-          email: credential
-        }
+        email: credential
       }
     });
     if (user && user.validatePassword(password)) {
@@ -95,11 +92,14 @@ module.exports = (sequelize, DataTypes) => {
   };
 
   // Static method to sign up a User
-  User.signup = async function ({ username, email, password }) {
+  User.signup = async function ({ name, email, phoneNumber, admin, farmer, password }) {
     const hashedPassword = bcrypt.hashSync(password);
     const user = await User.create({
-      username,
+      name,
       email,
+      phoneNumber,
+      admin,
+      farmer,
       hashedPassword
     });
     return await User.scope('currentUser').findByPk(user.id);

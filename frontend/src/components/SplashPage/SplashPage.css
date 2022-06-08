@@ -1,0 +1,59 @@
+#splash-hero {
+    display: flex;
+    width: 100%;
+    height: 100vh;
+    overflow-y: hidden;
+    position: relative;
+}
+
+#splash-img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: url("../../images/karmafarm.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    z-index: 1;
+}
+
+#splash-content-container {
+    display: flex;
+    width: 100%;
+}
+
+#splash-left {
+    z-index: 2;
+    width: 65%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 3rem;
+}
+
+#splash-title {
+    font-family: Arimo, sans-serif;
+    font-size: 40px;
+    font-weight: 500;
+    margin-bottom: 2rem;
+    color: #815606;
+    height: 30%;
+}
+
+#splash-slogan {
+    font-size: 30px;
+}
+
+#splash-right {
+    z-index: 2;
+    padding: 3rem;
+    width: 35%;
+    height: fit-content;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.splash-button {
+    font-size: 20px;
+    margin-right: 1rem;
+}

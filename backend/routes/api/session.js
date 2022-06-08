@@ -24,6 +24,7 @@ router.get(
     '/',
     restoreUser,
     (req, res, next) => {
+        console.log("@@@@@@@@@@@@@@@ in get api/session")
         const { user } = req;
         if (user) {
             return res.json({

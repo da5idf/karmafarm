@@ -11,7 +11,7 @@ module.exports = {
       },
       {
         name: 'Magdalena',
-        restaurantNumber: 123456789,
+        restaurantNumber: 123456780,
         address: '205 E Biddle St, Baltimore, MD 21202',
         ownerId: 3,
       },

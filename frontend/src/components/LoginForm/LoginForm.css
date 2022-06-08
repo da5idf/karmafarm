@@ -1,0 +1,28 @@
+#login-hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+}
+
+#login-form-title {
+    font-size: 30px;
+    font-weight: 400;
+}
+
+#login-form {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+    gap: 1rem;
+}
+
+#login-errors {
+    height: 19px;
+}
+
+#login-button {
+    align-self: flex-end;
+    transition: .2s;
+}

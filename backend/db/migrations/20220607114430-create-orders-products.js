@@ -18,6 +18,11 @@ module.exports = {
         type: Sequelize.INTEGER,
         references: { model: 'Products' }
       },
+      userId: {
+        allowNull: false,
+        type: Sequelize.INTEGER,
+        references: { model: 'Users' }
+      },
       weight: {
         allowNull: false,
         type: Sequelize.NUMERIC
