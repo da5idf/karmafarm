@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { csrfFetch } from '../../store/csrf';
 
 
 function KeyForm({ props }) {
-    const { setStep, handleCancel, setRestaurant } = props
+    const { setStep, handleCancel, setRestaurant, back, next } = props
 
     const [key, setKey] = useState("");
     const [error, setError] = useState("");
@@ -20,7 +20,7 @@ function KeyForm({ props }) {
             .then(async (res) => {
                 const restaurant = await res.json();
                 setRestaurant(restaurant);
-                setStep(4);
+                setStep(next);
             })
             .catch(async (res) => {
                 const data = await res.json();
@@ -51,7 +51,7 @@ function KeyForm({ props }) {
                 <div id="signup-buttons-right">
                     <button
                         className="basic-button"
-                        onClick={() => setStep(1)}
+                        onClick={() => setStep(back)}
                     >
                         Back
                     </button>

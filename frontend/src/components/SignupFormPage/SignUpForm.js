@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useState } from "react";
 import { Redirect, useHistory } from "react-router-dom";
 
 import './SignupForm.css';
@@ -11,57 +10,68 @@ import NewRestaurant from "./NewRestaurant";
 
 function SignUpForm() {
     const history = useHistory();
-    const sessionUser = useSelector((state) => state.session.user);
 
-    const [step, setStep] = useState(1);
-    const [newOwnerId, setNewOwnerId] = useState(null);
+    const prompt = "PROMPT";
+    const key = "KEY"
+    const newUser = "NEW_USER";
+    const newRestaurant = "NEW_RESTAURANT";
+    const join = "JOIN_TEAM"
+
+    const [step, setStep] = useState(prompt);
     const [restaurant, setRestaurant] = useState(null);
-
-    if (sessionUser) return <Redirect to="/" />;
 
     const handleCancel = () => {
         setStep(1);
         return history.push("/")
     }
 
+
     let view, props, title, subtitle;
     switch (step) {
-        case 1:
+        case prompt:
             props = {
-                setStep, handleCancel
+                setStep, handleCancel,
+                newUser, key
             }
             title = "Welcome to Karma Farm!"
             view = <Prompt props={props} />
             break;
-        case 2:
+        case newUser:
             props = {
-                setStep, handleCancel, setNewOwnerId
+                setStep, handleCancel,
+                back: prompt,
+                next: newRestaurant
             }
             title = "Thanks for joining us!"
             subtitle = "Let's get your account set up first"
             view = <NewUser props={props} />
             break;
-        case 2.5:
+        case newRestaurant:
             props = {
-                setStep, handleCancel, newOwnerId,
+                handleCancel
             }
             title = "Excellent! Your personal account has been created"
             subtitle = "Now, please fill out your restaurant info"
             view = <NewRestaurant props={props} />
             break;
-        case 3:
+        case key:
             props = {
-                setStep, handleCancel, setRestaurant
+                setStep, handleCancel, setRestaurant,
+                back: prompt,
+                next: join,
             }
             title = "Please enter your admin key."
             subtitle = "your chef or manager must provide you with one."
             view = <KeyForm props={props} />
             break;
-        case 4:
+        case join:
             props = {
-                setStep, handleCancel, restaurant
+                setStep, handleCancel, restaurant,
+                back: key,
             }
-            title = "Please enter your information"
+            title = `You are joining ${restaurant.name}'s team`
+            subtitle = "Please enter your information";
+            view = <NewUser props={props} />
         default:
             <Redirect to="/" />
     }
@@ -78,13 +88,6 @@ function SignUpForm() {
             </div>
         </div>
     )
-
-    return (
-        <div id="signup-hero">
-            <FormBanner />
-
-        </div>
-    );
 }
 
 export default SignUpForm;
