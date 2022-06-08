@@ -30,7 +30,7 @@ module.exports = {
         allowNull: true,
       },
       phoneNumber: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.STRING,
       },
       hashedPassword: {
         type: Sequelize.STRING.BINARY,

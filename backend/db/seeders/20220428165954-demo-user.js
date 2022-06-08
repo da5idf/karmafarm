@@ -11,7 +11,7 @@ module.exports = {
         farmer: true,
         key: 'k1k3naz92',
         hashedPassword: bcrypt.hashSync('password'),
-        phoneNumber: 123456789,
+        phoneNumber: "1111111111",
       },
       {
         name: 'Jeremy Long',
@@ -20,7 +20,7 @@ module.exports = {
         farmer: false,
         key: 'k1k3naz91',
         hashedPassword: bcrypt.hashSync('password2'),
-        phoneNumber: 123456788,
+        phoneNumber: "1234567890",
       },
       {
         name: 'Scott Bakon',
@@ -29,7 +29,7 @@ module.exports = {
         key: 'k123naz91',
         farmer: false,
         hashedPassword: bcrypt.hashSync('password3'),
-        phoneNumber: 123456789,
+        phoneNumber: "1234567891",
       },
       {
         name: 'Kai Lineman',
@@ -37,7 +37,7 @@ module.exports = {
         admin: false,
         farmer: false,
         hashedPassword: bcrypt.hashSync('password3'),
-        phoneNumber: 123456789,
+        phoneNumber: "1234567892",
       },
     ], {});
   },

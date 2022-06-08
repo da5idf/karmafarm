@@ -33,8 +33,7 @@ router.post('/',
         const user = await User.signup({ name, email, phoneNumber, admin, farmer, password })
 
         if (user) {
-            console.log(user);
-            // setTokenCookie(res, user)
+            setTokenCookie(res, user)
             return res.send({ user });
         }
     })

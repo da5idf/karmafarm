@@ -53,7 +53,7 @@ export const signupUser = ({ name, email, phoneNumber, admin, farmer, password }
                 password,
             }),
         },
-    );
+    )
 
     const data = await response.json();
     dispatch(setUserSession(data.user));

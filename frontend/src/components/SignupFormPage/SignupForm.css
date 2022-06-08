@@ -63,11 +63,11 @@
     width: 400px;
 }
 
-#key-form:invalid ~ div * #key-next-button {
+/* #key-form:invalid ~ div * #key-next-button {
     background-color: #f6f6f6;
     color: rgb(175, 175, 175);
     cursor: not-allowed;
-}
+} */
 
 .signup-redirect {
     width: 100%;
@@ -81,7 +81,7 @@
     outline: 2px solid #7EBEC5;
 }
 
-#newuser-login-redirect:hover {
+.signup-redirect:hover {
     cursor: pointer;
     outline: 2px solid black
 }

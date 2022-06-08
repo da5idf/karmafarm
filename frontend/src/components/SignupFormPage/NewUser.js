@@ -14,13 +14,18 @@ function NewUser({ props }) {
     const [password, setPassword] = useState("");
     const [errors, setErrors] = useState([]);
 
-    const handleNext = (e) => {
+    const handleNext = async (e) => {
         e.preventDefault();
+
+        /********************************
+        NEED TO FIX CLICK ON INVALID FORM
+        ********************************/
+
         if (password === confirmPassword) {
             const phoneNumber = number.split("-").join("");
-            setErrors([]);
-            console.log(name);
-            const data = dispatch(sessionActions.signupUser({
+            // setErrors([]);
+
+            return dispatch(sessionActions.signupUser({
                 name,
                 email,
                 phoneNumber,
@@ -28,21 +33,17 @@ function NewUser({ props }) {
                 farmer: false,
                 password,
             }))
-                // .then(async (res) => {
-                //     const user = res.json();
-                //     setNewOwnerId(user.id);
-                //     // dispatch(sessionActions.restoreUser());
-                //     setStep(2.5);
-                // })
+                .then(async (res) => {
+                    console.log("do we get in then?")
+                    setStep(2.5);
+                })
                 .catch(async (res) => {
                     const data = await res.json();
                     if (data && data.errors) setErrors(data.errors);
                 });
-
-            if (data) {
-                return setStep(2.5);
-            }
         }
+
+        // if psss != confirm
         return setErrors(['Confirm Password field must be the same as the Password field']);
     };
 
@@ -63,7 +64,8 @@ function NewUser({ props }) {
                 />
 
                 <input
-                    type="text"
+                    type="email"
+                    pattern="^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$"
                     className="form-input"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
@@ -73,7 +75,8 @@ function NewUser({ props }) {
 
                 <div className="phone-format">Please input in xxx-xxx-xxxx format.</div>
                 <input
-                    type="text"
+                    type="tel"
+                    pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
                     className="form-input"
                     value={number}
                     onChange={(e) => setNumber(e.target.value)}
@@ -126,7 +129,7 @@ function NewUser({ props }) {
                 </div>
             </div>
             <div
-                id="newuser-login-redirect"
+                className="signup-redirect"
             >
                 Already have an account?
             </div>

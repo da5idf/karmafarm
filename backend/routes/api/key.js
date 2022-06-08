@@ -14,8 +14,6 @@ router.post(
             where: { key }
         })
 
-
-
         if (user) {
             const restaurant = await Restaurant.scope('basic').findOne({
                 where: { ownerId: user.id }
@@ -26,7 +24,7 @@ router.post(
             const err = new Error("Key match failure");
             err.status = 401;
             err.title = "Key submission failed";
-            err.errors = ["The key you provided does not match any team"];
+            err.errors = ["The key you provided does not match any team's key"];
             return next(err);
         }
     }
