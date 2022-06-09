@@ -1,7 +1,30 @@
 import { csrfFetch } from "./csrf";
 
+const NEW_ORDER = "orders/NEW"
 const GET_ALL_ORDERS = "orders/GET/ALL"
 const GET_ORDERS = "orders/GET";
+
+export const createOrder = (restaurantId) => async (dispatch) => {
+    const res = await csrfFetch("/api/orders", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+            restaurantId,
+            submitted: false,
+            delivered: false,
+            paid: false,
+        })
+    })
+
+    const order = await res.json();
+    dispatch(newOrder(order))
+    return order;
+}
+
+const newOrder = (order) => ({
+    type: NEW_ORDER,
+    order
+})
 
 export const getRestaurantOrders = (restaurantId) => async (dispatch) => {
     const response = await csrfFetch(`/api/restaurants/${restaurantId}/orders`);
@@ -16,15 +39,19 @@ const restaurantOrders = orders => ({
 })
 
 const initialState = {
-    allOrders: {},
+    all: {},
     restaurantOrders: {},
-    oneOrder: {},
+    new: {},
 };
 
 const orderReducer = (state = initialState, action) => {
 
     let newState;
     switch (action.type) {
+        case NEW_ORDER:
+            newState = Object.assign({}, state);
+            newState.new = action.order
+            return newState;
         case GET_ALL_ORDERS:
             return state;
         case GET_ORDERS:
@@ -32,6 +59,7 @@ const orderReducer = (state = initialState, action) => {
             action.orders.forEach(order => {
                 newState.restaurantOrders[order.id] = order
             })
+            return newState;
         default:
             return state;
     }

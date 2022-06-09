@@ -8,7 +8,7 @@ import { getOneRestaurant } from "../../store/restaurants";
 import OrderProduct from "../OrderProduct";
 
 function NewOrder() {
-    const { restaurantId } = useParams();
+    const { orderId } = useParams();
     const dispatch = useDispatch();
 
     const restaurant = useSelector(state => state.restaurants.one);
@@ -18,7 +18,7 @@ function NewOrder() {
     const [isLoaded, setIsLoaded] = useState(false);
 
     useEffect(() => {
-        dispatch(getOneRestaurant(restaurantId));
+        // dispatch(getOneRestaurant(restaurantId));
         dispatch(getAllProducts())
             .then(() => setIsLoaded(true))
     }, [dispatch])
