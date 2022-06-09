@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { getOneRestaurant } from "../../store/restaurants";
 
@@ -7,14 +7,17 @@ function NewOrder() {
     const { restaurantId } = useParams();
     const dispatch = useDispatch();
 
+    const restaurant = useSelector(state => state.restaurants.oneRestaurant)
+
     useEffect(() => {
         dispatch(getOneRestaurant(restaurantId))
     }, [dispatch])
 
     return (
         <div className="page-hero">
-
-            <h1>New Order</h1>
+            <div>
+                <div>New Order for {restaurant.name}</div>
+            </div>
         </div>
     )
 }
