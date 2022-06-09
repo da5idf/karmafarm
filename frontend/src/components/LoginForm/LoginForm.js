@@ -6,7 +6,7 @@ import "./LoginForm.css"
 import FormBanner from "../FormBanner";
 import PasswordToggel from "../PasswordToggle"
 import * as sessionActions from "../../store/session";
-import HomePage from "../HomePage";
+import HomePage from "../Homepage";
 
 function LoginForm() {
     const dispatch = useDispatch();

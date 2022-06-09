@@ -7,7 +7,7 @@ import Navigation from "./components/Navigation";
 import * as sessionActions from "./store/session";
 import SplashPage from "./components/SplashPage";
 import LoginForm from "./components/LoginForm";
-import HomePage from "./components/HomePage";
+import HomePage from "./components/Homepage";
 import NewOrder from "./components/NewOrder";
 
 function App() {
