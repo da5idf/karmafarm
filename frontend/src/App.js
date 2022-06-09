@@ -5,10 +5,10 @@ import { Route, Switch } from "react-router-dom";
 import SignupFormPage from "./components/SignupFormPage";
 import Navigation from "./components/Navigation";
 import * as sessionActions from "./store/session";
-import SplashPage from "./components/SplashPage";
 import LoginForm from "./components/LoginForm";
-import Homepage from "./components/Homepage";
 import NewOrder from "./components/NewOrder";
+import RootView from "./components/RootView";
+import SingleOrder from "./components/SingleOrder";
 
 function App() {
   const dispatch = useDispatch();
@@ -19,23 +19,13 @@ function App() {
     dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
   }, [dispatch]);
 
-  const rootView = (
-    user ?
-      <>
-        <Navigation isLoaded={isLoaded} />
-        <Homepage />
-      </>
-      :
-      <SplashPage />
-  )
-
   return (
     <>
       <div id="app-hero">
         {isLoaded && (
           <Switch>
             <Route exact path="/">
-              {rootView}
+              <RootView user={user} isLoaded={isLoaded} />
             </Route>
             <Route path="/login">
               <LoginForm />
@@ -43,7 +33,11 @@ function App() {
             <Route path="/signup">
               <SignupFormPage />
             </Route>
-            <Route path="/orders/:orderId">
+            <Route exact path="/orders/:orderId">
+              <Navigation />
+              <SingleOrder />
+            </Route>
+            <Route exact path="/orders/:orderId/add">
               <Navigation />
               <NewOrder />
             </Route>

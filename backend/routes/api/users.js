@@ -45,9 +45,8 @@ router.get('/:userId/restaurants',
         const user = await User.findByPk(userId, {
             include: Restaurant
         })
-        // console.log(user)
 
-        return res.send(user)
+        return res.send(user.Restaurants)
     })
 )
 

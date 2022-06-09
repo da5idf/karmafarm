@@ -5,8 +5,9 @@ const GET_USER_RESTAURANTS = "user/RESTAURANT";
 export const getUserRestaurants = (userId) => async (dispatch) => {
     const response = await csrfFetch(`api/users/${userId}/restaurants`)
 
-    const user = await response.json()
-    const restaurants = user.Restaurant
+    const restaurants = await response.json()
+    console.log(restaurants)
+    // const restaurants = res.Restaurant
 
     dispatch(hydrateUserRestaurants(restaurants))
 }

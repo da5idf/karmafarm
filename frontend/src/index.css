@@ -117,3 +117,9 @@ form input {
 form input:last-of-type {
     margin-bottom: 0;
 }
+
+.page-title {
+    font-family: Arimo;
+    font-size: 35px;
+    padding-bottom: 1rem;
+}

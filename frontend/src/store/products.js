@@ -19,7 +19,7 @@ const initialState = {
     one: {}
 }
 
-export const productReducer = (state = initialState, action) => {
+const productReducer = (state = initialState, action) => {
     let newState;
     let all = {};
 
@@ -34,3 +34,5 @@ export const productReducer = (state = initialState, action) => {
             return state;
     }
 }
+
+export default productReducer;

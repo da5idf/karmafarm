@@ -37,9 +37,9 @@ function Navigation({ isLoaded }) {
                 <div id="nav-logo">Karma Farm</div>
                 <div id="nav-menu">
                     <NavLink exact to="/">Home</NavLink>
-                    <NavLink exact to={`users/${user.id}`}>My Profile</NavLink>
-                    <NavLink exact to={`users/${user.id}`}>My Orders</NavLink>
-                    <NavLink exact to={`users/${user.id}`}>My Team</NavLink>
+                    <NavLink exact to={`users/${user?.id}`}>My Profile</NavLink>
+                    <NavLink exact to={`users/${user?.id}`}>My Orders</NavLink>
+                    <NavLink exact to={`users/${user?.id}`}>My Team</NavLink>
                     {/* {isLoaded && sessionLinks} */}
                 </div>
                 <div id="nav-logout" onClick={logout}>Logout</div>

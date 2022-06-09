@@ -1,8 +1,13 @@
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 import "./OrderProduct.css"
+import { addProduct } from "../../store/orders_products"
 
-function OrderProduct({ product }) {
+function OrderProduct({ product, orderId }) {
+    const dispatch = useDispatch();
+
+    const user = useSelector(state => state.session.user)
 
     const [quantity, setQuantity] = useState(0);
     const [subTotal, setSubTotal] = useState(0);
@@ -12,9 +17,18 @@ function OrderProduct({ product }) {
         setSubTotal(e.target.value * product.pricePerPound)
     }
 
-    const addToCart = (e) => {
+    const addToCart = async (e) => {
         if (quantity === 0) return;
 
+        const newRecord = {
+            orderId,
+            productId: product.id,
+            userId: user.id,
+            weight: quantity
+        }
+
+        console.log(newRecord)
+        dispatch(addProduct(newRecord))
 
     }
 

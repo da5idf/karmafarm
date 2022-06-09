@@ -30,11 +30,13 @@ module.exports = (sequelize, DataTypes) => {
   Restaurant.associate = function (models) {
     Restaurant.belongsTo(models.User, { foreignKey: 'ownerId' })
     Restaurant.hasMany(models.Member, { foreignKey: 'restaurantId' })
+    Restaurant.hasMany(models.Feedback, { foreignKey: 'restaurantId' })
 
     const columnMapping = {
       through: "Member",
       otherKey: "userId",
-      foreignKey: "restaurantId"
+      foreignKey: "restaurantId",
+      as: "RestaurantMembers"
     }
     Restaurant.belongsToMany(models.User, columnMapping)
   };

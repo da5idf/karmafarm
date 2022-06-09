@@ -5,28 +5,27 @@ import { useHistory } from "react-router-dom"
 import "./Homepage.css"
 import { getUserRestaurants } from "../../store/users"
 import { createOrder, getRestaurantOrders } from "../../store/orders"
-import { csrfFetch } from "../../store/csrf";
 
 function Homepage() {
     const dispatch = useDispatch();
     const history = useHistory();
     const user = useSelector(state => state.session.user)
-    const restaurant = useSelector(state => state.users.restaurants)
+    const restaurants = useSelector(state => state.users.restaurants)
 
     useEffect(() => {
-        dispatch(getUserRestaurants(user.id))
+        dispatch(getUserRestaurants(user?.id))
     }, [dispatch])
 
     console.log()
 
     const newOrder = async () => {
-        const order = await dispatch(createOrder(restaurant.id))
-        history.push(`/orders/${order.id}`)
+        const order = await dispatch(createOrder(restaurants[0]?.id))
+        history.push(`/orders/${order.id}/add`)
     }
 
     return (
         <div className="page-hero">
-            <div id="hp-title">Hello {user.name.split(" ")[0]}, welcome back!</div>
+            <div id="hp-title">Hello {user?.name.split(" ")[0]}, welcome back!</div>
 
             <div id="hp-content">
                 <button
