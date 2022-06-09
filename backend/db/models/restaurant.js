@@ -20,6 +20,9 @@ module.exports = (sequelize, DataTypes) => {
     },
   },
     {
+      defaultScopes: {
+        attributes: ["id", "name", "address", "restaurantNumber", "ownerId"]
+      },
       scopes: {
         basic: {
           attributes: ["id", "name", "address", "restaurantNumber"]

@@ -15,7 +15,7 @@ function Homepage() {
 
     useEffect(() => {
         console.log(user.id)
-        dispatch(getUserRestaurants(user.id))
+        // dispatch(getUserRestaurants(user.id))
     }, [dispatch])
 
 

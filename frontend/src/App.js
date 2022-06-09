@@ -8,7 +8,7 @@ import * as sessionActions from "./store/session";
 import SplashPage from "./components/SplashPage";
 import LoginForm from "./components/LoginForm";
 import HomePage from "./components/HomePage";
-import NewOrder from "./components/NewOrder/NewOrder";
+import NewOrder from "./components/NewOrder";
 
 function App() {
   const dispatch = useDispatch();

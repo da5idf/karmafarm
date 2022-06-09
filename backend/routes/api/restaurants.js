@@ -48,9 +48,21 @@ router.post(
 );
 
 router.get(
+    '/:restaurantId',
+    asyncHandler(async (req, res, next) => {
+        const { restaurantId } = req.params
+        console.log("**************", restaurantId)
+        const restaurant = await Restaurant.findByPk(restaurantId)
+        console.log("**************", restaurant)
+
+        return res.send(restaurant)
+    })
+)
+
+router.get(
     '/:restaurantId/orders',
     asyncHandler(async (req, res, next) => {
-        const restaurantId = req.params;
+        const { restaurantId } = req.params;
         console.log(restaurantId)
         const orders = await Orders.findAll({
             where: { restaurantId }
