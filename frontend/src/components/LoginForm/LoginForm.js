@@ -70,23 +70,23 @@ function LoginForm() {
                         />
                         <PasswordToggel isPassword={isPassword} setIsPassword={setIsPassword} />
                     </div>
+                    <div className="signup-button-container" >
+                        <button
+                            id="login-button"
+                            className="bb-wt"
+                            onClick={() => history.push("/")}
+                        >
+                            Cancel
+                        </button>
+                        <button
+                            type="submit"
+                            id="login-button"
+                            className="bb-wt submit-button"
+                        >
+                            Log In
+                        </button>
+                    </div>
                 </form>
-                <div className="signup-button-container" >
-                    <button
-                        id="login-button"
-                        className="bb-wt"
-                        onClick={() => history.push("/")}
-                    >
-                        Cancel
-                    </button>
-                    <button
-                        type="submit"
-                        id="login-button"
-                        className="bb-wt submit-button"
-                    >
-                        Log In
-                    </button>
-                </div>
                 <div
                     className="signup-redirect"
                     onClick={() => history.push("/signup")}
