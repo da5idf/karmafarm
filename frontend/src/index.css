@@ -12,6 +12,9 @@ root {
 body {
     margin: 0;
 }
+a {
+    text-decoration: none;
+}
 
 button {
     border: none;
@@ -34,6 +37,11 @@ input:focus-visible {
 #app-hero {
     min-height: 100vh;
     width: 100%;
+    display: flex;
+}
+
+.page-hero {
+    padding: 3rem;
 }
 
 .flex-button-container {

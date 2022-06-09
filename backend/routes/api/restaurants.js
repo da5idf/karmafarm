@@ -5,7 +5,7 @@ const { check } = require('express-validator');
 
 const { handleValidationErrors } = require('../../utils/validation');
 const router = express.Router();
-const { User, Restaurant } = require('../../db/models');
+const { User, Restaurant, Orders, Member } = require('../../db/models');
 
 // Validate restaurant sign up
 const validateSignup = [
@@ -44,7 +44,60 @@ router.post(
             err.errors = ["Address and or number belong to another account."];
             return next(err);
         }
-    }
-    ));
+    })
+);
+
+router.get(
+    '/',
+    asyncHandler(async (req, res, next) => {
+        const restaurants = await Restaurant.findAll();
+        return res.send(restaurants)
+    })
+)
+
+router.get(
+    '/:restaurantId',
+    asyncHandler(async (req, res, next) => {
+        const { restaurantId } = req.params
+        const restaurant = await Restaurant.findByPk(restaurantId)
+
+        return res.send(restaurant)
+    })
+)
+
+router.get(
+    '/:restaurantId/orders',
+    asyncHandler(async (req, res, next) => {
+        const { restaurantId } = req.params;
+        const orders = await Orders.findAll({
+            where: { restaurantId }
+        })
+
+        console.log(orders);
+    })
+)
+
+router.get(
+    '/:restaurantId/members',
+    asyncHandler(async (req, res, next) => {
+        const { restaurantId } = req.params;
+        const members = await Restaurant.findByPk(restaurantId, {
+            include: [
+                {
+                    model: Member,
+                    include: User
+                }
+            ]
+        })
+
+        // This query returns each member
+        // const members = await Member.findAll({
+        //     where: { restaurantId },
+        //     include: User
+        // })
+
+        res.send(members)
+    })
+)
 
 module.exports = router;

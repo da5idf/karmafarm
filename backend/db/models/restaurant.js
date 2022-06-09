@@ -22,14 +22,21 @@ module.exports = (sequelize, DataTypes) => {
     {
       scopes: {
         basic: {
-          attributes: ["id", "name", "address", "restaurantNumber"]
+          attributes: ["id", "name"]
         }
       }
     });
 
   Restaurant.associate = function (models) {
-    Restaurant.belongsTo(models.User, { foreignKey: 'userId' })
+    Restaurant.belongsTo(models.User, { foreignKey: 'ownerId' })
     Restaurant.hasMany(models.Member, { foreignKey: 'restaurantId' })
+
+    const columnMapping = {
+      through: "Member",
+      otherKey: "userId",
+      foreignKey: "restaurantId"
+    }
+    Restaurant.belongsToMany(models.User, columnMapping)
   };
   return Restaurant;
 };

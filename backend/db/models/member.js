@@ -4,7 +4,6 @@ module.exports = (sequelize, DataTypes) => {
     userId: {
       allowNull: false,
       type: DataTypes.INTEGER,
-      unique: true,
       references: { model: 'Users' }
     },
     restaurantId: {
