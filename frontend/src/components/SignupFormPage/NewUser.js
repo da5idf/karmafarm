@@ -150,6 +150,7 @@ function NewUser({ props }) {
             </div>
             <div
                 className="signup-redirect"
+                onClick={() => history.push("/login")}
             >
                 Already have an account?
             </div>
