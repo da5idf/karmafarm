@@ -5,6 +5,7 @@
     display: flex;
     gap: .75rem;
     margin-bottom: 5rem;
+    cursor: pointer;
 }
 
 #form-banner-karma {

@@ -64,6 +64,14 @@
     width: 400px;
 }
 
+#prompt-redirect {
+    margin-bottom: 1rem;
+}
+
+#prompt-cancel {
+    border-radius: 5px;
+}
+
 /* #key-form:invalid ~ div * #key-next-button {
     background-color: #f6f6f6;
     color: rgb(175, 175, 175);
@@ -76,7 +84,7 @@
     background-color: #7EBEC5;
     padding: .5rem;
     border-radius: 5px;
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 400;
     color: white;
     outline: 2px solid #7EBEC5;
