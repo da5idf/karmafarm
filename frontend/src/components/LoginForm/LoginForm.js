@@ -6,7 +6,7 @@ import "./LoginForm.css"
 import FormBanner from "../FormBanner";
 import PasswordToggel from "../PasswordToggle"
 import * as sessionActions from "../../store/session";
-import HomePage from "../Homepage";
+import Homepage from "../Homepage";
 
 function LoginForm() {
     const dispatch = useDispatch();
@@ -33,7 +33,7 @@ function LoginForm() {
     };
 
     if (user?.id) {
-        return <HomePage />
+        return <Homepage />
     }
 
     return (
