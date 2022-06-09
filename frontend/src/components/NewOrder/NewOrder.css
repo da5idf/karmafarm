@@ -1,0 +1,45 @@
+#new-order-header {
+    padding-bottom: 2rem;
+}
+
+#new-order-title {
+    font-family: Arimo;
+    font-size: 35px;
+}
+
+#selection-title,
+#cart-title {
+    font-family: Arimo;
+    font-size: 25px;
+    padding-bottom: 1rem;
+}
+
+#new-order-product-list {
+    border: 1px solid black;
+    padding: 1rem;
+}
+
+#product-list-headers {
+    display: flex;
+    width: 100%;
+    padding-bottom: 1rem;
+}
+
+#header-name {
+    font-family: Arimo;
+    font-size: 20px;
+    width: 20%;
+}
+
+#header-description {
+    font-family: Arimo;
+    font-size: 20px;
+    width: 60%;
+}
+
+#header-price {
+    font-family: Arimo;
+    font-size: 20px;
+    width: 20%;
+    text-align: end;
+}
