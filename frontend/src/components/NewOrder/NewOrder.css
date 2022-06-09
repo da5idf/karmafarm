@@ -34,12 +34,29 @@
 #header-description {
     font-family: Arimo;
     font-size: 20px;
-    width: 60%;
+    width: 40%;
 }
 
 #header-price {
     font-family: Arimo;
     font-size: 20px;
-    width: 20%;
+    width: 10%;
     text-align: end;
+    padding-right: 1rem;
+}
+
+#header-quantity {
+    font-family: Arimo;
+    font-size: 20px;
+    width: 10%;
+    text-align: end;
+    padding-right: 1rem;
+}
+
+#header-subtotal {
+    font-family: Arimo;
+    font-size: 20px;
+    width: 10%;
+    text-align: end;
+    padding-right: 1rem;
 }

@@ -1,18 +1,22 @@
 import React, { useState } from "react";
 
 import "./OrderProduct.css"
-import CartModal from "./CartModal";
 
 function OrderProduct({ product }) {
 
-    const [modal, setModal] = useState(false);
+    const [quantity, setQuantity] = useState(0);
+    const [subTotal, setSubTotal] = useState(0);
 
-    const openModal = () => {
-        setModal(true);
+    const updateOrder = (e) => {
+        setQuantity(e.target.value)
+        setSubTotal(e.target.value * product.pricePerPound)
     }
 
-    const caseWeight = product.caseWeight ? `${product.caseWeight} pounds` : "No case"
-    const casePrice = product.casePrice ? `$ ${product.casePrice}` : "No case"
+    const addToCart = (e) => {
+        if (quantity === 0) return;
+
+
+    }
 
     return (
         <>
@@ -20,16 +24,19 @@ function OrderProduct({ product }) {
                 <div id="op-product-name">{product.name}</div>
                 <div id="op-product-description">{product.description}</div>
                 <div id="op-product-ppp">${product.pricePerPound}</div>
-                <div id="op-product-caseWeight">{caseWeight}</div>
-                <div id="op-product-casePrice">{casePrice}</div>
+                <input
+                    id="op-product-quantity"
+                    value={quantity}
+                    onChange={updateOrder}
+                />
+                <div id="op-product-quantity">{`$${subTotal}`}</div>
                 <button
                     id="op-addtocart"
-                    onClick={openModal}
+                    onClick={addToCart}
                 >
                     Add to Cart
                 </button>
             </div>
-            {modal && <CartModal product={product} setModal={setModal} />}
         </>
     )
 }

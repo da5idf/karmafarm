@@ -18,13 +18,18 @@
 
 #op-product-ppp {
     width: 10%;
-    /* text-align: end; */
+    text-align: end;
+    padding-right: 1rem;
 }
 
-#op-product-caseWeight {
+#op-product-quantity {
     width: 10%;
+    text-align: end;
+    padding-right: 1rem;
 }
 
-#op-product-casePrice {
+#op-product-subtotal {
     width: 10%;
+    text-align: end;
+    padding-right: 1rem;
 }

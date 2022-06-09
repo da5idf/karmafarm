@@ -35,6 +35,8 @@ function NewOrder() {
                         <div id="header-name">Product</div>
                         <div id="header-description">Description</div>
                         <div id="header-price">Price pp</div>
+                        <div id="header-quantity">Quantity</div>
+                        <div id="header-subtotal">Item Total</div>
                     </div>
                     {products.map(product => (<OrderProduct product={product} key={product.id} />))}
                 </div>
