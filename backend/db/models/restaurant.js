@@ -20,19 +20,16 @@ module.exports = (sequelize, DataTypes) => {
     },
   },
     {
-      defaultScopes: {
-        attributes: ["id", "name", "address", "restaurantNumber", "ownerId"]
-      },
       scopes: {
         basic: {
-          attributes: ["id", "name", "address", "restaurantNumber"]
+          attributes: ["id", "name"]
         }
       }
     });
 
   Restaurant.associate = function (models) {
-    Restaurant.belongsTo(models.User, { foreignKey: 'userId' })
-    // Restaurant.hasMany(models.Member, { foreignKey: 'restaurantId' })
+    Restaurant.belongsTo(models.User, { foreignKey: 'ownerId' })
+    Restaurant.hasMany(models.Member, { foreignKey: 'restaurantId' })
 
     const columnMapping = {
       through: "Member",

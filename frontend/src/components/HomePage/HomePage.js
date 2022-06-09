@@ -11,11 +11,9 @@ function Homepage() {
     const history = useHistory();
     const user = useSelector(state => state.session.user)
 
-    console.log(user);
 
     useEffect(() => {
-        console.log(user.id)
-        // dispatch(getUserRestaurants(user.id))
+        dispatch(getUserRestaurants(user.id))
     }, [dispatch])
 
 

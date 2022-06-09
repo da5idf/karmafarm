@@ -13,8 +13,8 @@ module.exports = (sequelize, DataTypes) => {
     }
   }, {});
   Member.associate = function (models) {
-    // Member.belongsTo(models.User, { foreignKey: 'userId' })
-    // Member.belongsTo(models.Restaurant, { foreignKey: 'restaurantId' })
+    Member.belongsTo(models.User, { foreignKey: 'userId' })
+    Member.belongsTo(models.Restaurant, { foreignKey: 'restaurantId' })
   };
   return Member;
 };

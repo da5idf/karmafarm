@@ -106,7 +106,8 @@ module.exports = (sequelize, DataTypes) => {
   };
 
   User.associate = function (models) {
-    User.hasMany(models.Restaurant, { foreignKey: 'userId' })
+    User.hasOne(models.Restaurant, { foreignKey: 'ownerId' })
+    User.hasMany(models.Member, { foreignKey: 'userId' })
     User.hasMany(models.Product, { foreignKey: 'userId' })
 
     const columnMapping = {
