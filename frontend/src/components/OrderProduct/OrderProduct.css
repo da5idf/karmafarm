@@ -1,0 +1,30 @@
+#product-hero {
+    display: flex;
+    align-items: center;
+}
+
+#product-hero:not(:last-child) {
+    padding-bottom: 1rem
+}
+
+#op-product-name {
+    width: 20%;
+}
+
+#op-product-description {
+    width: 40%;
+    padding-right: .5rem;
+}
+
+#op-product-ppp {
+    width: 10%;
+    /* text-align: end; */
+}
+
+#op-product-caseWeight {
+    width: 10%;
+}
+
+#op-product-casePrice {
+    width: 10%;
+}

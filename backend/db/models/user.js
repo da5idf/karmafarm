@@ -108,7 +108,7 @@ module.exports = (sequelize, DataTypes) => {
   User.associate = function (models) {
     User.hasOne(models.Restaurant, { foreignKey: 'ownerId' })
     User.hasMany(models.Member, { foreignKey: 'userId' })
-    User.hasMany(models.Product, { foreignKey: 'userId' })
+    User.hasMany(models.Product, { foreignKey: 'farmerId' })
 
     const columnMapping = {
       through: "Member",
