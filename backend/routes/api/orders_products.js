@@ -16,8 +16,6 @@ router.post(
             weight,
         })
 
-        console.log(order_product)
-
         res.send(order_product)
     })
 )

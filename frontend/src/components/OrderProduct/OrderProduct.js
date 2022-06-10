@@ -27,7 +27,6 @@ function OrderProduct({ product, orderId }) {
             weight: quantity
         }
 
-        console.log(newRecord)
         dispatch(addProduct(newRecord))
 
     }

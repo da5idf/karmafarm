@@ -24,17 +24,23 @@ function NewOrder() {
         dispatch(getOneOrder(orderId))
             .then(() => dispatch(getAllProducts()))
             .then(() => setIsLoaded(true))
-    }, [dispatch])
+    }, [dispatch, orderId])
 
     const viewCart = () => {
-        history.push(`/orders/${orderId}`)
+        history.push(`/orders/${orderId}/cart`)
     }
 
-    return isLoaded && (
+    if (!isLoaded) {
+        return (
+            <h1>Loading</h1>
+        )
+    }
+
+    return (
         <div className="page-hero">
             <div id="new-order-header">
-                <div id="new-order-title">New Order for {restaurant.name}</div>
-                <div id="new-order-address">{restaurant.address}</div>
+                <div id="new-order-title">New Order for {restaurant?.name}</div>
+                <div id="new-order-address">{restaurant?.address}</div>
             </div>
             <div id="products-container">
                 <div id="products-title-container">

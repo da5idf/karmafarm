@@ -58,4 +58,17 @@ router.get(
     })
 )
 
+router.put(
+    '/:orderId/submit/:submitted',
+    asyncHandler(async (req, res, next) => {
+        const { orderId, submitted } = req.params;
+        const order = await Order.findByPk(orderId);
+
+        order.submitted = submitted;
+        await order.save();
+
+        return res.send(order)
+    })
+)
+
 module.exports = router;

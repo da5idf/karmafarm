@@ -6,8 +6,6 @@ export const getUserRestaurants = (userId) => async (dispatch) => {
     const response = await csrfFetch(`api/users/${userId}/restaurants`)
 
     const restaurants = await response.json()
-    console.log(restaurants)
-    // const restaurants = res.Restaurant
 
     dispatch(hydrateUserRestaurants(restaurants))
 }
