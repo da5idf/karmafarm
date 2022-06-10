@@ -92,6 +92,21 @@ export const deleteRecordFromOrder = (recordId) => async (dispatch) => {
     dispatch(updateOrder(order))
 }
 
+export const updateRecordOnOrder = (recordId, weight) => async (dispatch) => {
+    console.log(recordId, weight)
+    const res = await csrfFetch(`/api/orders_products/${recordId}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+            weight
+        })
+    })
+
+    const order = await res.json();
+
+    dispatch(updateOrder(order))
+}
+
 const updateOrder = (order) => ({
     type: UPDATE_ORDER,
     order

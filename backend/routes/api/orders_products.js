@@ -55,4 +55,28 @@ router.delete(
     })
 )
 
+router.put(
+    '/:recordId',
+    asyncHandler(async (req, res, next) => {
+        const { recordId } = req.params;
+        const { weight } = req.body;
+        const record = await Orders_Products.findByPk(recordId);
+
+        record.weight = weight;
+        await record.save();
+
+        const order = await Order.findByPk(record.orderId, {
+            include: [
+                { model: Restaurant },
+                {
+                    model: Orders_Products,
+                    include: [Product, User]
+                }
+            ]
+        })
+
+        return res.send(order)
+    })
+)
+
 module.exports = router

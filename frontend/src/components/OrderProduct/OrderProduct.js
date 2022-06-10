@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import "./OrderProduct.css"
 import ProductButtons from "./ProductButtons";
-import { addProductToOrder, deleteRecordFromOrder } from "../../store/orders"
+import { addProductToOrder, deleteRecordFromOrder, updateRecordOnOrder } from "../../store/orders"
 
 
 function OrderProduct({ product, orderId, orderRecords }) {
@@ -44,7 +44,9 @@ function OrderProduct({ product, orderId, orderRecords }) {
     }
 
     const updateCart = () => {
-
+        const record = orderRecords.find(record => record.productId === product.id)
+        console.log(quantity)
+        dispatch(updateRecordOnOrder(record.id, quantity))
     }
 
     const removeFromCart = () => {
