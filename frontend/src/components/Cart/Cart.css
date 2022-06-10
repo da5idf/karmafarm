@@ -2,3 +2,29 @@
     justify-self: flex-end;
     width: 200px;
 }
+
+#add-to-order-button {
+    width: 200px;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+table {
+    padding-bottom: 1rem;
+}
+
+th {
+    font-family: Arimo;
+    font-size: 23px;
+    padding-bottom: .5rem;
+    text-align: start;
+}
+
+td {
+    padding-left: .5rem;
+    height: 35px;
+}
+
+tr:nth-child(even) {
+    background-color: rgba(204, 204, 204, 0.528);
+}

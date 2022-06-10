@@ -20,18 +20,13 @@ function ProductDetail({ record }) {
             <td id="pd-name">{product.name}</td>
             <td id="pd-weight">{record.weight}</td>
             <td id="pd-subTotal">{`$${subTotal}`}</td>
-            <td id="pd-buttons">
-                <button
-                >
-                    Update
-                </button>
+            <td id="pd-button-update">
+                Update
             </td>
-            <td>
-                <button
-                    onClick={deleteThisRecord}
-                >
-                    Delete
-                </button>
+            <td id="pd-button-delete"
+                onClick={deleteThisRecord}
+            >
+                Delete
             </td>
         </tr>
     )

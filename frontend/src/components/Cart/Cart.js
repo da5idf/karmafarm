@@ -43,12 +43,10 @@ function Cart({ props }) {
                 </button>
                 <table id="cart-product-details-container">
                     <tbody>
-                        <tr>
+                        <tr id="table-header">
                             <th>Product</th>
                             <th>Quantity</th>
                             <th>Item Total</th>
-                            <th>Update</th>
-                            <th>Delete</th>
                         </tr>
                         {
                             orderRecords?.map(record => {

@@ -1,3 +1,16 @@
-#product-detail-wrapper {
-    display: flex;
+#pd-button-update,
+#pd-button-delete {
+    font-family: Arimo;
+    font-weight: 400;
+    text-align: center;
+    color: white;
+    cursor: pointer;
+}
+
+#pd-button-update {
+    background-color: #7EBEC5;
+}
+
+#pd-button-delete {
+   background-color: #A8003B;
 }
