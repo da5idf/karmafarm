@@ -3,7 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 
 import "./OrderProduct.css"
 import ProductButtons from "./ProductButtons";
-import { addProductToOrder } from "../../store/orders"
+import { addProductToOrder, deleteRecordFromOrder } from "../../store/orders"
+
 
 function OrderProduct({ product, orderId, orderRecords }) {
     const dispatch = useDispatch();
@@ -29,7 +30,7 @@ function OrderProduct({ product, orderId, orderRecords }) {
     }
 
     const addToCart = () => {
-        if (quantity === 0) return;
+        if (quantity <= 0) return;
 
         const newRecord = {
             orderId,
@@ -39,16 +40,25 @@ function OrderProduct({ product, orderId, orderRecords }) {
         }
 
         dispatch(addProductToOrder(newRecord))
-
+        setOnOrder(true);
     }
 
     const updateCart = () => {
 
     }
 
+    const removeFromCart = () => {
+        const record = orderRecords.find(record => record.productId === product.id)
+        dispatch(deleteRecordFromOrder(record.id))
+        setQuantity(0);
+        setOnOrder(false);
+    }
+
     const props = {
         onOrder, setOnOrder,
-        addToCart
+        addToCart,
+        updateCart,
+        removeFromCart
     }
 
     return (
@@ -82,24 +92,6 @@ function OrderProduct({ product, orderId, orderRecords }) {
                     </div>
                     <ProductButtons props={props} />
                 </div>
-            </div>
-        </>
-    )
-
-    return (
-        <>
-            <div id="product-hero">
-                <div id="op-product-name">{product.name}</div>
-                <div id="op-product-description">{product.description}</div>
-                <div id="op-product-ppp">${product.pricePerPound}</div>
-                <input
-                    id="op-product-quantity"
-                    value={quantity}
-                    pattern="\d"
-                    onChange={updateOrder}
-                />
-                <div id="op-product-quantity">{`$${subTotal}`}</div>
-                <ProductButtons props={props} />
             </div>
         </>
     )
