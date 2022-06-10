@@ -33,3 +33,9 @@
     text-align: end;
     padding-right: 1rem;
 }
+
+#update-delete-buttons {
+    display: flex;
+    flex-direction: column;
+    width: 10%;
+}

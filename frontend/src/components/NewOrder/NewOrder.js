@@ -10,6 +10,9 @@ function NewOrder({ props }) {
     localStorage.setItem("orderView", views.addView)
 
     const restaurant = order.Restaurant
+    const orderRecords = order.Orders_Products;
+    const orderRecordsIds = orderRecords.map(record => record.id)
+    console.log(orderRecords, orderRecordsIds)
 
     const productsObjs = useSelector(state => state.products.all);
     const products = Object.values(productsObjs);
@@ -23,7 +26,7 @@ function NewOrder({ props }) {
     return (
         <div className="page-hero">
             <div id="new-order-header">
-                <div id="new-order-title">New Order for {restaurant?.name}</div>
+                <div id="new-order-title">Order for {restaurant?.name}</div>
                 <div id="new-order-address">{restaurant?.address}</div>
             </div>
             <div id="products-container">
@@ -45,7 +48,14 @@ function NewOrder({ props }) {
                         <div id="header-quantity">Quantity</div>
                         <div id="header-subtotal">Item Total</div>
                     </div>
-                    {products.map(product => (<OrderProduct product={product} orderId={order.id} key={product.id} />))}
+                    {products.map(product => (
+                        <OrderProduct
+                            product={product}
+                            orderId={order.id}
+                            orderRecords={orderRecords}
+                            key={product.id}
+                        />
+                    ))}
                 </div>
             </div>
         </div >
