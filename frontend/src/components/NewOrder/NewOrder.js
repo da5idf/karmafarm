@@ -23,11 +23,11 @@ function NewOrder({ props }) {
 
     return (
         <div className="page-hero">
-            <div id="new-order-header">
-                <div id="new-order-title">Order for {restaurant?.name}</div>
-                <div id="new-order-address">{restaurant?.address}</div>
-            </div>
             <div id="products-container">
+                <div id="new-order-header">
+                    <div id="new-order-title">Order for {restaurant?.name}</div>
+                    <div id="new-order-address">{restaurant?.address}</div>
+                </div>
                 <div id="products-title-container">
                     <div id="selection-title">Add items to your cart</div>
                     <button

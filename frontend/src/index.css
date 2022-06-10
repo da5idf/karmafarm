@@ -42,8 +42,11 @@ input:focus-visible {
 
 .page-hero {
     padding: 3rem;
+    padding-top: 30px;
     width: 100%;
     position: relative;
+    display: flex;
+    flex-direction: column;
 }
 
 .flex-button-container {
