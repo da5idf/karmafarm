@@ -12,13 +12,6 @@
     font-size: 25px;
 }
 
-#products-container {
-    max-width: 1064px;
-    display: flex;
-    flex-direction: column;
-    align-self: center;
-}
-
 #products-title-container {
     display: flex;
     justify-content: space-between;

@@ -18,7 +18,6 @@ function ProductDetail({ record }) {
     return (
         <div id="product-detail-wrapper">
             <div id="pd-name">{product.name}</div>
-            <div id="pd-description">{product.description}</div>
             <div id="pd-weight">{record.weight}</div>
             <div id="pd-subTotal">{`$${subTotal}`}</div>
             <div id="pd-buttons">

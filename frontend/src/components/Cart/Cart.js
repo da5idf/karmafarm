@@ -29,31 +29,33 @@ function Cart({ props }) {
 
     return (
         <div className="page-hero">
-            <div className="page-title">Shoppping Cart</div>
-            <div className="page-subtitle">Order #{`${orderId}`}</div>
-            <div id="cart-restaurant-name">{restaurant.name}</div>
-            <div id="cart-restaurant-address">{restaurant.address}</div>
-            <button
-                id="add-to-order-button"
-                className="basic-button"
-                onClick={addToOrder}
-            >
-                Add to Order
-            </button>
-            <div id="cart-product-details-container">
-                {
-                    orderRecords?.map(record => {
-                        return <ProductDetail record={record} key={record.id} />
-                    })
-                }
+            <div className="page-content">
+                <div className="page-title">Shoppping Cart</div>
+                <div className="page-subtitle">Order #{`${orderId}`}</div>
+                <div id="cart-restaurant-name">{restaurant.name}</div>
+                <div id="cart-restaurant-address">{restaurant.address}</div>
+                <button
+                    id="add-to-order-button"
+                    className="basic-button"
+                    onClick={addToOrder}
+                >
+                    Add to Order
+                </button>
+                <div id="cart-product-details-container">
+                    {
+                        orderRecords?.map(record => {
+                            return <ProductDetail record={record} key={record.id} />
+                        })
+                    }
+                </div>
+                <button
+                    id="cart-submit-order"
+                    className="blue-button"
+                    onClick={submitOrder}
+                >
+                    Submit Order
+                </button>
             </div>
-            <button
-                id="cart-submit-order"
-                className="blue-button"
-                onClick={submitOrder}
-            >
-                Submit Order
-            </button>
         </div>
     )
 }
