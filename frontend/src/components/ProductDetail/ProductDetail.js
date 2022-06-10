@@ -16,22 +16,24 @@ function ProductDetail({ record }) {
     }
 
     return (
-        <div id="product-detail-wrapper">
-            <div id="pd-name">{product.name}</div>
-            <div id="pd-weight">{record.weight}</div>
-            <div id="pd-subTotal">{`$${subTotal}`}</div>
-            <div id="pd-buttons">
+        <tr>
+            <td id="pd-name">{product.name}</td>
+            <td id="pd-weight">{record.weight}</td>
+            <td id="pd-subTotal">{`$${subTotal}`}</td>
+            <td id="pd-buttons">
                 <button
                 >
                     Update
                 </button>
+            </td>
+            <td>
                 <button
                     onClick={deleteThisRecord}
                 >
                     Delete
                 </button>
-            </div>
-        </div>
+            </td>
+        </tr>
     )
 }
 

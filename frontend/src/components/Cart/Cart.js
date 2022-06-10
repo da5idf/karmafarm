@@ -41,13 +41,22 @@ function Cart({ props }) {
                 >
                     Add to Order
                 </button>
-                <div id="cart-product-details-container">
-                    {
-                        orderRecords?.map(record => {
-                            return <ProductDetail record={record} key={record.id} />
-                        })
-                    }
-                </div>
+                <table id="cart-product-details-container">
+                    <tbody>
+                        <tr>
+                            <th>Product</th>
+                            <th>Quantity</th>
+                            <th>Item Total</th>
+                            <th>Update</th>
+                            <th>Delete</th>
+                        </tr>
+                        {
+                            orderRecords?.map(record => {
+                                return <ProductDetail record={record} key={record.id} />
+                            })
+                        }
+                    </tbody>
+                </table>
                 <button
                     id="cart-submit-order"
                     className="blue-button"
