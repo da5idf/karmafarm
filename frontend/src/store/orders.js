@@ -1,9 +1,10 @@
 import { csrfFetch } from "./csrf";
 
-const NEW_ORDER = "orders/NEW"
-const GET_ONE_ORDER = "orders/GET/ONE"
-const GET_ALL_ORDERS = "orders/GET/ALL"
+const NEW_ORDER = "orders/NEW";
+const GET_ONE_ORDER = "orders/GET/ONE";
+const GET_ALL_ORDERS = "orders/GET/ALL";
 const GET_RESTAURANT_ORDERS = "orders/GET";
+const UPDATE_ORDER = "orders/UPDATE";
 
 export const getOneOrder = (orderId) => async (dispatch) => {
     const res = await csrfFetch(`/api/orders/${orderId}`)
@@ -51,6 +52,23 @@ const restaurantOrders = orders => ({
     orders
 })
 
+export const toggleSubmission = (orderId, submitted) => async (dispatch) => {
+    console.log(orderId, submitted)
+    const response = await csrfFetch(`/api/orders/${orderId}/submit/${submitted}`, {
+        method: "PUT",
+    })
+
+    if (response.ok) {
+        const order = await response.json();
+        dispatch(updateOrder(order));
+    }
+}
+
+const updateOrder = (order) => ({
+    type: UPDATE_ORDER,
+    order
+})
+
 const initialState = {
     all: {},
     restaurantOrders: {},
@@ -58,8 +76,9 @@ const initialState = {
 };
 
 const orderReducer = (state = initialState, action) => {
-
     let newState;
+    let updatedOrder = {}
+
     switch (action.type) {
         case NEW_ORDER:
             newState = Object.assign({}, state);
@@ -67,7 +86,8 @@ const orderReducer = (state = initialState, action) => {
             return newState;
         case GET_ONE_ORDER:
             newState = Object.assign({}, state);
-            newState.thisOrder = action.order
+            updatedOrder = action.order
+            newState.thisOrder = updatedOrder
             return newState;
         case GET_ALL_ORDERS:
             return state;
@@ -76,6 +96,11 @@ const orderReducer = (state = initialState, action) => {
             action.orders.forEach(order => {
                 newState.restaurantOrders[order.id] = order
             })
+            return newState;
+        case UPDATE_ORDER:
+            newState = Object.assign({}, state);
+            updatedOrder = action.order
+            newState.thisOrder = updatedOrder
             return newState;
         default:
             return state;

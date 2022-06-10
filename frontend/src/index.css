@@ -73,6 +73,23 @@ input:focus-visible {
     border: 1px solid black;
 }
 
+.blue-button {
+    width: 100%;
+    text-align: center;
+    background-color: #7EBEC5;
+    padding: .5rem;
+    border-radius: 5px;
+    font-size: 18px;
+    font-weight: 400;
+    color: white;
+    outline: 2px solid #7EBEC5;
+}
+
+.blue-button:hover {
+    cursor: pointer;
+    outline: 2px solid black
+}
+
 .form-field {
     position: relative;
 }
@@ -121,5 +138,11 @@ form input:last-of-type {
 .page-title {
     font-family: Arimo;
     font-size: 35px;
+    padding-bottom: 1rem;
+}
+
+.page-subtitle {
+    font-family: Arimo;
+    font-size: 25px;
     padding-bottom: 1rem;
 }

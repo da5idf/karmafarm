@@ -7,7 +7,7 @@ const DELETE_RECORD = "order_product/DELETE"
 export const addProduct = (newRecord) => async (dispatch) => {
 
     const { productId, orderId, userId, weight } = newRecord
-    console.log("in thunk", productId, orderId, userId, weight)
+
     const res = await csrfFetch("/api/orders_products", {
         method: "POST",
         headers: { "Content-Type": "application/json" },

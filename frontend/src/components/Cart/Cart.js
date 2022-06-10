@@ -2,12 +2,13 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 
-import "./SingleOrder.css"
+import "./Cart.css"
+import { getOneOrder } from "../../store/orders";
 import ProductDetail from "../ProductDetail";
-import { getOneOrder, toggleSubmission } from "../../store/orders";
 import { getOrderProducts } from "../../store/orders_products";
+import { toggleSubmission } from "../../store/orders"
 
-function SingleOrder() {
+function Cart() {
     const { orderId } = useParams();
     const dispatch = useDispatch();
     const history = useHistory();
@@ -27,11 +28,15 @@ function SingleOrder() {
     }, [dispatch, orderId])
 
     const addToOrder = () => {
-        dispatch(toggleSubmission(orderId, false))
         history.push(`/orders/${orderId}/add`)
     }
 
-    if (!isLoaded || !restaurant || !orderRecords) {
+    const submitOrder = () => {
+        dispatch(toggleSubmission(orderId, true))
+            .then(() => history.push(`/orders/${orderId}`))
+    }
+
+    if (!isLoaded || !restaurant) {
         return (
             <h1>Loading</h1>
         )
@@ -39,25 +44,33 @@ function SingleOrder() {
 
     return (
         <div className="page-hero">
-            <div className="page-title">Order #{`${orderId}`} details</div>
-            <div id="so-restaurant-name">{restaurant.name}</div>
-            <div id="so-restaurant-address">{restaurant.address}</div>
+            <div className="page-title">Shoppping Cart</div>
+            <div className="page-subtitle">Order #{`${orderId}`}</div>
+            <div id="cart-restaurant-name">{restaurant.name}</div>
+            <div id="cart-restaurant-address">{restaurant.address}</div>
             <button
                 id="add-to-order-button"
-                className="blue-button"
+                className="basic-button"
                 onClick={addToOrder}
             >
                 Add to Order
             </button>
-            <div id="so-product-details-container">
+            <div id="cart-product-details-container">
                 {
-                    orderRecords.map(record => {
+                    orderRecords?.map(record => {
                         return <ProductDetail record={record} key={record.id} />
                     })
                 }
             </div>
+            <button
+                id="cart-submit-order"
+                className="blue-button"
+                onClick={submitOrder}
+            >
+                Submit Order
+            </button>
         </div>
     )
 }
 
-export default SingleOrder;
+export default Cart;

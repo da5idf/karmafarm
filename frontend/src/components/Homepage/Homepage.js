@@ -13,10 +13,8 @@ function Homepage() {
     const restaurants = useSelector(state => state.users.restaurants)
 
     useEffect(() => {
-        dispatch(getUserRestaurants(user?.id))
-    }, [dispatch])
-
-    console.log()
+        dispatch(getUserRestaurants(user.id))
+    }, [dispatch, user.id])
 
     const newOrder = async () => {
         const order = await dispatch(createOrder(restaurants[0]?.id))
