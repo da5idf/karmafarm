@@ -32,6 +32,7 @@ function OrderProduct({ product, orderId, orderRecords }) {
     const addToCart = () => {
         if (quantity <= 0) return;
 
+        toggleModal();
         const newRecord = {
             orderId,
             productId: product.id,
@@ -44,16 +45,26 @@ function OrderProduct({ product, orderId, orderRecords }) {
     }
 
     const updateCart = () => {
+        toggleModal()
         const record = orderRecords.find(record => record.productId === product.id)
         console.log(quantity)
         dispatch(updateRecordOnOrder(record.id, quantity))
     }
 
     const removeFromCart = () => {
+        toggleModal()
         const record = orderRecords.find(record => record.productId === product.id)
         dispatch(deleteRecordFromOrder(record.id))
         setQuantity(0);
         setOnOrder(false);
+    }
+
+    const toggleModal = () => {
+        const modal = document.getElementById(`modal-${product.id}`)
+        modal.style.display = "block"
+        setTimeout(() => {
+            modal.style.display = "none"
+        }, 1500)
     }
 
     const props = {
@@ -93,6 +104,9 @@ function OrderProduct({ product, orderId, orderRecords }) {
                         </div>
                     </div>
                     <ProductButtons props={props} />
+                </div>
+                <div className="confirmation-modal" id={`modal-${product.id}`}>
+                    Cart Updated!
                 </div>
             </div>
         </>

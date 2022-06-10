@@ -1,5 +1,5 @@
 #product-hero {
-    width: 100%;
+    width: 250px;
     height: 300px;
     display: flex;
     flex-direction: column;
@@ -7,6 +7,7 @@
     background-color: #ccc;
     border-radius: 5px;
     position: relative;
+    margin: .5rem;
 }
 
 #op-product-top {
@@ -118,7 +119,6 @@
 #op-remove-item {
     width: 50%;
     height: 100%;
-    text-align: center;
     background-color: #A8003B;
     border-bottom-right-radius: 5px;
 }
@@ -128,15 +128,50 @@
     width: 100%;
     height: 30px;
     font-size: 15px;
-    text-align: center;
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
     background-color: #73A577;
 }
 
 .op-button {
+    text-align: center;
     font-weight: 400;
     padding-top: 5px;
     color: white;
     cursor: pointer;
+}
+
+.confirmation-modal {
+    position: absolute;
+    bottom: -30px;
+    width: 100%;
+    height: 30px;
+    font-weight: 400;
+    text-align: center;
+    padding-top: 5px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    background-color: #F5DA70;
+    animation-name: modalPopup;
+    animation-duration: 1.5s;
+    display: none;
+}
+
+@keyframes modalPopup {
+    0% {
+        display: block;
+    }
+
+    20% {
+        bottom: 0px;
+    }
+
+    90% {
+        opacity: 100%;
+    }
+
+    100% {
+        bottom: 0px;
+        opacity: 0%;
+    } 
 }
