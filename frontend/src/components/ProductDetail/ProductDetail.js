@@ -2,18 +2,17 @@ import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 
 import "./ProductDetail.css"
-import { deleteRecord } from "../../store/orders_products"
+import { deleteRecordFromOrder } from "../../store/orders"
 
 function ProductDetail({ record }) {
     const dispatch = useDispatch();
 
     const product = record.Product;
-    const user = record.User;
 
     const subTotal = record.weight * product.pricePerPound;
 
     const deleteThisRecord = () => {
-        dispatch(deleteRecord(record.id))
+        dispatch(deleteRecordFromOrder(record.id))
     }
 
     return (

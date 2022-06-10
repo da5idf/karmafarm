@@ -1,39 +1,23 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useHistory, useParams } from "react-router-dom";
+import React from "react";
+import { useSelector } from "react-redux";
+
 
 import "./NewOrder.css"
-import { getAllProducts } from "../../store/products";
 import OrderProduct from "../OrderProduct";
-import { getOneOrder } from "../../store/orders";
 
-function NewOrder() {
-    const dispatch = useDispatch();
-    const history = useHistory();
-    const { orderId } = useParams();
+function NewOrder({ props }) {
+    const { order, setView, views } = props;
+    localStorage.setItem("orderView", views.addView)
 
-    const order = useSelector(state => state.orders.thisOrder);
     const restaurant = order.Restaurant
 
     const productsObjs = useSelector(state => state.products.all);
     const products = Object.values(productsObjs);
 
-    const [isLoaded, setIsLoaded] = useState(false);
-
-    useEffect(() => {
-        dispatch(getOneOrder(orderId))
-            .then(() => dispatch(getAllProducts()))
-            .then(() => setIsLoaded(true))
-    }, [dispatch, orderId])
 
     const viewCart = () => {
-        history.push(`/orders/${orderId}/cart`)
-    }
-
-    if (!isLoaded) {
-        return (
-            <h1>Loading</h1>
-        )
+        setView(views.cartView);
+        localStorage.setItem("orderView", views.cartView)
     }
 
     return (

@@ -53,7 +53,6 @@ const restaurantOrders = orders => ({
 })
 
 export const toggleSubmission = (orderId, submitted) => async (dispatch) => {
-    console.log(orderId, submitted)
     const response = await csrfFetch(`/api/orders/${orderId}/submit/${submitted}`, {
         method: "PUT",
     })
@@ -62,6 +61,35 @@ export const toggleSubmission = (orderId, submitted) => async (dispatch) => {
         const order = await response.json();
         dispatch(updateOrder(order));
     }
+}
+
+export const addProductToOrder = (newRecord) => async (dispatch) => {
+
+    const { productId, orderId, userId, weight } = newRecord
+
+    const res = await csrfFetch("/api/orders_products", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+            orderId,
+            productId,
+            userId,
+            weight
+        })
+    })
+
+    const order = await res.json()
+    dispatch(updateOrder(order));
+}
+
+export const deleteRecordFromOrder = (recordId) => async (dispatch) => {
+    const res = await csrfFetch(`/api/orders_products/${recordId}`, {
+        method: "DELETE"
+    })
+
+    const order = await res.json();
+
+    dispatch(updateOrder(order))
 }
 
 const updateOrder = (order) => ({

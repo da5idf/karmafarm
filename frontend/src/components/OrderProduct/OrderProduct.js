@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import "./OrderProduct.css"
-import { addProduct } from "../../store/orders_products"
+// import { addProduct } from "../../store/orders_products"
+import { addProductToOrder } from "../../store/orders"
 
 function OrderProduct({ product, orderId }) {
     const dispatch = useDispatch();
@@ -27,7 +28,7 @@ function OrderProduct({ product, orderId }) {
             weight: quantity
         }
 
-        dispatch(addProduct(newRecord))
+        dispatch(addProductToOrder(newRecord))
 
     }
 
