@@ -54,6 +54,41 @@ function OrderProduct({ product, orderId, orderRecords }) {
     return (
         <>
             <div id="product-hero">
+                <div id="op-product-top">
+                    <div id="op-img-container">
+                        <img id="op-product-img" src={product.imgUrl} alt="" />
+                        <div id="op-product-name">{product.name}</div>
+                    </div>
+                </div>
+                <div id="op-product-bottom">
+                    <div id="op-product-description">{product.description}</div>
+                    <div id="op-pricing-grid">
+                        <div id="op-grid-left">
+                            <div id="op-product-ppp">${product.pricePerPound} per pound</div>
+                            <div id="input-container">
+                                <input
+                                    id="op-product-quantity"
+                                    value={quantity}
+                                    type="number"
+                                    onChange={updateOrder}
+                                />
+                                <div id="input-container-label">pounds</div>
+                            </div>
+                        </div>
+                        <div id="op-grid-right">
+                            <div>Item total</div>
+                            <div id="op-product-subtotal">{`$${subTotal}`}</div>
+                        </div>
+                    </div>
+                    <ProductButtons props={props} />
+                </div>
+            </div>
+        </>
+    )
+
+    return (
+        <>
+            <div id="product-hero">
                 <div id="op-product-name">{product.name}</div>
                 <div id="op-product-description">{product.description}</div>
                 <div id="op-product-ppp">${product.pricePerPound}</div>

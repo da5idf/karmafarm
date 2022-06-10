@@ -6,29 +6,32 @@ function ProductButtons({ props }) {
     if (onOrder) {
         return (
             <div id="update-delete-buttons">
-                <button
+                <div
                     id="op-update-cart"
+                    className="op-button"
                     onClick={updateCart}
                 >
                     Update
-                </button>
-                <button
+                </div>
+                <div
                     id="op-remove-item"
+                    className="op-button"
                     onClick={removeFromCart}
                 >
                     Remove item
-                </button>
+                </div>
             </div>
         )
     }
 
     return (
-        <button
+        <div
             id="op-addtocart"
+            className="op-button"
             onClick={addToCart}
         >
             Add to Cart
-        </button>
+        </div>
     )
 }
 

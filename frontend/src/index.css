@@ -146,3 +146,8 @@ form input:last-of-type {
     font-size: 25px;
     padding-bottom: 1rem;
 }
+
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }

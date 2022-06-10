@@ -11,8 +11,6 @@ function NewOrder({ props }) {
 
     const restaurant = order.Restaurant
     const orderRecords = order.Orders_Products;
-    const orderRecordsIds = orderRecords.map(record => record.id)
-    console.log(orderRecords, orderRecordsIds)
 
     const productsObjs = useSelector(state => state.products.all);
     const products = Object.values(productsObjs);
@@ -41,13 +39,6 @@ function NewOrder({ props }) {
                     </button>
                 </div>
                 <div id="new-order-product-list">
-                    <div id="product-list-headers">
-                        <div id="header-name">Product</div>
-                        <div id="header-description">Description</div>
-                        <div id="header-price">Price pp</div>
-                        <div id="header-quantity">Quantity</div>
-                        <div id="header-subtotal">Item Total</div>
-                    </div>
                     {products.map(product => (
                         <OrderProduct
                             product={product}
