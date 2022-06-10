@@ -1,18 +1,36 @@
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 import "./OrderProduct.css"
-import CartModal from "./CartModal";
+import { addProduct } from "../../store/orders_products"
 
-function OrderProduct({ product }) {
+function OrderProduct({ product, orderId }) {
+    const dispatch = useDispatch();
 
-    const [modal, setModal] = useState(false);
+    const user = useSelector(state => state.session.user)
 
-    const openModal = () => {
-        setModal(true);
+    const [quantity, setQuantity] = useState(0);
+    const [subTotal, setSubTotal] = useState(0);
+
+    const updateOrder = (e) => {
+        setQuantity(e.target.value)
+        setSubTotal(e.target.value * product.pricePerPound)
     }
 
-    const caseWeight = product.caseWeight ? `${product.caseWeight} pounds` : "No case"
-    const casePrice = product.casePrice ? `$ ${product.casePrice}` : "No case"
+    const addToCart = async (e) => {
+        if (quantity === 0) return;
+
+        const newRecord = {
+            orderId,
+            productId: product.id,
+            userId: user.id,
+            weight: quantity
+        }
+
+        console.log(newRecord)
+        dispatch(addProduct(newRecord))
+
+    }
 
     return (
         <>
@@ -20,16 +38,19 @@ function OrderProduct({ product }) {
                 <div id="op-product-name">{product.name}</div>
                 <div id="op-product-description">{product.description}</div>
                 <div id="op-product-ppp">${product.pricePerPound}</div>
-                <div id="op-product-caseWeight">{caseWeight}</div>
-                <div id="op-product-casePrice">{casePrice}</div>
+                <input
+                    id="op-product-quantity"
+                    value={quantity}
+                    onChange={updateOrder}
+                />
+                <div id="op-product-quantity">{`$${subTotal}`}</div>
                 <button
                     id="op-addtocart"
-                    onClick={openModal}
+                    onClick={addToCart}
                 >
                     Add to Cart
                 </button>
             </div>
-            {modal && <CartModal product={product} setModal={setModal} />}
         </>
     )
 }

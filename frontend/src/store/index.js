@@ -4,13 +4,17 @@ import thunk from 'redux-thunk';
 import sessionReducer from './session';
 import userReducer from './users';
 import restaurantReducer from './restaurants';
-import { productReducer } from './products';
+import productReducer from './products';
+import orderReducer from './orders';
+import ordersProductReducer from './orders_products'
 
 const rootReducer = combineReducers({
     session: sessionReducer,
     users: userReducer,
     restaurants: restaurantReducer,
     products: productReducer,
+    orders: orderReducer,
+    orders_products: ordersProductReducer,
 });
 
 let enhancer;

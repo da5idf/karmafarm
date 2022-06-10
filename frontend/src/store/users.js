@@ -3,11 +3,11 @@ import { csrfFetch } from "./csrf"
 const GET_USER_RESTAURANTS = "user/RESTAURANT";
 
 export const getUserRestaurants = (userId) => async (dispatch) => {
-    console.log(userId)
     const response = await csrfFetch(`api/users/${userId}/restaurants`)
 
-    const user = await response.json()
-    const restaurants = user.Restaurant
+    const restaurants = await response.json()
+    console.log(restaurants)
+    // const restaurants = res.Restaurant
 
     dispatch(hydrateUserRestaurants(restaurants))
 }
@@ -18,7 +18,7 @@ const hydrateUserRestaurants = (restaurants) => ({
 })
 
 const initialState = {
-    userRestaurants: {}
+    restaurants: {}
 }
 
 const userReducer = (state = initialState, action) => {
@@ -27,8 +27,7 @@ const userReducer = (state = initialState, action) => {
     switch (action.type) {
         case GET_USER_RESTAURANTS:
             newState = Object.assign({}, state);
-            console.log("in reducer", action.restaurants)
-            newState.userRestaurants = action.restaurants;
+            newState.restaurants = action.restaurants;
             return newState;
         default:
             return state;

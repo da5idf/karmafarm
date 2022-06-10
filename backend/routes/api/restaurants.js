@@ -73,7 +73,7 @@ router.get(
             where: { restaurantId }
         })
 
-        console.log(orders);
+        // console.log(orders);
     })
 )
 
