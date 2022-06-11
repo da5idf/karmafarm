@@ -62,7 +62,15 @@ router.put(
     '/:orderId/submit/:submitted',
     asyncHandler(async (req, res, next) => {
         const { orderId, submitted } = req.params;
-        const order = await Order.findByPk(orderId);
+        const order = await Order.findByPk(orderId, {
+            include: [
+                { model: Restaurant },
+                {
+                    model: Orders_Products,
+                    include: [Product, User]
+                }
+            ]
+        })
 
         order.submitted = submitted;
         await order.save();

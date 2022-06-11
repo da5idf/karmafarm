@@ -18,7 +18,8 @@ function Homepage() {
 
     const newOrder = async () => {
         const order = await dispatch(createOrder(restaurants[0]?.id))
-        history.push(`/orders/${order.id}/add`)
+        localStorage.setItem("orderView", "add")
+        history.push(`/orders/${order.id}`)
     }
 
     return (

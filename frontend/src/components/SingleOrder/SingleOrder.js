@@ -1,40 +1,25 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useHistory, useParams } from "react-router-dom";
+import React from "react";
+import { useDispatch } from "react-redux";
 
 import "./SingleOrder.css"
 import ProductDetail from "../ProductDetail";
-import { getOneOrder, toggleSubmission } from "../../store/orders";
-import { getOrderProducts } from "../../store/orders_products";
+import { toggleSubmission } from "../../store/orders";
 
-function SingleOrder() {
-    const { orderId } = useParams();
+function SingleOrder({ props }) {
+    const { order, setView, views } = props;
+    localStorage.setItem("orderView", views.orderView)
+
+    const orderId = order.id
     const dispatch = useDispatch();
-    const history = useHistory();
-    const [isLoaded, setIsLoaded] = useState(false);
 
-    const order = useSelector(state => state.orders.thisOrder);
-    const orderRecordObjs = useSelector(state => state.orders_products.thisOrder)
-    const orderRecords = Object.values(orderRecordObjs)
+    const orderRecords = order.Orders_Products
 
     const restaurant = order.Restaurant
 
-    useEffect(() => {
-        dispatch(getOneOrder(orderId))
-            .then(() => dispatch(getOrderProducts(orderId)))
-            .then(() => setIsLoaded(true))
-
-    }, [dispatch, orderId])
-
     const addToOrder = () => {
         dispatch(toggleSubmission(orderId, false))
-        history.push(`/orders/${orderId}/add`)
-    }
-
-    if (!isLoaded || !restaurant || !orderRecords) {
-        return (
-            <h1>Loading</h1>
-        )
+        localStorage.setItem("orderView", views.addView)
+        setView(views.addView)
     }
 
     return (

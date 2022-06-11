@@ -26,9 +26,9 @@
 }
 
 #new-order-product-list {
-    border: 1px solid black;
-    border-radius: 5px;
-    padding: 1rem;
+    display: grid;
+    display: flex;
+    flex-wrap: wrap;
 }
 
 #product-list-headers {

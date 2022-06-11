@@ -1,48 +1,33 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useHistory, useParams } from "react-router-dom";
+import React from "react";
+import { useSelector } from "react-redux";
+
 
 import "./NewOrder.css"
-import { getAllProducts } from "../../store/products";
 import OrderProduct from "../OrderProduct";
-import { getOneOrder } from "../../store/orders";
 
-function NewOrder() {
-    const dispatch = useDispatch();
-    const history = useHistory();
-    const { orderId } = useParams();
+function NewOrder({ props }) {
+    const { order, setView, views } = props;
+    localStorage.setItem("orderView", views.addView)
 
-    const order = useSelector(state => state.orders.thisOrder);
     const restaurant = order.Restaurant
+    const orderRecords = order.Orders_Products;
 
     const productsObjs = useSelector(state => state.products.all);
     const products = Object.values(productsObjs);
 
-    const [isLoaded, setIsLoaded] = useState(false);
-
-    useEffect(() => {
-        dispatch(getOneOrder(orderId))
-            .then(() => dispatch(getAllProducts()))
-            .then(() => setIsLoaded(true))
-    }, [dispatch, orderId])
 
     const viewCart = () => {
-        history.push(`/orders/${orderId}/cart`)
-    }
-
-    if (!isLoaded) {
-        return (
-            <h1>Loading</h1>
-        )
+        setView(views.cartView);
+        localStorage.setItem("orderView", views.cartView)
     }
 
     return (
         <div className="page-hero">
-            <div id="new-order-header">
-                <div id="new-order-title">New Order for {restaurant?.name}</div>
-                <div id="new-order-address">{restaurant?.address}</div>
-            </div>
-            <div id="products-container">
+            <div className="page-content">
+                <div id="new-order-header">
+                    <div id="new-order-title">Order for {restaurant?.name}</div>
+                    <div id="new-order-address">{restaurant?.address}</div>
+                </div>
                 <div id="products-title-container">
                     <div id="selection-title">Add items to your cart</div>
                     <button
@@ -54,14 +39,14 @@ function NewOrder() {
                     </button>
                 </div>
                 <div id="new-order-product-list">
-                    <div id="product-list-headers">
-                        <div id="header-name">Product</div>
-                        <div id="header-description">Description</div>
-                        <div id="header-price">Price pp</div>
-                        <div id="header-quantity">Quantity</div>
-                        <div id="header-subtotal">Item Total</div>
-                    </div>
-                    {products.map(product => (<OrderProduct product={product} orderId={order.id} key={product.id} />))}
+                    {products.map(product => (
+                        <OrderProduct
+                            product={product}
+                            orderId={order.id}
+                            orderRecords={orderRecords}
+                            key={product.id}
+                        />
+                    ))}
                 </div>
             </div>
         </div >

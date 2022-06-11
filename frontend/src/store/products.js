@@ -15,20 +15,21 @@ const hydrateAllProducts = (products) => ({
 })
 
 const initialState = {
-    all: [],
+    all: {},
     one: {}
 }
 
 const productReducer = (state = initialState, action) => {
     let newState;
-    let all = {};
+    let newAll = {};
 
     switch (action.type) {
         case GET_ALL_PRODUCTS:
             newState = Object.assign({}, state);
             action.products.forEach(product => {
-                newState.all[product.id] = product
+                newAll[product.id] = product
             });
+            newState.all = newAll
             return newState;
         default:
             return state;
