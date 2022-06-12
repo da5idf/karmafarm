@@ -13,7 +13,11 @@ function Cart({ props }) {
     const dispatch = useDispatch();
 
     const orderRecords = order.Orders_Products
-
+    const total = orderRecords.reduce((accum, record) => {
+        console.log(record.weight, record.Product.pricePerPound)
+        accum += record.weight * record.Product.pricePerPound
+        return accum
+    }, 0)
     const restaurant = order.Restaurant
 
     const addToOrder = () => {
@@ -41,12 +45,17 @@ function Cart({ props }) {
                 >
                     Add to Order
                 </button>
+                <div id="cart-total-container">
+                    <div>Order Total</div>
+                    <div>{total}</div>
+                </div>
                 <table id="cart-product-details-container">
                     <tbody>
                         <tr id="table-header">
                             <th>Product</th>
                             <th>Quantity</th>
                             <th>Item Total</th>
+                            <th>Added By</th>
                         </tr>
                         {
                             orderRecords?.map(record => {
