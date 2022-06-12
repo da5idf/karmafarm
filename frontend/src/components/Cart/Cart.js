@@ -14,7 +14,6 @@ function Cart({ props }) {
 
     const orderRecords = order.Orders_Products
     const total = orderRecords.reduce((accum, record) => {
-        console.log(record.weight, record.Product.pricePerPound)
         accum += record.weight * record.Product.pricePerPound
         return accum
     }, 0)
@@ -31,6 +30,14 @@ function Cart({ props }) {
         setView(views.orderView)
     }
 
+    const getFormattedNumber = (number) => {
+        const numString = number.toString();
+        const first = numString.slice(0, 3) + "-";
+        const second = numString.slice(3, 6) + "-"
+        const formatted = first + second + numString.slice(6);
+        return formatted;
+    }
+
     return (
         <div className="page-hero">
             <div className="page-content">
@@ -38,6 +45,7 @@ function Cart({ props }) {
                 <div className="page-subtitle">Order #{`${orderId}`}</div>
                 <div id="cart-restaurant-name">{restaurant.name}</div>
                 <div id="cart-restaurant-address">{restaurant.address}</div>
+                <div id="cart-restaurant-address">{getFormattedNumber(restaurant.restaurantNumber)}</div>
                 <button
                     id="add-to-order-button"
                     className="basic-button"
@@ -53,7 +61,7 @@ function Cart({ props }) {
                     <tbody>
                         <tr id="table-header">
                             <th>Product</th>
-                            <th>Quantity</th>
+                            <th>Quantity (#)</th>
                             <th>Item Total</th>
                             <th>Added By</th>
                         </tr>

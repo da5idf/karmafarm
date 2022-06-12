@@ -10,7 +10,9 @@
 }
 
 table {
-    padding-bottom: 1rem;
+    padding-bottom: .5rem;
+    border-bottom: 2px solid rgba(204, 204, 204, 0.528);
+    margin-bottom: 1rem;
 }
 
 th {
@@ -27,4 +29,8 @@ td {
 
 tr:nth-child(even) {
     background-color: rgba(204, 204, 204, 0.528);
+}
+
+#cart-total-container {
+    display: flex;
 }
