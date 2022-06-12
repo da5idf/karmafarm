@@ -36,7 +36,7 @@ function ProductDetail({ record }) {
                 >
                     Confirm
                 </td>
-                <td id="pd-cancel-button"
+                <td id="pd-update-cancel"
                     onClick={() => setInUpdate(false)}
                 >
                     Cancel
@@ -62,7 +62,7 @@ function ProductDetail({ record }) {
         <tr>
             <td id="pd-name">{product.name}</td>
             {inUpdate ?
-                <td>
+                <td id="cart-update-quantity-container">
                     <input
                         id="cart-update-quantity"
                         value={quantity}

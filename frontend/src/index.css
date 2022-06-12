@@ -42,6 +42,8 @@ input:focus-visible {
 
 .page-hero {
     padding-top: 30px;
+    padding-left: 1rem;
+    padding-right: 2rem;
     width: 100%;
     position: relative;
     display: flex;
@@ -50,6 +52,7 @@ input:focus-visible {
 }
 
 .page-content {
+    width: 100%;
     max-width: 1064px;
     display: flex;
     flex-direction: column;
@@ -148,7 +151,7 @@ form input:last-of-type {
     font-family: Arimo;
     font-size: 35px;
     padding-bottom: 1rem;
-    width: 1064px;
+    /* width: 1064px; */
 }
 
 .page-subtitle {

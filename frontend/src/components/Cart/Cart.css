@@ -1,6 +1,8 @@
-#cart-submit-order {
-    justify-self: flex-end;
-    width: 200px;
+#cart-restaurant-name,
+#cart-restaurant-address,
+#cart-restaurant-number {
+    font-size: 20px;
+    margin-bottom: .5rem;
 }
 
 #add-to-order-button {
@@ -33,4 +35,16 @@ tr:nth-child(even) {
 
 #cart-total-container {
     display: flex;
+}
+
+#cart-submit-order {
+    justify-self: flex-end;
+    width: 200px;
+    outline: 2px solid #73A577;
+    background-color: #73A577;
+}
+
+#cart-submit-order:hover {
+    background-color: #73a577e0;
+    outline: 2px solid black;
 }

@@ -1,5 +1,7 @@
 #pd-button-update,
-#pd-button-delete {
+#pd-button-delete,
+#pd-update-confirm,
+#pd-update-cancel {
     font-family: Arimo;
     font-weight: 400;
     text-align: center;
@@ -11,6 +13,15 @@
     background-color: #7EBEC5;
 }
 
-#pd-button-delete {
+#pd-button-delete,
+#pd-update-cancel {
    background-color: #A8003B;
+}
+
+#pd-update-confirm {
+    background-color: #73A577;
+}
+
+#cart-update-quantity {
+    width: 50px;
 }

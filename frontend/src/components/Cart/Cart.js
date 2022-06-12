@@ -45,7 +45,7 @@ function Cart({ props }) {
                 <div className="page-subtitle">Order #{`${orderId}`}</div>
                 <div id="cart-restaurant-name">{restaurant.name}</div>
                 <div id="cart-restaurant-address">{restaurant.address}</div>
-                <div id="cart-restaurant-address">{getFormattedNumber(restaurant.restaurantNumber)}</div>
+                <div id="cart-restaurant-number">{getFormattedNumber(restaurant.restaurantNumber)}</div>
                 <button
                     id="add-to-order-button"
                     className="basic-button"
