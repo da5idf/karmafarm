@@ -65,6 +65,7 @@ function Cart({ props }) {
                             value={deliveryDay}
                             prev2Label={null}
                             next2Label={null}
+                            activeStartDate={new Date()}
                             tileDisabled={({ date }) => date < new Date()}
                         />
                     </div>
@@ -74,7 +75,7 @@ function Cart({ props }) {
                         </div>
                         <div id="cart-total-container">
                             <div className="page-subtitle">Order Total</div>
-                            <div id="cart-total">${total}</div>
+                            <div id="cart-total">{total}</div>
                         </div>
                         <div id="wrapper-button-container">
                             <button
