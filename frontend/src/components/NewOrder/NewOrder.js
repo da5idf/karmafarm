@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 
 import "./NewOrder.css"
 import OrderProduct from "../OrderProduct";
+import { getOrderTotal } from "../../utils"
 
 function NewOrder({ props }) {
     const { order, setView, views } = props;
@@ -11,6 +12,7 @@ function NewOrder({ props }) {
 
     const restaurant = order.Restaurant
     const orderRecords = order.Orders_Products;
+    const orderTotal = getOrderTotal(order);
 
     const productsObjs = useSelector(state => state.products.all);
     const products = Object.values(productsObjs);
@@ -29,14 +31,20 @@ function NewOrder({ props }) {
                     <div id="new-order-address">{restaurant?.address}</div>
                 </div>
                 <div id="products-title-container">
-                    <div id="selection-title">Add items to your cart</div>
-                    <button
-                        id="cart-button"
-                        className="basic-button button"
-                        onClick={viewCart}
-                    >
-                        View Cart
-                    </button>
+                    <div className="selection-title">Add items to your cart</div>
+                    <div id="products-title-right">
+                        <div id="cart-order-total-container">
+                            <div className="selection-title">Order Total</div>
+                            <div id="no-cart-total">{orderTotal}</div>
+                        </div>
+                        <button
+                            id="cart-button"
+                            className="basic-button button"
+                            onClick={viewCart}
+                        >
+                            View Cart
+                        </button>
+                    </div>
                 </div>
                 <div id="new-order-product-list">
                     {products.map(product => (
