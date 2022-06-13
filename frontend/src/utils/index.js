@@ -5,3 +5,25 @@ export const getFormattedNumber = (number) => {
     const formatted = first + second + numString.slice(6);
     return formatted;
 }
+
+export const formatDate = (dateStr) => {
+    if (dateStr) {
+        const date = new Date(dateStr);
+        return date.toDateString();
+    }
+    else return ""
+}
+
+export const getOrderTotal = (order) => {
+    const orderRecords = order.Orders_Products;
+    const total = orderRecords.reduce((accum, record) => {
+        accum += record.weight * record.Product.pricePerPound
+        return accum
+    }, 0)
+
+    if (total === 0) {
+        return "$0.00"
+    } else {
+        return `$${total}`
+    }
+}

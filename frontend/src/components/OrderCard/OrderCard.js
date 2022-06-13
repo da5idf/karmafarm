@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 
 import { getRestaurantOrders } from "../../store/orders"
+import { formatDate, getOrderTotal } from "../../utils"
 
 function OrderCard({ restaurant }) {
     const dispatch = useDispatch();
@@ -19,10 +20,12 @@ function OrderCard({ restaurant }) {
             return (
                 <tr className="order-line-item"
                     onClick={() => history.push(`/orders/${order.id}`)}
+                    key={order.id}
                 >
                     <td>{order.id}</td>
-                    <td>{order.dateOfDelivery}</td>
-                    <td>{order.paid === true ? "paid" : "not paid"}</td>
+                    <td>{formatDate(order.dateOfDelivery)}</td>
+                    <td id="oc-total">{getOrderTotal(order)}</td>
+                    <td className="text-align-center">{order.paid === true ? "paid" : "not paid"}</td>
                 </tr>
             )
         })

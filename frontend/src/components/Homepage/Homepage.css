@@ -57,6 +57,10 @@
     border-spacing: 0px;
 }
 
+#hp-orders-table th {
+    font-size: 20px;
+}
+
 .order-line-item {
     border-radius: 10px;
     cursor: pointer;
@@ -64,4 +68,9 @@
 
 .order-line-item:hover {
     background-color: #f2f2f2;
+}
+
+#oc-total {
+    text-align: end;
+    padding-right: 20px;
 }

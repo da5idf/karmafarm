@@ -1,28 +1,24 @@
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import Calendar from "react-calendar";
 
 import "./Cart.css"
 import ProductDetail from "../ProductDetail";
-import { toggleSubmission } from "../../store/orders"
-import { getFormattedNumber } from '../../utils'
+import { toggleSubmission, updateDeliveryOnOrder } from "../../store/orders"
+import { getFormattedNumber, getOrderTotal } from '../../utils'
 
 function Cart({ props }) {
     const { order, setView, views } = props;
     localStorage.setItem("orderView", views.cartView)
 
-    const [deliveryDay, setDeliveryDay] = useState(new Date())
-    const [validDay, setValidDay] = useState(false);
+    const [deliveryDay, setDeliveryDay] = useState(new Date(order.dateOfDelivery))
     const [error, setError] = useState("")
 
     const orderId = order.id
     const dispatch = useDispatch();
 
     const orderRecords = order.Orders_Products
-    const total = orderRecords.reduce((accum, record) => {
-        accum += record.weight * record.Product.pricePerPound
-        return accum
-    }, 0)
+    const total = getOrderTotal(order);
     const restaurant = order.Restaurant
 
     const addToOrder = () => {
@@ -32,7 +28,8 @@ function Cart({ props }) {
 
     const submitOrder = () => {
         if (validateDeliveryDay()) {
-            dispatch(toggleSubmission(orderId, true))
+            dispatch(toggleSubmission(orderId, true));
+            dispatch(updateDeliveryOnOrder(orderId, deliveryDay))
             localStorage.setItem("orderView", views.orderView)
             setView(views.orderView)
         }

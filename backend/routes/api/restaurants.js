@@ -5,7 +5,7 @@ const { check } = require('express-validator');
 
 const { handleValidationErrors } = require('../../utils/validation');
 const router = express.Router();
-const { User, Restaurant, Order, Member } = require('../../db/models');
+const { User, Restaurant, Order, Member, Orders_Products, Product } = require('../../db/models');
 
 // Validate restaurant sign up
 const validateSignup = [
@@ -71,6 +71,13 @@ router.get(
         const { restaurantId } = req.params;
         const orders = await Order.findAll({
             where: { restaurantId },
+            include: [
+                {
+                    model: Orders_Products,
+                    include: Product
+                }
+            ],
+            order: [['id', 'DESC']]
         })
 
         res.send(orders);

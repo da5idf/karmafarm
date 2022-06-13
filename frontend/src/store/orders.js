@@ -106,6 +106,20 @@ export const updateRecordOnOrder = (recordId, weight) => async (dispatch) => {
     dispatch(updateOrder(order))
 }
 
+export const updateDeliveryOnOrder = (orderId, dateOfDelivery) => async (dispatch) => {
+    const res = await csrfFetch(`/api/orders/${orderId}/delivery`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+            dateOfDelivery
+        })
+    })
+
+    const order = await res.json();
+
+    dispatch(updateOrder(order))
+}
+
 const updateOrder = (order) => ({
     type: UPDATE_ORDER,
     order

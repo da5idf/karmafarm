@@ -79,4 +79,28 @@ router.put(
     })
 )
 
+router.put(
+    '/:orderId/delivery/',
+    asyncHandler(async (req, res, next) => {
+        const { orderId } = req.params;
+        const { dateOfDelivery } = req.body;
+        const order = await Order.findByPk(orderId, {
+            include: [
+                { model: Restaurant },
+                {
+                    model: Orders_Products,
+                    include: [Product, User]
+                }
+            ]
+        })
+
+        order.dateOfDelivery = dateOfDelivery;
+        await order.save();
+
+        return res.send(order)
+    })
+)
+
+
+
 module.exports = router;

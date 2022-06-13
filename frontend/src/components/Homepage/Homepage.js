@@ -64,7 +64,8 @@ function Homepage() {
                                     <tr id="orders-table-header">
                                         <th>Order Number</th>
                                         <th>Delivery Date</th>
-                                        <th>Paid</th>
+                                        <th>Order Total</th>
+                                        <th className="text-align-center">Paid</th>
                                     </tr>
                                     {
                                         restaurants.map(restaurant => {

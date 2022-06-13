@@ -163,4 +163,8 @@ form input:last-of-type {
 input::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
-  }
+}
+
+.text-align-center {
+    text-align: center;
+}
