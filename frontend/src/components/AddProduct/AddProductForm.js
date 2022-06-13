@@ -62,18 +62,16 @@ function AddProductForm({ props }) {
                 </div>
                 <div className="newform-field">
                     <label id="active-label">Is this item active?</label>
-                    <label className="switch" htmlFor="new-active">
+                    <div className="toggle-container">
                         <input
                             id="new-active"
-                            className="form-input"
+                            className="toggle-switch"
                             type="checkbox"
                             value={active}
-                        // onChange={(e) => setActive(e.target.value)}
+                            onChange={(e) => setActive(e.target.value)}
                         />
-                        <span className="slider round"
-                            onClick={() => setActive(!active)}
-                        ></span>
-                    </label>
+                        <label className="slider round" htmlFor="new-active"></label>
+                    </div>
                 </div>
             </div>
             <div className="newform-field">
@@ -87,6 +85,8 @@ function AddProductForm({ props }) {
                     onChange={(e) => setType(e.target.value)}
                 />
             </div>
+            {/* <input type="checkbox" id="test"></input>
+            <label htmlFor="test">Test</label> */}
             <div className="newform-field">
                 <label>Product Image</label>
                 <input
