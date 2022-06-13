@@ -47,7 +47,6 @@ function OrderProduct({ product, orderId, orderRecords }) {
     const updateCart = () => {
         toggleModal()
         const record = orderRecords.find(record => record.productId === product.id)
-        console.log(quantity)
         dispatch(updateRecordOnOrder(record.id, quantity))
     }
 

@@ -10,15 +10,12 @@ function OrderCard({ restaurant }) {
 
     const orders = useSelector(state => state.orders.restaurantOrders);
 
-    console.log(orders)
-
     useEffect(() => {
         dispatch(getRestaurantOrders(restaurant.id))
     }, [dispatch, restaurant.id])
 
     return (
         orders.map(order => {
-            if (order.id === 4) console.log(order.paid, typeof order.paid)
             return (
                 <tr className="order-line-item"
                     onClick={() => history.push(`/orders/${order.id}`)}
