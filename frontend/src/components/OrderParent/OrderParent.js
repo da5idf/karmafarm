@@ -16,7 +16,7 @@ function OrderParent() {
     const order = useSelector(state => state.orders.thisOrder);
 
     const [isLoaded, setIsLoaded] = useState(false);
-    const [view, setView] = useState(localStorage.getItem("orderView"));
+    const [view, setView] = useState(localStorage.getItem("orderView") || "add");
 
     const addView = "add";
     const cartView = "cart";

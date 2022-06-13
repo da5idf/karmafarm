@@ -5,6 +5,21 @@ const router = express.Router();
 const { Order, Restaurant, Orders_Products, Product, User } = require('../../db/models')
 
 router.get(
+    '/',
+    asyncHandler(async (req, res, next) => {
+        const orders = await Order.findAll({
+            include: [Restaurant, {
+                model: Orders_Products,
+                include: Product
+            }],
+            order: [['id', 'DESC']]
+        });
+
+        res.send(orders);
+    })
+)
+
+router.get(
     '/:orderId',
     asyncHandler(async (req, res, next) => {
         const { orderId } = req.params

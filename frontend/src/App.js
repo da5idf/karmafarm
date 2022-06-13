@@ -35,18 +35,6 @@ function App() {
             <Route path="/signup">
               <SignupFormPage />
             </Route>
-            {/* <Route exact path="/orders/:orderId/add">
-              <Navigation />
-              <NewOrder />
-            </Route>
-            <Route exact path="/orders/:orderId/cart">
-              <Navigation />
-              <Cart />
-            </Route>
-            <Route exact path="/orders/:orderId">
-              <Navigation />
-              <SingleOrder />
-            </Route> */}
             <Route exact path="/orders/:orderId">
               <Navigation />
               <OrderParent />

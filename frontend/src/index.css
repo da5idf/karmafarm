@@ -98,8 +98,24 @@ input:focus-visible {
 }
 
 .blue-button:hover {
-    cursor: pointer;
     outline: 2px solid black
+}
+
+.green-button {
+    width: 100%;
+    text-align: center;
+    background-color: #73A577;
+    padding: .5rem;
+    border-radius: 5px;
+    font-size: 18px;
+    font-weight: 400;
+    color: white;
+    outline: 2px solid #73A577;
+}
+
+.green-button:hover {
+    background-color: #73a577b5;
+    outline: 2px solid #73a577b5;
 }
 
 .form-field {
@@ -151,7 +167,6 @@ form input:last-of-type {
     font-family: Arimo;
     font-size: 35px;
     padding-bottom: 1rem;
-    /* width: 1064px; */
 }
 
 .page-subtitle {
