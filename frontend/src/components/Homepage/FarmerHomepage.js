@@ -13,7 +13,7 @@ function FarmerHomepage({ user }) {
     const history = useHistory();
     const restaurants = useSelector(state => state.restaurants.all);
     const allOrders = useSelector(state => state.orders.all);
-    const [filterId, setFilterId] = useState(0);
+    const [filterId, setFilterId] = useState(undefined);
 
     useEffect(() => {
         dispatch(getAllRestaurants(user.id))
@@ -61,6 +61,14 @@ function FarmerHomepage({ user }) {
                                 return <RestaurantCard restaurant={restaurant} setFilterId={setFilterId} key={restaurant.id} />
                             })
                         }
+                        {filterId && (
+                            <button id="clear-filter"
+                                className="basic-button"
+                                onClick={() => setFilterId(undefined)}
+                            >
+                                Clear Filter
+                            </button>
+                        )}
                     </div>
                 </div>
                 <div id="hp-content">

@@ -106,3 +106,9 @@
 #new-items-container {
     height: 300px;
 }
+
+/***************************************/
+/* Farmer */
+#clear-filter {
+    align-self: flex-end
+}
