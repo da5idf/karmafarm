@@ -5,16 +5,118 @@
     margin-bottom: .5rem;
 }
 
-#add-to-order-button {
+#cart-top-wrapper {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+#error-container {
+    align-self: flex-end;
+    margin-bottom: 2.5rem;
+}
+
+#error-msg {
+    font-size: 20px;
+    font-weight: 400;
+    color: #A8003B;
+}
+
+#dd-title {
+    padding: 0;
+    align-self: flex-start;
+}
+
+#calendar-container {
+    width: 50%;
+    min-width: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.react-calendar__navigation {
+    display: flex;
+    justify-content: center;
+}
+
+.react-calendar__navigation__label {
+    max-width: 150px;
+}
+
+abbr {
+    padding: .5rem;
+    border-radius: 45px;
+}
+
+.react-calendar__tile:hover > abbr {
+    background-color: #73a577b5;
+}
+
+.react-calendar__tile--active > abbr {
+    background-color: #73A577;
+}
+
+#top-wrapper-right {
+    width: 50%;
+    min-width: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding-right: 2rem;
+}
+
+#wrapper-button-container,
+#cart-total-container {
+    display: flex;
+    justify-content: flex-end;
+}
+
+#cart-total {
     width: 200px;
-    margin-top: 1rem;
-    margin-bottom: 1rem;
+    text-align: end;
+    font-size: 20px;
+    font-weight: 400;
+    padding-right: .5rem
+}
+
+#cart-submit-button {
+    justify-self: flex-end;
+    width: 150px;
+    border-radius: 50px;
+    outline: 2px solid #73A577;
+    background-color: #73A577;
+    margin-left: 50px;
+}
+
+#cart-submit-button:hover {
+    background-color: #73a577e0;
+    outline: 2px solid black;
+}
+
+#add-to-order-button {
+    width: 150px;
+}
+
+#cart-table-icon {
+    width: 100%;
+    position: relative;
+}
+
+#cart-icon {
+    position: absolute;
+    top: 0;
+    right: 20px;
+    font-size: 30px;
 }
 
 #cart-product-details-container {
     padding-bottom: .5rem;
     border-bottom: 2px solid rgba(204, 204, 204, 0.528);
     margin-bottom: 1rem;
+    width: 100%;
 }
 
 th {
@@ -31,20 +133,4 @@ td {
 
 tr:nth-child(even) {
     background-color: rgba(204, 204, 204, 0.528);
-}
-
-#cart-total-container {
-    display: flex;
-}
-
-#cart-submit-order {
-    justify-self: flex-end;
-    width: 200px;
-    outline: 2px solid #73A577;
-    background-color: #73A577;
-}
-
-#cart-submit-order:hover {
-    background-color: #73a577e0;
-    outline: 2px solid black;
 }

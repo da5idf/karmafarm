@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import Calendar from "react-calendar";
 
 import "./Cart.css"
 import ProductDetail from "../ProductDetail";
@@ -9,6 +10,10 @@ import { getFormattedNumber } from '../../utils'
 function Cart({ props }) {
     const { order, setView, views } = props;
     localStorage.setItem("orderView", views.cartView)
+
+    const [deliveryDay, setDeliveryDay] = useState(new Date())
+    const [validDay, setValidDay] = useState(false);
+    const [error, setError] = useState("")
 
     const orderId = order.id
     const dispatch = useDispatch();
@@ -26,9 +31,25 @@ function Cart({ props }) {
     }
 
     const submitOrder = () => {
-        dispatch(toggleSubmission(orderId, true))
-        localStorage.setItem("orderView", views.orderView)
-        setView(views.orderView)
+        if (validateDeliveryDay()) {
+            dispatch(toggleSubmission(orderId, true))
+            localStorage.setItem("orderView", views.orderView)
+            setView(views.orderView)
+        }
+    }
+
+    const validateDeliveryDay = () => {
+        setError("");
+        const today = new Date();
+        const nextWeek = new Date(today.getTime() + 7 * 24 * 60 * 60 * 1000)
+
+        if (deliveryDay <= today || deliveryDay > nextWeek) {
+            setError("Please pick a day in the future, within one week")
+            return false;
+        }
+        else {
+            return true;
+        }
     }
 
     return (
@@ -39,39 +60,63 @@ function Cart({ props }) {
                 <div id="cart-restaurant-name">{restaurant.name}</div>
                 <div id="cart-restaurant-address">{restaurant.address}</div>
                 <div id="cart-restaurant-number">{getFormattedNumber(restaurant.restaurantNumber)}</div>
-                <button
-                    id="add-to-order-button"
-                    className="basic-button"
-                    onClick={addToOrder}
-                >
-                    Add to Order
-                </button>
-                <div id="cart-total-container">
-                    <div>Order Total</div>
-                    <div>{total}</div>
+                <div id="cart-top-wrapper">
+                    <div id="calendar-container">
+                        <div className="page-subtitle" id="dd-title">Select your delivery day</div>
+                        <Calendar
+                            onChange={setDeliveryDay}
+                            value={deliveryDay}
+                            prev2Label={null}
+                            next2Label={null}
+                            tileDisabled={({ date }) => date < new Date()}
+                        />
+                    </div>
+                    <div id="top-wrapper-right">
+                        <div id="error-container">
+                            <div id="error-msg">{error}</div>
+                        </div>
+                        <div id="cart-total-container">
+                            <div className="page-subtitle">Order Total</div>
+                            <div id="cart-total">${total}</div>
+                        </div>
+                        <div id="wrapper-button-container">
+                            <button
+                                id="add-to-order-button"
+                                className="basic-button"
+                                onClick={addToOrder}
+                            >
+                                Add to Order
+                            </button>
+                            <button
+                                id="cart-submit-button"
+                                className="blue-button"
+                                onClick={submitOrder}
+                            >
+                                Submit Order
+                            </button>
+
+                        </div>
+                    </div>
+
                 </div>
-                <table id="cart-product-details-container">
-                    <tbody>
-                        <tr id="table-header">
-                            <th>Product</th>
-                            <th>Quantity (#)</th>
-                            <th>Item Total</th>
-                            <th>Added By</th>
-                        </tr>
-                        {
-                            orderRecords?.map(record => {
-                                return <ProductDetail record={record} key={record.id} />
-                            })
-                        }
-                    </tbody>
-                </table>
-                <button
-                    id="cart-submit-order"
-                    className="blue-button"
-                    onClick={submitOrder}
-                >
-                    Submit Order
-                </button>
+                <div id="cart-table-icon">
+                    <table id="cart-product-details-container">
+                        <tbody>
+                            <tr id="table-header">
+                                <th>Product</th>
+                                <th>Quantity (#)</th>
+                                <th>Item Total</th>
+                                <th>Added By</th>
+                            </tr>
+                            {
+                                orderRecords?.map(record => {
+                                    return <ProductDetail record={record} key={record.id} />
+                                })
+                            }
+                        </tbody>
+                    </table>
+                    <i className="fa-solid fa-basket-shopping" id="cart-icon"></i>
+                </div>
             </div>
         </div>
     )
