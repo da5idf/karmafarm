@@ -1,8 +1,67 @@
-#hp-title {
-    font-family: Arimo, sans-serif;
-    font-size: 35px;
+#admin-container {
+    display: flex;
+    padding: .5rem;
+    background-color: #7EBEC5;
+    width: 250px;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    border-radius: 5px;
 }
 
-#dummy {
-    padding: 0;
+#admin-text {
+    font-size: 20px;
+    font-weight: 400;
+}
+
+#admin-key {
+    color: white;
+    font-size: 18px;
+    font-weight: 400;
+}
+
+#hp-new-order-button {
+    width: 200px;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+#hp-content {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: space-between;
+}
+
+#user-restaurants {
+    margin-bottom: 1rem;
+}
+
+#restaurant-card-container {
+    display: flex;
+}
+
+#hp-content-left {
+    width: 48%;
+    min-width: 400px;
+    margin-bottom: 1rem;
+}
+
+#hp-content-right {
+    width: 48%;
+    min-width: 400px;
+}
+
+#hp-orders-table {
+    width: 100%;
+    border-spacing: 0px;
+}
+
+.order-line-item {
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.order-line-item:hover {
+    background-color: #f2f2f2;
 }

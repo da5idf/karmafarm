@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import "./Cart.css"
 import ProductDetail from "../ProductDetail";
 import { toggleSubmission } from "../../store/orders"
+import { getFormattedNumber } from '../../utils'
 
 function Cart({ props }) {
     const { order, setView, views } = props;
@@ -28,14 +29,6 @@ function Cart({ props }) {
         dispatch(toggleSubmission(orderId, true))
         localStorage.setItem("orderView", views.orderView)
         setView(views.orderView)
-    }
-
-    const getFormattedNumber = (number) => {
-        const numString = number.toString();
-        const first = numString.slice(0, 3) + "-";
-        const second = numString.slice(3, 6) + "-"
-        const formatted = first + second + numString.slice(6);
-        return formatted;
     }
 
     return (
