@@ -16,7 +16,7 @@ const hydrateUserRestaurants = (restaurants) => ({
 })
 
 const initialState = {
-    restaurants: {}
+    restaurants: []
 }
 
 const userReducer = (state = initialState, action) => {

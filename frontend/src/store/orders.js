@@ -114,13 +114,14 @@ const updateOrder = (order) => ({
 
 const initialState = {
     all: {},
-    restaurantOrders: {},
+    restaurantOrders: [],
     thisOrder: {},
 };
 
 const orderReducer = (state = initialState, action) => {
     let newState;
-    let updatedOrder = {}
+    let updatedOrder = {};
+    let updated = [];
 
     switch (action.type) {
         case NEW_ORDER:
@@ -137,8 +138,9 @@ const orderReducer = (state = initialState, action) => {
         case GET_RESTAURANT_ORDERS:
             newState = Object.assign({}, state);
             action.orders.forEach(order => {
-                newState.restaurantOrders[order.id] = order
+                updated.push(order)
             })
+            newState.restaurantOrders = updated;
             return newState;
         case UPDATE_ORDER:
             newState = Object.assign({}, state);

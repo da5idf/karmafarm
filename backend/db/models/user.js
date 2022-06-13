@@ -49,12 +49,12 @@ module.exports = (sequelize, DataTypes) => {
     {
       defaultScope: {
         attributes: {
-          exclude: ['hashedPassword', 'email', 'key', 'createdAt', 'updatedAt']
+          exclude: ['hashedPassword', 'email', 'createdAt', 'updatedAt']
         }
       },
       scopes: {
         currentUser: {
-          attributes: { exclude: ['hashedPassword', 'key'] }
+          attributes: { exclude: ['hashedPassword'] }
         },
         allScope: {
           attributes: {}
@@ -64,8 +64,8 @@ module.exports = (sequelize, DataTypes) => {
 
   // Instance Method to return an obj with User information OK to save to JWT Token
   User.prototype.toSafeObject = function () {
-    const { id, name, admin, farmer, email } = this;
-    return { id, name, admin, farmer, email };
+    const { id, name, admin, farmer, key, email } = this;
+    return { id, name, admin, farmer, key, email };
   };
 
   // Instance Method to validate password
