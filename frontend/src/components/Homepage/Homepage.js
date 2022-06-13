@@ -24,6 +24,16 @@ function Homepage() {
         history.push(`/orders/${order.id}`)
     }
 
+    const copyKey = () => {
+        const keyElement = document.getElementById("admin-key");
+        const keyText = keyElement.innerHTML
+        navigator.clipboard.writeText(keyText);
+        keyElement.innerHTML = "copied!"
+        setTimeout(() => {
+            keyElement.innerHTML = keyText;
+        }, 1500)
+    }
+
     if (!restaurants) {
         return <h1>Loading</h1>
     }
@@ -33,9 +43,10 @@ function Homepage() {
             <div className="page-content">
                 <div className="page-title">Hello {user?.name.split(" ")[0]}, welcome back!</div>
                 {user.admin && (
-                    <div id="admin-container">
+                    <div id="admin-container" onClick={copyKey}>
                         <div id="admin-text">Admin Key:</div>
                         <div id="admin-key">{user.key}</div>
+                        <i className="fa-solid fa-copy"></i>
                     </div>
                 )}
                 <button
@@ -74,12 +85,15 @@ function Homepage() {
                                     }
                                 </tbody>
                             </table>
-                            <div id="hp-orders">
-                            </div>
                         </div>
                     </div>
                     <div id="hp-content-right">
-                        <div className="page-subtitle">New Items</div>
+                        <div id="new-items-container">
+                            <div className="page-subtitle">New Items</div>
+                        </div>
+                        <div id="feedback-container">
+                            <div className="page-subtitle">Order Feedback</div>
+                        </div>
 
                     </div>
 

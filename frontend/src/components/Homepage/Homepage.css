@@ -2,7 +2,7 @@
     display: flex;
     padding: .5rem;
     background-color: #7EBEC5;
-    width: 250px;
+    width: 300px;
     align-items: center;
     justify-content: space-between;
     gap: 1rem;
@@ -15,9 +15,24 @@
 }
 
 #admin-key {
-    color: white;
     font-size: 18px;
     font-weight: 400;
+    color: white;
+}
+
+.fa-copy {
+    color: white;
+    padding-right: .5rem;
+    visibility: hidden;
+}
+
+#admin-container:hover {
+    background-color: #7ebec5c0;
+    cursor: pointer;
+}
+
+#admin-container:hover > .fa-copy {
+    visibility: visible;
 }
 
 #hp-new-order-button {
@@ -26,15 +41,15 @@
     margin-bottom: 1rem;
 }
 
+#user-restaurants {
+    margin-bottom: 1rem;
+}
+
 #hp-content {
     display: flex;
     flex-wrap: wrap;
     width: 100%;
     justify-content: space-between;
-}
-
-#user-restaurants {
-    margin-bottom: 1rem;
 }
 
 #restaurant-card-container {
@@ -73,4 +88,14 @@
 #oc-total {
     text-align: end;
     padding-right: 20px;
+}
+
+#hp-content-right {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+#new-items-container {
+    height: 300px;
 }
