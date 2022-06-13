@@ -1,5 +1,6 @@
 .product-card-wrapper {
     width: 475px;
+    height: 145px;
     display: flex;
     padding: 10px;
     background-color: #ccc;
@@ -7,11 +8,22 @@
     border-radius: 5px;
 }
 
+.product-card-wrapper:hover {
+    cursor: pointer;
+    opacity: 80%;
+}
+
 .product-card-img {
     height: 125px;
     width: 125px;
     object-fit: cover;
     object-position: center;
+}
+
+#product-card-img-placeholder {
+    height: 125px;
+    width: 125px;
+    background-color: #7EBEC5;
 }
 
 .product-card-right {

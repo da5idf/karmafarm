@@ -1,0 +1,9 @@
+#add-edit-content {
+    display: flex;
+    gap: 2rem;
+}
+
+#farmer-products-list {
+    height: 80vh;
+    overflow-y: scroll;
+}

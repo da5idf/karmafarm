@@ -1,10 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 
 import "./AddProduct.css"
 import { getAllProducts } from "../../store/products";
 import ProductCard from "./ProductCard";
+import AddProductForm from "./AddProductForm";
 
 function AddProduct({ user }) {
     const dispatch = useDispatch();
@@ -12,6 +13,16 @@ function AddProduct({ user }) {
 
     const productsObjs = useSelector(state => state.products.all);
     const products = Object.values(productsObjs);
+
+    const [imgUrl, setImgUrl] = useState("");
+    const [name, setName] = useState("");
+    const [description, setDescription] = useState("");
+    const [pricePerPound, setPrice] = useState("");
+    const [active, setActive] = useState(false);
+    const [type, setType] = useState("");
+    const [farm, setFarm] = useState("");
+    const [casePrice, setCasePrice] = useState(0);
+    const [caseWeight, setCaseWeight] = useState(0);
 
     useEffect(() => {
         dispatch(getAllProducts());
@@ -21,16 +32,39 @@ function AddProduct({ user }) {
         history.push("/")
     }
 
+    const props = {
+        name, setName,
+        description, setDescription,
+        pricePerPound, setPrice,
+        active, setActive,
+        type, setType,
+        imgUrl, setImgUrl,
+    }
+
     return (
         <div className="page-hero">
             <div className="page-content">
-                <div id="farmer-products-list">
-                    {products.map(product => (
-                        <ProductCard
-                            product={product}
-                            key={product.id}
-                        />
-                    ))}
+                <div className="page-title">Add or Edit a Product</div>
+                <div className="page-subtitle">
+                    Use the form below to create a new product. Or click an existing product to edit it.
+                </div>
+                <div id="add-edit-content">
+                    <div id="add-edit-left">
+                        <div id="add-edit-form">
+                            <AddProductForm props={props} />
+                        </div>
+                        <ProductCard product={props} />
+                    </div>
+
+                    <div id="farmer-products-list">
+                        {products.map(product => (
+                            <ProductCard
+                                product={product}
+                                props={props}
+                                key={product.id}
+                            />
+                        ))}
+                    </div>
                 </div>
             </div>
         </div>

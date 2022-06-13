@@ -2,12 +2,27 @@ import React from "react";
 
 import "./ProductCard.css"
 
-function ProductCard({ product }) {
+function ProductCard({ product, props }) {
+
+    const fillForm = () => {
+        props.setName(product.name);
+        props.setDescription(product.description);
+        props.setPrice(product.pricePerPound);
+        props.setActive(product.active);
+        props.setType(product.type);
+        props.setImgUrl(product.imgUrl)
+    }
+
     return (
         <div className="product-card-wrapper"
-            onClick={() => console.log(product.id)}
+            onClick={fillForm}
         >
-            <img className="product-card-img" src={product.imgUrl} alt="" />
+            {
+                product.imgUrl ?
+                    <img className="product-card-img" src={product.imgUrl} alt="" />
+                    :
+                    <div id="product-card-img-placeholder"></div>
+            }
             <div className="product-card-right">
                 <div className="product-card-titles">
                     <div className="page-subtitle product-card-name">{product.name}</div>
@@ -16,7 +31,7 @@ function ProductCard({ product }) {
                 <div className="product-card-info">
                     <div className="product-card-active-container">
                         <div>Price pp</div>
-                        <div>{product.pricePerPound}</div>
+                        <div>${product.pricePerPound}</div>
                     </div>
                     <div className="product-card-price-container">
                         <div>Active</div>
