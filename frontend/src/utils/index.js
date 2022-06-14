@@ -24,7 +24,7 @@ export const getOrderTotal = (order) => {
     if (total === 0) {
         return "$0.00"
     } else {
-        return `$${total}`
+        return `$${total.toFixed(2)}`
     }
 }
 
