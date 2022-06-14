@@ -27,6 +27,7 @@ function AddProduct({ user }) {
     // const [caseWeight, setCaseWeight] = useState(0);
     const [inEdit, setInEdit] = useState(false);
     const [productId, setProductId] = useState(0);
+    const [errors, setErrors] = useState({});
 
     useEffect(() => {
         dispatch(getAllProducts());
@@ -40,6 +41,7 @@ function AddProduct({ user }) {
         const inputElement = document.getElementById("new-imgFile");
         inputElement.value = "";
 
+        setErrors({})
         setName("");
         setDescription("");
         setPrice(0);
@@ -60,6 +62,7 @@ function AddProduct({ user }) {
         imgFile, setImgFile,
         productId, setProductId,
         inEdit, setInEdit,
+        errors, setErrors,
         clearSelection
     }
 

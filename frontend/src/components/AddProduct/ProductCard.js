@@ -10,6 +10,9 @@ function ProductCard({ product, props }) {
 
     const fillForm = (e) => {
         e.preventDefault();
+        // clear out any prior errors
+        props.setErrors({});
+
         // clear out input file selection
         props.setImgFile("");
         const inputElement = document.getElementById("new-imgFile");

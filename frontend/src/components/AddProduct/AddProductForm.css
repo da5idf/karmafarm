@@ -9,10 +9,19 @@
 }
 
 .newform-field {
+    position: relative;
     width: 100%;
     display: flex;
     flex-direction: column;
     gap: .25rem;
+}
+
+.new-edit-error {
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    color: #A8003B;
+    font-weight: 400;
 }
 
 .newform-field > label {

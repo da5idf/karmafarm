@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createProduct, updateProduct } from "../../store/products";
 
@@ -15,6 +15,7 @@ function AddProductForm({ props }) {
         inEdit, setInEdit,
         productId,
         clearSelection,
+        errors, setErrors
     } = props
 
     const dispatch = useDispatch();
@@ -22,25 +23,49 @@ function AddProductForm({ props }) {
 
     const handleSubmit = (e) => {
         e.preventDefault()
+        const valid = validateSubmit();
 
-        const product = {
-            name,
-            description,
-            pricePerPound,
-            active,
-            type,
-            image: imgFile,
-            farmerId: user.id
+        if (valid) {
+            const product = {
+                name,
+                description,
+                pricePerPound,
+                active,
+                type,
+                image: imgFile,
+                farmerId: user.id
+            }
+
+            if (!inEdit) {
+                dispatch(createProduct(product));
+            } else {
+                product.id = productId
+                dispatch(updateProduct(product));
+            }
+            clearSelection();
+            setInEdit(false);
+        }
+    }
+
+    const validateSubmit = () => {
+        setErrors({});
+        const newErrors = Object.assign({}, errors)
+        let valid = true;
+        if (!name) {
+            newErrors.name = "Name is required";
+            valid = false;
+        }
+        if (!description) {
+            newErrors.description = "Description is required, max 100 characters";
+            valid = false;
+        }
+        if (pricePerPound <= 0) {
+            newErrors.ppp = "ppp > 0";
+            valid = false;
         }
 
-        if (!inEdit) {
-            dispatch(createProduct(product));
-        } else {
-            product.id = productId
-            dispatch(updateProduct(product));
-        }
-        clearSelection();
-        setInEdit(false);
+        setErrors(newErrors);
+        return valid;
     }
 
     const handleClear = (e) => {
@@ -59,6 +84,7 @@ function AddProductForm({ props }) {
             onSubmit={handleSubmit}
         >
             <div className="newform-field">
+                {errors.name && <div className="new-edit-error">{errors.name}</div>}
                 <label>Name</label>
                 <input
                     id="new-name"
@@ -70,6 +96,7 @@ function AddProductForm({ props }) {
                 />
             </div>
             <div className="newform-field">
+                {errors.description && <div className="new-edit-error">{errors.description}</div>}
                 <label>Description</label>
                 <input
                     id="new-description"
@@ -82,6 +109,7 @@ function AddProductForm({ props }) {
             </div>
             <div className="double-form-field">
                 <div className="newform-field">
+                    {errors.ppp && <div className="new-edit-error">{errors.ppp}</div>}
                     <label>Price Per Pound</label>
                     <input
                         id="new-price"
