@@ -45,4 +45,19 @@ router.put(
     })
 )
 
+router.delete(
+    "/:productId",
+    asyncHandler(async (req, res, next) => {
+        const { productId } = req.params;
+
+        const product = await Product.findByPk(productId);
+
+        if (product) {
+            await product.destroy();
+
+            res.send({ message: "successfully deleted" })
+        }
+    })
+)
+
 module.exports = router;
