@@ -58,13 +58,13 @@
 }
 
 #hp-content-left {
-    width: 48%;
+    width: 55%;
     min-width: 400px;
     margin-bottom: 1rem;
 }
 
 #hp-content-right {
-    width: 48%;
+    width: 40%;
     min-width: 400px;
 }
 

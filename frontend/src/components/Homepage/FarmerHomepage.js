@@ -25,7 +25,7 @@ function FarmerHomepage({ user }) {
             if (!filterId) return true
             return order.Restaurant.id === filterId
         })
-        return <OrderCard allOrders={filteredOrders} />
+        return <OrderCard allOrders={filteredOrders} admin={true} />
     }
 
     if (!restaurants) {
@@ -79,6 +79,7 @@ function FarmerHomepage({ user }) {
                                 <tbody>
                                     <tr id="orders-table-header">
                                         <th>Order Number</th>
+                                        <th>Restaurant</th>
                                         <th>Delivery Date</th>
                                         <th>Order Total</th>
                                         <th className="text-align-center">Paid</th>
