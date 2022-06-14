@@ -46,14 +46,10 @@ function AddProductForm({ props }) {
     const handleClear = (e) => {
         e.preventDefault();
         clearSelection();
-        const fileField = document.getElementById("new-imgFile");
-        console.log(fileField)
     }
 
     const updateFile = (e) => {
-        console.log("in update")
         const file = e.target.files[0];
-        console.log(file);
         if (file) setImgFile(file);
     }
 

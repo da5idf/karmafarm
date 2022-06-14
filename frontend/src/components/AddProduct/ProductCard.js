@@ -15,7 +15,7 @@ function ProductCard({ product, props }) {
         const inputElement = document.getElementById("new-imgFile");
         inputElement.value = "";
 
-        // reset all other state vars
+        // set all other state vars
         props.setProductId(product.id);
         props.setName(product.name);
         props.setDescription(product.description);

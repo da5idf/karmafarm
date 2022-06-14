@@ -36,10 +36,10 @@ function AddProduct({ user }) {
         history.push("/")
     }
 
-    const clearSelection = (e) => {
-        if (e) {
-            e.preventDefault();
-        }
+    const clearSelection = () => {
+        const inputElement = document.getElementById("new-imgFile");
+        inputElement.value = "";
+
         setName("");
         setDescription("");
         setPrice(0);
