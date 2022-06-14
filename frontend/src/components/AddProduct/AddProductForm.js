@@ -67,10 +67,10 @@ function AddProductForm({ props }) {
                             id="new-active"
                             className="toggle-switch"
                             type="checkbox"
-                            value={active}
-                            onChange={(e) => setActive(e.target.value)}
+                            checked={active}
+                            onChange={() => setActive(!active)}
                         />
-                        <label className="slider round" htmlFor="new-active"></label>
+                        <label htmlFor="new-active"></label>
                     </div>
                 </div>
             </div>
