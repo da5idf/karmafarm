@@ -9,10 +9,19 @@
 }
 
 .newform-field {
+    position: relative;
     width: 100%;
     display: flex;
     flex-direction: column;
     gap: .25rem;
+}
+
+.new-edit-error {
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    color: #A8003B;
+    font-weight: 400;
 }
 
 .newform-field > label {
@@ -23,6 +32,24 @@
 
 #active-label {
     align-self: center;
+}
+
+#new-imgFile {
+    display: none;
+}
+
+#new-img-title {
+    align-self: center;
+}
+
+#new-img-label {
+    cursor: pointer;
+    align-self: center;
+    color: #F5DA70;
+    /* background-color: #eee; */
+    border: 2px solid black;
+    padding: .4rem;
+    border-radius: 5px;
 }
 
 /*****************************************/

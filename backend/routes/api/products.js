@@ -1,5 +1,6 @@
 const express = require('express')
 const asyncHandler = require('express-async-handler');
+const { singleMulterUpload, singlePublicFileUpload } = require('../../awsS3')
 
 const router = express.Router();
 const { Product } = require('../../db/models');
@@ -17,28 +18,63 @@ router.get(
 
 router.post(
     "/",
+    singleMulterUpload("image"),
     asyncHandler(async (req, res, next) => {
-        const { product } = req.body
+        const {
+            name,
+            description,
+            pricePerPound,
+            active,
+            type,
+            farmerId,
+        } = req.body
 
-        const newProduct = await Product.create(product)
+        const imgUrl = await singlePublicFileUpload(req.file)
+
+        const newProduct = await Product.create({
+            name,
+            description,
+            pricePerPound,
+            active,
+            type,
+            farmerId,
+            imgUrl,
+        })
+
         res.send(newProduct)
     })
 )
 
 router.put(
     "/:productId",
+    singleMulterUpload("image"),
     asyncHandler(async (req, res, next) => {
         const { productId } = req.params
-        const { product } = req.body
+        const {
+            name,
+            description,
+            pricePerPound,
+            active,
+            type,
+            farmerId,
+        } = req.body
 
         const editProduct = await Product.findByPk(productId)
 
-        for (let key in product) {
-            if (product[key] != editProduct[key]) {
-                console.log(product[key], editProduct[key])
-                editProduct[key] = product[key];
-            }
+        let imgUrl
+        try {
+            imgUrl = await singlePublicFileUpload(req.file)
+            editProduct.imgUrl = imgUrl
+        } catch (e) {
+
         }
+
+        if (name) editProduct.name = name;
+        if (description) editProduct.description = description;
+        if (pricePerPound) editProduct.pricePerPound = pricePerPound;
+        if (active) editProduct.active = active;
+        if (type) editProduct.type = type;
+        if (farmerId) editProduct.farmerId = farmerId;
 
         await editProduct.save();
         res.send(editProduct)

@@ -16,6 +16,7 @@ function AddProduct({ user }) {
     products.reverse();
 
     const [imgUrl, setImgUrl] = useState("");
+    const [imgFile, setImgFile] = useState("");
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
     const [pricePerPound, setPrice] = useState("");
@@ -26,6 +27,7 @@ function AddProduct({ user }) {
     // const [caseWeight, setCaseWeight] = useState(0);
     const [inEdit, setInEdit] = useState(false);
     const [productId, setProductId] = useState(0);
+    const [errors, setErrors] = useState({});
 
     useEffect(() => {
         dispatch(getAllProducts());
@@ -35,6 +37,21 @@ function AddProduct({ user }) {
         history.push("/")
     }
 
+    const clearSelection = () => {
+        const inputElement = document.getElementById("new-imgFile");
+        inputElement.value = "";
+
+        setErrors({})
+        setName("");
+        setDescription("");
+        setPrice(0);
+        setActive(false);
+        setType("");
+        setImgFile(undefined);
+        setImgUrl("");
+        setInEdit(false);
+    }
+
     const props = {
         name, setName,
         description, setDescription,
@@ -42,8 +59,11 @@ function AddProduct({ user }) {
         active, setActive,
         type, setType,
         imgUrl, setImgUrl,
+        imgFile, setImgFile,
         productId, setProductId,
-        inEdit, setInEdit
+        inEdit, setInEdit,
+        errors, setErrors,
+        clearSelection
     }
 
     return (
