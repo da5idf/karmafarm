@@ -25,6 +25,24 @@
     align-self: center;
 }
 
+#new-imgFile {
+    display: none;
+}
+
+#new-img-title {
+    align-self: center;
+}
+
+#new-img-label {
+    cursor: pointer;
+    align-self: center;
+    color: #F5DA70;
+    /* background-color: #eee; */
+    border: 2px solid black;
+    padding: .4rem;
+    border-radius: 5px;
+}
+
 /*****************************************/
 /** Slider **/
 .toggle-container {

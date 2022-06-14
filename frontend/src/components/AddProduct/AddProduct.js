@@ -16,6 +16,7 @@ function AddProduct({ user }) {
     products.reverse();
 
     const [imgUrl, setImgUrl] = useState("");
+    const [imgFile, setImgFile] = useState("");
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
     const [pricePerPound, setPrice] = useState("");
@@ -35,6 +36,20 @@ function AddProduct({ user }) {
         history.push("/")
     }
 
+    const clearSelection = (e) => {
+        if (e) {
+            e.preventDefault();
+        }
+        setName("");
+        setDescription("");
+        setPrice(0);
+        setActive(false);
+        setType("");
+        setImgFile(undefined);
+        setImgUrl("");
+        setInEdit(false);
+    }
+
     const props = {
         name, setName,
         description, setDescription,
@@ -42,8 +57,10 @@ function AddProduct({ user }) {
         active, setActive,
         type, setType,
         imgUrl, setImgUrl,
+        imgFile, setImgFile,
         productId, setProductId,
-        inEdit, setInEdit
+        inEdit, setInEdit,
+        clearSelection
     }
 
     return (

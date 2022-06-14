@@ -1,5 +1,6 @@
 const express = require('express')
 const asyncHandler = require('express-async-handler');
+const { singleMulterUpload, singlePublicFileUpload } = require('../../awsS3')
 
 const router = express.Router();
 const { Product } = require('../../db/models');
@@ -17,10 +18,29 @@ router.get(
 
 router.post(
     "/",
+    singleMulterUpload("image"),
     asyncHandler(async (req, res, next) => {
-        const { product } = req.body
+        const {
+            name,
+            description,
+            pricePerPound,
+            active,
+            type,
+            farmerId,
+        } = req.body
 
-        const newProduct = await Product.create(product)
+        const imgUrl = await singlePublicFileUpload(req.file)
+
+        const newProduct = await Product.create({
+            name,
+            description,
+            pricePerPound,
+            active,
+            type,
+            farmerId,
+            imgUrl,
+        })
+
         res.send(newProduct)
     })
 )

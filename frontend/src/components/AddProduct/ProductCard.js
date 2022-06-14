@@ -8,7 +8,14 @@ import { deleteProduct } from "../../store/products"
 function ProductCard({ product, props }) {
     const dispatch = useDispatch();
 
-    const fillForm = () => {
+    const fillForm = (e) => {
+        e.preventDefault();
+        // clear out input file selection
+        props.setImgFile("");
+        const inputElement = document.getElementById("new-imgFile");
+        inputElement.value = "";
+
+        // reset all other state vars
         props.setProductId(product.id);
         props.setName(product.name);
         props.setDescription(product.description);
@@ -25,9 +32,6 @@ function ProductCard({ product, props }) {
     }
 
     const bind = useLongPress(cb, {
-        // onStart: () => console.log("Press started"),
-        // onFinish: () => console.log("Long press finished"),
-        // onCancel: () => console.log("Press cancelled"),
         threshold: 750,
         captureEvent: true,
         cancelOnMovement: false,
@@ -39,8 +43,21 @@ function ProductCard({ product, props }) {
     }
 
     const confirmDelete = () => {
-        const deleteModal = document.getElementById(`${product.id}-delete`);
         dispatch(deleteProduct(product.id))
+        props.clearSelection();
+    }
+
+    const renderImage = () => {
+        if (product.imgFile) {
+            const url = URL.createObjectURL(product.imgFile)
+            return <img className="product-card-img" src={url} alt="" />
+        }
+        else if (product.imgUrl) {
+            return <img className="product-card-img" src={product.imgUrl} alt="" />
+        }
+        else {
+            return <div id="product-card-img-placeholder"></div>
+        }
     }
 
     return (
@@ -50,10 +67,7 @@ function ProductCard({ product, props }) {
                 {...bind()}
             >
                 {
-                    product.imgUrl ?
-                        <img className="product-card-img" src={product.imgUrl} alt="" />
-                        :
-                        <div id="product-card-img-placeholder"></div>
+                    renderImage()
                 }
                 <div className="product-card-right">
                     <div className="product-card-titles">

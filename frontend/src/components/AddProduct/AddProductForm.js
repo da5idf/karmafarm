@@ -11,9 +11,10 @@ function AddProductForm({ props }) {
         pricePerPound, setPrice,
         active, setActive,
         type, setType,
-        imgUrl, setImgUrl,
+        imgFile, setImgFile,
         inEdit, setInEdit,
-        productId
+        productId,
+        clearSelection,
     } = props
 
     const dispatch = useDispatch();
@@ -28,7 +29,7 @@ function AddProductForm({ props }) {
             pricePerPound,
             active,
             type,
-            imgUrl,
+            image: imgFile,
             farmerId: user.id
         }
 
@@ -42,13 +43,18 @@ function AddProductForm({ props }) {
         setInEdit(false);
     }
 
-    const clearSelection = () => {
-        setName("");
-        setDescription("");
-        setPrice(0);
-        setActive(false);
-        setType("");
-        setImgUrl("");
+    const handleClear = (e) => {
+        e.preventDefault();
+        clearSelection();
+        const fileField = document.getElementById("new-imgFile");
+        console.log(fileField)
+    }
+
+    const updateFile = (e) => {
+        console.log("in update")
+        const file = e.target.files[0];
+        console.log(file);
+        if (file) setImgFile(file);
     }
 
     return (
@@ -79,7 +85,6 @@ function AddProductForm({ props }) {
                 />
             </div>
             <div className="double-form-field">
-
                 <div className="newform-field">
                     <label>Price Per Pound</label>
                     <input
@@ -104,33 +109,35 @@ function AddProductForm({ props }) {
                     </div>
                 </div>
             </div>
-            <div className="newform-field">
-                <label>Type</label>
-                <input
-                    id="new-type"
-                    className="form-input"
-                    type="text"
-                    value={type}
-                    placeholder="Please enter the product type"
-                    onChange={(e) => setType(e.target.value)}
-                />
-            </div>
-            <div className="newform-field">
-                <label>Product Image</label>
-                <input
-                    id="new-imgUrl"
-                    className="form-input"
-                    type="text"
-                    value={imgUrl}
-                    onChange={(e) => setImgUrl(e.target.value)}
-                />
-            </div>
-            <div id="new-edit-errors-container">
-
+            <div className="double-form-field">
+                <div className="newform-field">
+                    <label>Type</label>
+                    <input
+                        id="new-type"
+                        className="form-input"
+                        type="text"
+                        value={type}
+                        placeholder="Please enter the product type"
+                        onChange={(e) => setType(e.target.value)}
+                    />
+                </div>
+                <div className="newform-field">
+                    <label id="new-img-title">Product Image</label>
+                    <label id="new-img-label" htmlFor="new-imgFile">
+                        <input
+                            id="new-imgFile"
+                            className="form-input"
+                            type="file"
+                            accept="image/*"
+                            onChange={updateFile}
+                        />
+                        upload new image
+                    </label>
+                </div>
             </div>
             <button
                 className="basic-button"
-                onClick={clearSelection}
+                onClick={handleClear}
             >
                 Reset inputs
             </button>

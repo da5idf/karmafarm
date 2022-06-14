@@ -17,10 +17,20 @@ const hydrateAllProducts = (products) => ({
 })
 
 export const createProduct = (product) => async (dispatch) => {
+    console.log(product.image);
+    const formData = new FormData();
+    formData.append("name", product.name);
+    formData.append("description", product.description);
+    formData.append("pricePerPound", product.pricePerPound);
+    formData.append("type", product.type);
+    formData.append("active", product.active);
+    formData.append("farmerId", product.farmerId);
+    formData.append("image", product.image);
+
     const response = await csrfFetch("/api/products", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ product })
+        headers: { "Content-Type": "multipart/form-data" },
+        body: formData
     })
 
     if (response.ok) {
