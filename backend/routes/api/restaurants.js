@@ -9,12 +9,22 @@ const { User, Restaurant, Order, Member, Orders_Products, Product } = require('.
 
 // Validate restaurant sign up
 const validateSignup = [
+    check('name')
+        .isLength({ min: 3 })
+        .withMessage('Please provide a name with at least 3 characters.'),
     check('address')
+        .isLength({ min: 6 })
+        .withMessage('Address must be 6 characters or more.'),
+    check('restaurantNumber')
+        .isLength(10)
+        .withMessage('Please enter a 10-digit phone number'),
+    handleValidationErrors
 ]
 
 
 router.post(
-    '/new',
+    '/',
+    validateSignup,
     asyncHandler(async (req, res, next) => {
         const { name, address, restaurantNumber, ownerId } = req.body;
 

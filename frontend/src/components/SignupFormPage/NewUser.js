@@ -33,7 +33,7 @@ function NewUser({ props }) {
                 name,
                 email,
                 phoneNumber,
-                admin: true,
+                admin: next ? true : false,
                 farmer: false,
                 password,
             }))
@@ -64,12 +64,12 @@ function NewUser({ props }) {
         }
 
         // if psss != confirm
-        return setErrors(['Confirm Password field must be the same as the Password field']);
+        return setErrors(['Confirm Password must be the same as Password']);
     };
 
     return (
         <>
-            <form className="signup-form">
+            <form className="signup-form" onSubmit={handleNext}>
                 {errors.map((error, idx) => (
                     <div className="signup-error" key={idx}>{error}</div>)
                 )}
@@ -80,7 +80,7 @@ function NewUser({ props }) {
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     placeholder="Please enter your name"
-                    required
+                // required
                 />
 
                 <input
@@ -90,7 +90,7 @@ function NewUser({ props }) {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="Please enter your email"
-                    required
+                // required
                 />
 
                 <div className="phone-format">Please input in xxx-xxx-xxxx format.</div>
@@ -101,7 +101,7 @@ function NewUser({ props }) {
                     value={number}
                     onChange={(e) => setNumber(e.target.value)}
                     placeholder="Please enter your phone number"
-                    required
+                // required
                 />
 
                 <input
@@ -110,7 +110,7 @@ function NewUser({ props }) {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     placeholder="Please enter a password"
-                    required
+                // required
                 />
 
                 <input
@@ -119,35 +119,37 @@ function NewUser({ props }) {
                     value={confirmPassword}
                     onChange={(e) => setConfirmPassword(e.target.value)}
                     placeholder="Please confirm your password"
-                    required
+                // required
                 />
 
                 <div className="fields-required">All fields are required</div>
 
-            </form>
-            <div className="signup-button-container">
-                <button
-                    className="bb-wt signup-cancel-button"
-                    onClick={handleCancel}
-                >
-                    Cancel
-                </button>
-                <div id="signup-buttons-right">
+                <div className="signup-button-container">
                     <button
-                        className="basic-button"
-                        onClick={() => setStep(back)}
+                        className="bb-wt signup-cancel-button"
+                        onClick={handleCancel}
+                        type="button"
                     >
-                        Back
+                        Cancel
                     </button>
-                    <button
-                        onClick={handleNext}
-                        id="key-next-button"
-                        className="bb-wt submit-button"
-                    >
-                        Next
-                    </button>
+                    <div id="signup-buttons-right">
+                        <button
+                            className="basic-button"
+                            onClick={() => setStep(back)}
+                            type="button"
+                        >
+                            Back
+                        </button>
+                        <button
+                            type="submit"
+                            id="key-next-button"
+                            className="bb-wt submit-button"
+                        >
+                            Next
+                        </button>
+                    </div>
                 </div>
-            </div>
+            </form>
             <div
                 className="signup-redirect"
                 onClick={() => history.push("/login")}

@@ -1,3 +1,5 @@
+import cryptoRandomString from 'crypto-random-string';
+
 import { csrfFetch } from './csrf';
 
 const SET_USER = "session/setUser"
@@ -38,6 +40,14 @@ export const restoreUser = () => async (dispatch) => {
 }
 
 export const signupUser = ({ name, email, phoneNumber, admin, farmer, password }) => async (dispatch) => {
+    let key;
+    console.log(admin);
+    if (admin) {
+        console.log("are we here?")
+        key = cryptoRandomString({ length: 9 });
+        console.log("key", key)
+    }
+
     const response = await csrfFetch(
         '/api/users',
         {
@@ -49,6 +59,7 @@ export const signupUser = ({ name, email, phoneNumber, admin, farmer, password }
                 phoneNumber,
                 admin,
                 farmer,
+                key,
                 password,
             }),
         },

@@ -8,16 +8,17 @@ function NewRestaurant({ props }) {
     const history = useHistory();
     const user = useSelector(state => state.session.user);
 
-    const [error, setError] = useState("");
     const [name, setName] = useState("");
     const [address, setAddress] = useState("");
     const [number, setNumber] = useState("");
+    const [errors, setErrors] = useState([]);
 
-    const handleNext = async () => {
+    const handleNext = async (e) => {
+        e.preventDefault();
         const restaurantNumber = number.split("-").join("");
 
-        setError("");
-        csrfFetch('api/restaurants/new', {
+        // setErrors("");
+        csrfFetch('api/restaurants', {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
@@ -41,14 +42,16 @@ function NewRestaurant({ props }) {
             })
             .catch(async (res) => {
                 const data = await res.json();
-                setError(data.errors)
+                setErrors(data.errors)
             })
     }
 
     return (
         <>
-            <div className="signup-error">{error}</div>
-            <form className="signup-form" >
+            <form className="signup-form" onSubmit={handleNext}>
+                {errors.map((error, idx) => (
+                    <div className="signup-error" key={idx}>{error}</div>)
+                )}
                 <input
                     type="text"
                     className="form-input"
@@ -75,25 +78,25 @@ function NewRestaurant({ props }) {
                     required
                 />
                 <div className="fields-required">All fields are required</div>
-
-            </form>
-            <div className='signup-button-container'>
-                <button
-                    className="bb-wt signup-cancel-button"
-                    onClick={handleCancel}
-                >
-                    Cancel
-                </button>
-                <div id="signup-buttons-right">
+                <div className='signup-button-container'>
                     <button
-                        onClick={handleNext}
-                        id="key-next-button"
-                        className="bb-wt submit-button"
+                        className="bb-wt signup-cancel-button"
+                        type="button"
+                        onClick={handleCancel}
                     >
-                        Next
+                        Cancel
                     </button>
+                    <div id="signup-buttons-right">
+                        <button
+                            type="submit"
+                            id="key-next-button"
+                            className="bb-wt submit-button"
+                        >
+                            Next
+                        </button>
+                    </div>
                 </div>
-            </div>
+            </form>
             <div
                 className="signup-redirect"
                 onClick={() => history.push("/")}
