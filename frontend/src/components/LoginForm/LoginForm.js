@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 
@@ -6,7 +6,6 @@ import "./LoginForm.css"
 import FormBanner from "../FormBanner";
 import PasswordToggel from "../PasswordToggle"
 import * as sessionActions from "../../store/session";
-import Homepage from "../Homepage";
 
 function LoginForm() {
     const dispatch = useDispatch();
@@ -17,13 +16,13 @@ function LoginForm() {
     const [isPassword, setIsPassword] = useState("password");
     const [errors, setErrors] = useState([]);
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         setErrors([]);
-        dispatch(sessionActions.login({ credential, password }))
-            .then(() => {
-                history.push("/")
-            })
+        await dispatch(sessionActions.login({ credential, password }))
+            // .then(() => {
+            //     history.push("/")
+            // })
             .catch(
                 async (res) => {
                     const data = await res.json();
@@ -42,7 +41,7 @@ function LoginForm() {
             <div id="login-content">
 
                 <div id="login-form-title">Welcome Back!</div>
-                <div id="login-form" >
+                <form id="login-form" onSubmit={handleSubmit} >
                     <div id="login-errors">
                         {errors.map((error, idx) => (
                             <div key={idx}>{error}</div>
@@ -75,18 +74,19 @@ function LoginForm() {
                             id="login-cancel-button"
                             className="bb-wt"
                             onClick={() => history.push("/")}
+                            type="button"
                         >
                             Cancel
                         </button>
                         <button
-                            onClick={handleSubmit}
+                            type="submit"
                             id="login-button"
                             className="bb-wt submit-button"
                         >
                             Log In
                         </button>
                     </div>
-                </div>
+                </form>
                 <div
                     className="signup-redirect"
                     onClick={() => history.push("/signup")}

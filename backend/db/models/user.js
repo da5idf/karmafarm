@@ -92,7 +92,7 @@ module.exports = (sequelize, DataTypes) => {
   };
 
   // Static method to sign up a User
-  User.signup = async function ({ name, email, phoneNumber, admin, farmer, password }) {
+  User.signup = async function ({ name, email, phoneNumber, admin, farmer, key, password }) {
     const hashedPassword = bcrypt.hashSync(password);
     const user = await User.create({
       name,
@@ -100,6 +100,7 @@ module.exports = (sequelize, DataTypes) => {
       phoneNumber,
       admin,
       farmer,
+      key,
       hashedPassword
     });
     return await User.scope('currentUser').findByPk(user.id);

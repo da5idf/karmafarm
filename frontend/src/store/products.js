@@ -90,24 +90,21 @@ const initialState = {
 
 const productReducer = (state = initialState, action) => {
     let newState;
-    let newAll = {};
+    newState = Object.assign({}, state);
+    let newAll = Object.assign({}, state.all);
 
     switch (action.type) {
         case GET_ALL_PRODUCTS:
-            newState = Object.assign({}, state);
             action.products.forEach(product => {
                 newAll[product.id] = product
             });
             newState.all = newAll
             return newState;
         case ADD_UPDATE_PRODUCT:
-            newState = Object.assign({}, state);
-            newAll = Object.assign({}, state.all);
             newAll[action.product.id] = action.product;
             newState.all = newAll;
             return newState;
         case DELETE_PRODUCT:
-            newState = Object.assign({}, state);
             newAll = Object.assign({}, state.all);
             delete newAll[action.productId];
             newState.all = newAll;
