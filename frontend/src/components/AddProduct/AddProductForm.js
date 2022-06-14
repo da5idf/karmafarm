@@ -1,5 +1,6 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { createProduct, updateProduct } from "../../store/products";
 
 import "./AddProductForm.css"
 
@@ -11,14 +12,34 @@ function AddProductForm({ props }) {
         active, setActive,
         type, setType,
         imgUrl, setImgUrl,
-        inEdit
+        inEdit, setInEdit,
+        productId
     } = props
 
     const dispatch = useDispatch();
+    const user = useSelector(state => state.session.user)
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        console.log(props)
+
+        const product = {
+            name,
+            description,
+            pricePerPound,
+            active,
+            type,
+            imgUrl,
+            farmerId: user.id
+        }
+
+        if (!inEdit) {
+            dispatch(createProduct(product));
+        } else {
+            product.id = productId
+            dispatch(updateProduct(product));
+        }
+        clearSelection();
+        setInEdit(false);
     }
 
     const clearSelection = () => {
@@ -94,8 +115,6 @@ function AddProductForm({ props }) {
                     onChange={(e) => setType(e.target.value)}
                 />
             </div>
-            {/* <input type="checkbox" id="test"></input>
-            <label htmlFor="test">Test</label> */}
             <div className="newform-field">
                 <label>Product Image</label>
                 <input

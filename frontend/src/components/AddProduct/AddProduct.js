@@ -13,6 +13,7 @@ function AddProduct({ user }) {
 
     const productsObjs = useSelector(state => state.products.all);
     const products = Object.values(productsObjs);
+    products.reverse();
 
     const [imgUrl, setImgUrl] = useState("");
     const [name, setName] = useState("");
@@ -20,10 +21,11 @@ function AddProduct({ user }) {
     const [pricePerPound, setPrice] = useState("");
     const [active, setActive] = useState(false);
     const [type, setType] = useState("");
-    const [farm, setFarm] = useState("");
-    const [casePrice, setCasePrice] = useState(0);
-    const [caseWeight, setCaseWeight] = useState(0);
+    // const [farm, setFarm] = useState("");
+    // const [casePrice, setCasePrice] = useState(0);
+    // const [caseWeight, setCaseWeight] = useState(0);
     const [inEdit, setInEdit] = useState(false);
+    const [productId, setProductId] = useState(0);
 
     useEffect(() => {
         dispatch(getAllProducts());
@@ -40,6 +42,7 @@ function AddProduct({ user }) {
         active, setActive,
         type, setType,
         imgUrl, setImgUrl,
+        productId, setProductId,
         inEdit, setInEdit
     }
 

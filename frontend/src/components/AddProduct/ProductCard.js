@@ -5,6 +5,7 @@ import "./ProductCard.css"
 function ProductCard({ product, props }) {
 
     const fillForm = () => {
+        props.setProductId(product.id);
         props.setName(product.name);
         props.setDescription(product.description);
         props.setPrice(product.pricePerPound);
