@@ -50,6 +50,7 @@ function ProductCard({ product, props }) {
         props.clearSelection();
     }
 
+    // render the correct img based on file upload
     const renderImage = () => {
         if (product.imgFile) {
             const url = URL.createObjectURL(product.imgFile)
