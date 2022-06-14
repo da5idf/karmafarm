@@ -3,8 +3,20 @@ import { csrfFetch } from "./csrf";
 const NEW_ORDER = "orders/NEW";
 const GET_ONE_ORDER = "orders/GET/ONE";
 const GET_ALL_ORDERS = "orders/GET/ALL";
-const GET_RESTAURANT_ORDERS = "orders/GET";
+const GET_RESTAURANT_ORDERS = "orders/RESTAURANT/GET";
 const UPDATE_ORDER = "orders/UPDATE";
+
+export const getAllOrders = () => async (dispatch) => {
+    const res = await csrfFetch('/api/orders');
+    const orders = await res.json();
+
+    dispatch(hydrateAllOrders(orders));
+}
+
+const hydrateAllOrders = (orders) => ({
+    type: GET_ALL_ORDERS,
+    orders
+})
 
 export const getOneOrder = (orderId) => async (dispatch) => {
     const res = await csrfFetch(`/api/orders/${orderId}`)
@@ -126,15 +138,16 @@ const updateOrder = (order) => ({
 })
 
 const initialState = {
-    all: {},
+    all: [],
     restaurantOrders: [],
     thisOrder: {},
 };
 
 const orderReducer = (state = initialState, action) => {
     let newState;
+    let newAll = [];
     let updatedOrder = {};
-    let updated = [];
+    let updatedRestOrders = [];
 
     switch (action.type) {
         case NEW_ORDER:
@@ -147,13 +160,18 @@ const orderReducer = (state = initialState, action) => {
             newState.thisOrder = updatedOrder
             return newState;
         case GET_ALL_ORDERS:
-            return state;
+            newState = Object.assign({}, state);
+            action.orders.forEach(order => {
+                newAll.push(order)
+            })
+            newState.all = newAll;
+            return newState;
         case GET_RESTAURANT_ORDERS:
             newState = Object.assign({}, state);
             action.orders.forEach(order => {
-                updated.push(order)
+                updatedRestOrders.push(order)
             })
-            newState.restaurantOrders = updated;
+            newState.restaurantOrders = updatedRestOrders;
             return newState;
         case UPDATE_ORDER:
             newState = Object.assign({}, state);

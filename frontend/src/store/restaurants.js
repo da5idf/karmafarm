@@ -33,13 +33,13 @@ const hydrateAll = (restaurants) => ({
 
 
 const initialState = {
-    all: {},
+    all: [],
     one: {},
 }
 
 const restaurantReducer = (state = initialState, action) => {
     let newState;
-    let all = {};
+    let newAll = [];
 
     switch (action.type) {
         case GET_ONE:
@@ -49,9 +49,9 @@ const restaurantReducer = (state = initialState, action) => {
         case GET_ALL_RESTAURANTS:
             newState = Object.assign({}, state);
             action.restaurants.forEach(restaurant => {
-                all[restaurant.id] = restaurant
+                newAll.push(restaurant)
             })
-            newState.all = all;
+            newState.all = newAll;
             return newState;
         default:
             return state;

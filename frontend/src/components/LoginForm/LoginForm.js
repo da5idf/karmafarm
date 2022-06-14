@@ -33,7 +33,7 @@ function LoginForm() {
     };
 
     if (user?.id) {
-        return <Homepage />
+        return history.push("/")
     }
 
     return (

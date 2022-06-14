@@ -6,11 +6,9 @@ import SignupFormPage from "./components/SignupFormPage";
 import Navigation from "./components/Navigation";
 import * as sessionActions from "./store/session";
 import LoginForm from "./components/LoginForm";
-import NewOrder from "./components/NewOrder";
 import RootView from "./components/RootView";
-import SingleOrder from "./components/SingleOrder";
-import Cart from "./components/Cart";
 import OrderParent from "./components/OrderParent/OrderParent";
+import AddProduct from "./components/AddProduct";
 
 function App() {
   const dispatch = useDispatch();
@@ -35,21 +33,13 @@ function App() {
             <Route path="/signup">
               <SignupFormPage />
             </Route>
-            {/* <Route exact path="/orders/:orderId/add">
-              <Navigation />
-              <NewOrder />
-            </Route>
-            <Route exact path="/orders/:orderId/cart">
-              <Navigation />
-              <Cart />
-            </Route>
-            <Route exact path="/orders/:orderId">
-              <Navigation />
-              <SingleOrder />
-            </Route> */}
             <Route exact path="/orders/:orderId">
               <Navigation />
               <OrderParent />
+            </Route>
+            <Route exact path="/products/add">
+              <Navigation />
+              <AddProduct user={user} />
             </Route>
           </Switch>
         )}

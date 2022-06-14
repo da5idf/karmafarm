@@ -9,7 +9,7 @@ function RootView({ user, isLoaded }) {
         return (
             <>
                 <Navigation isLoaded={isLoaded} />
-                <Homepage />
+                <Homepage user={user} />
             </>
         )
     } else {

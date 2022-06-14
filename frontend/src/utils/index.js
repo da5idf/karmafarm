@@ -27,3 +27,13 @@ export const getOrderTotal = (order) => {
         return `$${total}`
     }
 }
+
+export const copyKey = () => {
+    const keyElement = document.getElementById("admin-key");
+    const keyText = keyElement.innerHTML
+    navigator.clipboard.writeText(keyText);
+    keyElement.innerHTML = "copied!"
+    setTimeout(() => {
+        keyElement.innerHTML = keyText;
+    }, 1500)
+}

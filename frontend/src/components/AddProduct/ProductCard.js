@@ -1,0 +1,100 @@
+import React from "react";
+import { useDispatch } from "react-redux"
+import { useLongPress, LongPressDetectEvents } from "use-long-press";
+
+import "./ProductCard.css"
+import { deleteProduct } from "../../store/products"
+
+function ProductCard({ product, props }) {
+    const dispatch = useDispatch();
+
+    const fillForm = () => {
+        props.setProductId(product.id);
+        props.setName(product.name);
+        props.setDescription(product.description);
+        props.setPrice(product.pricePerPound);
+        props.setActive(product.active);
+        props.setType(product.type);
+        props.setImgUrl(product.imgUrl);
+        props.setInEdit(true);
+    }
+
+    const cb = () => {
+        const deleteModal = document.getElementById(`${product.id}-delete`);
+        deleteModal.style.display = "flex";
+    }
+
+    const bind = useLongPress(cb, {
+        // onStart: () => console.log("Press started"),
+        // onFinish: () => console.log("Long press finished"),
+        // onCancel: () => console.log("Press cancelled"),
+        threshold: 750,
+        captureEvent: true,
+        cancelOnMovement: false,
+    })
+
+    const cancelDelete = () => {
+        const deleteModal = document.getElementById(`${product.id}-delete`);
+        deleteModal.style.display = "none";
+    }
+
+    const confirmDelete = () => {
+        const deleteModal = document.getElementById(`${product.id}-delete`);
+        dispatch(deleteProduct(product.id))
+    }
+
+    return (
+        <div className="product-card-hero">
+            <div className="product-card-wrapper"
+                onClick={fillForm}
+                {...bind()}
+            >
+                {
+                    product.imgUrl ?
+                        <img className="product-card-img" src={product.imgUrl} alt="" />
+                        :
+                        <div id="product-card-img-placeholder"></div>
+                }
+                <div className="product-card-right">
+                    <div className="product-card-titles">
+                        <div className="page-subtitle product-card-name">{product.name}</div>
+                        <div className="product-card-description">{product.description}</div>
+                    </div>
+                    <div className="product-card-info">
+                        <div className="product-card-active-container">
+                            <div>Price pp</div>
+                            <div>${product.pricePerPound}</div>
+                        </div>
+                        <div className="product-card-price-container">
+                            <div>Active</div>
+                            <div>
+                                {product.active ? "Yes" : "No"}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div >
+            <div
+                className="delete-product-wrapper"
+                id={`${product.id}-delete`}
+            >
+                <button
+                    id={`${product.id}-delete-confirm`}
+                    className="product-delete-confirm green-button"
+                    onClick={confirmDelete}
+                >
+                    Confirm
+                </button>
+                <button
+                    id={`${product.id}-delete-cancel`}
+                    className="product-delete-cancel"
+                    onClick={cancelDelete}
+                >
+                    Cancel
+                </button>
+            </div>
+        </div>
+    )
+}
+
+export default ProductCard;
