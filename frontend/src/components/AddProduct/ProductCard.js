@@ -10,7 +10,8 @@ function ProductCard({ product, props }) {
         props.setPrice(product.pricePerPound);
         props.setActive(product.active);
         props.setType(product.type);
-        props.setImgUrl(product.imgUrl)
+        props.setImgUrl(product.imgUrl);
+        props.setInEdit(true);
     }
 
     return (

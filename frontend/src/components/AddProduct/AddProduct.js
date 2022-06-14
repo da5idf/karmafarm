@@ -23,6 +23,7 @@ function AddProduct({ user }) {
     const [farm, setFarm] = useState("");
     const [casePrice, setCasePrice] = useState(0);
     const [caseWeight, setCaseWeight] = useState(0);
+    const [inEdit, setInEdit] = useState(false);
 
     useEffect(() => {
         dispatch(getAllProducts());
@@ -39,6 +40,7 @@ function AddProduct({ user }) {
         active, setActive,
         type, setType,
         imgUrl, setImgUrl,
+        inEdit, setInEdit
     }
 
     return (

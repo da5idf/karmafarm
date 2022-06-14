@@ -21,6 +21,15 @@ function AddProductForm({ props }) {
         console.log(props)
     }
 
+    const clearSelection = () => {
+        setName("");
+        setDescription("");
+        setPrice(0);
+        setActive(false);
+        setType("");
+        setImgUrl("");
+    }
+
     return (
         <form
             id="new-edit-product-form"
@@ -100,6 +109,12 @@ function AddProductForm({ props }) {
             <div id="new-edit-errors-container">
 
             </div>
+            <button
+                className="basic-button"
+                onClick={clearSelection}
+            >
+                Reset inputs
+            </button>
             <button
                 className="basic-button"
                 type="submit"
