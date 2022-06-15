@@ -178,6 +178,7 @@ form input:last-of-type {
     font-family: Arimo;
     font-size: 25px;
     padding-bottom: 1rem;
+    max-width: 900px;
 }
 
 input::-webkit-inner-spin-button {

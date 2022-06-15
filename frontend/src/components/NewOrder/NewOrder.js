@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
 
 
 import "./NewOrder.css"
 import OrderProduct from "../OrderProduct";
 import { getOrderTotal } from "../../utils"
+import Search from "../Search/Search";
 
 function NewOrder({ props }) {
     const { order, setView, views } = props;
@@ -15,8 +16,9 @@ function NewOrder({ props }) {
     const orderTotal = getOrderTotal(order);
 
     const productsObjs = useSelector(state => state.products.all);
-    const products = Object.values(productsObjs);
+    let products = Object.values(productsObjs);
 
+    const [filteredProducts, setFilteredProducts] = useState(products);
 
     const viewCart = () => {
         setView(views.cartView);
@@ -46,8 +48,11 @@ function NewOrder({ props }) {
                         </button>
                     </div>
                 </div>
+                <div id="filter-search-container">
+                    <Search items={products} setter={setFilteredProducts} />
+                </div>
                 <div id="new-order-product-list">
-                    {products.map(product => (
+                    {filteredProducts.map(product => (
                         <OrderProduct
                             product={product}
                             orderId={order.id}
