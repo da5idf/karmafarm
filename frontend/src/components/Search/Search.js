@@ -2,24 +2,25 @@ import React, { useState } from "react";
 
 import "./Search.css"
 
-function Search({ items, setter }) {
-    const [query, setQuery] = useState("");
+function Search({ query, setter }) {
+    // const [query, setQuery] = useState("");
 
-    const updateQuery = (e) => {
-        setQuery(e.target.value);
-        filterResults(e);
-    }
+    // const updateQuery = (e) => {
+    //     setQuery(e.target.value);
+    //     filterResults(e);
+    // }
 
-    const filterResults = (e) => {
-        const filtered = items.filter(item => {
-            return item.name.toLowerCase().includes(e.target.value.toLowerCase())
-        })
-        setter(filtered)
-    }
+    // const filterResults = (e) => {
+    //     const filtered = items.filter(item => {
+    //         return item.name.toLowerCase().includes(e.target.value.toLowerCase())
+    //     })
+    //     setter(filtered)
+    // }
 
     const clearSearch = () => {
-        setQuery("");
-        setter(items);
+        // setQuery("");
+        // setter(items);
+        setter("");
     }
 
     return (
@@ -29,7 +30,7 @@ function Search({ items, setter }) {
                 className="form-input"
                 placeholder="Search products by name..."
                 value={query}
-                onChange={updateQuery}
+                onChange={(e) => setter(e.target.value)}
             >
             </input>
             <button

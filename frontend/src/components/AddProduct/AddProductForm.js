@@ -115,6 +115,7 @@ function AddProductForm({ props }) {
                         id="new-price"
                         className="form-input"
                         value={pricePerPound}
+                        type="number"
                         placeholder="Please enter in #s"
                         onChange={(e) => setPrice(e.target.value)}
                     />
