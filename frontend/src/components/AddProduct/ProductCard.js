@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux"
 import { useLongPress, LongPressDetectEvents } from "use-long-press";
 
@@ -7,6 +7,8 @@ import { deleteProduct } from "../../store/products"
 
 function ProductCard({ product, props }) {
     const dispatch = useDispatch();
+
+    const [error, setError] = useState(false);
 
     const fillForm = (e) => {
         e.preventDefault();
@@ -47,6 +49,14 @@ function ProductCard({ product, props }) {
 
     const confirmDelete = () => {
         dispatch(deleteProduct(product.id))
+            .catch((e) => {
+                setError(true);
+                setTimeout(() => {
+                    const deleteModal = document.getElementById(`${product.id}-delete`);
+                    deleteModal.style.display = "none";
+                    setError(false);
+                }, 2500)
+            })
         props.clearSelection();
     }
 
@@ -110,6 +120,11 @@ function ProductCard({ product, props }) {
                 >
                     Cancel
                 </button>
+                {error &&
+                    <div id="delete-error-modal">
+                        <div>Error: products that are on orders can't be deleted</div>
+                    </div>
+                }
             </div>
         </div>
     )

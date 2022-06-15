@@ -18,7 +18,7 @@ function NewOrder({ props }) {
     const productsObjs = useSelector(state => state.products.all);
     let products = Object.values(productsObjs);
 
-    const [filteredProducts, setFilteredProducts] = useState(products);
+    const [query, setQuery] = useState("");
 
     const viewCart = () => {
         setView(views.cartView);
@@ -49,10 +49,13 @@ function NewOrder({ props }) {
                     </div>
                 </div>
                 <div id="filter-search-container">
-                    <Search items={products} setter={setFilteredProducts} />
+                    <Search query={query} setter={setQuery} />
                 </div>
                 <div id="new-order-product-list">
-                    {filteredProducts.map(product => (
+                    {products.filter(product => {
+                        if (!query) return true;
+                        else return product.name.toLowerCase().includes(query.toLowerCase())
+                    }).map(product => (
                         <OrderProduct
                             product={product}
                             orderId={order.id}

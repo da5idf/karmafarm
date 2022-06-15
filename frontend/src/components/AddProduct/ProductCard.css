@@ -71,6 +71,7 @@
     background-color: #cd0047;
     animation-name: appear_from_right;
     animation-duration: .3s;
+    position: absolute;
 }
 
 .product-delete-cancel {
@@ -82,4 +83,16 @@
 .product-delete-confirm,
 .product-delete-cancel {
     width: 30%;
+}
+
+#delete-error-modal {
+    position: absolute;
+    width: 80%;
+    height: 50%;
+    background-color: #F5DA70;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
 }

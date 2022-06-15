@@ -15,7 +15,7 @@ function AddProduct({ user }) {
     const productsObjs = useSelector(state => state.products.all);
     const products = Object.values(productsObjs);
     products.reverse();
-    const [filteredProducts, setFilteredProducts] = useState(products);
+    const [query, setQuery] = useState("");
 
     const [imgUrl, setImgUrl] = useState("");
     const [imgFile, setImgFile] = useState("");
@@ -84,9 +84,12 @@ function AddProduct({ user }) {
                         <ProductCard product={props} />
                     </div>
                     <div id="search-and-product-list">
-                        <Search items={products} setter={setFilteredProducts} />
+                        <Search query={query} setter={setQuery} />
                         <div id="farmer-products-list">
-                            {filteredProducts.map(product => (
+                            {products.filter(product => {
+                                if (!query) return true;
+                                else return product.name.toLowerCase().includes(query.toLowerCase())
+                            }).map(product => (
                                 <ProductCard
                                     product={product}
                                     props={props}
