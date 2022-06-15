@@ -19,12 +19,18 @@ function OrderProduct({ product, orderId, orderRecords }) {
         }
     }
 
-    const [quantity, setQuantity] = useState(productWeight || 0);
+    const [quantity, setQuantity] = useState(productWeight || "");
     const [subTotal, setSubTotal] = useState((quantity * product.pricePerPound).toFixed(2));
     const [onOrder, setOnOrder] = useState(onThisOrder);
 
     const updateOrder = (e) => {
         setQuantity(e.target.value)
+        if (e.target.value <= 0 && e.target.value != "") {
+            e.target.style.color = "red"
+            setSubTotal("Invalid")
+            return;
+        }
+        e.target.style.color = "black"
         const total = e.target.value * product.pricePerPound;
         setSubTotal(total.toFixed(2))
     }
