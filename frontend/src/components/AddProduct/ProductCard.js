@@ -93,7 +93,7 @@ function ProductCard({ product, props }) {
                 </div>
             </div >
             <div
-                className="delete-product-wrapper"
+                className="delete-product-wrapper appear-from-right"
                 id={`${product.id}-delete`}
             >
                 <button

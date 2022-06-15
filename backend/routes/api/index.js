@@ -8,6 +8,7 @@ const memberRouter = require('./members.js');
 const productRouter = require('./products.js')
 const ordersRouter = require('./orders.js');
 const order_productsRouter = require('./orders_products.js')
+const feedbackRouter = require('./feedback.js');
 
 router.use('/session', sessionRouter);
 router.use('/users', usersRouter);
@@ -17,5 +18,6 @@ router.use('/members', memberRouter);
 router.use('/products', productRouter);
 router.use('/orders', ordersRouter);
 router.use('/orders_products', order_productsRouter);
+router.use('/feedback', feedbackRouter);
 
 module.exports = router;
