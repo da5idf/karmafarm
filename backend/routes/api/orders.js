@@ -146,7 +146,7 @@ router.delete(
 
         if (order) await order.destroy();
 
-        res.send({ "message": "success" })
+        res.send(orderId);
     })
 )
 

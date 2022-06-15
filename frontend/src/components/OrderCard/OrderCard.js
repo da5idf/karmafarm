@@ -4,7 +4,7 @@ import { useLongPress } from "use-long-press";
 
 import { formatDate, getOrderTotal } from "../../utils"
 
-function OrderCard({ order, farmer, setDeleteOrderId }) {
+function OrderCard({ order, farmer, setDeleteOrderId, setError }) {
     const history = useHistory();
 
     const [redirect, setRedirect] = useState(true);
@@ -23,6 +23,18 @@ function OrderCard({ order, farmer, setDeleteOrderId }) {
 
     const cb = () => {
         setRedirect(false);
+        setError("");
+        setDeleteOrderId(null);
+
+        if (order.dateOfDelivery) {
+            const now = new Date().getTime();
+            const deliveryDay = new Date(order.dateOfDelivery).getTime();
+            const oneDay = 24 * 60 * 60 * 1000
+            if (deliveryDay - oneDay <= now) {
+                setError("Cannot delete an order within one day of delivery");
+                return;
+            }
+        }
         setDeleteOrderId(order.id);
         return setRedirect(true);
     }

@@ -185,7 +185,7 @@ const orderReducer = (state = initialState, action) => {
         case GET_RESTAURANT_ORDERS:
             newState = Object.assign({}, state);
             action.orders.forEach(order => {
-                updatedRestOrders.push(order)
+                updatedRestOrders[order.id] = order;
             })
             newState.restaurantOrders = updatedRestOrders;
             return newState;
@@ -195,8 +195,11 @@ const orderReducer = (state = initialState, action) => {
             newState.thisOrder = updatedOrder
             return newState;
         case DELETE_ORDER:
-            newState = Object.assign({}, state)
-            delete newState.all[action.orderId]
+            console.log("in reducer", action.orderId)
+            newState = Object.assign({}, state);
+            updatedRestOrders = Object.assign({}, state.restaurantOrders)
+            delete updatedRestOrders[action.orderId];
+            newState.restaurantOrders = updatedRestOrders;
             return newState;
         default:
             return state;

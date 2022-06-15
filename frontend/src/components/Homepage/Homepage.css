@@ -114,6 +114,11 @@
     height: 300px;
 }
 
+#delete-window-error {
+    color: #A8003B;
+    font-weight: 400;
+}
+
 /***************************************/
 /* Farmer */
 #clear-filter {

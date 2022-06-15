@@ -15,10 +15,11 @@ function RestaurantHomepage({ user }) {
     const dispatch = useDispatch();
     const history = useHistory();
     const restaurant = useSelector(state => state.users.restaurant);
-    const orders = useSelector(state => state.orders.restaurantOrders);
+    const ordersObjs = useSelector(state => state.orders.restaurantOrders);
+    const orders = Object.values(ordersObjs);
 
     const [deleteOrderId, setDeleteOrderId] = useState(null);
-    // const [modal, setModal] = useState(false);
+    const [error, setError] = useState("");
 
     useEffect(() => {
         dispatch(getUserRestaurants(user.id))
@@ -68,7 +69,9 @@ function RestaurantHomepage({ user }) {
                         <div id="hp-orders-container">
                             <div id="order-list-title_modal">
                                 <div className="page-subtitle">Your Orders</div>
+                                {!deleteOrderId && !error && <div>Click and hold to delete and order</div>}
                                 {deleteOrderId && <DeleteOrderModal orderId={deleteOrderId} setDeleteOrderId={setDeleteOrderId} />}
+                                {error && <div id="delete-window-error">Cannot delete order within 24 hours of delivery</div>}
                             </div>
                             <table id="hp-orders-table">
                                 <tbody>
@@ -81,7 +84,7 @@ function RestaurantHomepage({ user }) {
                                     </tr>
                                     {
                                         orders.map(order => (
-                                            <OrderCard order={order} setDeleteOrderId={setDeleteOrderId} key={uuidv4()} />
+                                            <OrderCard order={order} setDeleteOrderId={setDeleteOrderId} setError={setError} key={uuidv4()} />
                                         ))
                                     }
                                 </tbody>

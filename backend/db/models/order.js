@@ -28,11 +28,13 @@ module.exports = (sequelize, DataTypes) => {
     Order.belongsTo(models.Restaurant, { foreignKey: 'restaurantId' })
     Order.hasMany(models.Orders_Products, {
       foreignKey: 'orderId',
-      onDelete: 'cascade'
+      onDelete: 'CASCADE',
+      hooks: true
     })
     Order.hasMany(models.Feedback, {
       foreignKey: 'orderId',
-      onDelete: 'cascade'
+      onDelete: 'CASCADE',
+      hooks: true
     })
   };
   return Order;
