@@ -24,16 +24,12 @@ function OrderCard({ order, farmer, setDeleteOrderId }) {
     const cb = () => {
         setRedirect(false);
         setDeleteOrderId(order.id);
-        const deleteModal = document.getElementById(`${order.id}-delete`)
-        console.log(deleteModal);
-        deleteModal.style.display = "flex"
         return setRedirect(true);
     }
 
     const bind = useLongPress(cb, {
         threshold: 750,
         captureEvent: true,
-        onStart: () => console.log("start"),
         cancelOnMovement: false,
     })
 

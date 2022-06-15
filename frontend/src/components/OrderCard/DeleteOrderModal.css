@@ -1,42 +1,28 @@
-.delete-order-wrapper {
+#delete-order-wrapper {
     gap: 1rem;
-    background-color: #cd0047;
     animation-duration: .3s;
     cursor: default;
+    display: flex;
 }
 
-.order-delete-confirm,
-.order-delete-cancel {
-    height: 100px;
-    width: 100px;
+#order-delete-confirm,
+#order-delete-cancel {
+    width: 120px;
     font-size: 15px;
     font-weight: 400;
-    padding: .25em;
+    padding: .5em;
     color: white;
     text-align: center;
     border-radius: 5px;
     cursor: pointer;
 }
 
-.order-delete-confirm {
+#order-delete-confirm {
+    background-color: #A8003B;
+}
+
+#order-delete-cancel {
     background-color: #73A577;
-}
-
-.order-delete-cancel {
-    background-color: #F5DA70;
-}
-
-.delete-order {
-    display: flex;
-    display: none;
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0px;
-    border-radius: 5px;
-    justify-content: center;
-    align-items: center;
 }
 
 @keyframes appear_from_right {

@@ -66,9 +66,9 @@ function RestaurantHomepage({ user }) {
                 <div id="hp-content">
                     <div id="hp-content-left">
                         <div id="hp-orders-container">
-                            <div>
+                            <div id="order-list-title_modal">
                                 <div className="page-subtitle">Your Orders</div>
-                                {deleteOrderId && <DeleteOrderModal orderId={deleteOrderId} />}
+                                {deleteOrderId && <DeleteOrderModal orderId={deleteOrderId} setDeleteOrderId={setDeleteOrderId} />}
                             </div>
                             <table id="hp-orders-table">
                                 <tbody>

@@ -5,6 +5,7 @@ const GET_ONE_ORDER = "orders/GET/ONE";
 const GET_ALL_ORDERS = "orders/GET/ALL";
 const GET_RESTAURANT_ORDERS = "orders/RESTAURANT/GET";
 const UPDATE_ORDER = "orders/UPDATE";
+const DELETE_ORDER = "orders/DELETE"
 
 export const getAllOrders = () => async (dispatch) => {
     const res = await csrfFetch('/api/orders');
@@ -137,6 +138,21 @@ const updateOrder = (order) => ({
     order
 })
 
+export const deleteWholeOrder = (orderId) => async (dispatch) => {
+    const res = await csrfFetch(`/api/orders/${orderId}`, {
+        method: "DELETE"
+    })
+
+    if (res.ok) {
+        dispatch(removeOrderFromStore(orderId))
+    }
+}
+
+const removeOrderFromStore = (orderId) => ({
+    type: DELETE_ORDER,
+    orderId
+})
+
 const initialState = {
     all: [],
     restaurantOrders: [],
@@ -177,6 +193,10 @@ const orderReducer = (state = initialState, action) => {
             newState = Object.assign({}, state);
             updatedOrder = action.order
             newState.thisOrder = updatedOrder
+            return newState;
+        case DELETE_ORDER:
+            newState = Object.assign({}, state)
+            delete newState.all[action.orderId]
             return newState;
         default:
             return state;
