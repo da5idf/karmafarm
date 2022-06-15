@@ -58,7 +58,7 @@ function FarmerHomepage({ user }) {
                                 if (!filterId) return true
                                 else return restaurant.id === filterId
                             }).map(restaurant => {
-                                return <RestaurantCard restaurant={restaurant} setFilterId={setFilterId} key={restaurant.id} />
+                                return <RestaurantCard restaurant={restaurant} setFilterId={setFilterId} user={user} key={restaurant.id} />
                             })
                         }
                         {filterId && (

@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import "./Search.css"
 
 function Search({ items, setter }) {
-    console.log(items[0])
     const [query, setQuery] = useState("");
 
     const updateQuery = (e) => {

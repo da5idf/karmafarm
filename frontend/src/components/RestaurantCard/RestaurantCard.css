@@ -17,3 +17,7 @@
 #restaurant-card-name {
     font-weight: 400;
 }
+
+.farmer-card {
+    cursor: pointer;
+}
