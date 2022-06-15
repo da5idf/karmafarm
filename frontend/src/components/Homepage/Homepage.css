@@ -86,6 +86,7 @@
 .order-line-item {
     border-radius: 10px;
     cursor: pointer;
+    position: relative;
 }
 
 .order-line-item:hover {

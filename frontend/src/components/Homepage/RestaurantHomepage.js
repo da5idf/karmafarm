@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom"
 
 import { getUserRestaurants } from "../../store/users"
-import { createOrder } from "../../store/orders"
+import { createOrder, getRestaurantOrders } from "../../store/orders"
 import { copyKey } from "../../utils"
 import RestaurantCard from "../RestaurantCard";
 import OrderCard from "../OrderCard/OrderCard";
@@ -12,10 +12,14 @@ import { FeedbackForm } from "../Feedback";
 function RestaurantHomepage({ user }) {
     const dispatch = useDispatch();
     const history = useHistory();
-    const restaurant = useSelector(state => state.users.restaurant)
+    const restaurant = useSelector(state => state.users.restaurant);
+    const orders = useSelector(state => state.orders.restaurantOrders);
 
     useEffect(() => {
         dispatch(getUserRestaurants(user.id))
+            .then((restaurant) => {
+                dispatch(getRestaurantOrders(restaurant.id))
+            })
     }, [dispatch, user.id])
 
     const newOrder = async () => {
@@ -24,7 +28,7 @@ function RestaurantHomepage({ user }) {
         history.push(`/orders/${order.id}`)
     }
 
-    if (!restaurant.id) {
+    if (!orders.length) {
         return <h1>Loading</h1>
     }
 
@@ -67,7 +71,9 @@ function RestaurantHomepage({ user }) {
                                         <th className="text-align-center">Paid</th>
                                     </tr>
                                     {
-                                        <OrderCard restaurant={restaurant} key={restaurant.id} />
+                                        orders.map(order => (
+                                            <OrderCard order={order} key={restaurant.id} />
+                                        ))
                                     }
                                 </tbody>
                             </table>

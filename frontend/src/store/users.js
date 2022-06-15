@@ -8,6 +8,7 @@ export const getUserRestaurants = (userId) => async (dispatch) => {
     const restaurant = await response.json()
 
     dispatch(hydrateUserRestaurants(restaurant))
+    return restaurant;
 }
 
 const hydrateUserRestaurants = (restaurant) => ({

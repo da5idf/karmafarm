@@ -21,11 +21,12 @@ function FarmerHomepage({ user }) {
     }, [dispatch, user.id])
 
     const filterOrders = () => {
-        const filteredOrders = allOrders.filter(order => {
+        return allOrders.filter(order => {
             if (!filterId) return true
             return order.Restaurant.id === filterId
+        }).map(order => {
+            return <OrderCard order={order} farmer={true} />
         })
-        return <OrderCard allOrders={filteredOrders} admin={true} />
     }
 
     if (!restaurants) {

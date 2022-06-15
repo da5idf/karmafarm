@@ -1,55 +1,68 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
+import { useLongPress } from "use-long-press";
 
-import { getRestaurantOrders } from "../../store/orders"
 import { formatDate, getOrderTotal } from "../../utils"
+import DeleteOrderModal from "./DeleteOrderModal";
 
-function OrderCard({ restaurant, allOrders, admin }) {
-    const dispatch = useDispatch();
+function OrderCard({ order, farmer }) {
     const history = useHistory();
 
-    const orders = useSelector(state => state.orders.restaurantOrders);
+    const [redirect, setRedirect] = useState(true);
 
+    const handleClick = () => {
+        if (redirect) {
+            history.push(`/orders/${order.id}`)
+        }
+    }
 
-    useEffect(() => {
-        if (restaurant) dispatch(getRestaurantOrders(restaurant.id));
-    }, [dispatch])
+    const cb = () => {
+        setRedirect(false);
+        const deleteModal = document.getElementById(`${order.id}-delete`)
+        console.log(deleteModal);
+        deleteModal.style.display = "flex"
+        return setRedirect(true);
+    }
 
-    if (allOrders) {
+    const bind = useLongPress(cb, {
+        threshold: 750,
+        captureEvent: true,
+        onStart: () => console.log("start"),
+        cancelOnMovement: false,
+    })
+
+    const children = (
+        <>
+            <td>{order.id}</td>
+            {farmer && <td>{order.Restaurant.name}</td>}
+            <td>{formatDate(order.dateOfDelivery)}</td>
+            <td id="oc-total">{getOrderTotal(order)}</td>
+            <td className="text-align-center">{order.paid === true ? "paid" : "not paid"}</td>
+        </>
+    )
+
+    if (farmer) {
         return (
-            allOrders.map(order => {
-                return (
-                    <tr className="order-line-item"
-                        onClick={() => history.push(`/orders/${order.id}`)}
-                        key={order.id}
-                    >
-                        <td>{order.id}</td>
-                        {admin && <td>{order.Restaurant.name}</td>}
-                        <td>{formatDate(order.dateOfDelivery)}</td>
-                        <td id="oc-total">{getOrderTotal(order)}</td>
-                        <td className="text-align-center">{order.paid === true ? "paid" : "not paid"}</td>
-                    </tr>
-                )
-            })
+            <tr className="order-line-item"
+                onClick={() => history.push(`/orders/${order.id}`)}
+                key={order.id}
+            >
+                {children}
+            </tr>
         )
-
     }
 
     return (
-        orders.map(order => {
-            return (
-                <tr className="order-line-item"
-                    onClick={() => history.push(`/orders/${order.id}`)}
-                    key={order.id}
-                >
-                    <td>{order.id}</td>
-                    <td>{formatDate(order.dateOfDelivery)}</td>
-                    <td id="oc-total">{getOrderTotal(order)}</td>
-                    <td className="text-align-center">{order.paid === true ? "paid" : "not paid"}</td>
-                </tr>
-            )
-        })
+        <tr
+            id={`${order.id}-row`}
+            className="order-line-item"
+            onClick={handleClick}
+            key={new Date().getTime()}
+            {...bind()}
+        >
+            {children}
+            <DeleteOrderModal orderId={order.id} />
+        </tr>
     )
 }
 
