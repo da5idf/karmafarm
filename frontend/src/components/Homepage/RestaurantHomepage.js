@@ -12,19 +12,19 @@ import { FeedbackForm } from "../Feedback";
 function RestaurantHomepage({ user }) {
     const dispatch = useDispatch();
     const history = useHistory();
-    const restaurants = useSelector(state => state.users.restaurants)
+    const restaurant = useSelector(state => state.users.restaurant)
 
     useEffect(() => {
         dispatch(getUserRestaurants(user.id))
     }, [dispatch, user.id])
 
     const newOrder = async () => {
-        const order = await dispatch(createOrder(restaurants[0]?.id))
+        const order = await dispatch(createOrder(restaurant.id))
         localStorage.setItem("orderView", "add")
         history.push(`/orders/${order.id}`)
     }
 
-    if (!restaurants) {
+    if (!restaurant.id) {
         return <h1>Loading</h1>
     }
 
@@ -50,9 +50,7 @@ function RestaurantHomepage({ user }) {
                     <div className="page-subtitle">Your Restaurant</div>
                     <div id="restaurant-card-container">
                         {
-                            restaurants.map(restaurant => {
-                                return <RestaurantCard restaurant={restaurant} key={restaurant.id} />
-                            })
+                            <RestaurantCard restaurant={restaurant} key={restaurant.id} />
                         }
                     </div>
                 </div>
@@ -69,9 +67,7 @@ function RestaurantHomepage({ user }) {
                                         <th className="text-align-center">Paid</th>
                                     </tr>
                                     {
-                                        restaurants.map(restaurant => {
-                                            return <OrderCard restaurant={restaurant} key={restaurant.id} />
-                                        })
+                                        <OrderCard restaurant={restaurant} key={restaurant.id} />
                                     }
                                 </tbody>
                             </table>

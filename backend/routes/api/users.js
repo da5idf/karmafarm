@@ -43,10 +43,15 @@ router.get('/:userId/restaurants',
     asyncHandler(async (req, res) => {
         const { userId } = req.params;
         const user = await User.findByPk(userId, {
-            include: Restaurant
+            include: [
+                {
+                    model: Member,
+                    include: Restaurant
+                }
+            ]
         })
 
-        return res.send(user.Restaurants)
+        return res.send(user.Members[0].Restaurant)
     })
 )
 

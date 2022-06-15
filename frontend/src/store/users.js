@@ -5,27 +5,29 @@ const GET_USER_RESTAURANTS = "user/RESTAURANT";
 export const getUserRestaurants = (userId) => async (dispatch) => {
     const response = await csrfFetch(`api/users/${userId}/restaurants`)
 
-    const restaurants = await response.json()
+    const restaurant = await response.json()
 
-    dispatch(hydrateUserRestaurants(restaurants))
+    dispatch(hydrateUserRestaurants(restaurant))
 }
 
-const hydrateUserRestaurants = (restaurants) => ({
+const hydrateUserRestaurants = (restaurant) => ({
     type: GET_USER_RESTAURANTS,
-    restaurants
+    restaurant
 })
 
 const initialState = {
-    restaurants: []
+    restaurant: {}
 }
 
 const userReducer = (state = initialState, action) => {
     let newState;
+    let actionRestaurant;
 
     switch (action.type) {
         case GET_USER_RESTAURANTS:
             newState = Object.assign({}, state);
-            newState.restaurants = action.restaurants;
+            actionRestaurant = action.restaurant
+            newState.restaurant = actionRestaurant;
             return newState;
         default:
             return state;
