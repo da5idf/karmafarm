@@ -7,6 +7,7 @@ import { createOrder } from "../../store/orders"
 import { copyKey } from "../../utils"
 import RestaurantCard from "../RestaurantCard";
 import OrderCard from "../OrderCard/OrderCard";
+import { FeedbackForm } from "../Feedback";
 
 function RestaurantHomepage({ user }) {
     const dispatch = useDispatch();
@@ -81,7 +82,7 @@ function RestaurantHomepage({ user }) {
                             <div className="page-subtitle">New Items</div>
                         </div>
                         <div id="feedback-container">
-                            <div className="page-subtitle">Order Feedback</div>
+                            <FeedbackForm />
                         </div>
 
                     </div>

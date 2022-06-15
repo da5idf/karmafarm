@@ -1,0 +1,56 @@
+#feedback-form-hero {
+    /* width: 100%; */
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    background-color: #e2e2e2;
+    padding: .5rem;
+    padding-bottom: .75rem;
+    gap: .25rem;
+    border-radius: 5px;
+}
+
+#feedback-form-title {
+    padding-bottom: .25rem;
+}
+
+#feedback-selectors {
+    display: flex;
+}
+
+#feedback-text {
+    width: 100%;
+    font-family: Roboto;
+    font-size: 16px;
+    border: none;
+    resize: none;
+    border-radius: 2px;
+}
+
+#feedback-text:focus {
+    outline: 1px solid black;
+}
+
+#feedback-error-submit-container {
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+    align-items: flex-end;
+}
+
+#feedback-submit-button {
+    width: fit-content;
+    font-size: 16px;
+    margin: .5rem;
+    margin-right: 0px;
+    margin-bottom: 0px;
+}
+
+#feedback-error {
+    color: #A8003B;
+    font-weight: 400;
+}
+
+#feedback-submit-confirm {
+    display: none;
+}
