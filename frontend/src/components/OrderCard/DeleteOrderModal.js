@@ -15,7 +15,7 @@ function DeleteOrderModal({ orderId }) {
     }
 
     return (
-        <td
+        <div
             className="delete-order-wrapper delete-order"
             id={`${orderId}-delete`}
         >
@@ -24,7 +24,7 @@ function DeleteOrderModal({ orderId }) {
                 className="order-delete-confirm"
                 onClick={confirmDelete}
             >
-                Confirm
+                Confirm Delete
             </div>
             <div
                 id={`${orderId}-delete-cancel`}
@@ -33,7 +33,7 @@ function DeleteOrderModal({ orderId }) {
             >
                 Cancel
             </div>
-        </td>
+        </div>
     )
 }
 

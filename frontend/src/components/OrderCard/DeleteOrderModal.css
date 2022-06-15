@@ -1,15 +1,13 @@
 .delete-order-wrapper {
     gap: 1rem;
     background-color: #cd0047;
-    animation-name: delete-order;
     animation-duration: .3s;
-    position: absolute;
     cursor: default;
 }
 
 .order-delete-confirm,
 .order-delete-cancel {
-    height: 80%;
+    height: 100px;
     width: 100px;
     font-size: 15px;
     font-weight: 400;

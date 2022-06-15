@@ -3,14 +3,19 @@ import { useHistory } from "react-router-dom";
 import { useLongPress } from "use-long-press";
 
 import { formatDate, getOrderTotal } from "../../utils"
-import DeleteOrderModal from "./DeleteOrderModal";
 
-function OrderCard({ order, farmer }) {
+function OrderCard({ order, farmer, setDeleteOrderId }) {
     const history = useHistory();
 
     const [redirect, setRedirect] = useState(true);
 
     const handleClick = () => {
+        if (order.submitted) {
+            localStorage.setItem("orderView", "order");
+        }
+        else {
+            localStorage.setItem("orderView", "add");
+        }
         if (redirect) {
             history.push(`/orders/${order.id}`)
         }
@@ -18,6 +23,7 @@ function OrderCard({ order, farmer }) {
 
     const cb = () => {
         setRedirect(false);
+        setDeleteOrderId(order.id);
         const deleteModal = document.getElementById(`${order.id}-delete`)
         console.log(deleteModal);
         deleteModal.style.display = "flex"
@@ -44,8 +50,8 @@ function OrderCard({ order, farmer }) {
     if (farmer) {
         return (
             <tr className="order-line-item"
-                onClick={() => history.push(`/orders/${order.id}`)}
-                key={order.id}
+                onClick={handleClick}
+                key={new Date().getTime()}
             >
                 {children}
             </tr>
@@ -54,14 +60,12 @@ function OrderCard({ order, farmer }) {
 
     return (
         <tr
-            id={`${order.id}-row`}
             className="order-line-item"
             onClick={handleClick}
             key={new Date().getTime()}
             {...bind()}
         >
             {children}
-            <DeleteOrderModal orderId={order.id} />
         </tr>
     )
 }

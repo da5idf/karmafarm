@@ -1,6 +1,7 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom"
+import { v4 as uuidv4 } from 'uuid';
 
 import { getUserRestaurants } from "../../store/users"
 import { createOrder, getRestaurantOrders } from "../../store/orders"
@@ -8,12 +9,16 @@ import { copyKey } from "../../utils"
 import RestaurantCard from "../RestaurantCard";
 import OrderCard from "../OrderCard/OrderCard";
 import { FeedbackForm } from "../Feedback";
+import DeleteOrderModal from "../OrderCard/DeleteOrderModal";
 
 function RestaurantHomepage({ user }) {
     const dispatch = useDispatch();
     const history = useHistory();
     const restaurant = useSelector(state => state.users.restaurant);
     const orders = useSelector(state => state.orders.restaurantOrders);
+
+    const [deleteOrderId, setDeleteOrderId] = useState(null);
+    // const [modal, setModal] = useState(false);
 
     useEffect(() => {
         dispatch(getUserRestaurants(user.id))
@@ -54,14 +59,17 @@ function RestaurantHomepage({ user }) {
                     <div className="page-subtitle">Your Restaurant</div>
                     <div id="restaurant-card-container">
                         {
-                            <RestaurantCard restaurant={restaurant} key={restaurant.id} />
+                            <RestaurantCard restaurant={restaurant} key={uuidv4()} />
                         }
                     </div>
                 </div>
                 <div id="hp-content">
                     <div id="hp-content-left">
                         <div id="hp-orders-container">
-                            <div className="page-subtitle">Your Orders</div>
+                            <div>
+                                <div className="page-subtitle">Your Orders</div>
+                                {deleteOrderId && <DeleteOrderModal orderId={deleteOrderId} />}
+                            </div>
                             <table id="hp-orders-table">
                                 <tbody>
                                     <tr id="orders-table-header">
@@ -69,10 +77,11 @@ function RestaurantHomepage({ user }) {
                                         <th>Delivery Date</th>
                                         <th>Order Total</th>
                                         <th className="text-align-center">Paid</th>
+                                        <th></th>
                                     </tr>
                                     {
                                         orders.map(order => (
-                                            <OrderCard order={order} key={restaurant.id} />
+                                            <OrderCard order={order} setDeleteOrderId={setDeleteOrderId} key={uuidv4()} />
                                         ))
                                     }
                                 </tbody>
