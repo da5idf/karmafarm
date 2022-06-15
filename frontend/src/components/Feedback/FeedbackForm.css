@@ -51,6 +51,11 @@
     font-weight: 400;
 }
 
-#feedback-submit-confirm {
-    display: none;
+#feedback-confirmation-modal {
+    background-color: #7EBEC5;
+    color: white;
+    font-family: Arimo;
+    font-size: 25px;
+    animation-name: appear_from_right;
+    animation-duration: .3s;
 }

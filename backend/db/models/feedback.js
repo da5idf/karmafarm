@@ -24,7 +24,9 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       type: DataTypes.TEXT
     }
-  }, {});
+  }, {
+    freezeTableName: true
+  });
   Feedback.associate = function (models) {
     Feedback.belongsTo(models.Restaurant, { foreignKey: 'restaurantId' })
     Feedback.belongsTo(models.Order, { foreignKey: 'orderId' })

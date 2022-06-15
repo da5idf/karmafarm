@@ -1,8 +1,11 @@
-import React, { useState } from "react";
+import React, { useReducer, useState } from "react";
+import { useDispatch } from "react-redux";
+import { createFeedback } from "../../store/feedback";
 
 import "./FeedbackForm.css"
 
-function FeedbackForm() {
+function FeedbackForm({ user }) {
+    const dispatch = useDispatch();
 
     const [text, setText] = useState("");
     const [error, setError] = useState("");
@@ -13,8 +16,23 @@ function FeedbackForm() {
             setError("Minimum 10 characters")
             return;
         }
-        console.log(text);
+        const feedback = {
+            text,
+            userId: user.id,
+            restaurantId: 1, // need to fix this ************
+            orderId: 1, // need to fix this ************
+            productId: 1, // need to fix this ************
+        }
+        dispatch(createFeedback(feedback))
+        toggleConfirm();
+    }
 
+    const toggleConfirm = () => {
+        const modal = document.getElementById("feedback-confirmation-modal")
+        modal.style.display = "flex";
+        setTimeout(() => {
+            modal.style.display = "none";
+        }, 1500)
     }
 
     return (
@@ -44,8 +62,8 @@ function FeedbackForm() {
                     Submit feedback
                 </button>
             </div>
-            <div id="feedback-submit-confirm">
-                Thanks for your feedback!
+            <div id="feedback-confirmation-modal" className="appear-from-right">
+                <div>Thanks for your feedback!</div>
             </div>
         </form>
     )

@@ -82,7 +82,7 @@ function RestaurantHomepage({ user }) {
                             <div className="page-subtitle">New Items</div>
                         </div>
                         <div id="feedback-container">
-                            <FeedbackForm />
+                            <FeedbackForm user={user} />
                         </div>
 
                     </div>
