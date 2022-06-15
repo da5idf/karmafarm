@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux"
-import { useLongPress, LongPressDetectEvents } from "use-long-press";
+import { useLongPress } from "use-long-press";
 
 import "./ProductCard.css"
 import { deleteProduct } from "../../store/products"

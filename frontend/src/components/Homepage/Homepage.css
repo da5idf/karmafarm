@@ -68,6 +68,12 @@
     min-width: 400px;
 }
 
+#order-list-title_modal {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 #hp-orders-container {
     width: 100%;
     height: 500px;
@@ -86,6 +92,7 @@
 .order-line-item {
     border-radius: 10px;
     cursor: pointer;
+    position: relative;
 }
 
 .order-line-item:hover {
@@ -105,6 +112,11 @@
 
 #new-items-container {
     height: 300px;
+}
+
+#delete-window-error {
+    color: #A8003B;
+    font-weight: 400;
 }
 
 /***************************************/

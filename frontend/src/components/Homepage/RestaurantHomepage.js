@@ -1,21 +1,31 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom"
+import { v4 as uuidv4 } from 'uuid';
 
 import { getUserRestaurants } from "../../store/users"
-import { createOrder } from "../../store/orders"
+import { createOrder, getRestaurantOrders } from "../../store/orders"
 import { copyKey } from "../../utils"
 import RestaurantCard from "../RestaurantCard";
 import OrderCard from "../OrderCard/OrderCard";
 import { FeedbackForm } from "../Feedback";
+import DeleteOrderModal from "../OrderCard/DeleteOrderModal";
 
 function RestaurantHomepage({ user }) {
     const dispatch = useDispatch();
     const history = useHistory();
-    const restaurant = useSelector(state => state.users.restaurant)
+    const restaurant = useSelector(state => state.users.restaurant);
+    const ordersObjs = useSelector(state => state.orders.restaurantOrders);
+    const orders = Object.values(ordersObjs);
+
+    const [deleteOrderId, setDeleteOrderId] = useState(null);
+    const [error, setError] = useState("");
 
     useEffect(() => {
         dispatch(getUserRestaurants(user.id))
+            .then((restaurant) => {
+                dispatch(getRestaurantOrders(restaurant.id))
+            })
     }, [dispatch, user.id])
 
     const newOrder = async () => {
@@ -24,7 +34,7 @@ function RestaurantHomepage({ user }) {
         history.push(`/orders/${order.id}`)
     }
 
-    if (!restaurant.id) {
+    if (!orders.length) {
         return <h1>Loading</h1>
     }
 
@@ -50,14 +60,19 @@ function RestaurantHomepage({ user }) {
                     <div className="page-subtitle">Your Restaurant</div>
                     <div id="restaurant-card-container">
                         {
-                            <RestaurantCard restaurant={restaurant} key={restaurant.id} />
+                            <RestaurantCard restaurant={restaurant} key={uuidv4()} />
                         }
                     </div>
                 </div>
                 <div id="hp-content">
                     <div id="hp-content-left">
                         <div id="hp-orders-container">
-                            <div className="page-subtitle">Your Orders</div>
+                            <div id="order-list-title_modal">
+                                <div className="page-subtitle">Your Orders</div>
+                                {!deleteOrderId && !error && <div>Click and hold to delete and order</div>}
+                                {deleteOrderId && <DeleteOrderModal orderId={deleteOrderId} setDeleteOrderId={setDeleteOrderId} />}
+                                {error && <div id="delete-window-error">Cannot delete order within 24 hours of delivery</div>}
+                            </div>
                             <table id="hp-orders-table">
                                 <tbody>
                                     <tr id="orders-table-header">
@@ -65,9 +80,12 @@ function RestaurantHomepage({ user }) {
                                         <th>Delivery Date</th>
                                         <th>Order Total</th>
                                         <th className="text-align-center">Paid</th>
+                                        <th></th>
                                     </tr>
                                     {
-                                        <OrderCard restaurant={restaurant} key={restaurant.id} />
+                                        orders.map(order => (
+                                            <OrderCard order={order} setDeleteOrderId={setDeleteOrderId} setError={setError} key={uuidv4()} />
+                                        ))
                                     }
                                 </tbody>
                             </table>

@@ -1,0 +1,35 @@
+#delete-order-wrapper {
+    gap: 1rem;
+    animation-duration: .3s;
+    cursor: default;
+    display: flex;
+}
+
+#order-delete-confirm,
+#order-delete-cancel {
+    width: 120px;
+    font-size: 15px;
+    font-weight: 400;
+    padding: .5em;
+    color: white;
+    text-align: center;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#order-delete-confirm {
+    background-color: #A8003B;
+}
+
+#order-delete-cancel {
+    background-color: #73A577;
+}
+
+@keyframes appear_from_right {
+    0% {
+        left: 500px;
+    }
+    100% {
+        left: 0px;
+    }
+}
