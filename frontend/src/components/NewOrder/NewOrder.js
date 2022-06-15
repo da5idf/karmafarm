@@ -49,7 +49,7 @@ function NewOrder({ props }) {
                     </div>
                 </div>
                 <div id="filter-search-container">
-                    <Search products={products} setFilteredProducts={setFilteredProducts} />
+                    <Search items={products} setter={setFilteredProducts} />
                 </div>
                 <div id="new-order-product-list">
                     {filteredProducts.map(product => (

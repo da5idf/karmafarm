@@ -6,6 +6,7 @@ import "./AddProduct.css"
 import { getAllProducts } from "../../store/products";
 import ProductCard from "./ProductCard";
 import AddProductForm from "./AddProductForm";
+import Search from "../Search/Search";
 
 function AddProduct({ user }) {
     const dispatch = useDispatch();
@@ -14,6 +15,7 @@ function AddProduct({ user }) {
     const productsObjs = useSelector(state => state.products.all);
     const products = Object.values(productsObjs);
     products.reverse();
+    const [filteredProducts, setFilteredProducts] = useState(products);
 
     const [imgUrl, setImgUrl] = useState("");
     const [imgFile, setImgFile] = useState("");
@@ -71,7 +73,8 @@ function AddProduct({ user }) {
             <div className="page-content">
                 <div className="page-title">Add or Edit a Product</div>
                 <div className="page-subtitle">
-                    Use the form below to create a new product. Or click an existing product to edit it.
+                    Use the form below to create a new product, click an existing product to edit it, or
+                    delete an item by clicking and holding.
                 </div>
                 <div id="add-edit-content">
                     <div id="add-edit-left">
@@ -80,15 +83,17 @@ function AddProduct({ user }) {
                         </div>
                         <ProductCard product={props} />
                     </div>
-
-                    <div id="farmer-products-list">
-                        {products.map(product => (
-                            <ProductCard
-                                product={product}
-                                props={props}
-                                key={product.id}
-                            />
-                        ))}
+                    <div id="search-and-product-list">
+                        <Search items={products} setter={setFilteredProducts} />
+                        <div id="farmer-products-list">
+                            {filteredProducts.map(product => (
+                                <ProductCard
+                                    product={product}
+                                    props={props}
+                                    key={product.id}
+                                />
+                            ))}
+                        </div>
                     </div>
                 </div>
             </div>

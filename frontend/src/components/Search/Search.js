@@ -2,28 +2,25 @@ import React, { useState } from "react";
 
 import "./Search.css"
 
-function Search({ products, setFilteredProducts }) {
-
+function Search({ items, setter }) {
+    console.log(items[0])
     const [query, setQuery] = useState("");
 
+    const updateQuery = (e) => {
+        setQuery(e.target.value);
+        filterResults(e);
+    }
+
     const filterResults = (e) => {
-        console.log(e.target.value);
-        setQuery(e.target.value)
-        const filtered = products.filter(product => {
-            console.log("q", query)
-            return product.name.toLowerCase().includes(query?.toLowerCase())
+        const filtered = items.filter(item => {
+            return item.name.toLowerCase().includes(e.target.value.toLowerCase())
         })
-        setFilteredProducts(filtered)
-        //.map((item, idx) => {
-        //     return (
-        //         <div
-        //             className="search-result"
-        //             key={idx}
-        //         >
-        //             {item.name}
-        //         </div>
-        //     )
-        // })
+        setter(filtered)
+    }
+
+    const clearSearch = () => {
+        setQuery("");
+        setter(items);
     }
 
     return (
@@ -33,14 +30,16 @@ function Search({ products, setFilteredProducts }) {
                 className="form-input"
                 placeholder="Search products by name..."
                 value={query}
-                onChange={filterResults}
+                onChange={updateQuery}
             >
             </input>
-            {/* <div id="search-results-container">
-                {
-                    query && filterResults()
-                }
-            </div> */}
+            <button
+                id="clear-search-button"
+                className="basic-button"
+                onClick={clearSearch}
+            >
+                Clear Search
+            </button>
         </div>
 
     )
