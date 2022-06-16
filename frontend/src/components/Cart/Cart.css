@@ -68,8 +68,13 @@ abbr {
     padding-right: 2rem;
 }
 
+#cart-totals-info {
+    display: flex;
+    flex-direction: column;
+}
+
 #wrapper-button-container,
-#cart-total-container {
+.cart-totals-row {
     display: flex;
     justify-content: flex-end;
 }
