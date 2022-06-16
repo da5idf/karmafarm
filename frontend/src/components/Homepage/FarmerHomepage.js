@@ -47,9 +47,9 @@ function FarmerHomepage({ user }) {
                 <button
                     className="green-button"
                     id="hp-new-order-button"
-                    onClick={() => history.push("/products/add")}
+                    onClick={() => history.push("/products")}
                 >
-                    Add Product
+                    Add and Edit Products
                 </button>
                 <div id="user-restaurants">
                     <div className="page-subtitle">Karma Farm's Restaurants</div>
