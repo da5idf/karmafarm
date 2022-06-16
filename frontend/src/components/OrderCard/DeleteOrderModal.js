@@ -8,11 +8,12 @@ function DeleteOrderModal({ orderId, setDeleteOrderId }) {
     const dispatch = useDispatch();
 
     const cancelDelete = () => {
-        setDeleteOrderId(null)
+        setDeleteOrderId(null);
     }
 
     const confirmDelete = () => {
-        dispatch(deleteWholeOrder(orderId))
+        dispatch(deleteWholeOrder(orderId));
+        setDeleteOrderId(null);
     }
 
     return (

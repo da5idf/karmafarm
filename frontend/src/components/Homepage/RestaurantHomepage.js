@@ -69,7 +69,7 @@ function RestaurantHomepage({ user }) {
                         <div id="hp-orders-container">
                             <div id="order-list-title_modal">
                                 <div className="page-subtitle">Your Orders</div>
-                                {!deleteOrderId && !error && <div>Click and hold to delete and order</div>}
+                                {!deleteOrderId && !error && <div>Click and hold to delete an order</div>}
                                 {deleteOrderId && <DeleteOrderModal orderId={deleteOrderId} setDeleteOrderId={setDeleteOrderId} />}
                                 {error && <div id="delete-window-error">Cannot delete order within 24 hours of delivery</div>}
                             </div>
