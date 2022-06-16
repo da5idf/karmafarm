@@ -1,5 +1,6 @@
 const express = require('express')
 const asyncHandler = require('express-async-handler');
+const { uuid } = require('uuidv4')
 
 const router = express.Router();
 const { User, Restaurant } = require('../../db/models');
@@ -15,6 +16,8 @@ router.post(
         })
 
         if (user) {
+            // reset key
+            user.key = uuid().slice(0, 8);
             const restaurant = await Restaurant.scope('basic').findOne({
                 where: { ownerId: user.id }
             })
