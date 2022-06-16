@@ -17,9 +17,12 @@ function SingleOrder({ props }) {
     const orderRecords = order.Orders_Products
     const restaurant = order.Restaurant
 
-    const now = new Date().getTime();
-    const deliveryDay = new Date(order.dateOfDelivery).getTime();
-    const delivered = deliveryDay < now;
+    let delivered = false;
+    if (order.dateOfDelivery) {
+        const now = new Date().getTime();
+        const deliveryDay = new Date(order.dateOfDelivery).getTime();
+        delivered = deliveryDay < now;
+    }
 
     const addToOrder = () => {
         dispatch(toggleSubmission(orderId, false))
