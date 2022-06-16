@@ -18,11 +18,18 @@ function AddProductForm({ props }) {
         errors, setErrors
     } = props
 
+    console.log("desc", description)
+    console.log("ppp", pricePerPound)
+    console.log("active", active)
+    console.log("type", type)
+    console.log("imgFile", imgFile)
+
     const dispatch = useDispatch();
     const user = useSelector(state => state.session.user)
 
     const handleSubmit = (e) => {
         e.preventDefault()
+        console.log("are we here")
         const valid = validateSubmit();
 
         if (valid) {
@@ -51,6 +58,7 @@ function AddProductForm({ props }) {
         setErrors({});
         const newErrors = Object.assign({}, errors)
         let valid = true;
+
         if (!name) {
             newErrors.name = "Name is required";
             valid = false;
@@ -61,6 +69,10 @@ function AddProductForm({ props }) {
         }
         if (pricePerPound <= 0) {
             newErrors.ppp = "ppp > 0";
+            valid = false;
+        }
+        if (!inEdit && !imgFile) {
+            newErrors.img = "Please add an image"
             valid = false;
         }
 
@@ -146,7 +158,7 @@ function AddProductForm({ props }) {
                         onChange={(e) => setType(e.target.value)}
                     />
                 </div>
-                <div className="newform-field">
+                <div className="newform-field" id="img-form-field">
                     <label id="new-img-title">Product Image</label>
                     <label id="new-img-label" htmlFor="new-imgFile">
                         <input
@@ -155,15 +167,16 @@ function AddProductForm({ props }) {
                             type="file"
                             accept="image/*"
                             onChange={updateFile}
-                            required
                         />
                         upload new image
                     </label>
+                    {errors.img && <div id="new-edit-error-img">{errors.img}</div>}
                 </div>
             </div>
             <button
                 className="basic-button"
                 onClick={handleClear}
+                type="button"
             >
                 Reset inputs
             </button>

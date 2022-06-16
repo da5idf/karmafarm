@@ -16,12 +16,22 @@
     gap: .25rem;
 }
 
+#img-form-field {
+    align-items: center;
+}
+
 .new-edit-error {
     position: absolute;
     right: 0px;
     top: 0px;
     color: #A8003B;
     font-weight: 400;
+}
+
+#new-edit-error-img {
+    bottom: -15px;
+    font-weight: 400;
+    color: #A8003B;
 }
 
 .newform-field > label {
