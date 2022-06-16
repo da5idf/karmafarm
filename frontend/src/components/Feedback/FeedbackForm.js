@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { v4 as uuidv4 } from 'uuid';
 
 import { createFeedback } from "../../store/feedback";
@@ -9,30 +9,50 @@ import "./FeedbackForm.css"
 function FeedbackForm({ user, orders }) {
     const dispatch = useDispatch();
 
-    const orderIds = orders.map(order => order.id)
+    const restaurantId = useSelector(state => state.users.restaurant.id)
 
     const [text, setText] = useState("");
     const [orderId, setOrderId] = useState("");
     const [productId, setProductId] = useState("");
     const [products, setProducts] = useState("");
-    const [error, setError] = useState("");
+    const [errors, setErrors] = useState({});
 
     const submitFeedback = (e) => {
         e.preventDefault();
-        if (text.length <= 10) {
-            setError("Minimum 10 characters")
-            return;
-        }
+
+        if (!validateFeedback()) return;
+
         const feedback = {
             text,
             userId: user.id,
-            restaurantId: 1, // need to fix this ************
-            orderId: 1, // need to fix this ************
-            productId: 1, // need to fix this ************
+            restaurantId,
+            orderId,
+            productId,
         }
         dispatch(createFeedback(feedback))
         toggleConfirm();
         setText("");
+        setOrderId("");
+    }
+
+    const validateFeedback = () => {
+        let newErrors = {};
+        let valid = true;
+
+        if (text.length <= 10) {
+            newErrors.text = "Minimum 10 characters";
+            valid = false;
+        }
+        if (!orderId) {
+            newErrors.orderId = "Please select an order";
+            valid = false;
+        }
+
+        setErrors(newErrors)
+        setTimeout(() => {
+            setErrors({})
+        }, 3000)
+        return valid;
     }
 
     const toggleConfirm = () => {
@@ -46,16 +66,19 @@ function FeedbackForm({ user, orders }) {
     const orderSelected = (e) => {
         const id = e.target.value;
 
-        const orderProducts = orders.find(order => {
-            return order.id.toString() === id
-        }).Orders_Products
+        if (id) {
+            const orderProducts = orders.find(order => {
+                return order.id.toString() === id
+            }).Orders_Products
 
-        let temp = []
-        orderProducts.forEach(record => {
-            console.log(record.Product)
-            temp.push(record.Product)
-        })
-        setProducts(temp)
+            let temp = []
+            orderProducts.forEach(record => {
+                temp.push(record.Product)
+            })
+            setProducts(temp);
+        }
+        console.log(id);
+        setOrderId(id);
     }
 
     return (
@@ -67,11 +90,17 @@ function FeedbackForm({ user, orders }) {
                 Submit feedback on an order</div>
             <div id="feedback-selectors">
                 <select
+                    value={orderId}
                     onChange={orderSelected}
                 >
-                    <option value="" >What order is this for?</option>
+                    <option value="">What order is this for?</option>
                     {
-                        orders.map(order => {
+                        orders.filter(order => {
+                            const now = new Date().getTime();
+                            if (!order.dateOfDelivery) return false;
+                            const deliveryDay = new Date(order.dateOfDelivery).getTime();
+                            return deliveryDay < now;
+                        }).map(order => {
                             return (
                                 <option
                                     value={order.id}
@@ -84,16 +113,16 @@ function FeedbackForm({ user, orders }) {
                     }
                 </select>
                 <select
-                    onChange={(e) => setOrderId(e.target.value)}
+                    value={productId}
+                    onChange={(e) => setProductId(e.target.value)}
                 >
-                    <option value="" >What product is this for?</option>
+                    <option value="">What product is this for?</option>
                     {
                         products && products.map(product => {
                             return (
                                 <option
                                     value={product.id}
                                     key={uuidv4()}
-                                    onChange={(e) => setProductId(e.target.value)}
                                 >
                                     {product.name}
                                 </option>
@@ -109,7 +138,10 @@ function FeedbackForm({ user, orders }) {
                 id="feedback-text"
             />
             <div id="feedback-error-submit-container">
-                {error && <div id="feedback-error">{error}</div>}
+                <div id="feedback-errors">
+                    {errors.text && <div id="feedback-error">{errors.text}</div>}
+                    {errors.orderId && <div id="feedback-error">{errors.orderId}</div>}
+                </div>
                 <button
                     id="feedback-submit-button"
                     className="green-button"
