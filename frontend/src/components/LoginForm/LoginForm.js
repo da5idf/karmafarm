@@ -31,6 +31,20 @@ function LoginForm() {
             );
     };
 
+    const farmerLogin = async () => {
+        await dispatch(sessionActions.login({
+            credential: "jon@user.io",
+            password: "password"
+        }))
+    }
+
+    const restaurantLogin = async () => {
+        await dispatch(sessionActions.login({
+            credential: "jeremy@user.io",
+            password: "password2"
+        }))
+    }
+
     if (user?.id) {
         return history.push("/")
     }
@@ -92,6 +106,22 @@ function LoginForm() {
                     onClick={() => history.push("/signup")}
                 >
                     Need to sign up?
+                </div>
+                <div className="signup-button-container" >
+                    <button
+                        id="demo-farmer-login"
+                        className="green-button"
+                        onClick={farmerLogin}
+                        type="button"
+                    >
+                        Login as Farmer
+                    </button>
+                    <button
+                        id="demo-restaurant-login"
+                        onClick={restaurantLogin}
+                    >
+                        Login as Restaurant
+                    </button>
                 </div>
             </div>
         </div>
