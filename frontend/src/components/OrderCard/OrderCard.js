@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { useLongPress } from "use-long-press";
+import { v4 as uuidv4 } from 'uuid';
 
 import { formatDate, getOrderTotal } from "../../utils"
 
@@ -59,7 +60,7 @@ function OrderCard({ order, farmer, setDeleteOrderId, setError }) {
         return (
             <tr className="order-line-item"
                 onClick={handleClick}
-                key={new Date().getTime()}
+                key={uuidv4()}
             >
                 {children}
             </tr>
@@ -70,7 +71,7 @@ function OrderCard({ order, farmer, setDeleteOrderId, setError }) {
         <tr
             className="order-line-item"
             onClick={handleClick}
-            key={new Date().getTime()}
+            key={uuidv4()}
             {...bind()}
         >
             {children}

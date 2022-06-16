@@ -112,25 +112,13 @@ abbr {
     font-size: 30px;
 }
 
-#cart-product-details-container {
+#cart-table {
     padding-bottom: .5rem;
-    border-bottom: 2px solid rgba(204, 204, 204, 0.528);
+    border-bottom: 2px solid #e2e2e2;
     margin-bottom: 1rem;
     width: 100%;
 }
 
-th {
-    font-family: Arimo;
-    font-size: 23px;
-    padding-bottom: .5rem;
-    text-align: start;
-}
-
-td {
-    padding-left: .5rem;
-    height: 35px;
-}
-
-tr:nth-child(even) {
-    background-color: rgba(204, 204, 204, 0.528);
+#cart-table tr:nth-child(even) {
+    background-color: #e2e2e2;
 }

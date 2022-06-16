@@ -1,7 +1,7 @@
 const express = require('express')
 const asyncHandler = require('express-async-handler');
 
-const { Feedback } = require('../../db/models')
+const { Feedback, Restaurant, User, Product, Order } = require('../../db/models')
 
 const router = express.Router();
 
@@ -21,6 +21,17 @@ router.post(
         })
 
         res.send(feedback)
+    })
+)
+
+router.get(
+    '/',
+    asyncHandler(async (req, res, next) => {
+        const feedback = await Feedback.findAll({
+            include: [Restaurant, User, Product, Order]
+        });
+
+        res.send(feedback);
     })
 )
 

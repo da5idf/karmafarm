@@ -55,6 +55,7 @@
 #restaurant-card-container {
     display: flex;
     gap: 1rem;
+    min-height: 112px;
 }
 
 #hp-content-left {
@@ -66,6 +67,10 @@
 #hp-content-right {
     width: 40%;
     min-width: 400px;
+}
+
+#feedback-hero {
+    overflow-y: scroll;
 }
 
 #order-list-title_modal {
@@ -85,8 +90,8 @@
     border-spacing: 0px;
 }
 
-#hp-orders-table th {
-    font-size: 20px;
+#hp-orders-table tr:nth-child(even) {
+    background-color: #e2e2e2
 }
 
 .order-line-item {

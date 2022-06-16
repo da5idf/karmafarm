@@ -111,6 +111,7 @@ module.exports = (sequelize, DataTypes) => {
     User.hasMany(models.Member, { foreignKey: 'userId' })
     User.hasMany(models.Product, { foreignKey: 'farmerId' })
     User.hasMany(models.Orders_Products, { foreignKey: 'userId' })
+    User.hasMany(models.Feedback, { foreignKey: 'userId' })
 
     const columnMapping = {
       through: "Member",

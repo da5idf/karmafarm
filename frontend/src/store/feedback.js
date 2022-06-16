@@ -1,6 +1,7 @@
 import { csrfFetch } from "./csrf"
 
-const NEW_FEEDBACK = "feedback/NEW"
+const NEW_FEEDBACK = "feedback/NEW";
+const GET_FEEDBACK = "feedback/GET";
 
 export const createFeedback = (feedback) => async (dispatch) => {
     const res = await csrfFetch("/api/feedback", {
@@ -12,3 +13,34 @@ export const createFeedback = (feedback) => async (dispatch) => {
     const newFeedback = await res.json();
     console.log(newFeedback);
 }
+
+export const getFeedback = () => async (dispatch) => {
+    const res = await csrfFetch("/api/feedback");
+
+    const feedback = await res.json();
+    dispatch(hydrateFeedback(feedback));
+}
+
+const hydrateFeedback = (feedback) => ({
+    type: GET_FEEDBACK,
+    feedback
+})
+
+
+const initialState = []
+
+const feedbackReducer = (state = initialState, action) => {
+    let newState = [...state]
+
+    switch (action.type) {
+        case GET_FEEDBACK:
+            action.feedback.forEach(record => {
+                newState.push(record)
+            })
+            return newState;
+        default:
+            return state
+    }
+}
+
+export default feedbackReducer

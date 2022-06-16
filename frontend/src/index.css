@@ -34,6 +34,18 @@ input:focus-visible {
     outline: none;
 }
 
+th {
+    font-family: Arimo;
+    font-size: 20px;
+    padding-bottom: .5rem;
+    text-align: start;
+}
+
+td {
+    padding-left: .5rem;
+    height: 35px;
+}
+
 #app-hero {
     min-height: 100vh;
     width: 100%;
