@@ -31,7 +31,11 @@ function OrderCard({ order, farmer, setDeleteOrderId, setError }) {
             const now = new Date().getTime();
             const deliveryDay = new Date(order.dateOfDelivery).getTime();
             const oneDay = 24 * 60 * 60 * 1000
-            if (deliveryDay - oneDay <= now) {
+            if (deliveryDay < now) {
+                setError("Cannot delete orders that have been delivered.")
+                return;
+            }
+            else if (deliveryDay - oneDay <= now) {
                 setError("Cannot delete an order within one day of delivery");
                 return;
             }

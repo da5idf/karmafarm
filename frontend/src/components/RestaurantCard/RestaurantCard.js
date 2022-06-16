@@ -9,10 +9,7 @@ function RestaurantCard({ restaurant, setFilterId, user }) {
         <div
             id="restaurant-card"
             className={user?.farmer ? "farmer-card" : ""}
-            onClick={() => {
-                console.log(restaurant.id);
-                setFilterId(restaurant.id)
-            }}
+            onClick={() => setFilterId(restaurant.id)}
         >
             <div id="restaurant-card-name">{restaurant.name}</div>
             <div>{getFormattedNumber(restaurant.restaurantNumber)}</div>

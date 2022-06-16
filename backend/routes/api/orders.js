@@ -120,29 +120,8 @@ router.delete(
     '/:orderId',
     asyncHandler(async (req, res, next) => {
         const { orderId } = req.params;
-        console.log("#########################", orderId)
 
         const order = await Order.findByPk(orderId)
-
-        // if (order) async(() => {
-        //     // delete all product records for this order
-        //     const orderProducts = await Orders_Products.findAll({
-        //         where: { orderId }
-        //     })
-        //     orderProducts.forEach(record => async () => {
-        //         await record.destroy();
-        //     })
-
-        //     // Delete all feedback records for this order
-        //     const feedbackRecords = await Feedback.findAll({
-        //         where: { orderId }
-        //     })
-        //     feedbackRecords.forEach(record => async () => {
-        //         await record.destroy();
-        //     })
-
-        //     await order.destroy();
-        // })()
 
         if (order) await order.destroy();
 
