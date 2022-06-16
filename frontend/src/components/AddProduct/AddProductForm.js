@@ -18,18 +18,11 @@ function AddProductForm({ props }) {
         errors, setErrors
     } = props
 
-    console.log("desc", description)
-    console.log("ppp", pricePerPound)
-    console.log("active", active)
-    console.log("type", type)
-    console.log("imgFile", imgFile)
-
     const dispatch = useDispatch();
     const user = useSelector(state => state.session.user)
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        console.log("are we here")
         const valid = validateSubmit();
 
         if (valid) {
@@ -69,6 +62,10 @@ function AddProductForm({ props }) {
         }
         if (pricePerPound <= 0) {
             newErrors.ppp = "ppp > 0";
+            valid = false;
+        }
+        if (pricePerPound >= 100) {
+            newErrors.ppp = "ppp < 100"
             valid = false;
         }
         if (!inEdit && !imgFile) {
@@ -122,7 +119,7 @@ function AddProductForm({ props }) {
             <div className="double-form-field">
                 <div className="newform-field">
                     {errors.ppp && <div className="new-edit-error">{errors.ppp}</div>}
-                    <label>Price Per Pound</label>
+                    <label>Price Per #</label>
                     <input
                         id="new-price"
                         className="form-input"

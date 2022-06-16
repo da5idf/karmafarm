@@ -77,7 +77,7 @@ function FeedbackForm({ user, orders }) {
             })
             setProducts(temp);
         }
-        console.log(id);
+
         setOrderId(id);
     }
 

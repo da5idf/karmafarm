@@ -17,6 +17,10 @@ function SingleOrder({ props }) {
     const orderRecords = order.Orders_Products
     const restaurant = order.Restaurant
 
+    const now = new Date().getTime();
+    const deliveryDay = new Date(order.dateOfDelivery).getTime();
+    const delivered = deliveryDay < now;
+
     const addToOrder = () => {
         dispatch(toggleSubmission(orderId, false))
         localStorage.setItem("orderView", views.addView)
@@ -28,7 +32,7 @@ function SingleOrder({ props }) {
             <div className="page-title">Order #{`${orderId}`} details</div>
             <div id="so-restaurant-name">{restaurant.name}</div>
             <div id="so-restaurant-address">{restaurant.address}</div>
-            {!user.farmer && (
+            {!user.farmer && !delivered && (
                 <button
                     id="add-to-order-button"
                     className="blue-button"
@@ -40,7 +44,7 @@ function SingleOrder({ props }) {
             <div id="so-product-details-container">
                 {
                     orderRecords.map(record => {
-                        return <ProductDetail record={record} key={record.id} />
+                        return <ProductDetail record={record} order={order} delivered={delivered} key={record.id} />
                     })
                 }
             </div>

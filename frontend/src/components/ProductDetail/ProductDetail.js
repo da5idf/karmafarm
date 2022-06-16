@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import "./ProductDetail.css"
 import { deleteRecordFromOrder, updateRecordOnOrder } from "../../store/orders"
 
-function ProductDetail({ record }) {
+function ProductDetail({ record, order, delivered }) {
     const dispatch = useDispatch();
     const [inUpdate, setInUpdate] = useState(false);
     const [quantity, setQuantity] = useState(record.weight);
@@ -77,7 +77,7 @@ function ProductDetail({ record }) {
             }
             <td id="pd-subTotal">{newSubTotal ? `$${newSubTotal}` : `$${subTotal}`}</td>
             <td id="pd-addedBy">{record.User.name}</td>
-            {!user.farmer && buttons}
+            {!user.farmer && !delivered && buttons}
         </tr>
     )
 }
