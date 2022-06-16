@@ -27,3 +27,20 @@
     align-self: flex-end;
     transition: .2s;
 }
+
+#demo-farmer-login,
+#demo-restaurant-login {
+    width: 45%;
+}
+
+#demo-restaurant-login {
+    background-color: #F5DA70;
+    outline: 2px solid #F5DA70;
+    color: white;
+    border-radius: 5px;
+}
+
+#demo-restaurant-login:hover {
+    outline: 2px solid #f5da70a2;
+    background-color: #f5da70a2;
+}
