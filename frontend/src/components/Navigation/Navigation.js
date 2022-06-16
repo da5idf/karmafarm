@@ -16,6 +16,8 @@ function Navigation() {
         history.push("/")
     };
 
+    if (!user) return;
+
     return (
         <div id="nav-hero">
             <div id="nav-top">
