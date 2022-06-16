@@ -69,7 +69,7 @@ function SignUpForm() {
                 setStep, handleCancel, restaurant,
                 back: key,
             }
-            title = `You are joining ${restaurant.name}'s team`
+            title = `You are joining ${restaurant?.name}'s team`
             subtitle = "Please enter your information";
             view = <NewUser props={props} />
         default:

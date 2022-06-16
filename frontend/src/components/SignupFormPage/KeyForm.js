@@ -8,7 +8,8 @@ function KeyForm({ props }) {
     const [key, setKey] = useState("");
     const [error, setError] = useState("");
 
-    const handleNext = async () => {
+    const handleNext = async (e) => {
+        e.preventDefault()
         setError("")
         csrfFetch('api/key/validate', {
             method: "POST",
@@ -31,7 +32,7 @@ function KeyForm({ props }) {
     return (
         <>
             <div className="signup-error">{error}</div>
-            <form className="signup-form">
+            <form className="signup-form" onSubmit={handleNext}>
                 <input
                     type="text"
                     className="form-input"
@@ -40,30 +41,33 @@ function KeyForm({ props }) {
                     placeholder="Please enter your team's key"
                     required
                 />
-            </form>
-            <div className="signup-button-container">
-                <button
-                    className="bb-wt signup-cancel-button"
-                    onClick={handleCancel}
-                >
-                    Cancel
-                </button>
-                <div id="signup-buttons-right">
+                <div className="signup-button-container">
                     <button
-                        className="basic-button"
-                        onClick={() => setStep(back)}
+                        className="bb-wt signup-cancel-button"
+                        onClick={handleCancel}
+                        type="button"
                     >
-                        Back
+                        Cancel
                     </button>
-                    <button
-                        onClick={handleNext}
-                        id="key-next-button"
-                        className="bb-wt submit-button"
-                    >
-                        Next
-                    </button>
+                    <div id="signup-buttons-right">
+                        <button
+                            className="basic-button"
+                            onClick={() => setStep(back)}
+                            type="button"
+                        >
+                            Back
+                        </button>
+                        <button
+                            // onClick={handleNext}
+                            id="key-next-button"
+                            className="bb-wt submit-button"
+                            type="submit"
+                        >
+                            Next
+                        </button>
+                    </div>
                 </div>
-            </div>
+            </form>
         </>
     )
 }
