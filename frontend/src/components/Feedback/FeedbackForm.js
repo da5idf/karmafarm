@@ -25,6 +25,7 @@ function FeedbackForm({ user }) {
         }
         dispatch(createFeedback(feedback))
         toggleConfirm();
+        setText("");
     }
 
     const toggleConfirm = () => {
