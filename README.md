@@ -52,16 +52,19 @@ KarmaFarm is built on React/Redux, HTML, and CSS for its frontend, Express and S
 
 ## Dashboard
 # Restaurant Dashboard
-<img width="1261" alt="Screen Shot 2022-06-16 at 11 38 31 AM" src="https://user-images.githubusercontent.com/97040789/174108467-d13e64df-5cea-4f8c-a182-520c6904682c.png">
-
 On the Dashboard, Restaurant Users can view their orders, view newly release items and submit feedback on their orders. 
 If the Restaurant User is the owner of that Restaurant, this User is an admin user. By being an admin user, an Admin Key
 button renders at the top of the dashboard. The admin user can provide this key to staff of the restaurant to enable them
 to create their own profiles as a member of the Restaurnat.
+<img width="1261" alt="Screen Shot 2022-06-16 at 11 38 31 AM" src="https://user-images.githubusercontent.com/97040789/174108467-d13e64df-5cea-4f8c-a182-520c6904682c.png">
+
 
 # Farmer Dashboard
-<img width="1237" alt="Screen Shot 2022-06-16 at 11 44 10 AM" src="https://user-images.githubusercontent.com/97040789/174110864-3c40120b-9f30-46e2-82f4-cea1cd66d3b1.png">
 Logging in as a Farmer gives the user additional features. 
-1. Instead of a feedback form, the Farmer views a list of feedback. 
-2. All restaurants are rendered as Restaurant Cards 
-3. The Farmer can select one of the Restaurt Cards to filter the order list and feedback list for only that restaurant.
+1. Instead of a feedback form, the Farmer views a list of feedback. <br />
+2. All restaurants are rendered as Restaurant Cards <br />
+3. The Farmer can select one of the Restaurt Cards to filter the order list and feedback list for only that restaurant. <br />
+<img width="1237" alt="Screen Shot 2022-06-16 at 11 44 10 AM" src="https://user-images.githubusercontent.com/97040789/174110864-3c40120b-9f30-46e2-82f4-cea1cd66d3b1.png">
+
+## New Order
+
