@@ -73,9 +73,15 @@ function Cart({ props }) {
                         <div id="error-container">
                             <div id="error-msg">{error}</div>
                         </div>
-                        <div id="cart-total-container">
-                            <div className="page-subtitle">Order Total</div>
-                            <div id="cart-total">{total}</div>
+                        <div id="cart-totals-info">
+                            <div className="cart-totals-row">
+                                <div className="page-subtitle">Item Count</div>
+                                <div id="cart-total">{orderRecords.length}</div>
+                            </div>
+                            <div className="cart-totals-row">
+                                <div className="page-subtitle">Order Total</div>
+                                <div id="cart-total">{total}</div>
+                            </div>
                         </div>
                         <div id="wrapper-button-container">
                             <button
@@ -113,7 +119,6 @@ function Cart({ props }) {
                             }
                         </tbody>
                     </table>
-                    <i className="fa-solid fa-basket-shopping" id="cart-icon"></i>
                 </div>
             </div>
         </div>

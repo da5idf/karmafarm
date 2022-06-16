@@ -50,6 +50,12 @@ function NewOrder({ props }) {
                 </div>
                 <div id="filter-search-container">
                     <Search query={query} setter={setQuery} />
+                    <div id="cart-icons-container">
+                        <i id="new-order-cart" className="fa-solid fa-basket-shopping"></i>
+                        <div id="cart-items-num">
+                            <div>{orderRecords.length}</div>
+                        </div>
+                    </div>
                 </div>
                 <div id="new-order-product-list">
                     {products.filter(product => {
