@@ -1,0 +1,33 @@
+#nf-hero {
+    width: 100%;
+    height: 100vh;
+}
+
+#nf-page-content {
+    min-height: 90vh;
+}
+
+#nf-content {
+    height: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#nf-content-left {
+    width: 50%;
+}
+
+
+#nf-button {
+    margin-top: 200px;
+    width: 50%;
+}
+
+#nf-img-container {
+    width: 100%;
+}
+
+#nf-img {
+    width: 100%;
+}
