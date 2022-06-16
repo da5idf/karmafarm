@@ -10,6 +10,7 @@ import RootView from "./components/RootView";
 import OrderParent from "./components/OrderParent/OrderParent";
 import AddProduct from "./components/AddProduct";
 import About from "./components/About/About";
+import NotFound from "./components/NotFound";
 
 function App() {
   const dispatch = useDispatch();
@@ -45,6 +46,10 @@ function App() {
             <Route exact path="/about">
               <Navigation />
               <About />
+            </Route>
+            <Route >
+              <Navigation />
+              <NotFound />
             </Route>
           </Switch>
         )}
