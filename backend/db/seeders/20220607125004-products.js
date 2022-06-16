@@ -5,7 +5,7 @@ module.exports = {
     return queryInterface.bulkInsert('Products', [
       {
         name: 'Super Sugar Snap',
-        imgUrl: 'https://www.johnnyseeds.com/dw/image/v2/BBBW_PRD/on/demandware.static/-/Sites-jss-master/default/dw633d418d/images/products/vegetables/02855_01_super_sugar.jpg?sw=774&cx=302&cy=0&cw=1196&ch=1196',
+        imgUrl: 'https://karmafarm.s3.amazonaws.com/seeder/sugar_snap.jpeg',
         farm: 'Karma Farm',
         type: 'Peas',
         description: 'Very sweet and fresh',
@@ -17,7 +17,7 @@ module.exports = {
       },
       {
         name: 'Vroma Fava Bean',
-        imgUrl: 'https://www.johnnyseeds.com/dw/image/v2/BBBW_PRD/on/demandware.static/-/Sites-jss-master/default/dwe48d9f1a/images/products/vegetables/03171_01_vroma.jpg?sw=774&cx=502&cy=0&cw=1196&ch=1196',
+        imgUrl: 'https://karmafarm.s3.amazonaws.com/seeder/vroma.jpeg',
         farm: 'Karma Farm',
         type: 'Fava Bean',
         description: 'Large, pale green fava bean with large seeds',
@@ -29,7 +29,7 @@ module.exports = {
       },
       {
         name: 'Corinto Cucumber',
-        imgUrl: 'https://www.johnnyseeds.com/dw/image/v2/BBBW_PRD/on/demandware.static/-/Sites-jss-master/default/dw65c21f93/images/products/vegetables/02562g_01_corinto.jpg?sw=774&cx=302&cy=0&cw=1196&ch=1196',
+        imgUrl: 'https://karmafarm.s3.amazonaws.com/seeder/corinto.jpeg',
         farm: 'Karma Farm',
         type: 'Cucumber',
         description: 'Hybrid cucumber with dark green skin. Classic slicing cucumber',
@@ -41,7 +41,7 @@ module.exports = {
       },
       {
         name: 'Katrina Cucumber',
-        imgUrl: 'https://www.johnnyseeds.com/dw/image/v2/BBBW_PRD/on/demandware.static/-/Sites-jss-master/default/dw91ee707f/images/products/vegetables/0047g_01_katrina.jpg?sw=774&cx=216&cy=0&cw=1196&ch=1196',
+        imgUrl: 'https://karmafarm.s3.amazonaws.com/seeder/katrina.jpeg',
         farm: 'Karma Farm',
         type: 'Cucumber',
         description: 'Smooth skin, classic cocktail cuke!',
@@ -53,7 +53,7 @@ module.exports = {
       },
       {
         name: 'Hakurei Turnip',
-        imgUrl: 'https://www.johnnyseeds.com/dw/image/v2/BBBW_PRD/on/demandware.static/-/Sites-jss-master/default/dwb0d49ade/images/products/vegetables/00706_01_hakurei.jpg?sw=774&cx=402&cy=188&cw=1000&ch=1000',
+        imgUrl: 'https://karmafarm.s3.amazonaws.com/seeder/hakurei.jpeg',
         farm: 'Karma Farm',
         type: 'Turnip',
         description: 'Small, smooth, and white. Very nice raw because of their sweetness.',
@@ -65,7 +65,7 @@ module.exports = {
       },
       {
         name: 'Collard Greens',
-        imgUrl: 'https://www.johnnyseeds.com/dw/image/v2/BBBW_PRD/on/demandware.static/-/Sites-jss-master/default/dw61fc6d9d/images/products/vegetables/02116_01_flash.jpg?sw=774&cx=422&cy=92&cw=1000&ch=1000',
+        imgUrl: 'https://karmafarm.s3.amazonaws.com/seeder/flash.jpeg',
         farm: 'Karma Farm',
         type: 'Brassica',
         description: 'Big, hardy leaves',
@@ -77,7 +77,7 @@ module.exports = {
       },
       {
         name: 'Hinona Kabu',
-        imgUrl: 'https://200birdies.files.wordpress.com/2015/05/2015-0511-img_5860-hinona-kabu-turnips.jpg?w=1666',
+        imgUrl: 'https://karmafarm.s3.amazonaws.com/seeder/hinonakabu.jpeg',
         farm: 'Karma Farm',
         type: 'Turnip',
         description: 'Unusual carrot shaped turnip. Usually about 6 - 8" long with a beautiful purple top.',
@@ -89,7 +89,7 @@ module.exports = {
       },
       {
         name: 'Murasaki Sweet Potato',
-        imgUrl: 'https://www.johnnyseeds.com/dw/image/v2/BBBW_PRD/on/demandware.static/-/Sites-jss-master/default/dw52f59282/images/products/vegetables/04045g_01_murasaki.jpg?sw=774&cx=302&cy=0&cw=1196&ch=1196',
+        imgUrl: 'https://karmafarm.s3.amazonaws.com/seeder/murasaki.jpeg',
         farm: 'Sassafras Creek',
         type: 'Potato',
         description: 'Japanese sweet potato: purple skin, white flesh',
@@ -101,7 +101,7 @@ module.exports = {
       },
       {
         name: 'Nebechan Spring Onion',
-        imgUrl: 'https://www.johnnyseeds.com/dw/image/v2/BBBW_PRD/on/demandware.static/-/Sites-jss-master/default/dwb6ec617d/images/products/vegetables/0256_01_nabechan.jpg?sw=774&cx=302&cy=0&cw=1196&ch=1196',
+        imgUrl: 'https://karmafarm.s3.amazonaws.com/seeder/nebechan.jpeg',
         farm: 'Karma Farm',
         type: 'Onion',
         description: 'Japanese variety that has a sweeter more complex flavor but are smaller than average spring onions.',
@@ -113,7 +113,7 @@ module.exports = {
       },
       {
         name: 'Juicing Carrots',
-        imgUrl: 'https://hgtvhome.sndimg.com/content/dam/images/hgtv/fullset/2018/4/25/3/shutterstock_440493100_5-second-Studio_carrots.jpg.rend.hgtvcom.616.411.suffix/1524688181811.jpeg',
+        imgUrl: 'https://karmafarm.s3.amazonaws.com/seeder/carrots.jpeg',
         farm: 'Sassafras Creek',
         type: 'Carrots',
         description: 'Seconds: some imperfections but save flavor as always',

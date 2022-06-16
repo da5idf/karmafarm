@@ -155,6 +155,7 @@ function AddProductForm({ props }) {
                             type="file"
                             accept="image/*"
                             onChange={updateFile}
+                            required
                         />
                         upload new image
                     </label>
