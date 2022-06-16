@@ -14,6 +14,7 @@ function OrderParent() {
     const history = useHistory();
 
     const order = useSelector(state => state.orders.thisOrder);
+    const user = useSelector(state => state.session.user);
 
     const [isLoaded, setIsLoaded] = useState(false);
     const [view, setView] = useState(localStorage.getItem("orderView") || "add");
@@ -43,6 +44,10 @@ function OrderParent() {
             cartView,
             orderView,
         }
+    }
+
+    if (user.farmer) {
+        return <SingleOrder props={props} />
     }
 
     switch (view) {
