@@ -1,13 +1,20 @@
-import React, { useReducer, useState } from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
+import { v4 as uuidv4 } from 'uuid';
+
 import { createFeedback } from "../../store/feedback";
 
 import "./FeedbackForm.css"
 
-function FeedbackForm({ user }) {
+function FeedbackForm({ user, orders }) {
     const dispatch = useDispatch();
 
+    const orderIds = orders.map(order => order.id)
+
     const [text, setText] = useState("");
+    const [orderId, setOrderId] = useState("");
+    const [productId, setProductId] = useState("");
+    const [products, setProducts] = useState("");
     const [error, setError] = useState("");
 
     const submitFeedback = (e) => {
@@ -36,6 +43,21 @@ function FeedbackForm({ user }) {
         }, 1500)
     }
 
+    const orderSelected = (e) => {
+        const id = e.target.value;
+
+        const orderProducts = orders.find(order => {
+            return order.id.toString() === id
+        }).Orders_Products
+
+        let temp = []
+        orderProducts.forEach(record => {
+            console.log(record.Product)
+            temp.push(record.Product)
+        })
+        setProducts(temp)
+    }
+
     return (
         <form id="feedback-form-hero" onSubmit={submitFeedback}>
             <div
@@ -44,8 +66,41 @@ function FeedbackForm({ user }) {
             >
                 Submit feedback on an order</div>
             <div id="feedback-selectors">
-                <div>Orders</div>
-                <div>Items</div>
+                <select
+                    onChange={orderSelected}
+                >
+                    <option value="" >What order is this for?</option>
+                    {
+                        orders.map(order => {
+                            return (
+                                <option
+                                    value={order.id}
+                                    key={uuidv4()}
+                                >
+                                    Order {order.id}
+                                </option>
+                            )
+                        })
+                    }
+                </select>
+                <select
+                    onChange={(e) => setOrderId(e.target.value)}
+                >
+                    <option value="" >What product is this for?</option>
+                    {
+                        products && products.map(product => {
+                            return (
+                                <option
+                                    value={product.id}
+                                    key={uuidv4()}
+                                    onChange={(e) => setProductId(e.target.value)}
+                                >
+                                    {product.name}
+                                </option>
+                            )
+                        })
+                    }
+                </select>
             </div>
             <textarea
                 value={text}
