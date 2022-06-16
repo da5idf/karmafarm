@@ -1,0 +1,8 @@
+
+/* #feedback-hero tr:nth-child(4n + 1) {
+    background-color: #ccc;
+} */
+
+/* #feedback-hero > tbody:nth-child(4n + 2) {
+    background-color: #ccc;
+} */

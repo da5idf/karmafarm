@@ -31,6 +31,7 @@ module.exports = (sequelize, DataTypes) => {
     Feedback.belongsTo(models.Restaurant, { foreignKey: 'restaurantId' })
     Feedback.belongsTo(models.Order, { foreignKey: 'orderId' })
     Feedback.belongsTo(models.Product, { foreignKey: 'productId' })
+    Feedback.belongsTo(models.User, { foreignKey: 'userId' })
   };
   return Feedback;
 };

@@ -1,23 +1,28 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom"
+import { v4 as uuidv4 } from 'uuid';
 
 import { getAllRestaurants } from "../../store/restaurants"
 import { getAllOrders } from "../../store/orders"
 import { copyKey } from "../../utils"
 import RestaurantCard from "../RestaurantCard";
 import OrderCard from "../OrderCard/OrderCard";
+import { getFeedback } from "../../store/feedback";
+import { FarmerFeedbackCard } from "../Feedback"
 
 function FarmerHomepage({ user }) {
     const dispatch = useDispatch();
     const history = useHistory();
     const restaurants = useSelector(state => state.restaurants.all);
     const allOrders = useSelector(state => state.orders.all);
+    const allFeedback = useSelector(state => state.feedback)
     const [filterId, setFilterId] = useState(undefined);
 
     useEffect(() => {
         dispatch(getAllRestaurants(user.id))
         dispatch(getAllOrders());
+        dispatch(getFeedback());
     }, [dispatch, user.id])
 
     const filterOrders = () => {
@@ -59,7 +64,7 @@ function FarmerHomepage({ user }) {
                                 if (!filterId) return true
                                 else return restaurant.id === filterId
                             }).map(restaurant => {
-                                return <RestaurantCard restaurant={restaurant} setFilterId={setFilterId} user={user} key={new Date().getTime()} />
+                                return <RestaurantCard restaurant={restaurant} setFilterId={setFilterId} user={user} key={uuidv4()} />
                             })
                         }
                         {filterId && (
@@ -93,11 +98,26 @@ function FarmerHomepage({ user }) {
                         </div>
                     </div>
                     <div id="hp-content-right">
-                        <div id="new-items-container">
-                            <div className="page-subtitle">New Items</div>
-                        </div>
                         <div id="feedback-container">
                             <div className="page-subtitle">Order Feedback</div>
+                            <table id="feedback-hero">
+                                <tbody>
+                                    <tr>
+                                        <th>Order #</th>
+                                        <th>Restaurant</th>
+                                        <th>Product</th>
+                                    </tr>
+                                    {
+                                        allFeedback.filter(feedback => {
+                                            if (!filterId) return true
+                                            return feedback.Restaurant.id === filterId
+                                        }).map(feedback => {
+                                            return <FarmerFeedbackCard feedback={feedback} />
+                                        })
+                                    }
+                                </tbody>
+
+                            </table>
                         </div>
 
                     </div>
