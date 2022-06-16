@@ -11,7 +11,6 @@ export const createFeedback = (feedback) => async (dispatch) => {
     })
 
     const newFeedback = await res.json();
-    console.log(newFeedback);
 }
 
 export const getFeedback = () => async (dispatch) => {

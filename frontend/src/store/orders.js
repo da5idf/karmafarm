@@ -195,7 +195,6 @@ const orderReducer = (state = initialState, action) => {
             newState.thisOrder = updatedOrder
             return newState;
         case DELETE_ORDER:
-            console.log("in reducer", action.orderId)
             newState = Object.assign({}, state);
             updatedRestOrders = Object.assign({}, state.restaurantOrders)
             delete updatedRestOrders[action.orderId];

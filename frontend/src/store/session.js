@@ -41,9 +41,7 @@ export const restoreUser = () => async (dispatch) => {
 
 export const signupUser = ({ name, email, phoneNumber, admin, farmer, password }) => async (dispatch) => {
     let key;
-    console.log(admin);
     if (admin) {
-        console.log("are we here?")
         key = cryptoRandomString({ length: 9 });
         console.log("key", key)
     }
