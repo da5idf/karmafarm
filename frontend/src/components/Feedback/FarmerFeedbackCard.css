@@ -1,8 +1,16 @@
+#feedback-hero {
+    width: 100%;
+    border-spacing: 0px;
+}
 
-/* #feedback-hero tr:nth-child(4n + 1) {
-    background-color: #ccc;
-} */
+#feedback-hero tr:nth-child(4n + 2) {
+    background-color: #e2e2e2;
+}
 
-/* #feedback-hero > tbody:nth-child(4n + 2) {
-    background-color: #ccc;
-} */
+#feedback-hero tr:nth-child(4n + 3) {
+    background-color: #e2e2e2;
+}
+
+#feedback-table-text {
+    padding-left: 2rem;
+}

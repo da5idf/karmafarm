@@ -98,7 +98,7 @@ function Cart({ props }) {
 
                 </div>
                 <div id="cart-table-icon">
-                    <table id="cart-product-details-container">
+                    <table id="cart-table">
                         <tbody>
                             <tr id="table-header">
                                 <th>Product</th>

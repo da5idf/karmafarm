@@ -11,7 +11,7 @@ function FarmerFeedbackCard({ feedback }) {
                 <td>{feedback.Product.name}</td>
             </tr>
             <tr>
-                <td colSpan="3" id="feedback-text">{feedback.text}</td>
+                <td colSpan="3" id="feedback-table-text">{feedback.text}</td>
 
             </tr>
         </>
