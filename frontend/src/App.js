@@ -45,7 +45,7 @@ function App() {
             </Route>
             <Route exact path="/about">
               <Navigation />
-              <About />
+              <About user={user} />
             </Route>
             <Route >
               <Navigation />
