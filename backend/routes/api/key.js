@@ -18,6 +18,7 @@ router.post(
         if (user) {
             // reset key
             user.key = uuid().slice(0, 8);
+            await user.save();
             const restaurant = await Restaurant.scope('basic').findOne({
                 where: { ownerId: user.id }
             })
