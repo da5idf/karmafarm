@@ -1,0 +1,73 @@
+#about-blue {
+    position: absolute;
+    background-color: #7ebec5b1;
+    width: 58%;
+    height: 100vh;
+    z-index: 10;
+}
+
+#about-green {
+    position: absolute;
+    background-color: #73a577b5;
+    width: 100%;
+    height: 100vh;
+    z-index: 5;
+}
+
+#about-wrapper {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+}
+
+#about-photo {
+    position: absolute;
+    width: 300px;
+    top: 15%;
+    left: 42%;
+    z-index: 50;
+    object-fit: cover;
+}
+
+#about-left {
+    width: 35%;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+.thankyou-message {
+    font-size: 30px;
+    font-weight: 400;
+    width: 75%;
+    color: white;
+}
+
+.thankyou-message:last-of-type {
+    margin-bottom: 200px;
+}
+
+#about-photo-container {
+    display: flex;
+    flex-direction: column;
+    z-index: 100;
+    width: 20%;
+}
+
+#about-img-caption {
+    color: black;
+    text-align: end;
+}
+
+#about-right {
+    z-index: 100;
+    width: 45%;
+}
+
+#about-photo2 {
+    width: 100%;
+}

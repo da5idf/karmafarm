@@ -9,6 +9,7 @@ import LoginForm from "./components/LoginForm";
 import RootView from "./components/RootView";
 import OrderParent from "./components/OrderParent/OrderParent";
 import AddProduct from "./components/AddProduct";
+import About from "./components/About/About";
 
 function App() {
   const dispatch = useDispatch();
@@ -37,9 +38,13 @@ function App() {
               <Navigation />
               <OrderParent />
             </Route>
-            <Route exact path="/products/add">
+            <Route exact path="/products">
               <Navigation />
               <AddProduct user={user} />
+            </Route>
+            <Route exact path="/about">
+              <Navigation />
+              <About />
             </Route>
           </Switch>
         )}

@@ -10,6 +10,7 @@
     height: 100vh;
     padding-top: 30px;
     border-right: 1px solid #ccc;
+    z-index: 2000;
 }
 
 #nav-logo {
@@ -33,7 +34,7 @@
 #nav-menu > * {
     padding-left: 30px;
     padding-bottom: 20px;
-    font-size: 15px;
+    color: black;
 }
 
 #nav-logout {
@@ -51,4 +52,23 @@
     align-items: center;
     gap: 10px;
     padding-bottom: 30px;
+}
+
+#nav-about {
+    cursor: pointer;
+}
+
+#nav-copyright {
+    font-size: 15px;
+    color: #aaa
+}
+
+/********************************/
+/* Font Awesome */
+.fa-arrow-right-from-bracket,
+a > .fa-basket-shopping,
+.fa-house,
+.fa-circle-question,
+.fa-copyright {
+    margin-right: .5rem;
 }
