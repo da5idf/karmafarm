@@ -43,7 +43,6 @@ export const signupUser = ({ name, email, phoneNumber, admin, farmer, password }
     let key;
     if (admin) {
         key = cryptoRandomString({ length: 9 });
-        // console.log("key", key)
     }
 
     const response = await csrfFetch(
