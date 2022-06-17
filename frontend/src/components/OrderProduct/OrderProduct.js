@@ -7,7 +7,7 @@ import { addProductToOrder, deleteRecordFromOrder, updateRecordOnOrder } from ".
 import DeleteOrderModal from "./DeleteOrderModal";
 
 
-function OrderProduct({ product, orderId, orderRecords }) {
+function OrderProduct({ product, order, orderRecords }) {
     const dispatch = useDispatch();
 
     const user = useSelector(state => state.session.user)
@@ -49,7 +49,7 @@ function OrderProduct({ product, orderId, orderRecords }) {
         toggleModal();
 
         const newRecord = {
-            orderId,
+            orderId: order.id,
             productId: product.id,
             userId: user.id,
             weight: quantity
@@ -172,7 +172,7 @@ function OrderProduct({ product, orderId, orderRecords }) {
                     deleteOrderModal &&
                     <DeleteOrderModal
                         setDeleteOrderModal={setDeleteOrderModal}
-                        orderId={orderId}
+                        order={order}
                         containerClass="flex-col-center"
                     />
                 }

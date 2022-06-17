@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useHistory, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 import NewOrder from "../NewOrder"
@@ -11,12 +11,9 @@ import { getOneOrder } from "../../store/orders";
 function OrderParent() {
     const { orderId } = useParams();
     const dispatch = useDispatch();
-    const history = useHistory();
 
     const order = useSelector(state => state.orders.thisOrder);
     const user = useSelector(state => state.session.user);
-
-    console.log(order)
 
     const [isLoaded, setIsLoaded] = useState(false);
     const [adding, setAdding] = useState(false);
@@ -41,8 +38,6 @@ function OrderParent() {
     if (!order.id) {
         return <h1>Loading</h1>
     }
-
-    console.log(adding)
 
     if (order.submitted || order.delivered) {
         return <SingleOrder order={order} />

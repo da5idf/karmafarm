@@ -3,13 +3,33 @@ import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { deleteWholeOrder } from "../../store/orders";
 
-function DeleteOrderModal({ setDeleteOrderModal, orderId, containerClass }) {
+function DeleteOrderModal({ setDeleteOrderModal, order, containerClass }) {
     const dispatch = useDispatch();
     const history = useHistory();
 
     const confirmDelete = () => {
-        dispatch(deleteWholeOrder(orderId));
+        dispatch(deleteWholeOrder(order.id));
         history.push("/");
+    }
+
+    if (order.dateOfDelivery) {
+        const now = new Date().getTime();
+        const deliveryDay = new Date(order.dateOfDelivery).getTime();
+        const oneDay = 24 * 60 * 60 * 1000
+        if (deliveryDay - oneDay <= now) {
+            setTimeout(() => {
+                setDeleteOrderModal(false);
+            }, 5000)
+            return (
+                <div id="delete-order-modal" className={`red-bg ${containerClass}`}>
+                    <div id="delete-order-modal-text" className="white-text">
+                        You have one item in your cart. Deleting this item
+                        will delete your order and orders cannot be deleted
+                        within one day of delivery.
+                    </div>
+                </div>
+            )
+        }
     }
 
     return (

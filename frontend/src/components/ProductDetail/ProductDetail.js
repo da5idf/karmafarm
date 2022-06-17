@@ -20,7 +20,6 @@ function ProductDetail({ record, order, setDeleteOrderModal, delivered }) {
     }
 
     const validateDelete = () => {
-        console.log(order);
         if (order.Orders_Products.length > 1) return true;
 
         setDeleteOrderModal(true);

@@ -66,7 +66,7 @@ function NewOrder({ order, setAdding }) {
                     }).map(product => (
                         <OrderProduct
                             product={product}
-                            orderId={order.id}
+                            order={order}
                             orderRecords={orderRecords}
                             key={product.id}
                         />

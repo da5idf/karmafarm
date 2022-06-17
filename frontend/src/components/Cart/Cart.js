@@ -85,7 +85,7 @@ function Cart({ order, setAdding }) {
                                 <DeleteOrderModal
                                     setDeleteOrderModal={setDeleteOrderModal}
                                     containerClass="flex-modal"
-                                    orderId={orderId}
+                                    order={order}
                                 />
                             )
 
