@@ -52,7 +52,7 @@ function Cart({ order, setAdding }) {
         const nextWeek = new Date(today.getTime() + 7 * 24 * 60 * 60 * 1000)
 
         if (deliveryDay <= today || deliveryDay > nextWeek) {
-            setDateError("Please pick a day in the future, within one week")
+            setDateError("Please pick a day in the future,  week")
             return false;
         }
         return true;
