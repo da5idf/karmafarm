@@ -22,20 +22,25 @@ function OrderCard({ order, farmer, setDeleteOrderId, setError }) {
         }
     }
 
+    const now = new Date().getTime();
+    const deliveryDay = new Date(order.dateOfDelivery).getTime();
+    const oneDay = 24 * 60 * 60 * 1000
+
     const cb = () => {
         setRedirect(false);
         setError("");
         setDeleteOrderId(null);
 
+        const clearError = () => setError("")
+
         if (order.dateOfDelivery) {
-            const now = new Date().getTime();
-            const deliveryDay = new Date(order.dateOfDelivery).getTime();
-            const oneDay = 24 * 60 * 60 * 1000
             if (deliveryDay < now) {
+                setTimeout(clearError, 2500)
                 setError("Cannot delete orders that have been delivered.")
                 return;
             }
             else if (deliveryDay - oneDay <= now) {
+                setTimeout(clearError, 2500)
                 setError("Cannot delete an order within one day of delivery");
                 return;
             }
@@ -50,11 +55,14 @@ function OrderCard({ order, farmer, setDeleteOrderId, setError }) {
         cancelOnMovement: false,
     })
 
+    const greenText = (order.submitted && deliveryDay < now) ? "green-text" : ""
+    console.log(greenText)
+
     const children = (
         <>
             <td>{order.id}</td>
             {farmer && <td>{order.Restaurant.name}</td>}
-            <td>{formatDate(order.dateOfDelivery) || "Not Submitted"}</td>
+            <td className={greenText}>{formatDate(order.dateOfDelivery) || "Not Submitted"}</td>
             <td id="oc-total">{getOrderTotal(order)}</td>
             <td className="text-align-center">{order.paid === true ? "paid" : "not paid"}</td>
         </>

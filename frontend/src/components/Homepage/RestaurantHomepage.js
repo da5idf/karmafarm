@@ -89,6 +89,7 @@ function RestaurantHomepage({ user }) {
                                     }
                                 </tbody>
                             </table>
+                            <div className="green-text">Green dentotes a delivered order</div>
                         </div>
                     </div>
                     <div id="hp-content-right">

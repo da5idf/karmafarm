@@ -269,3 +269,12 @@ input::-webkit-inner-spin-button {
 .justify-right {
     align-self: flex-end;
 }
+
+.green-text {
+    color: #73A577;
+    font-weight: 400;
+}
+
+table {
+    margin-bottom: .5rem;
+}

@@ -68,6 +68,7 @@ function NewOrder({ order, setAdding }) {
                             product={product}
                             order={order}
                             orderRecords={orderRecords}
+                            setAdding={setAdding}
                             key={product.id}
                         />
                     ))}

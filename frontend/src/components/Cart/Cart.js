@@ -13,6 +13,7 @@ function Cart({ order, setAdding }) {
     const [deliveryDay, setDeliveryDay] = useState(new Date(order.dateOfDelivery))
     const [dateError, setDateError] = useState("")
     const [nullError, setNullError] = useState("")
+    const [updateError, setUpdateError] = useState("")
     const [deleteOrderModal, setDeleteOrderModal] = useState(false);
 
     const orderId = order.id
@@ -51,7 +52,7 @@ function Cart({ order, setAdding }) {
         const nextWeek = new Date(today.getTime() + 7 * 24 * 60 * 60 * 1000)
 
         if (deliveryDay <= today || deliveryDay > nextWeek) {
-            setDateError("Please pick a day in the future, within one week")
+            setDateError("Please pick a day in the future,  week")
             return false;
         }
         return true;
@@ -81,6 +82,7 @@ function Cart({ order, setAdding }) {
                         <div id="error-container">
                             <div className="error-msg">{dateError}</div>
                             <div className="error-msg">{nullError}</div>
+                            <div className="error-msg">{updateError}</div>
                             {deleteOrderModal && (
                                 <DeleteOrderModal
                                     setDeleteOrderModal={setDeleteOrderModal}
@@ -137,6 +139,7 @@ function Cart({ order, setAdding }) {
                                             record={record}
                                             order={order}
                                             setDeleteOrderModal={setDeleteOrderModal}
+                                            setUpdateError={setUpdateError}
                                             key={record.id} />
                                     )
                                 })
