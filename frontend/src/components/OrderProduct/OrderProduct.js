@@ -7,7 +7,7 @@ import { addProductToOrder, deleteRecordFromOrder, updateRecordOnOrder } from ".
 import DeleteOrderModal from "./DeleteOrderModal";
 
 
-function OrderProduct({ product, order, orderRecords }) {
+function OrderProduct({ product, order, orderRecords, setAdding }) {
     const dispatch = useDispatch();
 
     const user = useSelector(state => state.session.user)
@@ -45,6 +45,7 @@ function OrderProduct({ product, order, orderRecords }) {
     }
 
     const addToCart = () => {
+        setAdding(true);
         if (!validQuantity(quantity)) return
         toggleModal();
 
