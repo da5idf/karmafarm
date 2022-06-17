@@ -9,7 +9,7 @@ function About({ user }) {
     if (!user) history.push("/");
 
     const linkedinLink = "https://www.linkedin.com/in/david-forster-70b44673/";
-    const githuLink = "https://github.com/da5idf";
+    const githubLink = "https://github.com/da5idf";
 
     return (
         <>
@@ -29,15 +29,15 @@ function About({ user }) {
                         <div
                             id="github-link"
                             className="dev-link"
-                            onClick={() => history.push(githuLink)}
+                            onClick={() => window.location = githubLink}
                         >
-                            <a href={githuLink} >GitHub</a>
+                            <a href={githubLink} >GitHub</a>
 
                         </div>
                         <div
                             id="linkedin-link"
                             className="dev-link"
-                            onClick={() => history.push(linkedinLink)}
+                            onClick={() => window.location = linkedinLink}
                         >
                             <a href={linkedinLink} >LinkedIn</a>
                         </div>
