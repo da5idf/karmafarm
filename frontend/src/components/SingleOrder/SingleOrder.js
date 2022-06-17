@@ -41,6 +41,7 @@ function SingleOrder({ order }) {
                         id="add-to-order-button"
                         className="blue-button"
                         onClick={addToOrder}
+                        type="button"
                     >
                         Reopen Order
                     </button>

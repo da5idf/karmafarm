@@ -27,13 +27,13 @@ function Cart({ order, setAdding }) {
         setAdding(true)
     }
 
-    const submitOrder = () => {
+    const submitOrder = async () => {
         const nullOrder = validateNullOrder();
         const validDelivery = validateDeliveryDay();
 
         if (!nullOrder || !validDelivery) return
-
-        dispatch(toggleSubmission(orderId, true));
+        setAdding(false);
+        await dispatch(toggleSubmission(orderId, true));
         dispatch(updateDeliveryOnOrder(orderId, deliveryDay))
     }
 
@@ -108,6 +108,7 @@ function Cart({ order, setAdding }) {
                                 id="add-to-order-button"
                                 className="basic-button"
                                 onClick={addToOrder}
+                                type="button"
                             >
                                 Add to Order
                             </button>
@@ -115,6 +116,7 @@ function Cart({ order, setAdding }) {
                                 id="cart-submit-button"
                                 className="blue-button"
                                 onClick={submitOrder}
+                                type="button"
                             >
                                 Submit Order
                             </button>

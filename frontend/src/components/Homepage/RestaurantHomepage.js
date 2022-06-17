@@ -89,8 +89,8 @@ function RestaurantHomepage({ user }) {
                                     }
                                 </tbody>
                             </table>
-                            <div className="green-text">Green dentotes a delivered order</div>
                         </div>
+                        <div className="green-text">Green dentotes a delivered order</div>
                     </div>
                     <div id="hp-content-right">
                         {/* <div id="new-items-container">
