@@ -27,8 +27,8 @@ function FeedbackForm({ user, orders }) {
             userId: user.id,
             restaurantId,
             orderId,
-            productId,
         }
+        if (productId) feedback.productId = productId;
         dispatch(createFeedback(feedback))
         toggleConfirm();
         setText("");
@@ -41,6 +41,10 @@ function FeedbackForm({ user, orders }) {
 
         if (text.length <= 10) {
             newErrors.text = "Minimum 10 characters";
+            valid = false;
+        }
+        if (text.length > 150) {
+            newErrors.text = "Maximum 150 characters";
             valid = false;
         }
         if (!orderId) {
@@ -85,13 +89,13 @@ function FeedbackForm({ user, orders }) {
         let newErrors = {};
 
         let value = e.target.value;
-        setText(value)
 
-        if (text.length > 150) {
+        if (value.length > 150) {
             newErrors.text = "Maximum 150 characters";
-            setText(value.slice(0, 150))
         }
 
+        value = value.slice(0, 150)
+        setText(value);
         setErrors(newErrors)
         setTimeout(() => {
             setErrors({})

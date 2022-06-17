@@ -24,7 +24,6 @@ module.exports = {
         references: { model: 'Orders' }
       },
       productId: {
-        allowNull: false,
         type: Sequelize.INTEGER,
         references: { model: 'Products' }
       },
