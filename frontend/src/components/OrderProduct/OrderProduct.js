@@ -36,9 +36,9 @@ function OrderProduct({ product, orderId, orderRecords }) {
     }
 
     const addToCart = () => {
-        if (quantity <= 0) return;
-
         toggleModal();
+
+        if (quantity <= 0 || quantity >= 200) return;
         const newRecord = {
             orderId,
             productId: product.id,
@@ -65,7 +65,23 @@ function OrderProduct({ product, orderId, orderRecords }) {
     }
 
     const toggleModal = () => {
-        const modal = document.getElementById(`modal-${product.id}`)
+        if (quantity <= 0 || !quantity) {
+            const modal = document.getElementById(`modal-zero-error-${product.id}`)
+            modal.style.display = "block"
+            setTimeout(() => {
+                modal.style.display = "none"
+            }, 1500)
+            return;
+        }
+        else if (quantity > 100) {
+            const modal = document.getElementById(`modal-big-error-${product.id}`)
+            modal.style.display = "block"
+            setTimeout(() => {
+                modal.style.display = "none"
+            }, 1500)
+            return;
+        }
+        const modal = document.getElementById(`modal-confirm-${product.id}`)
         modal.style.display = "block"
         setTimeout(() => {
             modal.style.display = "none"
@@ -110,8 +126,14 @@ function OrderProduct({ product, orderId, orderRecords }) {
                     </div>
                     <ProductButtons props={props} />
                 </div>
-                <div className="confirmation-modal" id={`modal-${product.id}`}>
+                <div className="confirmation-modal yellow-bg" id={`modal-confirm-${product.id}`}>
                     Cart Updated!
+                </div>
+                <div className="confirmation-modal yellow-bg" id={`modal-zero-error-${product.id}`}>
+                    {"Quantity must be > 0"}
+                </div>
+                <div className="confirmation-modal yellow-bg" id={`modal-big-error-${product.id}`}>
+                    {"Quantity must be < 200"}
                 </div>
             </div>
         </>

@@ -52,6 +52,14 @@ td {
     display: flex;
 }
 
+.yellow-bg {
+    background-color: #F5DA70;
+}
+
+.red-bg {
+    background-color: #A8003B;
+}
+
 .page-hero {
     padding-top: 30px;
     padding-left: 1rem;

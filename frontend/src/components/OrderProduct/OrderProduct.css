@@ -151,10 +151,10 @@
     padding-top: 5px;
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
-    background-color: #F5DA70;
     animation-name: modalPopup;
     animation-duration: 1.5s;
     display: none;
+    z-index: 100;
 }
 
 @keyframes modalPopup {
