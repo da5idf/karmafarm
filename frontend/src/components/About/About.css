@@ -13,13 +13,11 @@
     height: 100vh;
 }
 
-#about-photo {
-    position: absolute;
-    width: 300px;
-    top: 15%;
-    left: 42%;
-    z-index: 50;
-    object-fit: cover;
+#about-photo-container {
+    height: 50%;
+    background-position: center;
+    background-size: cover;
+    background-image: url("../../images/AboutPhoto.jpeg");
 }
 
 #about-left {
@@ -94,14 +92,17 @@
 
 #about-photo-container {
     display: flex;
+    position: relative;
     flex-direction: column;
     z-index: 100;
     width: 20%;
 }
 
 #about-img-caption {
+    position: absolute;
+    bottom: -20px;
     color: black;
-    text-align: end;
+    right: 0px;
 }
 
 #about-right {

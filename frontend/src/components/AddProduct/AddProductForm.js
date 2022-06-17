@@ -80,7 +80,7 @@ function AddProductForm({ props }) {
         const decimals = valStr.split(".")[1];
         if (decimals && decimals.length > 2) {
             setPrice(valStr.slice(0, valStr.length - 1))
-            newErrors.ppp = "2 decimals max";
+            newErrors.ppp = "2 decimal max";
             valid = false;
         }
 
@@ -115,7 +115,7 @@ function AddProductForm({ props }) {
         }
         const decimals = pricePerPound.toString().split(".")[1]
         if (decimals && decimals.length > 2) {
-            newErrors.ppp = "Max 2 decimal places"
+            newErrors.ppp = "2 decimal max"
         }
         if (!inEdit && !imgFile) {
             newErrors.img = "Please add an image"
@@ -192,7 +192,7 @@ function AddProductForm({ props }) {
             <div className="double-form-field">
                 <div className="newform-field">
                     {errors.ppp && <div className="new-edit-error">{errors.ppp}</div>}
-                    <label>Price Per Pound*</label>
+                    <label>Price per #*</label>
                     <input
                         id="new-price"
                         className="form-input"

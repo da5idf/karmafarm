@@ -44,7 +44,7 @@ function About({ user }) {
                     </div>
                 </div>
                 <div id="about-photo-container">
-                    <img id="about-photo" src={require("../../images/AboutPhoto.jpeg")} alt="" />
+                    {/* <img id="about-photo" src={require("../../images/AboutPhoto.jpeg")} alt="" /> */}
                     <div id="about-img-caption">An organic photo from KarmaFarm</div>
                 </div>
                 <div id="about-right">

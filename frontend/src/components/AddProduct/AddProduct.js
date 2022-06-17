@@ -72,9 +72,10 @@ function AddProduct({ user }) {
         <div className="page-hero">
             <div className="page-content">
                 <div className="page-title">Add or Edit a Product</div>
-                <div className="page-subtitle">
-                    Use the form below to create a new product, click an existing product to edit it, or
-                    delete an item by clicking and holding.
+                <div className="flex-col-center">
+                    <div className="page-subtitle">Use the form below to create a new product.</div>
+                    <div className="page-subtitle">Click an existing product to edit it.</div>
+                    <div className="page-subtitle red-text">Delete an item by clicking and holding.</div>
                 </div>
                 <div id="add-edit-content">
                     <div id="add-edit-left">

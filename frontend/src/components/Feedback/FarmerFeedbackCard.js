@@ -4,8 +4,6 @@ import "./FarmerFeedbackCard.css"
 
 function FarmerFeedbackCard({ feedback }) {
 
-    console.log(feedback);
-
     if (!feedback) {
         return;
     }

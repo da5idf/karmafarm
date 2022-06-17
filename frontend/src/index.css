@@ -44,6 +44,7 @@ th {
 td {
     padding-left: .5rem;
     height: 35px;
+    overflow-wrap: anywhere;
 }
 
 #app-hero {
@@ -277,4 +278,8 @@ input::-webkit-inner-spin-button {
 
 table {
     margin-bottom: .5rem;
+}
+
+.red-text {
+    color: #A8003B;
 }

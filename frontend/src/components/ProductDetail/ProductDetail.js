@@ -130,7 +130,7 @@ function ProductDetail({ record, order, setDeleteOrderModal, delivered, setUpdat
                 :
                 <td id="pd-weight">{record.weight}</td>
             }
-            <td id="pd-subTotal">{newSubTotal ? `$${newSubTotal}` : `$${subTotal}`}</td>
+            <td id="pd-subTotal">{newSubTotal === "invalid" ? newSubTotal : `$${subTotal}`}</td>
             <td id="pd-addedBy">{record.User.name}</td>
             {!user.farmer && !delivered && buttons}
         </tr>

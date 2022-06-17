@@ -158,7 +158,9 @@ function OrderProduct({ product, order, orderRecords, setAdding }) {
                         </div>
                         <div id="op-grid-right">
                             <div>Item total</div>
-                            <div id="op-product-subtotal">{`$${subTotal}`}</div>
+                            <div id="op-product-subtotal">{
+                                subTotal === "Invalid" ? subTotal : `$${subTotal}`
+                            }</div>
                         </div>
                     </div>
                     <ProductButtons props={props} />
