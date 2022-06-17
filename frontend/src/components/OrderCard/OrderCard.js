@@ -54,7 +54,7 @@ function OrderCard({ order, farmer, setDeleteOrderId, setError }) {
         <>
             <td>{order.id}</td>
             {farmer && <td>{order.Restaurant.name}</td>}
-            <td>{formatDate(order.dateOfDelivery)}</td>
+            <td>{formatDate(order.dateOfDelivery) || "Not Submitted"}</td>
             <td id="oc-total">{getOrderTotal(order)}</td>
             <td className="text-align-center">{order.paid === true ? "paid" : "not paid"}</td>
         </>

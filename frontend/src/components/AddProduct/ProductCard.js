@@ -91,7 +91,7 @@ function ProductCard({ product, props }) {
                     <div className="product-card-info">
                         <div className="product-card-active-container">
                             <div>Price pp</div>
-                            <div>${product.pricePerPound}</div>
+                            <div>${Number(product.pricePerPound).toFixed(2)}</div>
                         </div>
                         <div className="product-card-price-container">
                             <div>Active</div>

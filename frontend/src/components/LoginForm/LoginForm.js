@@ -20,9 +20,6 @@ function LoginForm() {
         e.preventDefault();
         setErrors([]);
         await dispatch(sessionActions.login({ credential, password }))
-            // .then(() => {
-            //     history.push("/")
-            // })
             .catch(
                 async (res) => {
                     const data = await res.json();
@@ -114,13 +111,14 @@ function LoginForm() {
                         onClick={farmerLogin}
                         type="button"
                     >
-                        Login as Farmer
+                        Demo Farmer
                     </button>
                     <button
                         id="demo-restaurant-login"
                         onClick={restaurantLogin}
+                        type="button"
                     >
-                        Login as Restaurant
+                        Demo Restaurant
                     </button>
                 </div>
             </div>

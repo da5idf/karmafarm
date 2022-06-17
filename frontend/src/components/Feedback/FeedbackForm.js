@@ -81,6 +81,23 @@ function FeedbackForm({ user, orders }) {
         setOrderId(id);
     }
 
+    const updateText = (e) => {
+        let newErrors = {};
+
+        let value = e.target.value;
+        setText(value)
+
+        if (text.length > 150) {
+            newErrors.text = "Maximum 150 characters";
+            setText(value.slice(0, 150))
+        }
+
+        setErrors(newErrors)
+        setTimeout(() => {
+            setErrors({})
+        }, 3000)
+    }
+
     return (
         <form id="feedback-form-hero" onSubmit={submitFeedback}>
             <div
@@ -90,6 +107,7 @@ function FeedbackForm({ user, orders }) {
                 Submit feedback on an order</div>
             <div id="feedback-selectors">
                 <select
+                    className="form-input"
                     value={orderId}
                     onChange={orderSelected}
                 >
@@ -113,6 +131,7 @@ function FeedbackForm({ user, orders }) {
                     }
                 </select>
                 <select
+                    className="form-input"
                     value={productId}
                     onChange={(e) => setProductId(e.target.value)}
                 >
@@ -133,7 +152,7 @@ function FeedbackForm({ user, orders }) {
             </div>
             <textarea
                 value={text}
-                onChange={(e) => setText(e.target.value)}
+                onChange={updateText}
                 minLength="10"
                 id="feedback-text"
             />

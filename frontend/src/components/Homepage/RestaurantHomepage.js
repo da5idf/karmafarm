@@ -92,9 +92,9 @@ function RestaurantHomepage({ user }) {
                         </div>
                     </div>
                     <div id="hp-content-right">
-                        <div id="new-items-container">
+                        {/* <div id="new-items-container">
                             <div className="page-subtitle">New Items</div>
-                        </div>
+                        </div> */}
                         <div id="feedback-container">
                             <FeedbackForm user={user} orders={orders} />
                         </div>

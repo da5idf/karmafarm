@@ -11,17 +11,24 @@
     flex-wrap: wrap;
     margin-top: 1.5rem;
     margin-bottom: 2rem;
+    position: relative;
 }
 
 #error-container {
     align-self: flex-end;
     margin-bottom: 2.5rem;
+    max-width: 420px;
+    max-height: 200px;
 }
 
-#error-msg {
+.error-msg {
     font-size: 20px;
     font-weight: 400;
     color: #A8003B;
+}
+
+.error-msg:not(:last-child) {
+    margin-bottom: .5rem;
 }
 
 #dd-title {
@@ -126,4 +133,17 @@ abbr {
 
 #cart-table tr:nth-child(even) {
     background-color: #e2e2e2;
+}
+
+#delete-order-modal.flex-modal {
+    display: flex;
+    width: 50%;
+    height: 50%;
+    left: 50%;
+    top: 51%;
+    align-items: center;
+}
+
+#delete-order-modal-text {
+    margin: 1rem;
 }
