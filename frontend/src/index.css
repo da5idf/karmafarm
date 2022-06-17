@@ -136,7 +136,7 @@ td {
 .green-button {
     width: 100%;
     text-align: center;
-    background-color: #73A577;
+    background-color: invoice-table-header;
     padding: .5rem;
     border-radius: 5px;
     font-size: 18px;
@@ -264,4 +264,8 @@ input::-webkit-inner-spin-button {
 .err-text {
     color: #A8003B;
     font-weight: 400;
+}
+
+.justify-right {
+    align-self: flex-end;
 }

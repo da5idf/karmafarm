@@ -19,7 +19,7 @@ function OrderParent() {
     console.log(order)
 
     const [isLoaded, setIsLoaded] = useState(false);
-    const [adding, setAdding] = useState(true);
+    const [adding, setAdding] = useState(false);
 
     useEffect(() => {
         dispatch(getOneOrder(orderId))
@@ -42,20 +42,16 @@ function OrderParent() {
         return <h1>Loading</h1>
     }
 
-    if (order.Orders_Products) {
-        console.log("order.Orders_Produts > true", order.Orders_Products)
-    } else {
-        console.log("false")
-    }
+    console.log(adding)
 
     if (order.submitted || order.delivered) {
         return <SingleOrder order={order} />
     }
-    else if (!adding && order.Orders_Products.length) {
-        return <Cart order={order} setAdding={setAdding} />
-    }
-    else {
+    else if (adding || !order.Orders_Products.length) {
         return <NewOrder order={order} setAdding={setAdding} />
+    }
+    else if (!adding || order.Orders_Products.length) {
+        return <Cart order={order} setAdding={setAdding} />
     }
 }
 
