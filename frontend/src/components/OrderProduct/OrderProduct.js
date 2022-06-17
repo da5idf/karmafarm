@@ -22,23 +22,35 @@ function OrderProduct({ product, orderId, orderRecords }) {
     const [quantity, setQuantity] = useState(productWeight || "");
     const [subTotal, setSubTotal] = useState((quantity * product.pricePerPound).toFixed(2));
     const [onOrder, setOnOrder] = useState(onThisOrder);
+    const [errMsg, setErrMsg] = useState("");
 
-    const updateOrder = (e) => {
+    const updateQuantity = (e) => {
         setQuantity(e.target.value)
-        if (e.target.value <= 0 && e.target.value != "") {
-            e.target.style.color = "red"
-            setSubTotal("Invalid")
-            return;
+        const value = e.target.value
+
+        if (!validQuantity(value)) {
+            if (value > 200 || value.toString().length > 5) {
+                setQuantity(value.toString().slice(0, 6))
+                e.target.style.color = "red"
+                setSubTotal("Invalid")
+                return;
+            }
+            // if (value.toString().length < 5) {
+            //     e.target.style.color = "red"
+            //     setSubTotal("Invalid")
+            //     return;
+            // }
         }
+
         e.target.style.color = "black"
-        const total = e.target.value * product.pricePerPound;
+        const total = value * product.pricePerPound;
         setSubTotal(total.toFixed(2))
     }
 
     const addToCart = () => {
+        if (!validQuantity(quantity)) return
         toggleModal();
 
-        if (quantity <= 0 || quantity >= 200) return;
         const newRecord = {
             orderId,
             productId: product.id,
@@ -51,41 +63,64 @@ function OrderProduct({ product, orderId, orderRecords }) {
     }
 
     const updateCart = () => {
+        if (!validQuantity(quantity)) return
         toggleModal()
         const record = orderRecords.find(record => record.productId === product.id)
         dispatch(updateRecordOnOrder(record.id, quantity))
     }
 
     const removeFromCart = () => {
+        if (!validQuantity(quantity)) return;
         toggleModal()
         const record = orderRecords.find(record => record.productId === product.id)
         dispatch(deleteRecordFromOrder(record.id))
         setQuantity(0);
+        setSubTotal(0.00);
         setOnOrder(false);
     }
 
+    const validQuantity = (value) => {
+        if (!value || value <= 0) {
+            toggleErrorModal();
+            setErrMsg("Quantity must be > 0")
+            return false;
+        }
+        if (value > 200) {
+            setErrMsg("200# max on order")
+            toggleErrorModal();
+            return false;
+        }
+        const valStr = value.toString();
+        const decimals = valStr.split(".")[1];
+        if (decimals && decimals.length > 2) {
+            setQuantity(valStr.slice(0, valStr.length - 1))
+            setErrMsg("2 decimals max");
+            toggleErrorModal();
+            return false;
+        }
+        if (value.toString().length > 6) {
+            setQuantity(valStr.slice(6))
+            setErrMsg("2 decimals max");
+            toggleErrorModal();
+            return false;
+        }
+        return true
+    }
+
+    const toggleErrorModal = () => {
+        const modal = document.getElementById(`modal-error-${product.id}`)
+        modal.style.display = "block"
+        setTimeout(() => {
+            modal.style.display = "none"
+        }, 1400)
+    }
+
     const toggleModal = () => {
-        if (quantity <= 0 || !quantity) {
-            const modal = document.getElementById(`modal-zero-error-${product.id}`)
-            modal.style.display = "block"
-            setTimeout(() => {
-                modal.style.display = "none"
-            }, 1500)
-            return;
-        }
-        else if (quantity > 100) {
-            const modal = document.getElementById(`modal-big-error-${product.id}`)
-            modal.style.display = "block"
-            setTimeout(() => {
-                modal.style.display = "none"
-            }, 1500)
-            return;
-        }
         const modal = document.getElementById(`modal-confirm-${product.id}`)
         modal.style.display = "block"
         setTimeout(() => {
             modal.style.display = "none"
-        }, 1500)
+        }, 1400)
     }
 
     const props = {
@@ -114,7 +149,7 @@ function OrderProduct({ product, orderId, orderRecords }) {
                                     id="op-product-quantity"
                                     value={quantity}
                                     type="number"
-                                    onChange={updateOrder}
+                                    onChange={updateQuantity}
                                 />
                                 <div id="input-container-label">pounds</div>
                             </div>
@@ -129,11 +164,8 @@ function OrderProduct({ product, orderId, orderRecords }) {
                 <div className="confirmation-modal yellow-bg" id={`modal-confirm-${product.id}`}>
                     Cart Updated!
                 </div>
-                <div className="confirmation-modal yellow-bg" id={`modal-zero-error-${product.id}`}>
-                    {"Quantity must be > 0"}
-                </div>
-                <div className="confirmation-modal yellow-bg" id={`modal-big-error-${product.id}`}>
-                    {"Quantity must be < 200"}
+                <div className="confirmation-modal yellow-bg" id={`modal-error-${product.id}`}>
+                    {errMsg}
                 </div>
             </div>
         </>
