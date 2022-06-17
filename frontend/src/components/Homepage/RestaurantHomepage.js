@@ -34,7 +34,7 @@ function RestaurantHomepage({ user }) {
         history.push(`/orders/${order.id}`)
     }
 
-    if (!orders.length) {
+    if (!restaurant.id) {
         return <h1>Loading</h1>
     }
 

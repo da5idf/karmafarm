@@ -167,7 +167,7 @@ function AddProductForm({ props }) {
         >
             <div className="newform-field">
                 {errors.name && <div className="new-edit-error">{errors.name}</div>}
-                <label>Name</label>
+                <label>Name*</label>
                 <input
                     id="new-name"
                     className="form-input"
@@ -179,7 +179,7 @@ function AddProductForm({ props }) {
             </div>
             <div className="newform-field">
                 {errors.description && <div className="new-edit-error">{errors.description}</div>}
-                <label>Description</label>
+                <label>Description*</label>
                 <input
                     id="new-description"
                     className="form-input"
@@ -192,7 +192,7 @@ function AddProductForm({ props }) {
             <div className="double-form-field">
                 <div className="newform-field">
                     {errors.ppp && <div className="new-edit-error">{errors.ppp}</div>}
-                    <label>Price Per #</label>
+                    <label>Price Per Pound*</label>
                     <input
                         id="new-price"
                         className="form-input"
@@ -243,7 +243,7 @@ function AddProductForm({ props }) {
                     </select>
                 </div>
                 <div className="newform-field" id="img-form-field">
-                    <label id="new-img-title">Product Image</label>
+                    <label id="new-img-title">Product Image*</label>
                     <label id="new-img-label" htmlFor="new-imgFile">
                         <input
                             id="new-imgFile"
@@ -270,6 +270,7 @@ function AddProductForm({ props }) {
             >
                 {inEdit ? "Confirm Edit" : "Add new product"}
             </button>
+            <div id="required-field">*Required Fields</div>
         </form >
     )
 }
