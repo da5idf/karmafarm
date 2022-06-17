@@ -8,9 +8,7 @@ import { toggleSubmission, updateDeliveryOnOrder } from "../../store/orders"
 import { getFormattedNumber, getOrderTotal } from '../../utils'
 import DeleteOrderModal from "../OrderProduct/DeleteOrderModal";
 
-function Cart({ props }) {
-    const { order, setView, views } = props;
-    localStorage.setItem("orderView", views.cartView)
+function Cart({ order, setAdding }) {
 
     const [deliveryDay, setDeliveryDay] = useState(new Date(order.dateOfDelivery))
     const [dateError, setDateError] = useState("")
@@ -25,8 +23,7 @@ function Cart({ props }) {
     const restaurant = order.Restaurant
 
     const addToOrder = () => {
-        localStorage.setItem("orderView", views.addView)
-        setView(views.addView)
+        setAdding(true)
     }
 
     const submitOrder = () => {
@@ -37,8 +34,6 @@ function Cart({ props }) {
 
         dispatch(toggleSubmission(orderId, true));
         dispatch(updateDeliveryOnOrder(orderId, deliveryDay))
-        localStorage.setItem("orderView", views.orderView)
-        setView(views.orderView)
     }
 
     const validateNullOrder = () => {

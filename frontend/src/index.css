@@ -260,3 +260,8 @@ input::-webkit-inner-spin-button {
         left: 0px;
     }
 }
+
+.err-text {
+    color: #A8003B;
+    font-weight: 400;
+}

@@ -7,9 +7,7 @@ import OrderProduct from "../OrderProduct";
 import { getOrderTotal } from "../../utils"
 import Search from "../Search/Search";
 
-function NewOrder({ props }) {
-    const { order, setView, views } = props;
-    localStorage.setItem("orderView", views.addView)
+function NewOrder({ order, setAdding }) {
 
     const restaurant = order.Restaurant
     const orderRecords = order.Orders_Products;
@@ -19,10 +17,13 @@ function NewOrder({ props }) {
     let products = Object.values(productsObjs);
 
     const [query, setQuery] = useState("");
+    const [error, setError] = useState("");
 
     const viewCart = () => {
-        setView(views.cartView);
-        localStorage.setItem("orderView", views.cartView)
+        if (!orderRecords.length) {
+            setError("Add at least 1 item to view cart")
+        }
+        setAdding(false);
     }
 
     return (
@@ -51,6 +52,7 @@ function NewOrder({ props }) {
                 <div id="filter-search-container">
                     <Search query={query} setter={setQuery} />
                     <div id="cart-icons-container">
+                        {error && <div className="err-text">{error}</div>}
                         <i id="new-order-cart" className="fa-solid fa-basket-shopping"></i>
                         <div id="cart-items-num">
                             <div>{orderRecords.length}</div>

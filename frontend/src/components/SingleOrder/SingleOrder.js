@@ -5,9 +5,7 @@ import "./SingleOrder.css"
 import ProductDetail from "../ProductDetail";
 import { toggleSubmission } from "../../store/orders";
 
-function SingleOrder({ props }) {
-    const { order, setView, views } = props;
-    localStorage.setItem("orderView", views.orderView)
+function SingleOrder({ order }) {
 
     const user = useSelector(state => state.session.user)
 
@@ -26,8 +24,6 @@ function SingleOrder({ props }) {
 
     const addToOrder = () => {
         dispatch(toggleSubmission(orderId, false))
-        localStorage.setItem("orderView", views.addView)
-        setView(views.addView)
     }
 
     return (
@@ -35,7 +31,7 @@ function SingleOrder({ props }) {
             <div className="page-title">Order #{`${orderId}`} details</div>
             <div id="so-restaurant-name">{restaurant.name}</div>
             <div id="so-restaurant-address">{restaurant.address}</div>
-            {!user.farmer && !delivered && (
+            {!order.delivered && !user.farmer && !delivered && (
                 <button
                     id="add-to-order-button"
                     className="blue-button"

@@ -50,6 +50,8 @@
 #cart-icons-container {
     position: relative;
     margin-right: 1rem;
+    display: flex;
+    gap: 1rem;
 }
 
 #new-order-cart {

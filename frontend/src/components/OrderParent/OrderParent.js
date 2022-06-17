@@ -19,11 +19,7 @@ function OrderParent() {
     console.log(order)
 
     const [isLoaded, setIsLoaded] = useState(false);
-    const [view, setView] = useState(localStorage.getItem("orderView") || "add");
-
-    const addView = "add";
-    const cartView = "cart";
-    const orderView = "order";
+    const [adding, setAdding] = useState(true);
 
     useEffect(() => {
         dispatch(getOneOrder(orderId))
@@ -38,31 +34,29 @@ function OrderParent() {
         )
     }
 
-    const props = {
-        order,
-        setView,
-        views: {
-            addView,
-            cartView,
-            orderView,
-        }
-    }
-
     if (user.farmer) {
-        return <SingleOrder props={props} />
+        return <SingleOrder order={order} />
     }
 
-    switch (view) {
-        case addView:
-            return <NewOrder props={props} />
-        case cartView:
-            return <Cart props={props} />
-        case orderView:
-            return <SingleOrder props={props} />
-        default:
-            return history.push("/");
+    if (!order.id) {
+        return <h1>Loading</h1>
     }
 
+    if (order.Orders_Products) {
+        console.log("order.Orders_Produts > true", order.Orders_Products)
+    } else {
+        console.log("false")
+    }
+
+    if (order.submitted || order.delivered) {
+        return <SingleOrder order={order} />
+    }
+    else if (!adding && order.Orders_Products.length) {
+        return <Cart order={order} setAdding={setAdding} />
+    }
+    else {
+        return <NewOrder order={order} setAdding={setAdding} />
+    }
 }
 
 export default OrderParent;
