@@ -56,7 +56,10 @@ function AddProductForm({ props }) {
             newErrors.name = "Name is required";
             valid = false;
         }
-        if (!description) {
+        if (name.length > 25) {
+            newErrors.name = "Name must be less than 25 characters"
+        }
+        if (!description || description.length > 100) {
             newErrors.description = "Description is required, max 100 characters";
             valid = false;
         }
@@ -66,6 +69,14 @@ function AddProductForm({ props }) {
         }
         if (pricePerPound >= 100) {
             newErrors.ppp = "ppp < 100"
+            valid = false;
+        }
+        const decimals = pricePerPound.toString().split(".")[1]
+        if (decimals && decimals.length > 2) {
+            newErrors.ppp = "Max 2 decimal places"
+        }
+        if (type.length > 15) {
+            newErrors.type = "Max 15 characters";
             valid = false;
         }
         if (!inEdit && !imgFile) {
@@ -87,6 +98,26 @@ function AddProductForm({ props }) {
         if (file) setImgFile(file);
     }
 
+    const updateName = (e) => {
+        let newErrors = {};
+        if (e.target.value.length <= 25) {
+            setName(e.target.value);
+            return;
+        }
+        newErrors.name = "Name is at most 25 characters"
+        setErrors(newErrors)
+    }
+
+    const updateDescription = (e) => {
+        let newErrors = {};
+        if (e.target.value.length <= 100) {
+            setDescription(e.target.value);
+            return
+        }
+        newErrors.description = "Description must be less than 100 characters"
+        setErrors(newErrors)
+    }
+
     return (
         <form
             id="new-edit-product-form"
@@ -101,7 +132,7 @@ function AddProductForm({ props }) {
                     type="text"
                     value={name}
                     placeholder="Please enter the product name"
-                    onChange={(e) => setName(e.target.value)}
+                    onChange={updateName}
                 />
             </div>
             <div className="newform-field">
@@ -113,7 +144,7 @@ function AddProductForm({ props }) {
                     type="text"
                     value={description}
                     placeholder="Please enter the product description"
-                    onChange={(e) => setDescription(e.target.value)}
+                    onChange={updateDescription}
                 />
             </div>
             <div className="double-form-field">
@@ -125,7 +156,8 @@ function AddProductForm({ props }) {
                         className="form-input"
                         value={pricePerPound}
                         type="number"
-                        placeholder="Please enter in #s"
+                        placeholder="Please enter in $/p"
+                        pattern="^[1-9]{1,2}[0-9]?\.?[0-9]{1,2}$"
                         onChange={(e) => setPrice(e.target.value)}
                     />
                 </div>
@@ -145,6 +177,7 @@ function AddProductForm({ props }) {
             </div>
             <div className="double-form-field">
                 <div className="newform-field">
+                    {errors.type && <div className="new-edit-error" id="type-error">{errors.type}</div>}
                     <label>Type</label>
                     <input
                         id="new-type"
