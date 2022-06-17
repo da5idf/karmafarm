@@ -96,6 +96,7 @@ function FarmerHomepage({ user }) {
                                 </tbody>
                             </table>
                         </div>
+                        <div className="green-text">Green denotes a delivered order</div>
                     </div>
                     <div id="hp-content-right">
                         <div id="feedback-container">
