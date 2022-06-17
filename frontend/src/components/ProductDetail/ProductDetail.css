@@ -23,5 +23,7 @@
 }
 
 #cart-update-quantity {
-    width: 50px;
+    width: 60px;
+    outline: 1px solid black;
+    font-size: 15px;
 }

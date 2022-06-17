@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import "./ProductDetail.css"
 import { deleteRecordFromOrder, updateRecordOnOrder } from "../../store/orders"
 
-function ProductDetail({ record, order, setDeleteOrderModal, delivered }) {
+function ProductDetail({ record, order, setDeleteOrderModal, delivered, setUpdateError }) {
     const dispatch = useDispatch();
     const [inUpdate, setInUpdate] = useState(false);
     const [quantity, setQuantity] = useState(record.weight);
@@ -31,13 +31,52 @@ function ProductDetail({ record, order, setDeleteOrderModal, delivered }) {
     }
 
     const updateThisRecord = () => {
+        if (!validQuantity(quantity)) return;
         dispatch(updateRecordOnOrder(record.id, quantity))
         setInUpdate(false)
     }
 
+    // see if you can clean up
+    // same functions as in OrderProdcut & AddProductForm
     const updateQuantity = (e) => {
-        setQuantity(e.target.value);
-        setNewSubTotal(e.target.value * product.pricePerPound);
+        console.log("here", quantity)
+        setUpdateError("")
+
+        setQuantity(e.target.value)
+        const value = e.target.value
+
+        if (!validQuantity(value)) {
+            if (value > 200 || value < 0) {
+                setQuantity(value.toString().slice(0, 6))
+                e.target.style.color = "red"
+                setNewSubTotal("Invalid")
+                return;
+            }
+        }
+
+        e.target.style.color = "black"
+        const total = value * product.pricePerPound;
+        setNewSubTotal(total.toFixed(2))
+    }
+
+    const validQuantity = (value) => {
+        if (!value || value <= 0) {
+            setUpdateError("Quantity must be > 0")
+            return false;
+        }
+        if (value > 200) {
+            setUpdateError("200# max on order")
+            return false;
+        }
+        const valStr = value.toString();
+        const decimals = valStr.split(".")[1];
+        if (decimals && decimals.length > 2) {
+            setQuantity(valStr.slice(0, valStr.length - 1))
+            setUpdateError("2 decimals max");
+            return false;
+        }
+
+        return true
     }
 
     const buttons = inUpdate ?
@@ -49,7 +88,10 @@ function ProductDetail({ record, order, setDeleteOrderModal, delivered }) {
                     Confirm
                 </td>
                 <td id="pd-update-cancel"
-                    onClick={() => setInUpdate(false)}
+                    onClick={() => {
+                        setUpdateError("");
+                        setInUpdate(false);
+                    }}
                 >
                     Cancel
                 </td>
