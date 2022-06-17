@@ -1,6 +1,6 @@
 #product-hero {
     width: 250px;
-    height: 300px;
+    height: 310px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -42,7 +42,7 @@
 
 #op-product-bottom {
     width: 100%;
-    height: 150px;
+    height: 160px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -55,7 +55,7 @@
 }
 
 #op-product-description {
-    font-size: 16px;
+    font-size: 15px;
     padding-left: .5rem;
 }
 
@@ -174,4 +174,20 @@
         bottom: 0px;
         opacity: 0%;
     } 
+}
+
+#delete-order-modal {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+    padding: 1.5rem;
+}
+
+#delete-order-modal-text {
+    font-weight: 400;
+    text-align: center;
+    margin-bottom: 2rem;
 }

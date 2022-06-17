@@ -60,6 +60,18 @@ td {
     background-color: #A8003B;
 }
 
+.white-text {
+    color: white;
+}
+
+.flex-col-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
 .page-hero {
     padding-top: 30px;
     padding-left: 1rem;
@@ -136,6 +148,23 @@ td {
 .green-button:hover {
     background-color: #73a577b5;
     outline: 2px solid #73a577b5;
+}
+
+.yellow-button {
+    width: 100%;
+    text-align: center;
+    background-color: #F5DA70;
+    padding: .5rem;
+    border-radius: 5px;
+    font-size: 18px;
+    font-weight: 400;
+    color: white;
+    outline: 2px solid #F5DA70;
+}
+
+.yellow-button:hover {
+    background-color: #ffea97c7;
+    outline: 2px solid #ffea97c7;
 }
 
 .form-field {

@@ -1,7 +1,7 @@
 import React from "react";
 
 function ProductButtons({ props }) {
-    const { onOrder, updateCart, removeFromCart, addToCart } = props
+    const { onOrder, updateCart, handleRemove, addToCart } = props
 
     if (onOrder) {
         return (
@@ -16,7 +16,7 @@ function ProductButtons({ props }) {
                 <div
                     id="op-remove-item"
                     className="op-button"
-                    onClick={removeFromCart}
+                    onClick={handleRemove}
                 >
                     Remove item
                 </div>

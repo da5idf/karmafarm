@@ -3,7 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 
 import "./OrderProduct.css"
 import ProductButtons from "./ProductButtons";
-import { addProductToOrder, deleteRecordFromOrder, updateRecordOnOrder } from "../../store/orders"
+import { addProductToOrder, deleteRecordFromOrder, deleteWholeOrder, updateRecordOnOrder } from "../../store/orders"
+import DeleteOrderModal from "./DeleteOrderModal";
 
 
 function OrderProduct({ product, orderId, orderRecords }) {
@@ -23,23 +24,19 @@ function OrderProduct({ product, orderId, orderRecords }) {
     const [subTotal, setSubTotal] = useState((quantity * product.pricePerPound).toFixed(2));
     const [onOrder, setOnOrder] = useState(onThisOrder);
     const [errMsg, setErrMsg] = useState("");
+    const [deleteOrderModal, setDeleteOrderModal] = useState(false);
 
     const updateQuantity = (e) => {
         setQuantity(e.target.value)
         const value = e.target.value
 
         if (!validQuantity(value)) {
-            if (value > 200 || value.toString().length > 5) {
+            if (value > 200 || value < 0) {
                 setQuantity(value.toString().slice(0, 6))
                 e.target.style.color = "red"
                 setSubTotal("Invalid")
                 return;
             }
-            // if (value.toString().length < 5) {
-            //     e.target.style.color = "red"
-            //     setSubTotal("Invalid")
-            //     return;
-            // }
         }
 
         e.target.style.color = "black"
@@ -69,14 +66,23 @@ function OrderProduct({ product, orderId, orderRecords }) {
         dispatch(updateRecordOnOrder(record.id, quantity))
     }
 
+    const handleRemove = () => {
+        if (validateRemoval()) removeFromCart();
+    }
+
     const removeFromCart = () => {
-        if (!validQuantity(quantity)) return;
         toggleModal()
         const record = orderRecords.find(record => record.productId === product.id)
         dispatch(deleteRecordFromOrder(record.id))
-        setQuantity(0);
+        setQuantity("");
         setSubTotal(0.00);
         setOnOrder(false);
+    }
+
+    const validateRemoval = () => {
+        if (orderRecords.length > 1) return true;
+
+        setDeleteOrderModal(true);
     }
 
     const validQuantity = (value) => {
@@ -98,12 +104,12 @@ function OrderProduct({ product, orderId, orderRecords }) {
             toggleErrorModal();
             return false;
         }
-        if (value.toString().length > 6) {
-            setQuantity(valStr.slice(6))
-            setErrMsg("2 decimals max");
-            toggleErrorModal();
-            return false;
-        }
+        // if (value.toString().length > 6) {
+        //     setQuantity(valStr.slice(6))
+        //     setErrMsg("2 decimals max");
+        //     toggleErrorModal();
+        //     return false;
+        // }
         return true
     }
 
@@ -127,7 +133,7 @@ function OrderProduct({ product, orderId, orderRecords }) {
         onOrder, setOnOrder,
         addToCart,
         updateCart,
-        removeFromCart
+        handleRemove
     }
 
     return (
@@ -167,6 +173,13 @@ function OrderProduct({ product, orderId, orderRecords }) {
                 <div className="confirmation-modal yellow-bg" id={`modal-error-${product.id}`}>
                     {errMsg}
                 </div>
+                {
+                    deleteOrderModal &&
+                    <DeleteOrderModal
+                        setDeleteOrderModal={setDeleteOrderModal}
+                        orderId={orderId}
+                    />
+                }
             </div>
         </>
     )
