@@ -1,4 +1,10 @@
 'use strict';
+const now = new Date().getTime()
+const day = 24 * 60 * 60 * 1000
+const oneDayAgo = new Date(now - day)
+const tenDaysAgo = new Date(now - 10 * day)
+const oneDayAhead = new Date(now + day)
+const tenDaysAhead = new Date(now + 10 * day)
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
@@ -14,17 +20,20 @@ module.exports = {
       },
       {
         restaurantId: 1,
-        submitted: true
+        submitted: true,
+        dateOfDelivery: oneDayAhead,
       },
       {
         restaurantId: 1,
         submitted: true,
         delivered: true,
+        dateOfDelivery: oneDayAgo,
       },
       {
         restaurantId: 1,
         submitted: true,
         delivered: true,
+        dateOfDelivery: tenDaysAgo,
         paid: true,
       },
       {
@@ -32,17 +41,20 @@ module.exports = {
       },
       {
         restaurantId: 2,
-        submitted: true
+        submitted: true,
+        dateOfDelivery: tenDaysAhead,
       },
       {
         restaurantId: 2,
         submitted: true,
         delivered: true,
+        dateOfDelivery: oneDayAgo,
       },
       {
         restaurantId: 2,
         submitted: true,
         delivered: true,
+        dateOfDelivery: tenDaysAgo,
         paid: true,
       },
 
