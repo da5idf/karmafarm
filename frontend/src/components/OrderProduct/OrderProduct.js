@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import "./OrderProduct.css"
 import ProductButtons from "./ProductButtons";
-import { addProductToOrder, deleteRecordFromOrder, deleteWholeOrder, updateRecordOnOrder } from "../../store/orders"
+import { addProductToOrder, deleteRecordFromOrder, updateRecordOnOrder } from "../../store/orders"
 import DeleteOrderModal from "./DeleteOrderModal";
 
 
@@ -178,6 +178,7 @@ function OrderProduct({ product, orderId, orderRecords }) {
                     <DeleteOrderModal
                         setDeleteOrderModal={setDeleteOrderModal}
                         orderId={orderId}
+                        containerClass="flex-col-center"
                     />
                 }
             </div>

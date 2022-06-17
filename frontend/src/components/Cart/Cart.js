@@ -6,6 +6,7 @@ import "./Cart.css"
 import ProductDetail from "../ProductDetail";
 import { toggleSubmission, updateDeliveryOnOrder } from "../../store/orders"
 import { getFormattedNumber, getOrderTotal } from '../../utils'
+import DeleteOrderModal from "../OrderProduct/DeleteOrderModal";
 
 function Cart({ props }) {
     const { order, setView, views } = props;
@@ -14,6 +15,7 @@ function Cart({ props }) {
     const [deliveryDay, setDeliveryDay] = useState(new Date(order.dateOfDelivery))
     const [dateError, setDateError] = useState("")
     const [nullError, setNullError] = useState("")
+    const [deleteOrderModal, setDeleteOrderModal] = useState(false);
 
     const orderId = order.id
     const dispatch = useDispatch();
@@ -84,6 +86,15 @@ function Cart({ props }) {
                         <div id="error-container">
                             <div className="error-msg">{dateError}</div>
                             <div className="error-msg">{nullError}</div>
+                            {deleteOrderModal && (
+                                <DeleteOrderModal
+                                    setDeleteOrderModal={setDeleteOrderModal}
+                                    containerClass="flex-modal"
+                                    orderId={orderId}
+                                />
+                            )
+
+                            }
                         </div>
                         <div id="cart-totals-info">
                             <div className="cart-totals-row">
@@ -126,7 +137,13 @@ function Cart({ props }) {
                             </tr>
                             {
                                 orderRecords?.map(record => {
-                                    return <ProductDetail record={record} key={record.id} />
+                                    return (
+                                        <ProductDetail
+                                            record={record}
+                                            order={order}
+                                            setDeleteOrderModal={setDeleteOrderModal}
+                                            key={record.id} />
+                                    )
                                 })
                             }
                         </tbody>

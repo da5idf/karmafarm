@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import "./ProductDetail.css"
 import { deleteRecordFromOrder, updateRecordOnOrder } from "../../store/orders"
 
-function ProductDetail({ record, order, delivered }) {
+function ProductDetail({ record, order, setDeleteOrderModal, delivered }) {
     const dispatch = useDispatch();
     const [inUpdate, setInUpdate] = useState(false);
     const [quantity, setQuantity] = useState(record.weight);
@@ -13,8 +13,19 @@ function ProductDetail({ record, order, delivered }) {
     const user = useSelector(state => state.session.user);
 
     const product = record.Product;
-
     const subTotal = (record.weight * product.pricePerPound).toFixed(2);
+
+    const handleDelete = () => {
+        if (validateDelete()) deleteThisRecord();
+    }
+
+    const validateDelete = () => {
+        console.log(order);
+        if (order.Orders_Products.length > 1) return true;
+
+        setDeleteOrderModal(true);
+        return false;
+    }
 
     const deleteThisRecord = () => {
         dispatch(deleteRecordFromOrder(record.id))
@@ -48,12 +59,15 @@ function ProductDetail({ record, order, delivered }) {
         (
             <>
                 <td id="pd-button-update"
-                    onClick={() => setInUpdate(true)}
+                    onClick={() => {
+                        setDeleteOrderModal(false);
+                        setInUpdate(true);
+                    }}
                 >
                     Update
                 </td>
                 <td id="pd-button-delete"
-                    onClick={deleteThisRecord}
+                    onClick={handleDelete}
                 >
                     Delete
                 </td>
