@@ -26,15 +26,15 @@ const hydrateFeedback = (feedback) => ({
 })
 
 
-const initialState = []
+const initialState = {}
 
 const feedbackReducer = (state = initialState, action) => {
-    let newState = [...state]
+    let newState = Object.assign({}, state)
 
     switch (action.type) {
         case GET_FEEDBACK:
             action.feedback.forEach(record => {
-                newState.push(record)
+                newState[record.id] = record;
             })
             return newState;
         default:

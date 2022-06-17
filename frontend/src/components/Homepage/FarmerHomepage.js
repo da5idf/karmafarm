@@ -16,7 +16,8 @@ function FarmerHomepage({ user }) {
     const history = useHistory();
     const restaurants = useSelector(state => state.restaurants.all);
     const allOrders = useSelector(state => state.orders.all);
-    const allFeedback = useSelector(state => state.feedback)
+    const feedbackObjs = useSelector(state => state.feedback)
+    const allFeedback = Object.values(feedbackObjs);
     const [filterId, setFilterId] = useState(undefined);
 
     useEffect(() => {
