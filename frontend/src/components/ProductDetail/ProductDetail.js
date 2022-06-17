@@ -39,7 +39,6 @@ function ProductDetail({ record, order, setDeleteOrderModal, delivered, setUpdat
     // see if you can clean up
     // same functions as in OrderProdcut & AddProductForm
     const updateQuantity = (e) => {
-        console.log("here", quantity)
         setUpdateError("")
 
         setQuantity(e.target.value)

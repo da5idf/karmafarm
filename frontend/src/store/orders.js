@@ -66,7 +66,6 @@ const restaurantOrders = orders => ({
 })
 
 export const toggleSubmission = (orderId, submitted) => async (dispatch) => {
-    console.log("in thunk", submitted)
     const response = await csrfFetch(`/api/orders/${orderId}/submit/${submitted}`, {
         method: "PUT",
     })

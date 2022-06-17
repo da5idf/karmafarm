@@ -56,7 +56,6 @@ function OrderCard({ order, farmer, setDeleteOrderId, setError }) {
     })
 
     const greenText = (order.submitted && deliveryDay < now) ? "green-text" : ""
-    console.log(greenText)
 
     const children = (
         <>

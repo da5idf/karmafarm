@@ -39,10 +39,6 @@ function OrderParent() {
         return <h1>Loading</h1>
     }
 
-    console.log("adding", adding)
-    console.log("submitted", order.submitted)
-    console.log("delivered", order.delivered)
-
     if (order.submitted || order.delivered) {
         return <SingleOrder order={order} />
     }
