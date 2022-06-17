@@ -51,28 +51,42 @@ function AddProductForm({ props }) {
         setPrice(e.target.value)
         const value = e.target.value
 
-        validQuantity(value);
+        if (!validPrice(value)) {
+            if (value > 100 || value < 0) {
+                setPrice(value.toString().slice(0, 6))
+                e.target.style.color = "red"
+                return;
+            }
+        }
+
+        e.target.style.color = "black"
+        validPrice(value);
     }
 
-    const validQuantity = (value) => {
+    const validPrice = (value) => {
         let newErrors = {};
         setErrors({});
+        let valid = true;
+
         if (!value || value <= 0) {
-            newErrors.ppp = "Quantity must be > 0"
+            newErrors.ppp = "ppp > 0"
+            valid = false;
         }
-        if (value > 200) {
-            newErrors.ppp = "200# max on order"
+        if (value > 100) {
+            newErrors.ppp = "max $100/p"
+            valid = false;
         }
         const valStr = value.toString();
         const decimals = valStr.split(".")[1];
         if (decimals && decimals.length > 2) {
             setPrice(valStr.slice(0, valStr.length - 1))
             newErrors.ppp = "2 decimals max";
+            valid = false;
         }
 
         setErrors(newErrors)
 
-        return true
+        return valid
     }
 
     const validateSubmit = () => {
@@ -95,7 +109,7 @@ function AddProductForm({ props }) {
             newErrors.ppp = "ppp > 0";
             valid = false;
         }
-        if (pricePerPound >= 100) {
+        if (pricePerPound > 100) {
             newErrors.ppp = "ppp < 100"
             valid = false;
         }
