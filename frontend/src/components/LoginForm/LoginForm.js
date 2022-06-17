@@ -116,6 +116,7 @@ function LoginForm() {
                     <button
                         id="demo-restaurant-login"
                         onClick={restaurantLogin}
+                        type="button"
                     >
                         Demo Restaurant
                     </button>
