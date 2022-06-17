@@ -104,12 +104,7 @@ function OrderProduct({ product, orderId, orderRecords }) {
             toggleErrorModal();
             return false;
         }
-        // if (value.toString().length > 6) {
-        //     setQuantity(valStr.slice(6))
-        //     setErrMsg("2 decimals max");
-        //     toggleErrorModal();
-        //     return false;
-        // }
+
         return true
     }
 

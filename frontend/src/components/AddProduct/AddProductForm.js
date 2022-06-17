@@ -47,6 +47,34 @@ function AddProductForm({ props }) {
         }
     }
 
+    const updatePrice = (e) => {
+        setPrice(e.target.value)
+        const value = e.target.value
+
+        validQuantity(value);
+    }
+
+    const validQuantity = (value) => {
+        let newErrors = {};
+        setErrors({});
+        if (!value || value <= 0) {
+            newErrors.ppp = "Quantity must be > 0"
+        }
+        if (value > 200) {
+            newErrors.ppp = "200# max on order"
+        }
+        const valStr = value.toString();
+        const decimals = valStr.split(".")[1];
+        if (decimals && decimals.length > 2) {
+            setPrice(valStr.slice(0, valStr.length - 1))
+            newErrors.ppp = "2 decimals max";
+        }
+
+        setErrors(newErrors)
+
+        return true
+    }
+
     const validateSubmit = () => {
         setErrors({});
         const newErrors = Object.assign({}, errors)
@@ -75,10 +103,6 @@ function AddProductForm({ props }) {
         if (decimals && decimals.length > 2) {
             newErrors.ppp = "Max 2 decimal places"
         }
-        if (type.length > 15) {
-            newErrors.type = "Max 15 characters";
-            valid = false;
-        }
         if (!inEdit && !imgFile) {
             newErrors.img = "Please add an image"
             valid = false;
@@ -100,6 +124,8 @@ function AddProductForm({ props }) {
 
     const updateName = (e) => {
         let newErrors = {};
+        setErrors({});
+
         if (e.target.value.length <= 25) {
             setName(e.target.value);
             return;
@@ -110,6 +136,8 @@ function AddProductForm({ props }) {
 
     const updateDescription = (e) => {
         let newErrors = {};
+        setErrors({});
+
         if (e.target.value.length <= 100) {
             setDescription(e.target.value);
             return
@@ -158,7 +186,7 @@ function AddProductForm({ props }) {
                         type="number"
                         placeholder="Please enter in $/p"
                         pattern="^[1-9]{1,2}[0-9]?\.?[0-9]{1,2}$"
-                        onChange={(e) => setPrice(e.target.value)}
+                        onChange={updatePrice}
                     />
                 </div>
                 <div className="newform-field">
@@ -177,16 +205,28 @@ function AddProductForm({ props }) {
             </div>
             <div className="double-form-field">
                 <div className="newform-field">
-                    {errors.type && <div className="new-edit-error" id="type-error">{errors.type}</div>}
                     <label>Type</label>
-                    <input
+                    <select
                         id="new-type"
                         className="form-input"
                         type="text"
                         value={type}
                         placeholder="Please enter the product type"
                         onChange={(e) => setType(e.target.value)}
-                    />
+                    >
+                        <option value="">Please select a type</option>
+                        <option value="Tomato">Tomato</option>
+                        <option value="Collard">Collard</option>
+                        <option value="Potato">Potato</option>
+                        <option value="Mushroom">Mushroom</option>
+                        <option value="Turnip">Turnip</option>
+                        <option value="Radish">Radish</option>
+                        <option value="Onion">Onion</option>
+                        <option value="Garlic">Garlic</option>
+                        <option value="Cucumber">Cucumber</option>
+                        <option value="Pea">Pea</option>
+                        <option value="Other">Other</option>
+                    </select>
                 </div>
                 <div className="newform-field" id="img-form-field">
                     <label id="new-img-title">Product Image</label>
