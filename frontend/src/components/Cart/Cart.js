@@ -12,7 +12,8 @@ function Cart({ props }) {
     localStorage.setItem("orderView", views.cartView)
 
     const [deliveryDay, setDeliveryDay] = useState(new Date(order.dateOfDelivery))
-    const [error, setError] = useState("")
+    const [dateError, setDateError] = useState("")
+    const [nullError, setNullError] = useState("")
 
     const orderId = order.id
     const dispatch = useDispatch();
@@ -27,26 +28,36 @@ function Cart({ props }) {
     }
 
     const submitOrder = () => {
-        if (validateDeliveryDay()) {
-            dispatch(toggleSubmission(orderId, true));
-            dispatch(updateDeliveryOnOrder(orderId, deliveryDay))
-            localStorage.setItem("orderView", views.orderView)
-            setView(views.orderView)
+        const nullOrder = validateNullOrder();
+        const validDelivery = validateDeliveryDay();
+
+        if (!nullOrder || !validDelivery) return
+
+        dispatch(toggleSubmission(orderId, true));
+        dispatch(updateDeliveryOnOrder(orderId, deliveryDay))
+        localStorage.setItem("orderView", views.orderView)
+        setView(views.orderView)
+    }
+
+    const validateNullOrder = () => {
+        setNullError("")
+        if (orderRecords.length === 0) {
+            setNullError("Orders must have at least 1 item")
+            return false
         }
+        return true;
     }
 
     const validateDeliveryDay = () => {
-        setError("");
+        setDateError("");
         const today = new Date();
         const nextWeek = new Date(today.getTime() + 7 * 24 * 60 * 60 * 1000)
 
         if (deliveryDay <= today || deliveryDay > nextWeek) {
-            setError("Please pick a day in the future, within one week")
+            setDateError("Please pick a day in the future, within one week")
             return false;
         }
-        else {
-            return true;
-        }
+        return true;
     }
 
     return (
@@ -71,7 +82,8 @@ function Cart({ props }) {
                     </div>
                     <div id="top-wrapper-right">
                         <div id="error-container">
-                            <div id="error-msg">{error}</div>
+                            <div className="error-msg">{dateError}</div>
+                            <div className="error-msg">{nullError}</div>
                         </div>
                         <div id="cart-totals-info">
                             <div className="cart-totals-row">

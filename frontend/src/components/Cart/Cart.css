@@ -18,10 +18,14 @@
     margin-bottom: 2.5rem;
 }
 
-#error-msg {
+.error-msg {
     font-size: 20px;
     font-weight: 400;
     color: #A8003B;
+}
+
+.error-msg:not(:last-child) {
+    margin-bottom: .5rem;
 }
 
 #dd-title {
