@@ -36,6 +36,7 @@
     flex-direction: column;
     justify-content: space-between;
     width: 100%;
+    max-width: 315px;
     margin-left: .5rem;
     margin-right: .5rem;
     margin-bottom: .5rem;
@@ -71,7 +72,7 @@
 
 .delete-product-wrapper {
     gap: 1rem;
-    background-color: #cd0047;
+    background-color: #A8003B;
     animation-name: appear_from_right;
     animation-duration: .3s;
     position: absolute;

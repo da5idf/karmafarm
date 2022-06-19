@@ -135,6 +135,10 @@ abbr {
     background-color: #e2e2e2;
 }
 
+#delete-order-modal > .flex-col-center {
+    gap: 1rem;
+}
+
 #delete-order-modal.flex-modal {
     display: flex;
     width: 50%;

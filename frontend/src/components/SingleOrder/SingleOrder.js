@@ -30,7 +30,10 @@ function SingleOrder({ order }) {
 
     const twoWeeks = 14 * 24 * 60 * 60 * 1000;
     const deliveryDay = new Date(order.dateOfDelivery).getTime();
-    const dueDate = new Date(deliveryDay + twoWeeks).toDateString();
+
+    const invoiceTitle = order.submitted ? "INVOICE" : "INVOICE -- NOT SUBMITTED";
+    const invoiceDate = order.dateOfDelivery ? new Date(order.dateOfDelivery).toDateString() : "INCOMPLETE ORDER"
+    const dueDate = order.dateOfDelivery ? new Date(deliveryDay + twoWeeks).toDateString() : "INCOMPLETE ORDER"
 
     return (
         <div className="page-hero">
@@ -47,7 +50,7 @@ function SingleOrder({ order }) {
                     </button>
                 )}
                 <div id="invoice">
-                    <div id="invoice-title" className="page-title">INVOICE</div>
+                    <div id="invoice-title" className="page-title">{invoiceTitle}</div>
                     <div id="invoice-karma-farm-info">
                         <div className="page-subtitle">Karma Farm</div>
                         <div className="invoice-subtitle">16345 Old York Rd</div>
@@ -74,7 +77,7 @@ function SingleOrder({ order }) {
                             </div>
                             <div className="space-between">
                                 <div className="page-subtitle invoice-banner-title">Invoice Date</div>
-                                <div>{new Date(order.dateOfDelivery).toDateString()}</div>
+                                <div>{invoiceDate}</div>
                             </div>
                             <div className="space-between">
                                 <div className="page-subtitle invoice-banner-title">Due Date</div>
@@ -96,8 +99,35 @@ function SingleOrder({ order }) {
                                     return <InvoiceItem record={record} idx={idx} order={order} delivered={delivered} key={record.id} />
                                 })
                             }
+                            <tr>
+                                <td />
+                            </tr>
+                            <tr>
+                                <td />
+                                <td />
+                                <th id="invoice-total-title" >Total</th>
+                                <td id="invoice-total-number">{getOrderTotal(order)}</td>
+                            </tr>
                         </tbody>
                     </table>
+                    <div id="signatures">
+                        <pre>Received By     ___________________________</pre>
+                    </div>
+                    <div id="invoice-ty-container">
+                        <div id="invoice-thank-you">Thank you!</div>
+                        <div id="invoice-thank-you-text">
+                            If anything is wrong with your order, please submit feedback and
+                            we will do everything we can to make it right.
+                        </div>
+                    </div>
+                    <div id="karmafarm-footer">
+                        <div id="kf-footer-name">
+                            KarmaFarm
+                        </div>
+                        <div>
+                            Good Karma Great Produce
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

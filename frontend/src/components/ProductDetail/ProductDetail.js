@@ -78,6 +78,12 @@ function ProductDetail({ record, order, setDeleteOrderModal, delivered, setUpdat
         return true
     }
 
+    const handleCancel = () => {
+        setUpdateError("");
+        setQuantity(record.weight);
+        setInUpdate(false);
+    }
+
     const buttons = inUpdate ?
         (
             <>
@@ -87,10 +93,7 @@ function ProductDetail({ record, order, setDeleteOrderModal, delivered, setUpdat
                     Confirm
                 </td>
                 <td id="pd-update-cancel"
-                    onClick={() => {
-                        setUpdateError("");
-                        setInUpdate(false);
-                    }}
+                    onClick={handleCancel}
                 >
                     Cancel
                 </td>
