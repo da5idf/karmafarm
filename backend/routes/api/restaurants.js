@@ -12,9 +12,15 @@ const validateSignup = [
     check('name')
         .isLength({ min: 3 })
         .withMessage('Please provide a name with at least 3 characters.'),
+    check('name')
+        .isLength({ max: 20 })
+        .withMessage('Please provide a name with at most 20 characters.'),
     check('address')
         .isLength({ min: 6 })
         .withMessage('Address must be 6 characters or more.'),
+    check('address')
+        .isLength({ max: 6 })
+        .withMessage('Address must be less than 100 characters.'),
     check('restaurantNumber')
         .isLength(10)
         .withMessage('Please enter a 10-digit phone number'),

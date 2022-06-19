@@ -10,15 +10,24 @@ const router = express.Router();
 
 // Validate sign up
 const validateSignup = [
-    check('email')
-        .isEmail()
-        .withMessage('Please provide a valid email.'),
     check('name')
         .isLength({ min: 4 })
         .withMessage('Please provide a name with at least 4 characters.'),
+    check('name')
+        .isLength({ max: 20 })
+        .withMessage('Please provide a name with at most 20 characters.'),
+    check('email')
+        .isEmail()
+        .withMessage('Please provide a valid email.'),
+    check('email')
+        .isLength({ max: 20 })
+        .withMessage('Please provide an email with at most 50 characters.'),
     check('password')
         .isLength({ min: 6 })
         .withMessage('Password must be 6 characters or more.'),
+    check('password')
+        .isLength({ max: 63 })
+        .withMessage('Password must be less than 64 characters.'),
     check('phoneNumber')
         .isLength(10)
         .withMessage('Please enter a 10-digit phone number'),
