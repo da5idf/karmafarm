@@ -32,8 +32,8 @@ function SingleOrder({ order }) {
     const deliveryDay = new Date(order.dateOfDelivery).getTime();
 
     const invoiceTitle = order.submitted ? "INVOICE" : "INVOICE -- NOT SUBMITTED";
-    const invoiceDate = order.dateOfDelivery ? new Date(order.dateOfDelivery).toDateString() : "INCOMPLETE ORDER"
-    const dueDate = order.dateOfDelivery ? new Date(deliveryDay + twoWeeks).toDateString() : "INCOMPLETE ORDER"
+    const invoiceDate = order.submitted ? new Date(order.dateOfDelivery).toDateString() : "INCOMPLETE ORDER"
+    const dueDate = order.submitted ? new Date(deliveryDay + twoWeeks).toDateString() : "INCOMPLETE ORDER"
 
     return (
         <div className="page-hero">
