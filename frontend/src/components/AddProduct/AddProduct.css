@@ -8,14 +8,9 @@
     height: 70vh;
     overflow-y: scroll;
     margin-top: 1rem;
+    overflow-x: hidden;
 }
 
-.flex-col-center {
-    align-items: flex-start;
-    gap: 0;
-}
-
-.flex-col-center > div:not(:last-child) {
-    margin-top: 0;
-    padding-bottom: .25rem;
+.flex-col-center > .page-subtitle {
+    align-self: flex-start;
 }

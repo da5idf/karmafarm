@@ -70,7 +70,11 @@ td {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 1rem;
+}
+
+.flex-col-center > div:not(:last-child) {
+    margin-top: 0;
+    padding-bottom: .25rem;
 }
 
 .page-hero {

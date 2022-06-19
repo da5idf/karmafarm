@@ -33,6 +33,7 @@ function FeedbackForm({ user, orders }) {
         toggleConfirm();
         setText("");
         setOrderId("");
+        setProductId("")
     }
 
     const validateFeedback = () => {

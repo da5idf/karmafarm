@@ -1,5 +1,6 @@
 #invoice {
     margin-top: 2rem;
+    margin-bottom: 2rem;
     padding: 2rem;
     border: 1px solid black;
     border-radius: 2px;
@@ -67,4 +68,52 @@
 .invoice-table-header {
     font-size: 25px;
     font-weight: 400;
+}
+
+#invoice-total-title {
+    padding-bottom: 0;
+    padding-right: 50px;
+    font-size: 30px;
+    text-align: end;  
+}
+
+#invoice-total-number {
+    font-size: 25px;
+}
+
+#signatures {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+}
+
+#signatures > pre {
+    font-size: 20px;
+}
+
+#invoice-thank-you {
+    font-family: Arimo;
+    font-size: 40px;
+}
+
+#invoice-thank-you-text {
+    width: 42%;
+}
+
+#karmafarm-footer {
+    margin-top: 1rem;
+    display: flex;
+    gap: 1rem;
+    width: 100%;
+    justify-content: end;
+}
+
+#karmafarm-footer > div {
+    font-size: 30px;
+}
+
+#kf-footer-name {
+    font-family: Arimo;
 }

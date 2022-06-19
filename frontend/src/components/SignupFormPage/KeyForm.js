@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import { csrfFetch } from '../../store/csrf';
 
 
 function KeyForm({ props }) {
     const { setStep, handleCancel, setRestaurant, back, next } = props
+    const history = useHistory();
 
     const [key, setKey] = useState("");
     const [error, setError] = useState("");
@@ -66,6 +68,12 @@ function KeyForm({ props }) {
                             Next
                         </button>
                     </div>
+                </div>
+                <div
+                    className="signup-redirect"
+                    onClick={() => history.push("/login")}
+                >
+                    Already have an account?
                 </div>
             </form>
         </>
