@@ -97,12 +97,6 @@ function NewRestaurant({ props }) {
                     </div>
                 </div>
             </form>
-            <div
-                className="signup-redirect"
-                onClick={() => history.push("/")}
-            >
-                Go straight to dashboard
-            </div>
         </>
     )
 }
