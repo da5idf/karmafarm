@@ -71,7 +71,7 @@
 
 #feedback-container {
     max-height: 500px;
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 
 #order-list-title_modal {
@@ -83,7 +83,7 @@
 #hp-orders-container {
     width: 100%;
     max-height: 500px;
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 
 #hp-orders-table {
