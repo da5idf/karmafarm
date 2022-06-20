@@ -8,6 +8,7 @@
     padding-bottom: .75rem;
     gap: .25rem;
     border-radius: 5px;
+    overflow-x: hidden;
 }
 
 #feedback-form-title {
