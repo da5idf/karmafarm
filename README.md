@@ -20,7 +20,8 @@ KarmaFarm is built on React/Redux, HTML, and CSS for its frontend, Express and S
   <img  src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg"  height=40/>
 </div>
 
-
+## Live Link
+https://karmafarm-app.herokuapp.com/
 
 
 # Getting Started
