@@ -23,11 +23,10 @@ function Homepage({ user }) {
         return <div>Loading</div>
     }
 
-    if (!restaurant.id) {
-        history.push("/restaurant/signup")
-    }
-    else if (user.farmer) {
+    if (user.farmer) {
         return <FarmerHomepage user={user} />
+    } else if (!restaurant.id) {
+        history.push("/restaurant/signup")
     } else {
         return <RestaurantHomepage user={user} />
     }
