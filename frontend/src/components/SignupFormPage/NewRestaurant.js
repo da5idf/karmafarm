@@ -3,8 +3,8 @@ import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { csrfFetch } from "../../store/csrf";
 
-function NewRestaurant({ props }) {
-    const { handleCancel } = props;
+function NewRestaurant() {
+
     const history = useHistory();
     const user = useSelector(state => state.session.user);
 
@@ -79,23 +79,14 @@ function NewRestaurant({ props }) {
                     required
                 />
                 <div className="fields-required">All fields are required</div>
-                <div className='signup-button-container'>
+                <div id="new-rest-buttons" className='signup-button-container'>
                     <button
-                        className="bb-wt signup-cancel-button"
-                        type="button"
-                        onClick={handleCancel}
+                        type="submit"
+                        id="restaurant-next-button"
+                        className="bb-wt submit-button"
                     >
-                        Cancel
+                        Next
                     </button>
-                    <div id="signup-buttons-right">
-                        <button
-                            type="submit"
-                            id="key-next-button"
-                            className="bb-wt submit-button"
-                        >
-                            Next
-                        </button>
-                    </div>
                 </div>
             </form>
         </>

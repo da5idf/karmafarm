@@ -20,8 +20,8 @@ const validateSignup = [
         .isEmail()
         .withMessage('Please provide a valid email.'),
     check('email')
-        .isLength({ max: 20 })
-        .withMessage('Please provide an email with at most 50 characters.'),
+        .isLength({ max: 100 })
+        .withMessage('Please provide an email with at most 100 characters.'),
     check('password')
         .isLength({ min: 6 })
         .withMessage('Password must be 6 characters or more.'),
