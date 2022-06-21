@@ -18,7 +18,7 @@ function NewRestaurant({ props }) {
         const restaurantNumber = number.split("-").join("");
 
         // setErrors("");
-        csrfFetch('api/restaurants', {
+        csrfFetch('/api/restaurants', {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
@@ -37,8 +37,9 @@ function NewRestaurant({ props }) {
                         userId: user.id,
                         restaurantId: newRestaurant.id
                     })
+                }).then(() => {
+                    history.push("/")
                 })
-                history.push("/")
             })
             .catch(async (res) => {
                 const data = await res.json();
