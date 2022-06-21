@@ -60,7 +60,12 @@ router.get('/:userId/restaurants',
             ]
         })
 
-        return res.send(user.Members[0].Restaurant)
+        if (user.Members.length) {
+            return res.send(user.Members[0].Restaurant)
+        } else {
+            return (res.send({ response: false }))
+        }
+
     })
 )
 

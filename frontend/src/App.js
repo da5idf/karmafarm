@@ -11,6 +11,8 @@ import OrderParent from "./components/OrderParent/OrderParent";
 import AddProduct from "./components/AddProduct";
 import About from "./components/About/About";
 import NotFound from "./components/NotFound";
+import ProtectedRoute from "./components/ProtectedRoute";
+import RestaurantSignUp from "./components/SignupFormPage/RestaurantSignUp";
 
 function App() {
   const dispatch = useDispatch();
@@ -35,18 +37,21 @@ function App() {
             <Route path="/signup">
               <SignupFormPage />
             </Route>
-            <Route exact path="/orders/:orderId">
+            <ProtectedRoute path="/restaurant/signup">
+              <RestaurantSignUp user={user} />
+            </ProtectedRoute>
+            <ProtectedRoute exact path="/orders/:orderId">
               <Navigation />
               <OrderParent />
-            </Route>
-            <Route exact path="/products">
+            </ProtectedRoute>
+            <ProtectedRoute exact path="/products">
               <Navigation />
               <AddProduct user={user} />
-            </Route>
-            <Route exact path="/about">
+            </ProtectedRoute>
+            <ProtectedRoute exact path="/about">
               <Navigation />
               <About user={user} />
-            </Route>
+            </ProtectedRoute>
             <Route >
               <Navigation />
               <NotFound />

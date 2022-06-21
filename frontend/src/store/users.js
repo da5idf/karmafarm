@@ -3,12 +3,17 @@ import { csrfFetch } from "./csrf"
 const GET_USER_RESTAURANTS = "user/RESTAURANT";
 
 export const getUserRestaurants = (userId) => async (dispatch) => {
-    const response = await csrfFetch(`api/users/${userId}/restaurants`)
+    const response = await csrfFetch(`/api/users/${userId}/restaurants`)
+        .catch((e) => {
 
-    const restaurant = await response.json()
+        });
 
-    dispatch(hydrateUserRestaurants(restaurant))
-    return restaurant;
+    if (response.ok) {
+        const restaurant = await response.json()
+        dispatch(hydrateUserRestaurants(restaurant))
+        return restaurant;
+    }
+
 }
 
 const hydrateUserRestaurants = (restaurant) => ({

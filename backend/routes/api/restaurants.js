@@ -19,7 +19,7 @@ const validateSignup = [
         .isLength({ min: 6 })
         .withMessage('Address must be 6 characters or more.'),
     check('address')
-        .isLength({ max: 6 })
+        .isLength({ max: 100 })
         .withMessage('Address must be less than 100 characters.'),
     check('restaurantNumber')
         .isLength(10)

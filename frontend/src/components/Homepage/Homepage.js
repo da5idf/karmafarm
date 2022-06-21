@@ -1,11 +1,32 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 
 import "./Homepage.css"
 import FarmerHomepage from "./FarmerHomepage";
 import RestaurantHomepage from "./RestaurantHomepage";
+import { getUserRestaurants } from "../../store/users";
+import { useState } from "react";
 
 function Homepage({ user }) {
-    if (user.farmer) {
+    const dispatch = useDispatch();
+    const restaurant = useSelector(state => state.users.restaurant);
+    const history = useHistory();
+
+    const [isLoaded, setIsLoaded] = useState(false);
+
+    useEffect(() => {
+        dispatch(getUserRestaurants(user.id)).then(() => setIsLoaded(true))
+    }, [dispatch, user.id])
+
+    if (!isLoaded) {
+        return <div>Loading</div>
+    }
+
+    if (!restaurant.id) {
+        history.push("/restaurant/signup")
+    }
+    else if (user.farmer) {
         return <FarmerHomepage user={user} />
     } else {
         return <RestaurantHomepage user={user} />
