@@ -47,12 +47,9 @@ function SignUpForm() {
             view = <NewUser props={props} />
             break;
         case newRestaurant:
-            props = {
-                handleCancel
-            }
             title = "Excellent! Your personal account has been created"
             subtitle = "Now, please fill out your restaurant info"
-            view = <NewRestaurant props={props} />
+            view = <NewRestaurant />
             break;
         case key:
             props = {
