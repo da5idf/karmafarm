@@ -1,0 +1,27 @@
+#invoice-toggle-row {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-end;
+}
+
+#invoice-subtitle {
+    font-size: 20px;
+    font-weight: 400;
+    width: 258px;
+}
+
+.toggle-switch + #invoice-toggle::before {
+    background-color: #A8003B;
+}
+
+.toggle-switch + #invoice-toggle::after {
+    background-color: white;
+}
+
+.toggle-switch:checked + #invoice-toggle::before {
+    background-color: #73A577;
+}
+
+.toggle-switch:checked + #invoice-toggle::after {
+    left: 28px;
+}

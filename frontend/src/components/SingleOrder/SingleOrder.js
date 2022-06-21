@@ -5,6 +5,7 @@ import "./SingleOrder.css"
 import { toggleSubmission } from "../../store/orders";
 import { getFormattedNumber, getOrderTotal } from "../../utils";
 import InvoiceItem from "./InvoiceItem";
+import TogglePaid from "./TogglePaid";
 
 function SingleOrder({ order }) {
     const dispatch = useDispatch();
@@ -49,6 +50,11 @@ function SingleOrder({ order }) {
                         Reopen Order
                     </button>
                 )}
+                {
+                    user.farmer && delivered && (
+                        <TogglePaid order={order} />
+                    )
+                }
                 <div id="invoice">
                     <div id="invoice-title" className="page-title">{invoiceTitle}</div>
                     <div id="invoice-karma-farm-info">
