@@ -1,25 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 
 import "./Search.css"
 
 function Search({ query, setter }) {
-    // const [query, setQuery] = useState("");
-
-    // const updateQuery = (e) => {
-    //     setQuery(e.target.value);
-    //     filterResults(e);
-    // }
-
-    // const filterResults = (e) => {
-    //     const filtered = items.filter(item => {
-    //         return item.name.toLowerCase().includes(e.target.value.toLowerCase())
-    //     })
-    //     setter(filtered)
-    // }
 
     const clearSearch = () => {
-        // setQuery("");
-        // setter(items);
+
         setter("");
     }
 

@@ -1,6 +1,6 @@
 import { csrfFetch } from "./csrf"
 
-const NEW_FEEDBACK = "feedback/NEW";
+// const NEW_FEEDBACK = "feedback/NEW";
 const GET_FEEDBACK = "feedback/GET";
 
 export const createFeedback = (feedback) => async (dispatch) => {
@@ -10,7 +10,8 @@ export const createFeedback = (feedback) => async (dispatch) => {
         body: JSON.stringify({ feedback })
     })
 
-    const newFeedback = await res.json();
+    // const newFeedback = await res.json();
+    return res
 }
 
 export const getFeedback = () => async (dispatch) => {

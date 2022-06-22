@@ -22,7 +22,7 @@ function NotFound() {
                     </button>
                 </div>
                 <div id="nf-img-container">
-                    <img id="nf-img" src={require("../../images/notFoundBanner.jpeg")} />
+                    <img id="nf-img" src={require("../../images/notFoundBanner.jpeg")} alt="" />
 
                 </div>
 

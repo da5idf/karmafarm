@@ -68,7 +68,7 @@ export const signupUser = ({ name, email, phoneNumber, admin, farmer, password }
 }
 
 export const logout = () => async (dispatch) => {
-    const response = await csrfFetch(
+    await csrfFetch(
         '/api/session',
         {
             method: 'DELETE',

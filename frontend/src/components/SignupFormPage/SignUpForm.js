@@ -69,6 +69,7 @@ function SignUpForm() {
             title = `You are joining ${restaurant?.name}'s team`
             subtitle = "Please enter your information";
             view = <NewUser props={props} />
+            break;
         default:
             <Redirect to="/" />
     }

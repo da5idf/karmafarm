@@ -1,14 +1,28 @@
+#pdf-button {
+    margin-top: 1rem;
+    width: 200px;
+}
+
 #invoice {
-    margin-top: 2rem;
+    margin-top: 1rem;
     margin-bottom: 2rem;
     padding: 2rem;
     border: 1px solid black;
     border-radius: 2px;
+    width: 815px;
+    min-height: 1200px;
+}
+
+#inner-invoice {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 #invoice-title {
-    font-size: 40px;
-    margin-bottom: 3rem;
+    font-size: 25px;
+    margin-bottom: 1.5rem;
 }
 
 #invoice-karma-farm-info {
@@ -17,7 +31,7 @@
 }
 
 .invoice-subtitle {
-    font-size: 18px;
+    font-size: 15px;
 }
 
 .invoice-subtitle:not(:last-child) {
@@ -32,6 +46,7 @@
 }
 
 .invoice-banner-title {
+    font-size: 20px;
     padding-bottom: .25rem;
 }
 
@@ -39,7 +54,7 @@
     max-width: 20%;
 }
 
-.invoice-rest-name {
+.bold {
     font-weight: 400;
 }
 
@@ -60,25 +75,27 @@
     width: 100%;
 }
 
-#invoice-table-headers {
-    border-top: 3px solid #73A577;
-    border-bottom: 3px solid #73A577;
+#invoice-table td {
+    padding: 0;
+    height: 20px;
+    font-size: 15px;
 }
 
 .invoice-table-header {
-    font-size: 25px;
+    font-size: 20px;
     font-weight: 400;
 }
 
 #invoice-total-title {
     padding-bottom: 0;
     padding-right: 50px;
-    font-size: 30px;
+    font-size: 25px;
     text-align: end;  
 }
 
-#invoice-total-number {
-    font-size: 25px;
+td#invoice-total-number {
+    font-size: 20px;
+    text-justify: end;
 }
 
 #signatures {
@@ -95,10 +112,11 @@
 
 #invoice-thank-you {
     font-family: Arimo;
-    font-size: 40px;
+    font-size: 25px;
 }
 
 #invoice-thank-you-text {
+    font-size: 15px;
     width: 42%;
 }
 
@@ -107,11 +125,11 @@
     display: flex;
     gap: 1rem;
     width: 100%;
-    justify-content: end;
+    justify-content: flex-end;
 }
 
 #karmafarm-footer > div {
-    font-size: 30px;
+    font-size: 25px;
 }
 
 #kf-footer-name {

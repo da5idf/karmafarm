@@ -311,6 +311,7 @@ table {
     display: flex;
     align-items: center;
     position: relative;
+    cursor: pointer;
 }
 
 .toggle-switch + label::before {
