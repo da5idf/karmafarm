@@ -1,13 +1,16 @@
-#invoice-toggle-row {
+.invoice-toggle-row {
     display: flex;
     gap: 1rem;
     align-items: flex-end;
 }
 
-#invoice-subtitle {
+.invoice-subtitle {
     font-size: 20px;
     font-weight: 400;
-    width: 258px;
+}
+
+.wide-toggle {
+    width: 300px;
 }
 
 .toggle-switch + #invoice-toggle::before {

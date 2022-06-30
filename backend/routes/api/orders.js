@@ -138,6 +138,27 @@ router.put(
 )
 
 router.put(
+    '/:orderId/delivery/:delivered',
+    asyncHandler(async (req, res, next) => {
+        const { orderId, delivered } = req.params;
+        const order = await Order.findByPk(orderId, {
+            include: [
+                { model: Restaurant },
+                {
+                    model: Orders_Products,
+                    include: [Product, User]
+                }
+            ]
+        })
+
+        order.delivered = delivered;
+        await order.save();
+
+        return res.send(order)
+    })
+)
+
+router.put(
     '/:orderId/reopen',
     asyncHandler(async (req, res, next) => {
         const { orderId } = req.params;

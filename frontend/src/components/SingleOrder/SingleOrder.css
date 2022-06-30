@@ -1,3 +1,9 @@
+#farmer-toggles {
+    display: flex;
+    justify-content: space-between;
+    width: 815px;
+}
+
 #pdf-button {
     margin-top: 1rem;
     width: 200px;
