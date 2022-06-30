@@ -144,6 +144,21 @@ export const togglePaymentOnOrder = (orderId, paid) => async (dispatch) => {
     }
 }
 
+export const reopenOrder = (orderId, submitted, dateOfDelivery) => async (dispatch) => {
+    const res = await csrfFetch(`/api/orders/${orderId}/reopen`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+            submitted,
+            dateOfDelivery
+        })
+    })
+
+    const order = await res.json();
+
+    dispatch(updateOrder(order))
+}
+
 const updateOrder = (order) => ({
     type: UPDATE_ORDER,
     order
