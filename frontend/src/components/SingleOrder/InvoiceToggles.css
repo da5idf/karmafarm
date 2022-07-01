@@ -1,16 +1,26 @@
+.invoice-toggle-container {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: .5rem;
+}
+
+.invoice-toggle-container > .page-subtitle {
+    padding-bottom: 0;
+    width: 300px;
+}
+
 .invoice-toggle-row {
     display: flex;
     gap: 1rem;
     align-items: flex-end;
+    justify-content: space-between;
 }
 
-.invoice-subtitle {
+.invoice-toggle-container .invoice-subtitle {
     font-size: 20px;
     font-weight: 400;
-}
-
-.wide-toggle {
-    width: 300px;
+    width: 310px;
 }
 
 .toggle-switch + #invoice-toggle::before {

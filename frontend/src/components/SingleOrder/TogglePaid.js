@@ -21,8 +21,8 @@ function TogglePaid({ order }) {
     const subTitleClass = paid ? "green-text" : "red-text"
 
     return (
-        <div className="payment-toggle">
-            <div className="page-subtitle">Toggle payment status below</div>
+        <div className="invoice-toggle-container">
+            <div className="page-subtitle">Toggle payment status:</div>
             <div className="invoice-toggle-row">
                 <div className={`invoice-subtitle ${subTitleClass}`}>{subtitle}</div>
                 <input

@@ -1,5 +1,6 @@
 #farmer-toggles {
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
     width: 815px;
 }
@@ -40,7 +41,7 @@
     font-size: 15px;
 }
 
-.invoice-subtitle:not(:last-child) {
+#invoice .invoice-subtitle:not(:last-child) {
     margin-bottom: .25rem
 }
 

@@ -21,10 +21,10 @@ function ToggleDelivered({ order }) {
     const subTitleClass = delivered ? "green-text" : "red-text"
 
     return (
-        <div className="delivery-toggle">
-            <div className="page-subtitle">Toggle delivery status below.</div>
+        <div className="invoice-toggle-container">
+            <div className="page-subtitle">Toggle delivery status:</div>
             <div className="invoice-toggle-row">
-                <div className={`invoice-subtitle ${subTitleClass} wide-toggle`}>{subtitle}</div>
+                <div className={`invoice-subtitle ${subTitleClass}`}>{subtitle}</div>
                 <input
                     id="invoice-delivered"
                     className="toggle-switch"
