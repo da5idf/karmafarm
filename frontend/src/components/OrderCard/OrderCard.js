@@ -55,7 +55,7 @@ function OrderCard({ order, farmer, setDeleteOrderId, setError }) {
         cancelOnMovement: false,
     })
 
-    const greenText = (order.submitted && deliveryDay < now) ? "green-text" : ""
+    const greenText = (order.submitted && order.delivered) ? "green-text" : ""
 
     const children = (
         <>

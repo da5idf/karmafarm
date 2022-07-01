@@ -70,7 +70,9 @@ function FeedbackForm({ user, orders }) {
 
     const orderSelected = (e) => {
         const id = e.target.value;
+        setOrderId(id);
 
+        // if an order is selected (not placeholder)
         if (id) {
             const orderProducts = orders.find(order => {
                 return order.id.toString() === id
@@ -83,7 +85,6 @@ function FeedbackForm({ user, orders }) {
             setProducts(temp);
         }
 
-        setOrderId(id);
     }
 
     const updateText = (e) => {
@@ -119,10 +120,7 @@ function FeedbackForm({ user, orders }) {
                     <option value="">What order is this for?</option>
                     {
                         orders.filter(order => {
-                            const now = new Date().getTime();
-                            if (!order.dateOfDelivery) return false;
-                            const deliveryDay = new Date(order.dateOfDelivery).getTime();
-                            return deliveryDay < now;
+                            return order.delivered
                         }).map(order => {
                             return (
                                 <option

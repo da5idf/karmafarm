@@ -4,10 +4,11 @@ import { jsPDF } from "jspdf";
 import html2canvas from "html2canvas";
 
 import "./SingleOrder.css"
-import { toggleSubmission } from "../../store/orders";
+import { reopenOrder, toggleSubmission, updateDeliveryOnOrder } from "../../store/orders";
 import { getFormattedNumber, getOrderTotal } from "../../utils";
 import InvoiceItem from "./InvoiceItem";
 import TogglePaid from "./TogglePaid";
+import ToggleDelivered from "./ToggleDelivered";
 
 function SingleOrder({ order }) {
     const dispatch = useDispatch();
@@ -28,7 +29,7 @@ function SingleOrder({ order }) {
     }
 
     const addToOrder = () => {
-        dispatch(toggleSubmission(orderId, false))
+        dispatch(reopenOrder(orderId, false, null))
     }
 
     const twoWeeks = 14 * 24 * 60 * 60 * 1000;
@@ -50,6 +51,18 @@ function SingleOrder({ order }) {
             })
     }
 
+    const farmerToggles = (
+        <div id="farmer-toggles">
+            {
+                delivered && (
+                    <TogglePaid order={order} />
+                )
+            }
+            <ToggleDelivered order={order} />
+
+        </div>
+    )
+
     return (
         <div className="page-hero">
             <div className="page-content">
@@ -65,9 +78,7 @@ function SingleOrder({ order }) {
                     </button>
                 )}
                 {
-                    user.farmer && delivered && (
-                        <TogglePaid order={order} />
-                    )
+                    user.farmer && farmerToggles
                 }
                 {
                     user.farmer && (

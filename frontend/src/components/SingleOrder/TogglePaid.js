@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { togglePaymentOnOrder } from "../../store/orders";
 
-import "./TogglePaid.css"
+import "./InvoiceToggles.css"
 
 function TogglePaid({ order }) {
     const dispatch = useDispatch();
@@ -10,8 +10,8 @@ function TogglePaid({ order }) {
     const [paid, setPaid] = useState(order.paid || false)
 
     const handleChange = async () => {
-        setPaid(!paid);
         await dispatch(togglePaymentOnOrder(order.id, !paid))
+        setPaid(!paid);
     }
 
     const subtitle = paid ?
@@ -21,10 +21,10 @@ function TogglePaid({ order }) {
     const subTitleClass = paid ? "green-text" : "red-text"
 
     return (
-        <div className="payment-toggle">
-            <div className="page-subtitle">Toggle payment submission below</div>
-            <div id="invoice-toggle-row">
-                <div id="invoice-subtitle" className={subTitleClass}>{subtitle}</div>
+        <div className="invoice-toggle-container">
+            <div className="page-subtitle">Toggle payment status:</div>
+            <div className="invoice-toggle-row">
+                <div className={`invoice-subtitle ${subTitleClass}`}>{subtitle}</div>
                 <input
                     id="invoice-paid"
                     className="toggle-switch"

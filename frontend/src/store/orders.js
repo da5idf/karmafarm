@@ -144,6 +144,32 @@ export const togglePaymentOnOrder = (orderId, paid) => async (dispatch) => {
     }
 }
 
+export const toggleDeliveryOnOrder = (orderId, delivered) => async (dispatch) => {
+    const response = await csrfFetch(`/api/orders/${orderId}/delivery/${delivered}`, {
+        method: "PUT",
+    })
+
+    if (response.ok) {
+        const order = await response.json();
+        dispatch(updateOrder(order));
+    }
+}
+
+export const reopenOrder = (orderId, submitted, dateOfDelivery) => async (dispatch) => {
+    const res = await csrfFetch(`/api/orders/${orderId}/reopen`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+            submitted,
+            dateOfDelivery
+        })
+    })
+
+    const order = await res.json();
+
+    dispatch(updateOrder(order))
+}
+
 const updateOrder = (order) => ({
     type: UPDATE_ORDER,
     order
