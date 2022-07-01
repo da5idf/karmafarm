@@ -1,3 +1,4 @@
+// script to format a phone-number
 export const getFormattedNumber = (number) => {
     const numString = number.toString();
     const first = numString.slice(0, 3) + "-";
@@ -6,6 +7,7 @@ export const getFormattedNumber = (number) => {
     return formatted;
 }
 
+// script to format
 export const formatDate = (dateStr) => {
     if (dateStr) {
         const date = new Date(dateStr);

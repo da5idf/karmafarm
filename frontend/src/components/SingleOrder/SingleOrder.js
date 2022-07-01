@@ -20,14 +20,6 @@ function SingleOrder({ order }) {
     const orderRecords = order.Orders_Products
     const restaurant = order.Restaurant
 
-    // can change this once Farmer can toggle manually
-    // let delivered = false;
-    // if (order.dateOfDelivery) {
-    //     const now = new Date().getTime();
-    //     const deliveryDay = new Date(order.dateOfDelivery).getTime();
-    //     delivered = deliveryDay < now;
-    // }
-
     const addToOrder = () => {
         dispatch(reopenOrder(orderId, false, null))
     }
