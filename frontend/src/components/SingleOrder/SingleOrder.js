@@ -4,7 +4,7 @@ import { jsPDF } from "jspdf";
 import html2canvas from "html2canvas";
 
 import "./SingleOrder.css"
-import { reopenOrder, toggleSubmission, updateDeliveryOnOrder } from "../../store/orders";
+import { reopenOrder } from "../../store/orders";
 import { getFormattedNumber, getOrderTotal } from "../../utils";
 import InvoiceItem from "./InvoiceItem";
 import TogglePaid from "./TogglePaid";
@@ -21,12 +21,12 @@ function SingleOrder({ order }) {
     const restaurant = order.Restaurant
 
     // can change this once Farmer can toggle manually
-    let delivered = false;
-    if (order.dateOfDelivery) {
-        const now = new Date().getTime();
-        const deliveryDay = new Date(order.dateOfDelivery).getTime();
-        delivered = deliveryDay < now;
-    }
+    // let delivered = false;
+    // if (order.dateOfDelivery) {
+    //     const now = new Date().getTime();
+    //     const deliveryDay = new Date(order.dateOfDelivery).getTime();
+    //     delivered = deliveryDay < now;
+    // }
 
     const addToOrder = () => {
         dispatch(reopenOrder(orderId, false, null))
@@ -53,13 +53,8 @@ function SingleOrder({ order }) {
 
     const farmerToggles = (
         <div id="farmer-toggles">
-            {
-                delivered && (
-                    <TogglePaid order={order} />
-                )
-            }
+            <TogglePaid order={order} />
             <ToggleDelivered order={order} />
-
         </div>
     )
 
@@ -67,7 +62,7 @@ function SingleOrder({ order }) {
         <div className="page-hero">
             <div className="page-content">
                 <div className="page-title">Order #{`${orderId}`} Invoice</div>
-                {!order.delivered && !user.farmer && !delivered && (
+                {!order.delivered && !user.farmer && (
                     <button
                         id="add-to-order-button"
                         className="blue-button"
@@ -141,7 +136,7 @@ function SingleOrder({ order }) {
 
                                     {
                                         orderRecords.map((record, idx) => {
-                                            return <InvoiceItem record={record} idx={idx} order={order} delivered={delivered} key={record.id} />
+                                            return <InvoiceItem record={record} idx={idx} order={order} delivered={order.delivered} key={record.id} />
                                         })
                                     }
                                     <tr>
