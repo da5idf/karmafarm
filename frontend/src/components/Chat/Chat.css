@@ -1,0 +1,58 @@
+#chat-hero {
+    position: absolute;
+    bottom: 3rem;
+    right: 3rem;
+    max-width: 1064px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+#chat-icon-container {
+    padding: .5rem;
+    border-radius: 45px;
+    width: 48px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.chat-toggle {
+    font-size: 25px;
+}
+
+.larger-icon {
+    font-size: 30px;
+}
+
+/****************************************/
+/** Chat Box **/
+
+#chat-box {
+    width: 300px;
+    height: 400px;
+    margin-bottom: .25rem;
+    border-radius: 6px;
+    position: relative;
+    border: 3px solid #73A577;
+    display: flex;
+    flex-direction: column;
+}
+
+#chat-header {
+    width: 100%;
+    left: 0px;
+    top: 0px;
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
+    padding: 1.5rem;
+}
+
+#chat-header-title {
+    padding-bottom: 0;
+}
+
+#chat-box-content {
+    padding: 1rem;
+}
