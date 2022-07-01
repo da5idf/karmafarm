@@ -1,3 +1,6 @@
+import { jsPDF } from "jspdf";
+import html2canvas from "html2canvas";
+
 // script to format a phone-number
 export const getFormattedNumber = (number) => {
     const numString = number.toString();
@@ -7,7 +10,7 @@ export const getFormattedNumber = (number) => {
     return formatted;
 }
 
-// script to format
+// script to format a date
 export const formatDate = (dateStr) => {
     if (dateStr) {
         const date = new Date(dateStr);
@@ -16,6 +19,7 @@ export const formatDate = (dateStr) => {
     else return ""
 }
 
+// script to get total price of an order
 export const getOrderTotal = (order) => {
     const orderRecords = order.Orders_Products;
     const total = orderRecords.reduce((accum, record) => {
@@ -30,6 +34,7 @@ export const getOrderTotal = (order) => {
     }
 }
 
+// script to copy key to clipboard
 export const copyKey = () => {
     const keyElement = document.getElementById("admin-key");
     const keyText = keyElement.innerHTML
@@ -38,4 +43,17 @@ export const copyKey = () => {
     setTimeout(() => {
         keyElement.innerHTML = keyText;
     }, 1500)
+}
+
+// script to create PDF
+export const createPDF = (order) => {
+    html2canvas(document.getElementById("inner-invoice"), {
+        scale: .9
+    })
+        .then((canvas) => {
+            const pdf = new jsPDF();
+            pdf.addImage(canvas.toDataURL("image/png"), "PNG", 15, 15);
+            pdf.save(`${order.Restaurant.name}-INVOICE-${order.id}`);
+
+        })
 }
