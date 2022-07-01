@@ -1,11 +1,9 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { jsPDF } from "jspdf";
-import html2canvas from "html2canvas";
 
 import "./SingleOrder.css"
 import { reopenOrder } from "../../store/orders";
-import { getFormattedNumber, getOrderTotal } from "../../utils";
+import { getFormattedNumber, getOrderTotal, createPDF } from "../../utils";
 import InvoiceItem from "./InvoiceItem";
 import TogglePaid from "./TogglePaid";
 import ToggleDelivered from "./ToggleDelivered";
@@ -16,7 +14,6 @@ function SingleOrder({ order }) {
     const user = useSelector(state => state.session.user)
 
     const orderId = order.id
-
     const orderRecords = order.Orders_Products
     const restaurant = order.Restaurant
 
@@ -30,18 +27,6 @@ function SingleOrder({ order }) {
     const invoiceTitle = order.submitted ? "INVOICE" : "INVOICE -- NOT SUBMITTED";
     const invoiceDate = order.submitted ? new Date(order.dateOfDelivery).toDateString() : "INCOMPLETE ORDER"
     const dueDate = order.submitted ? new Date(deliveryDay + twoWeeks).toDateString() : "INCOMPLETE ORDER"
-
-    const createPDF = () => {
-        html2canvas(document.getElementById("inner-invoice"), {
-            scale: .9
-        })
-            .then((canvas) => {
-                const pdf = new jsPDF();
-                pdf.addImage(canvas.toDataURL("image/png"), "PNG", 15, 15);
-                pdf.save(`${order.Restaurant.name}-INVOICE-${order.id}`);
-
-            })
-    }
 
     const farmerToggles = order.submitted && (
         <div id="farmer-toggles">
@@ -71,7 +56,7 @@ function SingleOrder({ order }) {
                         <button
                             id="pdf-button"
                             className="green-button"
-                            onClick={createPDF}
+                            onClick={() => createPDF(order)}
                             type="button"
                         >
                             Save as PDF
