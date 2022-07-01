@@ -51,7 +51,7 @@ function SingleOrder({ order }) {
             })
     }
 
-    const farmerToggles = (
+    const farmerToggles = order.submitted && (
         <div id="farmer-toggles">
             <TogglePaid order={order} />
             <ToggleDelivered order={order} />
@@ -73,10 +73,9 @@ function SingleOrder({ order }) {
                     </button>
                 )}
                 {
-                    user.farmer && farmerToggles
-                }
-                {
-                    user.farmer && (
+                    user.farmer &&
+                    <>
+                        {farmerToggles}
                         <button
                             id="pdf-button"
                             className="green-button"
@@ -85,7 +84,7 @@ function SingleOrder({ order }) {
                         >
                             Save as PDF
                         </button>
-                    )
+                    </>
                 }
                 <div id="invoice">
                     <div id="inner-invoice">
