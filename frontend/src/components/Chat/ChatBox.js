@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-
+import { v4 as uuidv4 } from "uuid"
 
 import ChatProfileCard from "./ChatProfileCard";
 
-function ChatBox() {
+function ChatBox({ chatProfiles }) {
 
     const [inMessage, setInMessage] = useState(false);
 
@@ -22,7 +22,15 @@ function ChatBox() {
 
     const content = (
         <div id="chat-box-content">
-            <ChatProfileCard setInMessage={setInMessage} />
+            {
+                chatProfiles.map(profile => {
+                    return <ChatProfileCard
+                        key={uuidv4()}
+                        profile={profile}
+                        setInMessage={setInMessage}
+                    />
+                }
+                )}
         </div>
     )
 

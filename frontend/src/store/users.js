@@ -1,4 +1,3 @@
-import Chat from "../components/Chat/Chat";
 import { csrfFetch } from "./csrf"
 
 const GET_USER_RESTAURANTS = "user/RESTAURANT";
@@ -28,7 +27,6 @@ export const getChatProfiles = (userId) => async (dispatch) => {
 
     if (response.ok) {
         const users = await response.json();
-        console.log("in thunk", users)
         dispatch(hydrateChatProfiles(users));
         return users;
     }
@@ -46,7 +44,7 @@ const initialState = {
 
 const userReducer = (state = initialState, action) => {
     let newState = Object.assign({}, state);
-    let actionRestaurant;
+    // let actionRestaurant;
     let newChatProfiles = Object.assign({}, state.chatProfiles);
 
     switch (action.type) {

@@ -73,6 +73,9 @@ router.get('/:userId/restaurants',
 router.get('/:userId/chat',
     asyncHandler(async (req, res) => {
         const { userId } = req.params;
+
+        // currently only able to chat with farmers.
+        // can change to farmers + staff of same restaurant in future
         const users = await User.findAll({
             where: {
                 farmer: true
