@@ -7,9 +7,11 @@ import Prompt from "./Prompt";
 import NewUser from "./NewUser";
 import KeyForm from "./KeyForm";
 import NewRestaurant from "./NewRestaurant";
+import { useSelector } from "react-redux";
 
 function SignUpForm() {
     const history = useHistory();
+    const userRestaurant = useSelector(state => state.users.restaurant)
 
     const prompt = "PROMPT";
     const key = "KEY"
@@ -20,11 +22,16 @@ function SignUpForm() {
     const [step, setStep] = useState(prompt);
     const [restaurant, setRestaurant] = useState(null);
 
+    // if an existing user manually goes to /signup, redirect to /
+    if (!userRestaurant.id) {
+        console.log("are we in if?")
+        history.push("/")
+    }
+
     const handleCancel = () => {
         setStep(1);
         return history.push("/")
     }
-
 
     let view, props, title, subtitle;
     switch (step) {
