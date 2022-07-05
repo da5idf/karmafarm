@@ -21,10 +21,6 @@ function NewUser({ props }) {
     const handleNext = async (e) => {
         e.preventDefault();
 
-        /********************************
-        NEED TO FIX CLICK ON INVALID FORM
-        ********************************/
-
         if (password === confirmPassword) {
             const phoneNumber = number.split("-").join("");
             // setErrors([]);

@@ -17,6 +17,7 @@ function Chat({ user }) {
     const [viewChat, setViewChat] = useState(false);
 
     const iconName = viewChat ? "fa-x larger-icon" : "fa-comments"
+    const buttonText = viewChat ? "Close chat" : "Chat with the Farm"
 
     return (
         <div id="chat-hero">
@@ -26,7 +27,7 @@ function Chat({ user }) {
                 className="yellow-bg"
                 onClick={() => setViewChat(!viewChat)}
             >
-                Chat with the Farm
+                {buttonText}
                 <i
                     className={`fa-solid ${iconName} chat-toggle green-text`}
                 ></i>

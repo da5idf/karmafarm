@@ -52,10 +52,15 @@
     padding: 1.5rem;
 }
 
-#chat-header-title {
-    padding-bottom: 0;
-}
-
 #chat-box-content {
     padding: 1rem;
+}
+
+/****************************************/
+/** Chat Profile Card **/
+
+.chat-profile-card {
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
 }
