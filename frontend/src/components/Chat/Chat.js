@@ -3,12 +3,13 @@ import { useDispatch } from "react-redux";
 
 import "./Chat.css"
 import ChatBox from "./ChatBox";
+import { getChatProfiles } from "../../store/users"
 
 function Chat({ user }) {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        // dispatch(getChatProfiles(user))
+        dispatch(getChatProfiles(user.id))
     }, [dispatch])
 
     const [viewChat, setViewChat] = useState(false);

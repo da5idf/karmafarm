@@ -11,7 +11,7 @@ function RootView({ user, isLoaded }) {
             <>
                 <Navigation isLoaded={isLoaded} />
                 <Homepage user={user} />
-                <Chat />
+                <Chat user={user} />
             </>
         )
     } else {

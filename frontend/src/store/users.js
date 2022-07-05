@@ -24,10 +24,11 @@ const hydrateUserRestaurants = (restaurant) => ({
 })
 
 export const getChatProfiles = (userId) => async (dispatch) => {
-    const response = await csrfFetch(`/api/user/${userId}/chat`)
+    const response = await csrfFetch(`/api/users/${userId}/chat`)
 
     if (response.ok) {
         const users = await response.json();
+        console.log("in thunk", users)
         dispatch(hydrateChatProfiles(users));
         return users;
     }
@@ -44,19 +45,20 @@ const initialState = {
 }
 
 const userReducer = (state = initialState, action) => {
-    let newState;
+    let newState = Object.assign({}, state);
     let actionRestaurant;
-    let newChatProfiles = {};
+    let newChatProfiles = Object.assign({}, state.chatProfiles);
 
     switch (action.type) {
         case GET_USER_RESTAURANTS:
-            newState = Object.assign({}, state);
-            actionRestaurant = action.restaurant
-            newState.restaurant = actionRestaurant;
+            newState.restaurant = action.restaurant;
             return newState;
         case GET_CHAT_PROFILES:
-            newState = Object.assign({}, state);
-            action.users.forEach(user => null)
+            action.users.forEach(user => {
+                newChatProfiles[user.id] = user
+            })
+            newState.chatProfiles = newChatProfiles;
+            return newState;
         default:
             return state;
     }

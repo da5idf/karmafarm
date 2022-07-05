@@ -1,6 +1,7 @@
 const express = require('express')
 const asyncHandler = require('express-async-handler');
 const { check } = require('express-validator');
+const { Op } = require("sequelize");
 
 const { handleValidationErrors } = require('../../utils/validation');
 const { setTokenCookie, requireAuth } = require('../../utils/auth');
@@ -62,6 +63,24 @@ router.get('/:userId/restaurants',
 
         if (user.Members.length) {
             return res.send(user.Members[0].Restaurant)
+        } else {
+            return (res.send({ response: false }))
+        }
+
+    })
+)
+
+router.get('/:userId/chat',
+    asyncHandler(async (req, res) => {
+        const { userId } = req.params;
+        const users = await User.findAll({
+            where: {
+                farmer: true
+            }
+        })
+
+        if (users.length) {
+            return res.send(users)
         } else {
             return (res.send({ response: false }))
         }
