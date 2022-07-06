@@ -5,11 +5,13 @@ module.exports = (sequelize, DataTypes) => {
       members: {
         type: DataTypes.STRING,
         allowNull: false
+      },
+      last: {
+        type: DataTypes.STRING
       }
-      // 1-2-13
     });
   Thread.associate = function (models) {
-    // associations can be defined here
+    Thread.hasMany(models.Message, { foreignKey: 'threadId' })
   };
   return Thread;
 };

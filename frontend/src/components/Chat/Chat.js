@@ -12,7 +12,7 @@ function Chat({ user }) {
 
     useEffect(() => {
         dispatch(getChatProfiles(user.id))
-    }, [dispatch])
+    }, [dispatch, user.id])
 
     const [viewChat, setViewChat] = useState(false);
 
@@ -21,11 +21,14 @@ function Chat({ user }) {
 
     return (
         <div id="chat-hero">
-            {viewChat && <ChatBox chatProfiles={chatProfiles} />}
+            {viewChat && <ChatBox chatProfiles={chatProfiles} setViewChat={setViewChat} />}
             <div
                 id="chat-icon-container"
                 className="yellow-bg"
-                onClick={() => setViewChat(!viewChat)}
+                onClick={(e) => {
+                    e.stopPropagation();
+                    setViewChat(!viewChat)
+                }}
             >
                 {buttonText}
                 <i

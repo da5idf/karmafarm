@@ -14,6 +14,15 @@ module.exports = {
         phoneNumber: "1111111111",
       },
       {
+        name: 'Jackie Miller',
+        email: 'jackie@user.io',
+        admin: false,
+        farmer: true,
+        key: 'k1k3naz92',
+        hashedPassword: bcrypt.hashSync('password1'),
+        phoneNumber: "1231111234",
+      },
+      {
         name: 'Jeremy Long',
         email: 'jeremy@user.io',
         admin: true,

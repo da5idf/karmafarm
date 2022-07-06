@@ -29,6 +29,10 @@
     font-size: 30px;
 }
 
+.fa-x {
+    cursor: pointer;
+}
+
 /****************************************/
 /** Chat Box **/
 
@@ -50,6 +54,8 @@
     border-top-left-radius: 2px;
     border-top-right-radius: 2px;
     padding: 1.5rem;
+    display: flex;
+    justify-content: space-between;
 }
 
 #chat-box-content {
@@ -63,4 +69,27 @@
     display: flex;
     justify-content: space-between;
     cursor: pointer;
+}
+
+/****************************************/
+/** Thread **/
+#messages-container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+#new-message-div {
+    display: flex;
+    padding: .5rem;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+}
+
+#new-message-text {
+    width: 100%;
+    font-size: 16px;
+    /* height: 25px; */
+    flex-grow: 1;
 }

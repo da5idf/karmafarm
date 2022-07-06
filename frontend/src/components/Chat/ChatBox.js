@@ -4,15 +4,20 @@ import { v4 as uuidv4 } from "uuid"
 import ChatProfileCard from "./ChatProfileCard";
 import Thread from "./Thread";
 
-function ChatBox({ chatProfiles }) {
+function ChatBox({ chatProfiles, setViewChat }) {
 
     const [inMessage, setInMessage] = useState(false);
     const [header, setHeader] = useState("Messages");
-    const [threadId, setThreadId] = useState();
+    const [members, setMembers] = useState("");
+
+    const closeThread = () => {
+        setInMessage(false)
+        setHeader("Messges")
+    }
 
     const content = inMessage ?
         <Thread
-            threadId={threadId}
+            members={members}
             setHeader={setHeader}
             setInMessage={setInMessage}
         />
@@ -23,7 +28,7 @@ function ChatBox({ chatProfiles }) {
                 profile={profile}
                 setHeader={setHeader}
                 setInMessage={setInMessage}
-                setThreadId={setThreadId}
+                setMembers={setMembers}
             />
         });
 
@@ -34,6 +39,11 @@ function ChatBox({ chatProfiles }) {
         >
             <div id="chat-header" className="green-bg white-text page-subtitle">
                 {header}
+                {inMessage &&
+                    <i
+                        className="fa-solid fa-x"
+                        onClick={closeThread}
+                    ></i>}
             </div>
             <div id="chat-box-content">
                 {content}

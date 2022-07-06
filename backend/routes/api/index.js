@@ -9,6 +9,7 @@ const productRouter = require('./products.js')
 const ordersRouter = require('./orders.js');
 const order_productsRouter = require('./orders_products.js')
 const feedbackRouter = require('./feedback.js');
+const threadRouter = require('./thread.js');
 
 router.use('/session', sessionRouter);
 router.use('/users', usersRouter);
@@ -19,5 +20,6 @@ router.use('/products', productRouter);
 router.use('/orders', ordersRouter);
 router.use('/orders_products', order_productsRouter);
 router.use('/feedback', feedbackRouter);
+router.use('/threads', threadRouter)
 
 module.exports = router;

@@ -30,6 +30,15 @@ input {
     border: none;
 }
 
+textarea {
+    border: none;
+    resize: none;
+}
+
+textarea:focus {
+    outline: none;
+}
+
 input:focus-visible {
     outline: none;
 }
