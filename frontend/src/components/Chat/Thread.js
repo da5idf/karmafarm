@@ -12,7 +12,7 @@ function Thread({ members }) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-
+        // dispatch(newMessage({ members, text }))
     }
 
     return (
