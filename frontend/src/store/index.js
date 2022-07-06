@@ -16,7 +16,7 @@ const rootReducer = combineReducers({
     products: productReducer,
     orders: orderReducer,
     feedback: feedbackReducer,
-    thread: threadReducer,
+    threads: threadReducer,
 });
 
 let enhancer;

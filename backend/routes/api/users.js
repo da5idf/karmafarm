@@ -80,7 +80,13 @@ router.get('/:userId/chat',
 
         let users;
         if (sessionUser.farmer) {
-            users = await User.findAll();
+            users = await User.findAll({
+                where: {
+                    id: {
+                        [Op.ne]: userId
+                    }
+                }
+            });
         }
         else {
             users = await User.findAll({

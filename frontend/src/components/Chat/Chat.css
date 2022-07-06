@@ -37,8 +37,8 @@
 /** Chat Box **/
 
 #chat-box {
-    width: 300px;
-    height: 400px;
+    width: 350px;
+    height: 500px;
     margin-bottom: .25rem;
     border-radius: 6px;
     position: relative;
@@ -68,14 +68,31 @@
 
 .chat-profile-card {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
     cursor: pointer;
+    width: 100%;
+    padding: .25rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
+
+.chat-profile-card:not(:last-child) {
+    margin-bottom: .5rem;
+}
+
+.chat-name {
+    font-weight: 400;
+}
+
+.last-msg {
+    margin-left: 2rem;
+    overflow: hidden;
 }
 
 /****************************************/
 /** Thread **/
 #messages-container {
-    height: 282px;
+    height: 382px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -99,6 +116,11 @@
     overflow-y: auto;
     display: flex;
     flex-direction: column;
+    margin-bottom: .5rem;
+}
+
+::-webkit-scrollbar {
+    display: none;
 }
 
 /****************************************/
@@ -107,8 +129,9 @@
 .chat-msg {
     padding: .25rem .5rem;
     margin-bottom: .25rem;
-    border-radius: 45px;
+    border-radius: 10px;
     width: fit-content;
+    overflow-wrap: anywhere;
 }
 
 .left {

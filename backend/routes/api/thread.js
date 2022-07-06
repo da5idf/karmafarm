@@ -15,40 +15,40 @@ router.get(
     })
 )
 
-router.get(
-    "/:members/messages",
-    asyncHandler(async (req, res, next) => {
-        const { members } = req.params
+// router.get(
+//     "/:members/messages",
+//     asyncHandler(async (req, res, next) => {
+//         const { members } = req.params
 
-        // returns [thread, boolean] where bool = true if created
-        // important for next where criteria.
-        let thread = await Thread.findOne({
-            where: { members }
-        })
+//         // returns [thread, boolean] where bool = true if created
+//         // important for next where criteria.
+//         let thread = await Thread.findOne({
+//             where: { members }
+//         })
 
-        if (!thread) thread = await Thread.create({ members })
+//         if (!thread) thread = await Thread.create({ members })
 
-        const messages = await Message.findAll({
-            where: { threadId: thread.id }
-        })
+//         const messages = await Message.findAll({
+//             where: { threadId: thread.id }
+//         })
 
-        return res.send(messages);
-    })
-)
+//         return res.send(messages);
+//     })
+// )
 
-router.post(
-    "/",
-    asyncHandler(async (req, res, next) => {
-        const { members } = req.body
+// router.post(
+//     "/",
+//     asyncHandler(async (req, res, next) => {
+//         const { members } = req.body
 
-        const thread = await Thread.create({
-            members
-        })
+//         const thread = await Thread.create({
+//             members
+//         })
 
-        if (thread) {
-            return res.send(thread);
-        }
-    })
-)
+//         if (thread) {
+//             return res.send(thread);
+//         }
+//     })
+// )
 
 module.exports = router

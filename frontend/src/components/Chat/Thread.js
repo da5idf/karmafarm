@@ -9,11 +9,11 @@ function Thread({ members }) {
     const dispatch = useDispatch();
     const [text, setText] = useState("");
     const sessionUser = useSelector(state => state.session.user);
-    const currentThread = useSelector(state => state.thread);
+    const threads = useSelector(state => state.threads);
 
     let messages = [];
-    if (currentThread[members]) {
-        const messageObjs = currentThread[members].Messages
+    if (threads[members]) {
+        const messageObjs = threads[members].Messages
         messages = Object.values(messageObjs);
     }
 
