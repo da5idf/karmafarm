@@ -39,7 +39,7 @@ const threadReducer = (state = initialState, action) => {
             // lots of nested structures to work through in order
             // for state to update correctly
             const thread = Object.assign({}, newState[action.members])
-            const threadMsgs = [...thread.Messages];
+            const threadMsgs = [...thread.Messages] || [];
             threadMsgs.push(action.message);
             thread.Messages = threadMsgs;
             newState[action.members] = thread;
