@@ -1,7 +1,5 @@
 import { csrfFetch } from "./csrf";
 
-const NEW_MESSAGE = 'message/NEW';
-
 export const newMessage = ({ members, userId, text }) => async (dispatch) => {
     const response = await csrfFetch("/api/messages", {
         method: "POST",

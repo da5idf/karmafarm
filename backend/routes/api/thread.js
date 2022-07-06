@@ -5,6 +5,17 @@ const router = express.Router();
 const { Thread, Message } = require('../../db/models');
 
 router.get(
+    "/",
+    asyncHandler(async (req, res, next) => {
+        const threads = await Thread.findAll({
+            include: Message
+        })
+
+        return res.send(threads);
+    })
+)
+
+router.get(
     "/:members/messages",
     asyncHandler(async (req, res, next) => {
         const { members } = req.params
@@ -21,7 +32,7 @@ router.get(
             where: { threadId: thread.id }
         })
 
-        res.send(messages);
+        return res.send(messages);
     })
 )
 

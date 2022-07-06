@@ -9,9 +9,16 @@ router.post(
     asyncHandler(async (req, res, next) => {
         const { members, userId, text } = req.body
 
-        const thread = await Thread.findOne({
+        let thread;
+        thread = await Thread.findOne({
             where: { members }
         })
+
+        if (!thread) {
+            thread = await Thread.create({
+                members
+            })
+        }
 
         const message = await Message.create({
             threadId: thread.id,
@@ -20,13 +27,13 @@ router.post(
         })
 
         // update the last message on this thread
-        thread.last = message;
+        thread.last = message.text;
         await thread.save();
 
         // emmit new message to client side socket
         // dispatch from the socket to update the store.
         const io = req.app.get("socketio");
-        io.emit("message:new", { message });
+        io.emit("message:new", { message, members });
     })
 )
 

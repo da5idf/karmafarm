@@ -1,44 +1,48 @@
 import { csrfFetch } from "./csrf"
 
-const THREAD_MESSAGES = 'thread/MESSAGES';
+const ALL_THREADS = 'threads/ALL';
 const NEW_MESSAGE = 'thread/NEW/MESSAGE';
 
-export const getThreadMessages = (members) => async (dispatch) => {
-    const response = await csrfFetch(`/api/threads/${members}/messages`)
+export const getAllThreads = () => async (dispatch) => {
+    const response = await csrfFetch('api/threads');
 
-    const messages = await response.json();
+    if (response.ok) {
+        const threads = await response.json();
 
-    dispatch(hydrateThreadMessages(messages))
+        dispatch(hydrateThreads(threads));
+    }
 }
 
-const hydrateThreadMessages = (messages) => ({
-    type: THREAD_MESSAGES,
-    messages
+const hydrateThreads = (threads) => ({
+    type: ALL_THREADS,
+    threads
 })
 
-export const newThreadMessage = (message) => ({
+export const newThreadMessage = (message, members) => ({
     type: NEW_MESSAGE,
-    message
+    message,
+    members,
 })
 
-const initialState = {
-    messages: {}
-};
+const initialState = {};
 
 const threadReducer = (state = initialState, action) => {
     const newState = Object.assign({}, state);
-    const newMessages = Object.assign({}, state.messages);
 
     switch (action.type) {
-        case THREAD_MESSAGES:
-            action.messages.forEach(message => {
-                newMessages[message.id] = message
+        case ALL_THREADS:
+            action.threads.forEach(thread => {
+                newState[thread.members] = thread;
             })
-            newState.messages = newMessages;
-            return newState
+            return newState;
         case NEW_MESSAGE:
-            newMessages[action.message.id] = action.message;
-            newState.messages = newMessages;
+            // lots of nested structures to work through in order
+            // for state to update correctly
+            const thread = Object.assign({}, newState[action.members])
+            const threadMsgs = [...thread.Messages];
+            threadMsgs.push(action.message);
+            thread.Messages = threadMsgs;
+            newState[action.members] = thread;
             return newState;
         default:
             return state

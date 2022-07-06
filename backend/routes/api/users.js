@@ -76,11 +76,19 @@ router.get('/:userId/chat',
 
         // currently only able to chat with farmers.
         // can change to farmers + staff of same restaurant in future
-        const users = await User.findAll({
-            where: {
-                farmer: true
-            }
-        })
+        const sessionUser = await User.findByPk(userId);
+
+        let users;
+        if (sessionUser.farmer) {
+            users = await User.findAll();
+        }
+        else {
+            users = await User.findAll({
+                where: {
+                    farmer: true
+                }
+            })
+        }
 
         if (users.length) {
             return res.send(users)
