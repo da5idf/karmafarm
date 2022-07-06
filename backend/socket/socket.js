@@ -11,19 +11,19 @@ const { Server } = require('socket.io');
 //https://socket.io/get-started/chat
 //https://socket.io/docs/v4/using-multiple-nodes/
 //enable CORS - https://socket.io/docs/v3/handling-cors/
-// Test: curl "http://localhost:5000/socket.io/?EIO=4&transport=polling"
-const io = new Server(server, {
-    cors: {
-        origin: origin,
-        // origin: environment === 'development' ? '*' : origin
-        methods: ['GET', 'POST'],
-    },
-});
+// Test: curl "http://localhost:3000/socket.io/?EIO=4&transport=polling"
+const io = new Server(server,
+    {
+        cors: {
+            origin: "*",
+            methods: ['GET', 'POST'],
+        },
+    }
+);
+
 
 // add socket-IO to app's global space as key value pair for api route use
 app.set('socketio', io);
-
-const { registerChannelHandlers } = require('./channelRoutes');
 
 const onConnection = (socket) => {
     // Add socket to express app's global space as unique key value pair
@@ -35,8 +35,6 @@ const onConnection = (socket) => {
 
     //listen on the connection event for incoming sockets and log it to the console.
     console.log('a user connected');
-
-    registerChannelHandlers(io, socket);
 
     //upon first connect, emit to the user who connected:
     socket.emit('welcome', 'Welcome to Slackluster!');

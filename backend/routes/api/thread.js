@@ -1,9 +1,7 @@
 const express = require('express')
 const asyncHandler = require('express-async-handler');
-const { check } = require('express-validator');
 
 const router = express.Router();
-const { handleValidationErrors } = require('../../utils/validation');
 const { Thread, Message } = require('../../db/models');
 
 router.get(

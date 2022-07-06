@@ -10,6 +10,8 @@ import { restoreCSRF, csrfFetch } from './store/csrf';
 import * as sessionActions from './store/session';
 import * as restaurantActions from './store/restaurants'
 import { ModalProvider } from './context/Modal';
+import { SocketProvider } from './context/Socket';
+
 
 const store = configureStore();
 
@@ -26,9 +28,11 @@ function Root() {
   return (
     <Provider store={store}>
       <ModalProvider>
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
+        <SocketProvider>
+          <BrowserRouter>
+            <App />
+          </BrowserRouter>
+        </SocketProvider>
       </ModalProvider>
     </Provider>
   )

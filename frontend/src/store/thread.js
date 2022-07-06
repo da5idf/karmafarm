@@ -1,31 +1,24 @@
 import { csrfFetch } from "./csrf"
 
-const NEW_THREAD = 'thread/NEW'
-const THREAD_MESSAGES = 'thread/MESSAGES'
-
-// const createNewThread = (members) => async (dispatch) => {
-//     const response = await csrfFetch('/api/threads', {
-//         method: "POST",
-//         "Conttent-Type": "application/json",
-//         body: JSON.stringify(members)
-//     })
-
-//     if (response.ok) {
-//         thread = await response.json();
-//     }
-// }
+const THREAD_MESSAGES = 'thread/MESSAGES';
+const NEW_MESSAGE = 'thread/NEW/MESSAGE';
 
 export const getThreadMessages = (members) => async (dispatch) => {
     const response = await csrfFetch(`/api/threads/${members}/messages`)
 
     const messages = await response.json();
 
-    hydrateThreadMessages(messages)
+    dispatch(hydrateThreadMessages(messages))
 }
 
 const hydrateThreadMessages = (messages) => ({
     type: THREAD_MESSAGES,
     messages
+})
+
+export const newThreadMessage = (message) => ({
+    type: NEW_MESSAGE,
+    message
 })
 
 const initialState = {
@@ -34,7 +27,7 @@ const initialState = {
 
 const threadReducer = (state = initialState, action) => {
     const newState = Object.assign({}, state);
-    const newMessages = Object.assign({}, state);
+    const newMessages = Object.assign({}, state.messages);
 
     switch (action.type) {
         case THREAD_MESSAGES:
@@ -43,7 +36,13 @@ const threadReducer = (state = initialState, action) => {
             })
             newState.messages = newMessages;
             return newState
+        case NEW_MESSAGE:
+            newMessages[action.message.id] = action.message;
+            newState.messages = newMessages;
+            return newState;
         default:
             return state
     }
 }
+
+export default threadReducer;

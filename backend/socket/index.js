@@ -1,3 +1,3 @@
-import { server, io, onConnection } from "./socket.js";
+const { server, io, onConnection } = require("./socket.js");
 
 module.exports = { server, io, onConnection };

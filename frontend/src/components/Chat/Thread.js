@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getThreadMessages } from "../../store/thread";
+import { newMessage } from "../../store/messages";
 
 function Thread({ members }) {
     const dispatch = useDispatch();
-    const [text, setText] = useState("")
+    const [text, setText] = useState("");
+    const sessionUser = useSelector(state => state.session.user);
 
     useEffect(() => {
         dispatch(getThreadMessages(members));
@@ -12,7 +14,7 @@ function Thread({ members }) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // dispatch(newMessage({ members, text }))
+        dispatch(newMessage({ members, userId: sessionUser.id, text }))
     }
 
     return (
