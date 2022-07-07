@@ -1,9 +1,7 @@
 import React, { createContext, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import * as usersActions from '../store/users';
-import * as channelsActions from '../store/channels';
-import * as messagesActions from '../store/messages';
+import { newThreadMessage } from '../store/thread.js';
 
 //import client-side socket package
 //https://socket.io/docs/v4/client-initialization/
@@ -24,44 +22,16 @@ export const SocketProvider = ({ children }) => {
     useEffect(() => {
         // create websocket
         if (sessionUser) {
-            //defaults to trying to connect to the host that serves the page.
-            //the server URL will be deduced from the window.location object
-            //works because frontend is served on the same domain as the server on heroku or via a proxy(?)
+            // defaults to trying to connect to the host that serves the page.
+            // the server URL will be deduced from the window.location object
+            // works because frontend is served on the same domain as the server on heroku or via a proxy(?)
             socket.current = io();
-            //socket.id - each new socket is assigned a random 20 character unique and synced with server
-            //socket.connected - boolean describing whether socket is currently connected to server
+            // socket.id - each new socket is assigned a random 20 character unique and synced with server
+            // socket.connected - boolean describing whether socket is currently connected to server
             console.log('Socket Connected');
 
-            // socket.current.emit('join', sessionUser);
-            // socket.current.on('welcome', (msg) => console.log(msg));
-
-            //user event listeners to update redux state
-            socket.current.on('user:add', ({ user }) => {
-                dispatch(usersActions.addUser(user));
-            });
-
-            //channel event listeners to update redux state
-            socket.current.on('channel:add', ({ newChannel }) => {
-                dispatch(channelsActions.addChannel(newChannel));
-            });
-            socket.current.on('channel:update', ({ updatedChannel }) => {
-                dispatch(channelsActions.updateChannel(updatedChannel));
-            });
-            socket.current.on('channel:delete', ({ ownerId, channelId }) => {
-                dispatch(channelsActions.deleteChannel(ownerId, channelId));
-                dispatch(messagesActions.deleteChannelMessages(ownerId, channelId));
-            });
-
-            //message event listeners to update redux state
-            socket.current.on('message:add', ({ newMessage }) => {
-                dispatch(messagesActions.addMessage(newMessage));
-            });
-            socket.current.on('message:update', ({ updatedMessage }) => {
-                dispatch(messagesActions.updateMessage(updatedMessage));
-            });
-            //prettier-ignore
-            socket.current.on('message:delete', ({ ownerId, messageId, channelId }) => {
-                dispatch(messagesActions.deleteMessage(ownerId, messageId, channelId));
+            socket.current.on('message:new', ({ message, members }) => {
+                dispatch(newThreadMessage(message, members));
             });
         }
 
@@ -89,11 +59,8 @@ SOCKET DATA FLOW:
     Thunk dispatched to update database (persist data)
       If error, display error,
       If response is ok:
-        Server broadcasts a message/channel was added/updated/deleted event (and includes the data needed)
-        All Users receive broadcast and update redux state based on that data using regular redux actions
-        channel's messages auto re-renders because channel component is subscribed to state
-
-  Note: only ever looking at one channel at a time, when you click a channel, it will do a getChannelMEssagesThunk
+        Server emits event which this file listens for.
+        Each event dispatches directly to the store.
 
   Edge cases,
   -If some how disconnected to internet or server, how do you know if received all broacast messages?

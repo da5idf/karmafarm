@@ -54,7 +54,7 @@ function About({ user }) {
                                 Last year I worked at an organic farm
                             </div>
                             <div className="about-text">
-                                It's a very small farm run with a equally small team. The farm's
+                                It's a very small farm run with an equally small team. The farm's
                                 revenue comes almost exclusively from sales to restaurants. But
                                 the ordering system we had was very outdated. The manager more or
                                 less did everything by hand. Seeing her frustration sparked the idea

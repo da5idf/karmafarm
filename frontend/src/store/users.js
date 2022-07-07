@@ -1,6 +1,7 @@
 import { csrfFetch } from "./csrf"
 
 const GET_USER_RESTAURANTS = "user/RESTAURANT";
+const GET_CHAT_PROFILES = "user/CHAT/PROFILES"
 
 export const getUserRestaurants = (userId) => async (dispatch) => {
     const response = await csrfFetch(`/api/users/${userId}/restaurants`)
@@ -21,19 +22,40 @@ const hydrateUserRestaurants = (restaurant) => ({
     restaurant
 })
 
+export const getChatProfiles = (userId) => async (dispatch) => {
+    const response = await csrfFetch(`/api/users/${userId}/chat`)
+
+    if (response.ok) {
+        const users = await response.json();
+        dispatch(hydrateChatProfiles(users));
+        return users;
+    }
+}
+
+const hydrateChatProfiles = (users) => ({
+    type: GET_CHAT_PROFILES,
+    users
+})
+
 const initialState = {
-    restaurant: {}
+    restaurant: {},
+    chatProfiles: {}
 }
 
 const userReducer = (state = initialState, action) => {
-    let newState;
-    let actionRestaurant;
+    let newState = Object.assign({}, state);
+    // let actionRestaurant;
+    let newChatProfiles = Object.assign({}, state.chatProfiles);
 
     switch (action.type) {
         case GET_USER_RESTAURANTS:
-            newState = Object.assign({}, state);
-            actionRestaurant = action.restaurant
-            newState.restaurant = actionRestaurant;
+            newState.restaurant = action.restaurant;
+            return newState;
+        case GET_CHAT_PROFILES:
+            action.users.forEach(user => {
+                newChatProfiles[user.id] = user
+            })
+            newState.chatProfiles = newChatProfiles;
             return newState;
         default:
             return state;

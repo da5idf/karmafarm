@@ -30,6 +30,15 @@ input {
     border: none;
 }
 
+textarea {
+    border: none;
+    resize: none;
+}
+
+textarea:focus {
+    outline: none;
+}
+
 input:focus-visible {
     outline: none;
 }
@@ -51,6 +60,7 @@ td {
     min-height: 100vh;
     width: 100%;
     display: flex;
+    position: relative;
 }
 
 .yellow-bg {
@@ -59,6 +69,22 @@ td {
 
 .red-bg {
     background-color: #A8003B;
+}
+
+.blue-bg {
+    background-color: #7EBEC5;
+}
+
+.green-bg {
+    background-color: #73A577;
+}
+
+.gray-bg {
+    background-color: #ccc;
+}
+
+.white-bg {
+    background-color: white;
 }
 
 .white-text {
@@ -80,7 +106,7 @@ td {
 .page-hero {
     padding-top: 30px;
     padding-left: 1rem;
-    padding-right: 2rem;
+    padding-right: 1rem;
     width: 100%;
     position: relative;
     display: flex;
@@ -288,8 +314,8 @@ table {
     color: #A8003B;
 }
 
-.green-text {
-    color: #73A577
+.blue-text {
+    color: #7EBEC5;
 }
 
 /*****************************************/

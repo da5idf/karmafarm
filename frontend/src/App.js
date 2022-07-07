@@ -13,6 +13,7 @@ import About from "./components/About/About";
 import NotFound from "./components/NotFound";
 import ProtectedRoute from "./components/ProtectedRoute";
 import RestaurantSignUp from "./components/SignupFormPage/RestaurantSignUp";
+import Chat from "./components/Chat";
 
 function App() {
   const dispatch = useDispatch();
