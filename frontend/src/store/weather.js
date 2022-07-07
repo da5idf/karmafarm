@@ -8,7 +8,7 @@ export const getWeather = () => async (dispatch) => {
     const numDays = 2;
 
     // limit the number of forecast days to 2
-    const response = await fetch(`http://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${zipCode}&days=${numDays}`)
+    const response = await fetch(`https://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${zipCode}&days=${numDays}`)
 
 
     if (response) {
