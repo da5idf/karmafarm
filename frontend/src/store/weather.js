@@ -1,4 +1,4 @@
-const API_KEY = process.env.REACT_APP_WEATHER_API_KEY
+const API_KEY = process.env.REACT_APP_RAPID_API_KEY
 
 const HYDRATE_WEATHER = 'weather/HYDRATE'
 
@@ -8,17 +8,26 @@ export const getWeather = () => async (dispatch) => {
     const numDays = 2;
 
     // limit the number of forecast days to 2
-    const response = await fetch(`https://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${zipCode}&days=${numDays}`)
+    // const response = await fetch(`https://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${zipCode}&days=${numDays}`)
 
+
+    const options = {
+        method: 'GET',
+        headers: {
+            'X-RapidAPI-Key': 'd9ac816b5cmshcd011ed6c638616p1f4ac3jsn8121d202cf20',
+            'X-RapidAPI-Host': 'weatherapi-com.p.rapidapi.com'
+        }
+    };
+
+    const response = await fetch(`https://weatherapi-com.p.rapidapi.com/forecast.json?q=${zipCode}&days=${numDays}`, options)
+        .catch(err => console.error(err));
 
     if (response) {
         const weather = await response.json();
-        console.log(weather);
+        // console.log(weather);
         dispatch(hydrateWeather(weather));
         return weather;
     }
-
-    return response.code; // ERROR HANDLING?
 }
 
 const hydrateWeather = (weather) => ({
