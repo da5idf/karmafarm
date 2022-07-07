@@ -8,6 +8,7 @@ import productReducer from './products';
 import orderReducer from './orders';
 import feedbackReducer from './feedback';
 import threadReducer from './thread';
+import weatherReducer from './weather';
 
 const rootReducer = combineReducers({
     session: sessionReducer,
@@ -17,6 +18,7 @@ const rootReducer = combineReducers({
     orders: orderReducer,
     feedback: feedbackReducer,
     threads: threadReducer,
+    weather: weatherReducer,
 });
 
 let enhancer;
