@@ -42,6 +42,8 @@ const threadReducer = (state = initialState, action) => {
             const threadMsgs = [...thread.Messages] || [];
             threadMsgs.push(action.message);
             thread.Messages = threadMsgs;
+            // update last msg on thread
+            thread.last = action.message.text
             newState[action.members] = thread;
             return newState;
         default:
