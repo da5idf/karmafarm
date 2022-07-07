@@ -1,0 +1,58 @@
+#weather-container {
+    width: 100%;
+    min-width: 400px;
+}
+
+#weather-container > .page-subtitle {
+    padding-bottom: .25rem;
+}
+
+#current-weather {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.current-weather-subtitle {
+    font-size: 20px;
+    font-weight: 400;
+}
+
+#current-weather-icon {
+    width: 70px;
+}
+
+#weather-forecast {
+    display: flex;
+    gap: .25rem
+}
+
+/***************************************/
+/* Forecast Day */
+
+.forecast-day {
+    display: flex;
+    flex-direction: column;
+    gap: .25rem;
+    width: 50%;
+    padding: .25rem;
+    border: 1px solid #c2c2c2;
+    border-radius: 10px;
+}
+
+.forecast-day-top {
+    display: flex;
+    justify-content: space-between;
+}
+
+.forecast-day-name {
+    font-weight: 400;
+}
+
+.forecast-extreme {
+    display: flex;
+}
+
+.forecast-temp-label {
+    width: 50px;
+}

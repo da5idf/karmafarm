@@ -10,6 +10,7 @@ import RestaurantCard from "../RestaurantCard";
 import OrderCard from "../OrderCard/OrderCard";
 import { FeedbackForm } from "../Feedback";
 import DeleteOrderModal from "../OrderCard/DeleteOrderModal";
+import Weather from "../Weather";
 
 function RestaurantHomepage({ user }) {
     const dispatch = useDispatch();
@@ -42,26 +43,33 @@ function RestaurantHomepage({ user }) {
         <div className="page-hero">
             <div className="page-content">
                 <div className="page-title">Hello {user?.name.split(" ")[0]}, welcome back!</div>
-                {user.admin && (
-                    <div id="admin-container" onClick={copyKey}>
-                        <div id="admin-text">Admin Key:</div>
-                        <div id="admin-key">{user.key}</div>
-                        <i className="fa-solid fa-copy"></i>
+                <div id="hp-top">
+                    <div id="hp-top-left">
+                        {user.admin && (
+                            <div id="admin-container" onClick={copyKey}>
+                                <div id="admin-text">Admin Key:</div>
+                                <div id="admin-key">{user.key}</div>
+                                <i className="fa-solid fa-copy"></i>
+                            </div>
+                        )}
+                        <button
+                            className="green-button"
+                            id="hp-new-order-button"
+                            onClick={newOrder}
+                        >
+                            New Order
+                        </button>
+                        <div id="user-restaurants">
+                            <div className="page-subtitle">Your Restaurant</div>
+                            <div id="restaurant-card-container">
+                                {
+                                    <RestaurantCard restaurant={restaurant} key={uuidv4()} />
+                                }
+                            </div>
+                        </div>
                     </div>
-                )}
-                <button
-                    className="green-button"
-                    id="hp-new-order-button"
-                    onClick={newOrder}
-                >
-                    New Order
-                </button>
-                <div id="user-restaurants">
-                    <div className="page-subtitle">Your Restaurant</div>
-                    <div id="restaurant-card-container">
-                        {
-                            <RestaurantCard restaurant={restaurant} key={uuidv4()} />
-                        }
+                    <div id="hp-top-right">
+                        <Weather />
                     </div>
                 </div>
                 <div id="hp-content">
@@ -93,9 +101,6 @@ function RestaurantHomepage({ user }) {
                         <div className="green-text">Green denotes a delivered order</div>
                     </div>
                     <div id="hp-content-right">
-                        {/* <div id="new-items-container">
-                            <div className="page-subtitle">New Items</div>
-                        </div> */}
                         <div id="feedback-container">
                             <FeedbackForm user={user} orders={orders} />
                         </div>
