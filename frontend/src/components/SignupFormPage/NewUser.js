@@ -21,10 +21,6 @@ function NewUser({ props }) {
     const handleNext = async (e) => {
         e.preventDefault();
 
-        /********************************
-        NEED TO FIX CLICK ON INVALID FORM
-        ********************************/
-
         if (password === confirmPassword) {
             const phoneNumber = number.split("-").join("");
             // setErrors([]);
@@ -63,7 +59,7 @@ function NewUser({ props }) {
                 });
         }
 
-        // if psss != confirm
+        // if pssswords don't match
         return setErrors(['Confirm Password must be the same as Password']);
     };
 
