@@ -14,7 +14,7 @@ export const getWeather = () => async (dispatch) => {
     const options = {
         method: 'GET',
         headers: {
-            'X-RapidAPI-Key': 'd9ac816b5cmshcd011ed6c638616p1f4ac3jsn8121d202cf20',
+            'X-RapidAPI-Key': API_KEY,
             'X-RapidAPI-Host': 'weatherapi-com.p.rapidapi.com'
         }
     };
