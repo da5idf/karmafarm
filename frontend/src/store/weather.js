@@ -5,7 +5,7 @@ const HYDRATE_WEATHER = 'weather/HYDRATE'
 export const getWeather = () => async (dispatch) => {
 
     const zipCode = 21111;
-    const numDays = 2;
+    const numDays = 3;
 
     // limit the number of forecast days to 2
     // const response = await fetch(`https://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${zipCode}&days=${numDays}`)
@@ -24,7 +24,9 @@ export const getWeather = () => async (dispatch) => {
 
     if (response) {
         const weather = await response.json();
-        // console.log(weather);
+        // for some reason the API returns today in the forecase list
+        weather.forecast.forecastday = weather.forecast.forecastday.slice(1);
+        console.log(weather);
         dispatch(hydrateWeather(weather));
         return weather;
     }

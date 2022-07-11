@@ -1,11 +1,6 @@
 import React from 'react'
 
-function Forecast({ day, date }) {
-
-    // get name of the day
-    const options = { weekday: "long" }
-    const dateObj = new Date(date);
-    const nameOfDay = new Intl.DateTimeFormat('en-US', options).format(dateObj)
+function Forecast({ day, nameOfDay }) {
 
     return (
         <div className="forecast-day">

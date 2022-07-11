@@ -29,8 +29,13 @@ function Weather() {
                 <img id="current-weather-icon" src={weather.current.condition.icon} alt="" />
             </div>
             <div id="weather-forecast">
-                {weather.forecast.forecastday.map(day => {
-                    return <Forecast day={day.day} date={day.date} />
+                {weather.forecast.forecastday.map((day, idx) => {
+                    // get name of the day
+                    const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+                    const dayIdx = new Date().getDay();
+                    const nameOfDay = days[dayIdx + idx + 1]
+
+                    return <Forecast day={day.day} nameOfDay={nameOfDay} />
                 })}
             </div>
         </div>
