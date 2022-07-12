@@ -33,7 +33,7 @@ function Weather() {
                     // get name of the day
                     const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
                     const dayIdx = new Date().getDay();
-                    const nameOfDay = days[dayIdx + idx + 1]
+                    const nameOfDay = days[(dayIdx + idx + 1) % 7]
 
                     return <Forecast day={day.day} nameOfDay={nameOfDay} />
                 })}
