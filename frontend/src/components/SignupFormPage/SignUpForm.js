@@ -24,7 +24,6 @@ function SignUpForm() {
 
     // if an existing user manually goes to /signup, redirect to /
     if (!userRestaurant.id) {
-        console.log("are we in if?")
         history.push("/")
     }
 
