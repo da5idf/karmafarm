@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
+import { v4 as uuidv4 } from 'uuid';
 
 import './Weather.css'
 import Forecast from './Forecast';
@@ -35,7 +36,7 @@ function Weather() {
                     const dayIdx = new Date().getDay();
                     const nameOfDay = days[(dayIdx + idx + 1) % 7]
 
-                    return <Forecast day={day.day} nameOfDay={nameOfDay} />
+                    return <Forecast day={day.day} nameOfDay={nameOfDay} key={uuidv4()} />
                 })}
             </div>
         </div>
