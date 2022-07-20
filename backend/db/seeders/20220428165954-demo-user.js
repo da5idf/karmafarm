@@ -45,7 +45,7 @@ module.exports = {
         email: 'kai@user.io',
         admin: false,
         farmer: false,
-        hashedPassword: bcrypt.hashSync('password3'),
+        hashedPassword: bcrypt.hashSync('password4'),
         phoneNumber: "1234567892",
       },
     ], {});

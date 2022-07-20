@@ -15,6 +15,10 @@ module.exports = {
         userId: 4,
         restaurantId: 2,
       },
+      {
+        userId: 5,
+        restaurantId: 1,
+      },
     ], {});
   },
 
