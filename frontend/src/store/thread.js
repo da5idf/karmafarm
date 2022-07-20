@@ -3,19 +3,19 @@ import { csrfFetch } from "./csrf"
 const ALL_THREADS = 'threads/ALL';
 const NEW_MESSAGE = 'thread/NEW/MESSAGE';
 
-export const getAllThreads = () => async (dispatch) => {
-    const response = await csrfFetch('api/threads');
+export const getAllThreads = (userId) => async (dispatch) => {
+    const response = await csrfFetch(`api/threads/${userId}`);
 
     if (response.ok) {
-        const threads = await response.json();
-
-        dispatch(hydrateThreads(threads));
+        const { threads, totalUnread } = await response.json();
+        dispatch(hydrateThreads(threads, totalUnread));
     }
 }
 
-const hydrateThreads = (threads) => ({
+const hydrateThreads = (threads, totalUnread) => ({
     type: ALL_THREADS,
-    threads
+    threads,
+    totalUnread
 })
 
 export const newThreadMessage = (message, members) => ({
@@ -34,12 +34,14 @@ const threadReducer = (state = initialState, action) => {
             action.threads.forEach(thread => {
                 newState[thread.members] = thread;
             })
+            newState.totalUnread = action.totalUnread;
             return newState;
         case NEW_MESSAGE:
             // lots of nested structures to work through in order
             // for state to update correctly
             const thread = Object.assign({}, newState[action.members])
-            const threadMsgs = [...thread.Messages] || [];
+            // this ternary catches new threads when thread.Messages = undefined
+            const threadMsgs = thread.Messages ? [...thread.Messages] : [];
             threadMsgs.push(action.message);
             thread.Messages = threadMsgs;
             // update last msg on thread

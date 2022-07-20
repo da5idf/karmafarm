@@ -1,21 +1,24 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+// import { useDispatch, useSelector } from "react-redux";
 import { v4 as uuidv4 } from "uuid"
-import { getAllThreads } from "../../store/thread";
+// import { getAllThreads } from "../../store/thread";
 
 import ChatProfileCard from "./ChatProfileCard";
 import Thread from "./Thread";
 
 function ChatBox({ chatProfiles }) {
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
+
+    // const sessionUser = useSelector(state => state.session.user);
 
     const [inMessage, setInMessage] = useState(false);
     const [header, setHeader] = useState("Messages");
     const [members, setMembers] = useState("");
 
-    useEffect(() => {
-        dispatch(getAllThreads())
-    }, [dispatch])
+    // useEffect(() => {
+    //     // pass in sessionUser id for marking unread msgs
+    //     dispatch(getAllThreads(sessionUser.id))
+    // }, [dispatch])
 
     const closeThread = () => {
         setInMessage(false);
@@ -35,7 +38,6 @@ function ChatBox({ chatProfiles }) {
                 profile={profile}
                 setHeader={setHeader}
                 setInMessage={setInMessage}
-                members={members}
                 setMembers={setMembers}
             />
         });
