@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
 
@@ -31,33 +31,24 @@ function Thread({ members }) {
         else return true;
     }
 
-    // why can't you do this?
-    // const getMessages = () => {
-    //     console.log(messages)
-    //     messages.map(message => {
-    //         console.log(message.text);
-    //         return (
-    //             <ChatMessage
-    //                 key={uuidv4()}
-    //                 message={message}
-    //                 sessionUser={sessionUser}
-    //             />
-    //         )
-    //     }
-    //     )
-    // }
+    const getMessages = () => {
+        return messages.map(message => {
+            return (
+                <ChatMessage
+                    key={uuidv4()}
+                    message={message}
+                    sessionUser={sessionUser}
+                />
+            )
+        }
+        )
+    }
 
     return (
         <div id="messages-container">
             <div id="messages">
                 {
-                    messages.map(message =>
-                        <ChatMessage
-                            key={uuidv4()}
-                            message={message}
-                            sessionUser={sessionUser}
-                        />
-                    )
+                    getMessages()
                 }
             </div>
             <form

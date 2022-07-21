@@ -2,53 +2,44 @@ const express = require('express')
 const asyncHandler = require('express-async-handler');
 
 const router = express.Router();
-const { Thread, Message } = require('../../db/models');
+const { Thread, Message, Sequelize } = require('../../db/models');
+const { Op } = require('sequelize');
 
 router.get(
-    "/",
+    "/:userId",
     asyncHandler(async (req, res, next) => {
+        const { userId } = req.params
+
+        // only get threads that this user is member of
         const threads = await Thread.findAll({
+            where: {
+                members: {
+                    [Op.like]: `%${userId}%`
+                }
+            },
             include: Message
         })
 
-        return res.send(threads);
+        let totalUnread = 0;
+        threads.forEach(thread => {
+            // != for implicit type coercion
+            const otherUser = thread.members.split("-").find(member => member != userId)
+            let count = 0;
+
+            let messages = thread.Messages;
+            messages.length && messages.forEach(message => {
+                // != for string <=> number comparison
+                if (message.userId != userId && !message.read) count++
+            })
+            thread.dataValues.unreadCounts = {
+                [userId]: count,
+                [otherUser]: undefined
+            };
+            totalUnread += count;
+        })
+
+        return res.send({ threads, totalUnread });
     })
 )
-
-// router.get(
-//     "/:members/messages",
-//     asyncHandler(async (req, res, next) => {
-//         const { members } = req.params
-
-//         // returns [thread, boolean] where bool = true if created
-//         // important for next where criteria.
-//         let thread = await Thread.findOne({
-//             where: { members }
-//         })
-
-//         if (!thread) thread = await Thread.create({ members })
-
-//         const messages = await Message.findAll({
-//             where: { threadId: thread.id }
-//         })
-
-//         return res.send(messages);
-//     })
-// )
-
-// router.post(
-//     "/",
-//     asyncHandler(async (req, res, next) => {
-//         const { members } = req.body
-
-//         const thread = await Thread.create({
-//             members
-//         })
-
-//         if (thread) {
-//             return res.send(thread);
-//         }
-//     })
-// )
 
 module.exports = router

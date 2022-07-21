@@ -6,12 +6,15 @@
     display: flex;
     flex-direction: column;
     align-items: flex-end;
+    /* overflow: hidden; */
 }
 
 #chat-icon-container {
+    position: relative;
     padding: .5rem;
-    border-radius: 45px;
+    border-radius: 10px;
     height: 44px;
+    width: 47.25px;
     display: flex;
     gap: .5rem;
     align-items: center;
@@ -21,16 +24,21 @@
     cursor: pointer;
 }
 
-.chat-toggle {
+#chat-icon-container > .fa-solid,
+#chat-icon-container > .fa-regular {
     font-size: 25px;
+    color: #73A577;
 }
 
-.larger-icon {
-    font-size: 30px;
-}
-
-.fa-x {
-    cursor: pointer;
+#totalUnread {
+    position: absolute;
+    top: -20px;
+    right: -15px;
+    padding: .25rem .5rem;
+    border-radius: 45px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 /****************************************/
@@ -47,6 +55,22 @@
     flex-direction: column;
 }
 
+#chat-hero[viewchat='true'] > #chat-box {
+    animation: openChat .5s;
+}
+
+@keyframes openChat {
+    0% {
+        bottom: -500px;
+    }
+    90% {
+        bottom: 20px;
+    }
+    100% {
+        bottom: 0px;
+    }
+}
+
 #chat-header {
     width: 100%;
     left: 0px;
@@ -58,6 +82,10 @@
     justify-content: space-between;
 }
 
+#chat-header > .fa-x {
+    cursor: pointer;
+}
+
 #chat-box-content {
     padding: 1rem;
     height: 100%;
@@ -67,6 +95,7 @@
 /** Chat Profile Card **/
 
 .chat-profile-card {
+    position: relative;
     display: flex;
     flex-direction: column;
     cursor: pointer;
@@ -87,6 +116,18 @@
 .last-msg {
     margin-left: 2rem;
     overflow: hidden;
+}
+
+.unreadCount {
+    display: flex;
+    width: 20px;
+    height: 20px;
+    border-radius: 45px;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: -5px;
+    right: -5px;
 }
 
 /****************************************/

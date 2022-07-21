@@ -4,24 +4,31 @@ import { useDispatch, useSelector } from "react-redux";
 import "./Chat.css"
 import ChatBox from "./ChatBox";
 import { getChatProfiles } from "../../store/users"
+import { getAllThreads } from "../../store/thread";
 
 function Chat({ user }) {
     const dispatch = useDispatch();
+
+    const sessionUser = useSelector(state => state.session.user);
     const chatObjs = useSelector(state => state.users.chatProfiles)
     const chatProfiles = Object.values(chatObjs);
+    const totalUnread = useSelector(state => state.threads.totalUnread)
 
     useEffect(() => {
         dispatch(getChatProfiles(user.id))
+        dispatch(getAllThreads(sessionUser.id))
     }, [dispatch, user.id])
 
     const [viewChat, setViewChat] = useState(false);
 
-    const iconName = viewChat ? "fa-x larger-icon" : "fa-comments"
-    const buttonText = viewChat ? "Close chat" : "Chat with the Farm"
+    const iconName = viewChat ? "fa-solid fa-x" : "fa-regular fa-comments"
 
     return (
-        <div id="chat-hero">
-            {viewChat && <ChatBox chatProfiles={chatProfiles} setViewChat={setViewChat} />}
+        <div
+            id="chat-hero"
+            viewchat={viewChat ? "true" : "false"}
+        >
+            {viewChat && <ChatBox chatProfiles={chatProfiles} />}
             <div
                 id="chat-icon-container"
                 className="yellow-bg"
@@ -30,10 +37,17 @@ function Chat({ user }) {
                     setViewChat(!viewChat)
                 }}
             >
-                {buttonText}
                 <i
-                    className={`fa-solid ${iconName} chat-toggle green-text`}
+                    className={`${iconName}`}
                 ></i>
+                {!viewChat && totalUnread !== undefined && totalUnread[sessionUser.id] > 0 &&
+                    <div
+                        id="totalUnread"
+                        className="red-bg white-text"
+                    >
+                        {totalUnread[sessionUser.id]}
+                    </div>
+                }
             </div>
         </div >
     )

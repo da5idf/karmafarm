@@ -30,8 +30,8 @@ export const SocketProvider = ({ children }) => {
             // socket.connected - boolean describing whether socket is currently connected to server
             console.log('Socket Connected');
 
-            socket.current.on('message:new', ({ message, members }) => {
-                dispatch(newThreadMessage(message, members));
+            socket.current.on('message:new', ({ message, members, receiver }) => {
+                dispatch(newThreadMessage(message, members, receiver));
             });
         }
 
