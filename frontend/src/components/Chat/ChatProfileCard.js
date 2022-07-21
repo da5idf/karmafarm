@@ -1,7 +1,10 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+
+import { markAsRead } from "../../store/messages"
 
 function ChatProfileCard({ profile, setInMessage, setMembers, setHeader }) {
+    const dispatch = useDispatch();
     const sessionUser = useSelector(state => state.session.user)
     const threads = useSelector(state => state.threads);
 
@@ -10,12 +13,17 @@ function ChatProfileCard({ profile, setInMessage, setMembers, setHeader }) {
     // User 4 clicking User 1 -> 1-4    NOT 4-1
     const orderedMembers = [sessionUser.id, profile.id].sort().join("-")
     const last = threads[orderedMembers]?.last
-    const unreadCount = threads[orderedMembers]?.unreadCount;
+    const unreadCount = threads[orderedMembers]?.unreadCounts[sessionUser.id];
 
     const openRoom = () => {
         setInMessage(true);
         setHeader(profile.name);
         setMembers(orderedMembers);
+
+        // only dispatch this if this user has unread msgs
+        if (threads[orderedMembers] && threads[orderedMembers].unreadCounts[sessionUser.id] !== 0) {
+            dispatch(markAsRead(threads[orderedMembers]?.id, sessionUser.id));
+        }
     }
 
     return (

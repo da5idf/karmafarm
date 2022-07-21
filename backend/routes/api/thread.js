@@ -9,6 +9,8 @@ router.get(
     "/:userId",
     asyncHandler(async (req, res, next) => {
         const { userId } = req.params
+
+        // only get threads that this user is member of
         const threads = await Thread.findAll({
             where: {
                 members: {
@@ -20,6 +22,8 @@ router.get(
 
         let totalUnread = 0;
         threads.forEach(thread => {
+            // != for implicit type coercion
+            const otherUser = thread.members.split("-").find(member => member != userId)
             let count = 0;
 
             let messages = thread.Messages;
@@ -27,7 +31,10 @@ router.get(
                 // != for string <=> number comparison
                 if (message.userId != userId && !message.read) count++
             })
-            thread.dataValues.unreadCount = count;
+            thread.dataValues.unreadCounts = {
+                [userId]: count,
+                [otherUser]: undefined
+            };
             totalUnread += count;
         })
 

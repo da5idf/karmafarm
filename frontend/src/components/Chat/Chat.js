@@ -40,7 +40,14 @@ function Chat({ user }) {
                 <i
                     className={`${iconName}`}
                 ></i>
-                <div>{totalUnread}</div>
+                {!viewChat && totalUnread !== undefined && totalUnread[sessionUser.id] > 0 &&
+                    <div
+                        id="totalUnread"
+                        className="red-bg white-text"
+                    >
+                        {totalUnread[sessionUser.id]}
+                    </div>
+                }
             </div>
         </div >
     )
