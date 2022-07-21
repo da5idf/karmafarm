@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 
-
 import "./NewOrder.css"
 import OrderProduct from "../OrderProduct";
 import { getOrderTotal } from "../../utils"

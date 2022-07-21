@@ -31,7 +31,7 @@ function FarmerHomepage({ user }) {
             if (!filterId) return true
             return order.Restaurant.id === filterId
         }).map(order => {
-            return <OrderCard order={order} farmer={true} />
+            return <OrderCard order={order} farmer={true} key={uuidv4()} />
         })
     }
 
@@ -114,7 +114,7 @@ function FarmerHomepage({ user }) {
                                             if (!filterId) return true
                                             return feedback.Restaurant.id === filterId
                                         }).map(feedback => {
-                                            return <FarmerFeedbackCard feedback={feedback} />
+                                            return <FarmerFeedbackCard feedback={feedback} key={uuidv4()} />
                                         })
                                     }
                                 </tbody>

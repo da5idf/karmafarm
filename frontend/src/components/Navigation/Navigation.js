@@ -33,6 +33,10 @@ function Navigation() {
                             Products
                         </NavLink>
                     )}
+                    <NavLink exact to="/reports">
+                        <i className="fa-solid fa-chart-line"></i>
+                        Reports
+                    </NavLink>
                     {/* <NavLink exact to={`users/${user?.id}`}>My Profile</NavLink>
                     <NavLink exact to={`users/${user?.id}`}>My Orders</NavLink>
                     <NavLink exact to={`users/${user?.id}`}>My Team</NavLink> */}
