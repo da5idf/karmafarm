@@ -14,6 +14,7 @@ import NotFound from "./components/NotFound";
 import ProtectedRoute from "./components/ProtectedRoute";
 import RestaurantSignUp from "./components/SignupFormPage/RestaurantSignUp";
 import Chat from "./components/Chat";
+import { UpdateMessages } from "./components/UpdateMessage";
 
 function App() {
   const dispatch = useDispatch();
@@ -48,6 +49,10 @@ function App() {
             <ProtectedRoute exact path="/products">
               <Navigation />
               <AddProduct user={user} />
+            </ProtectedRoute>
+            <ProtectedRoute exact path="/updates">
+              <Navigation />
+              <UpdateMessages />
             </ProtectedRoute>
             <ProtectedRoute exact path="/about">
               <Navigation />

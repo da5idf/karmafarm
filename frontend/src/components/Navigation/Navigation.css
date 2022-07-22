@@ -65,10 +65,7 @@
 
 /********************************/
 /* Font Awesome */
-.fa-arrow-right-from-bracket,
-a > .fa-basket-shopping,
-.fa-house,
-.fa-circle-question,
-.fa-copyright {
+#nav-hero .fa-solid,
+#nav-hero, .fa-regular {
     margin-right: .5rem;
 }

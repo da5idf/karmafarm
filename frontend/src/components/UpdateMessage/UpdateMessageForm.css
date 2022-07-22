@@ -1,0 +1,59 @@
+#weekly-msg-form-hero {
+    /* width: 100%; */
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    padding: .5rem;
+    padding-bottom: .75rem;
+    gap: .25rem;
+    border-radius: 5px;
+    overflow-x: hidden;
+}
+
+#weekly-msg-form-title {
+    padding-bottom: .25rem;
+    color: white;
+}
+
+#weekly-msg-text {
+    width: 100%;
+    font-family: Roboto;
+    font-size: 16px;
+    border-radius: 2px;
+    height: 100px;
+    padding: .4rem .5rem;
+}
+
+#weekly-msg-text:focus {
+    outline: 1px solid black;
+}
+
+#weekly-msg-error-submit-container {
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+    align-items: flex-end;
+}
+
+#weekly-msg-submit-button {
+    width: fit-content;
+    font-size: 16px;
+    margin: .5rem;
+    margin-right: 0px;
+    margin-bottom: 0px;
+    border-radius: 10px;
+}
+
+#weekly-msg-error {
+    color: #A8003B;
+    font-weight: 400;
+}
+
+#weekly-msg-confirmation-modal {
+    background-color: #7EBEC5;
+    color: white;
+    font-family: Arimo;
+    font-size: 25px;
+    animation-name: appear_from_right;
+    animation-duration: .3s;
+}
