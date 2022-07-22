@@ -8,6 +8,11 @@ export const getUpdateMessageModal = (userId) => async (dispatch) => {
 
     if (response.ok) {
         const { read, text } = await response.json();
+        console.log("$$")
+        console.log("$$")
+        console.log("read, text", read, text)
+        console.log("$$")
+        console.log("$$")
         dispatch(hydrateUserUpdateModal(read, text));
         return { read, text }
     }

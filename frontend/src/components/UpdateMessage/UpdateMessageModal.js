@@ -16,7 +16,7 @@ export default function UpdateMessageModal({ user }) {
         dispatch(getUpdateMessageModal(user.id))
             .then(response => setShowUpdateModal(!response.read))
 
-    }, [dispatch])
+    }, [dispatch, user.id])
 
 
     const handleClose = () => {
