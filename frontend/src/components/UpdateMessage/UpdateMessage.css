@@ -1,3 +1,27 @@
+#update-message-inputs {
+    width: 50%;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+#update-message-inputs > input[type=checkbox] {
+    display: none;
+}
+
+#update-message-inputs > [type=checkbox] + label {
+    padding: .5rem;
+    font-size: 20px;
+    border: 1px solid black;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+#update-message-inputs > [type=checkbox]:checked + label {
+    background-color: #F5DA70;
+}   
+
 #newest-update-container {
     position: relative;
     overflow: hidden;
@@ -8,7 +32,7 @@
     gap: .5rem;
     align-items: flex-end;
     border-radius: 6px;
-}
+}    
 
 #newest-update-container > textarea {
     width: 100%;

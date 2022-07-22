@@ -21,7 +21,7 @@ router.post(
     asyncHandler(async (req, res, next) => {
         const { text, userId } = req.body
 
-        await UpdateMessage.create({
+        const newUpdate = await UpdateMessage.create({
             text
         })
 
@@ -34,7 +34,7 @@ router.post(
             await record.save();
         })
 
-        return res.send({ text });
+        return res.send(newUpdate);
     })
 )
 

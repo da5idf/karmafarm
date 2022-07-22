@@ -1,7 +1,27 @@
 import { csrf, csrfFetch } from "./csrf";
 
-const GET_UPDATE_MESSAGES = "updateMessage/NEW";
-const MODIFY_UPDATE_MESSAGE = "updateMessage/MODIFY"
+const NEW_UPDATE_MESSAGE = "updateMessage/NEW"
+const GET_UPDATE_MESSAGES = "updateMessage/GET/ALL";
+const MODIFY_UPDATE_MESSAGE = "updateMessage/MODIFY";
+
+export const newUpdateMessage = (text, userId) => async (dispatch) => {
+    const response = await csrfFetch('/api/updateMessage', {
+        method: "POST",
+        "Content-Type": "application/json",
+        // need the userId to mark all other user's read column as false
+        body: JSON.stringify({ text, userId })
+    })
+
+    if (response.ok) {
+        const message = await response.json();
+        dispatch(hydrateNewMessage(message));
+    }
+}
+
+const hydrateNewMessage = (message) => ({
+    type: NEW_UPDATE_MESSAGE,
+    message
+})
 
 export const getUpdateMessages = () => async (dispatch) => {
     const response = await csrfFetch("/api/updateMessage");
@@ -42,6 +62,10 @@ export default function updateMessagesReducer(state = initialState, action) {
     let newState;
 
     switch (action.type) {
+        case NEW_UPDATE_MESSAGE:
+            newState = [...state];
+            newState.unshift(action.message);
+            return newState
         case GET_UPDATE_MESSAGES:
             newState = action.messages;
             return newState;
