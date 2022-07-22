@@ -14,7 +14,7 @@ export default function UpdateMessages() {
 
     const [newUpdate, setNewUpdate] = useState(true)
     const [text, setText] = useState("")
-    const [confirmationText, setConfirmationText] = useState("")
+    const [confirmationText, setConfirmationText] = useState("Update delivered!")
     const [buttonText, setButtonText] = useState("Send new update")
 
     useEffect(() => {
@@ -56,6 +56,7 @@ export default function UpdateMessages() {
             dispatch(modifyLatestUpdate({ updateId, text }))
             toggleConfirm("newest-update-confirmation");
             setNewUpdate(true);
+            setButtonText("Send new update")
             setText("");
         }
     }
@@ -76,17 +77,22 @@ export default function UpdateMessages() {
                     >
                         Send new update
                     </label>
-                    <input
-                        type="checkbox"
-                        id="modify-update"
-                        checked={!newUpdate}
-                        onChange={handleSelection}
-                    />
-                    <label
-                        htmlFor="modify-update"
-                    >
-                        Modify or Delete your last update
-                    </label>
+                    {/* catch when there have been no updates */}
+                    {updateMessages[0] &&
+                        <>
+                            <input
+                                type="checkbox"
+                                id="modify-update"
+                                checked={!newUpdate}
+                                onChange={handleSelection}
+                            />
+                            <label
+                                htmlFor="modify-update"
+                            >
+                                Modify or Delete your last update
+                            </label>
+                        </>
+                    }
                 </div>
                 <div id="newest-update-container" className='green-bg'>
                     <textarea

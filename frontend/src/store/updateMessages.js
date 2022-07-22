@@ -1,4 +1,4 @@
-import { csrf, csrfFetch } from "./csrf";
+import { csrfFetch } from "./csrf";
 
 const NEW_UPDATE_MESSAGE = "updateMessage/NEW";
 const GET_UPDATE_MESSAGES = "updateMessage/GET/ALL";
