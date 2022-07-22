@@ -1,8 +1,9 @@
 import { csrf, csrfFetch } from "./csrf";
 
-const NEW_UPDATE_MESSAGE = "updateMessage/NEW"
+const NEW_UPDATE_MESSAGE = "updateMessage/NEW";
 const GET_UPDATE_MESSAGES = "updateMessage/GET/ALL";
 const MODIFY_UPDATE_MESSAGE = "updateMessage/MODIFY";
+const DELETE_UPDATE = "updateMessage/DELETE"
 
 export const newUpdateMessage = (text, userId) => async (dispatch) => {
     const response = await csrfFetch('/api/updateMessage', {
@@ -56,6 +57,17 @@ const hydrateUpdateModification = (update) => ({
     update
 })
 
+export const deleteLastUpdate = (updateId) => async (dispatch) => {
+    await csrfFetch(`/api/updateMessage/${updateId}`, {
+        method: "DELETE"
+    })
+    dispatch(hydrateDeleteLastUpdate())
+}
+
+const hydrateDeleteLastUpdate = () => ({
+    type: DELETE_UPDATE
+})
+
 const initialState = []
 
 export default function updateMessagesReducer(state = initialState, action) {
@@ -73,6 +85,10 @@ export default function updateMessagesReducer(state = initialState, action) {
             newState = [...state];
             // from GET_UPDATE_MESSAGES, 0 idx guarantees newest update
             newState[0] = action.update;
+            return newState;
+        case DELETE_UPDATE:
+            newState = [...state]
+            newState.shift();
             return newState;
         default:
             return state

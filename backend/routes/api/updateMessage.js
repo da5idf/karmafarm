@@ -52,4 +52,24 @@ router.patch(
     })
 )
 
+router.delete(
+    "/:updateId",
+    asyncHandler(async (req, res, next) => {
+        const { updateId } = req.params;
+
+        const update = await UpdateMessage.findByPk(updateId);
+        await update.destroy();
+
+        // set all user's read columns to true so that the previous
+        // update doesn't populate their screen on login.
+        const records = await User_UpdateMessage.findAll()
+        records.forEach(async record => {
+            record.read = true;
+            await record.save();
+        })
+
+        res.send(update);
+    })
+)
+
 module.exports = router

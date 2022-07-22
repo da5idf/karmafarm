@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import './UpdateMessage.css'
-import { getUpdateMessages, modifyLatestUpdate, newUpdateMessage } from '../../store/updateMessages';
+import { deleteLastUpdate, getUpdateMessages, modifyLatestUpdate, newUpdateMessage } from '../../store/updateMessages';
 import UpdateMessage from './UpdateMessage';
 import { toggleConfirm } from '../../utils';
 
@@ -34,8 +34,13 @@ export default function UpdateMessages() {
         }
     }
 
-    const deleteUpdate = () => {
-
+    const deleteUpdate = (e) => {
+        e.stopPropagation();
+        dispatch(deleteLastUpdate(updateMessages[0].id));
+        setConfirmationText("Update deleted");
+        toggleConfirm("newest-update-confirmation")
+        setText("")
+        setNewUpdate(true);
     }
 
     const handleSubmit = (e) => {
