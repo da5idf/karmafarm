@@ -198,6 +198,21 @@ td {
     outline: 2px solid #ffea97c7;
 }
 
+.red-button {
+    width: 100%;
+    text-align: center;
+    background-color: #A8003B;
+    padding: .5rem;
+    border-radius: 5px;
+    font-size: 18px;
+    font-weight: 400;
+    color: white;
+}
+
+.red-button:hover {
+    background-color: #a8003ba1;
+}
+
 .form-field {
     position: relative;
 }
@@ -285,7 +300,7 @@ input::-webkit-inner-spin-button {
 
 @keyframes appear_from_right {
     0% {
-        left: 475px;
+        left: 100%;
     }
     100% {
         left: 0px;

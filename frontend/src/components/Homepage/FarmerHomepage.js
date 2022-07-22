@@ -9,19 +9,20 @@ import { copyKey } from "../../utils"
 import RestaurantCard from "../RestaurantCard";
 import OrderCard from "../OrderCard/OrderCard";
 import { getFeedback } from "../../store/feedback";
-import { FarmerFeedbackCard } from "../Feedback"
+import { FarmerFeedbackCard } from "../Feedback";
+import { UpdateMessageForm } from "../UpdateMessage";
 
 function FarmerHomepage({ user }) {
     const dispatch = useDispatch();
     const history = useHistory();
     const restaurants = useSelector(state => state.restaurants.all);
     const allOrders = useSelector(state => state.orders.all);
-    const feedbackObjs = useSelector(state => state.feedback)
+    const feedbackObjs = useSelector(state => state.feedback);
     const allFeedback = Object.values(feedbackObjs);
     const [filterId, setFilterId] = useState(undefined);
 
     useEffect(() => {
-        dispatch(getAllRestaurants(user.id))
+        dispatch(getAllRestaurants(user.id));
         dispatch(getAllOrders());
         dispatch(getFeedback());
     }, [dispatch, user.id])
@@ -31,7 +32,7 @@ function FarmerHomepage({ user }) {
             if (!filterId) return true
             return order.Restaurant.id === filterId
         }).map(order => {
-            return <OrderCard order={order} farmer={true} />
+            return <OrderCard order={order} farmer={true} key={uuidv4()} />
         })
     }
 
@@ -43,39 +44,46 @@ function FarmerHomepage({ user }) {
         <div className="page-hero">
             <div className="page-content">
                 <div className="page-title">Hello {user?.name.split(" ")[0]}, welcome back!</div>
-                {user.admin && (
-                    <div id="admin-container" onClick={copyKey}>
-                        <div id="admin-text">Admin Key:</div>
-                        <div id="admin-key">{user.key}</div>
-                        <i className="fa-solid fa-copy"></i>
-                    </div>
-                )}
-                <button
-                    className="green-button"
-                    id="hp-new-order-button"
-                    onClick={() => history.push("/products")}
-                >
-                    Add and Edit Products
-                </button>
-                <div id="user-restaurants">
-                    <div className="page-subtitle">Karma Farm's Restaurants</div>
-                    <div id="restaurant-card-container">
-                        {
-                            restaurants.filter(restaurant => {
-                                if (!filterId) return true
-                                else return restaurant.id === filterId
-                            }).map(restaurant => {
-                                return <RestaurantCard restaurant={restaurant} setFilterId={setFilterId} user={user} key={uuidv4()} />
-                            })
-                        }
-                        {filterId && (
-                            <button id="clear-filter"
-                                className="basic-button"
-                                onClick={() => setFilterId(undefined)}
-                            >
-                                Clear Filter
-                            </button>
+                <div id="hp-top">
+                    <div id="hp-top-left">
+                        {user.admin && (
+                            <div id="admin-container" onClick={copyKey}>
+                                <div id="admin-text">Admin Key:</div>
+                                <div id="admin-key">{user.key}</div>
+                                <i className="fa-solid fa-copy"></i>
+                            </div>
                         )}
+                        <button
+                            className="green-button"
+                            id="hp-new-order-button"
+                            onClick={() => history.push("/products")}
+                        >
+                            Add and Edit Products
+                        </button>
+                        <div id="user-restaurants">
+                            <div className="page-subtitle">Karma Farm's Restaurants</div>
+                            <div id="restaurant-card-container">
+                                {
+                                    restaurants.filter(restaurant => {
+                                        if (!filterId) return true
+                                        else return restaurant.id === filterId
+                                    }).map(restaurant => {
+                                        return <RestaurantCard restaurant={restaurant} setFilterId={setFilterId} user={user} key={uuidv4()} />
+                                    })
+                                }
+                                {filterId && (
+                                    <button id="clear-filter"
+                                        className="basic-button"
+                                        onClick={() => setFilterId(undefined)}
+                                    >
+                                        Clear Filter
+                                    </button>
+                                )}
+                            </div>
+                        </div>
+                    </div>
+                    <div id="hp-top-right">
+                        <UpdateMessageForm userId={user.id} />
                     </div>
                 </div>
                 <div id="hp-content">
@@ -114,7 +122,7 @@ function FarmerHomepage({ user }) {
                                             if (!filterId) return true
                                             return feedback.Restaurant.id === filterId
                                         }).map(feedback => {
-                                            return <FarmerFeedbackCard feedback={feedback} />
+                                            return <FarmerFeedbackCard feedback={feedback} key={uuidv4()} />
                                         })
                                     }
                                 </tbody>

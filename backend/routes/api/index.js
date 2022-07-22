@@ -11,6 +11,8 @@ const order_productsRouter = require('./orders_products.js')
 const feedbackRouter = require('./feedback.js');
 const threadRouter = require('./thread.js');
 const messageRouter = require('./message.js');
+const updateMessageRouter = require('./updateMessage.js');
+const userUpdateMessageRouter = require('./userUpdateMessage')
 
 router.use('/session', sessionRouter);
 router.use('/users', usersRouter);
@@ -23,5 +25,7 @@ router.use('/orders_products', order_productsRouter);
 router.use('/feedback', feedbackRouter);
 router.use('/threads', threadRouter);
 router.use('/messages', messageRouter);
+router.use('/updateMessage', updateMessageRouter);
+router.use('/user_updatemessage', userUpdateMessageRouter);
 
 module.exports = router;

@@ -5,7 +5,7 @@ const { Op } = require("sequelize");
 
 const { handleValidationErrors } = require('../../utils/validation');
 const { setTokenCookie, requireAuth } = require('../../utils/auth');
-const { User, Restaurant, Member } = require('../../db/models');
+const { User, Restaurant, Member, User_UpdateMessage } = require('../../db/models');
 
 const router = express.Router();
 
@@ -44,6 +44,12 @@ router.post(
 
         if (user) {
             setTokenCookie(res, user)
+
+            // create a record on the User_UpdateMessage Table
+            User_UpdateMessage.create({
+                userId: user.id
+            })
+
             return res.send({ user });
         }
     })
