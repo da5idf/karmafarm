@@ -1,0 +1,49 @@
+#updateMessage-modal-hero {
+    position: relative;
+    width: 500px;
+    padding: 2rem;
+    border-radius: 6px;
+    background-color: #f2f2f2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#updateMessage-modal-hero .fa-x {
+    font-size: 15px;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    cursor: pointer;
+}
+
+#updateMessage-modal-title {
+    width: 100%;
+    display: flex;
+    gap: .5rem;
+    font-size: 25px;
+    font-weight: 500;
+    padding-bottom: .5rem;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid #c2c2c2;
+}
+
+#updateMessage-modal-text {
+    align-self: flex-start;
+}
+
+#updateMessage-modal-button {
+    width: 25%;
+    margin-top: 2rem;
+    font-size: 15px;
+    align-self: flex-end;
+}
+
+#updateMessage-modal-button:hover {
+    width: 25%;
+    margin-top: 2rem;
+    font-size: 15px;
+    align-self: flex-end;
+    outline: 2px solid #7ebec5c0;
+    background-color: #7ebec5c0;
+}
