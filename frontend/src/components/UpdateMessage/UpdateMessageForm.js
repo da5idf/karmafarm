@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 
 import './UpdateMessageForm.css';
 import { csrfFetch } from '../../store/csrf';
 import { toggleConfirm } from '../../utils';
+import { newUpdateMessage } from '../../store/updateMessages';
 
 export default function UpdateMessageForm({ userId }) {
+    const dispatch = useDispatch();
 
     const [text, setText] = useState("");
     const [error, setError] = useState("");
@@ -14,11 +17,7 @@ export default function UpdateMessageForm({ userId }) {
 
         if (!validateUpdate()) return;
 
-        await csrfFetch('/api/updateMessage', {
-            method: "POST",
-            "Content-Type": "application/json",
-            body: JSON.stringify({ text, userId })
-        })
+        dispatch(newUpdateMessage(text, userId))
 
         toggleConfirm("weekly-msg-confirmation-modal");
         setText("");

@@ -20,8 +20,6 @@ router.post(
     "/",
     asyncHandler(async (req, res, next) => {
         const { text, userId } = req.body
-        console.log("backend text", text);
-        console.log("backend userId", userId);
 
         const newUpdate = await UpdateMessage.create({
             userId,
@@ -31,7 +29,6 @@ router.post(
         const records = await User_UpdateMessage.findAll({
             where: { userId: { [Op.not]: userId } }
         })
-        console.log("backend records", records);
 
         records.forEach(async record => {
             record.read = false;
