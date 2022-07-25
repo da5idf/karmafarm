@@ -13,8 +13,9 @@ import About from "./components/About/About";
 import NotFound from "./components/NotFound";
 import ProtectedRoute from "./components/ProtectedRoute";
 import RestaurantSignUp from "./components/SignupFormPage/RestaurantSignUp";
-import Chat from "./components/Chat";
 import Reports from "./components/Reports";
+// import Chat from "./components/Chat";
+import { UpdateMessages } from "./components/UpdateMessage";
 
 function App() {
   const dispatch = useDispatch();
@@ -37,7 +38,7 @@ function App() {
               <LoginForm />
             </Route>
             <Route path="/signup">
-              <SignupFormPage />
+              <SignupFormPage sessionUser={user} />
             </Route>
             <ProtectedRoute path="/restaurant/signup">
               <RestaurantSignUp user={user} />
@@ -54,6 +55,10 @@ function App() {
               <Navigation />
               <Reports user={user} />
             </ProtectedRoute>
+            <ProtectedRoute exact path="/updates">
+              <Navigation />
+              <UpdateMessages />
+            </ProtectedRoute>
             <ProtectedRoute exact path="/about">
               <Navigation />
               <About user={user} />
@@ -63,8 +68,9 @@ function App() {
               <NotFound />
             </Route>
           </Switch>
-        )}
-      </div>
+        )
+        }
+      </div >
     </>
   );
 }

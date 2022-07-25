@@ -57,3 +57,12 @@ export const createPDF = (order) => {
 
         })
 }
+
+// toggles confirmation modals
+export const toggleConfirm = (id) => {
+    const modal = document.getElementById(id);
+    modal.style.display = "flex";
+    setTimeout(() => {
+        modal.style.display = "none";
+    }, 1500)
+}

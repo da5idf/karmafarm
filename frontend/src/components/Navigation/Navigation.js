@@ -28,10 +28,16 @@ function Navigation() {
                         Dashboard
                     </NavLink>
                     {user.farmer && (
-                        <NavLink exact to="/products">
-                            <i className="fa-solid fa-basket-shopping"></i>
-                            Products
-                        </NavLink>
+                        <>
+                            <NavLink exact to="/products">
+                                <i className="fa-solid fa-basket-shopping"></i>
+                                Products
+                            </NavLink>
+                            <NavLink exact to="/updates">
+                                <i className="fa-solid fa-clipboard"></i>
+                                Weekly Updates
+                            </NavLink>
+                        </>
                     )}
                     <NavLink exact to="/reports">
                         <i className="fa-solid fa-chart-line"></i>

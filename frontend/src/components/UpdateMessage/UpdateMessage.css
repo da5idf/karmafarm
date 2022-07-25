@@ -1,0 +1,85 @@
+#update-message-inputs {
+    width: 50%;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+#update-message-inputs > input[type=checkbox] {
+    display: none;
+}
+
+#update-message-inputs > [type=checkbox] + label {
+    padding: .5rem;
+    font-size: 20px;
+    border: 1px solid black;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+#update-message-inputs > [type=checkbox]:checked + label {
+    background-color: #F5DA70;
+}   
+
+#newest-update-container {
+    position: relative;
+    overflow: hidden;
+    width: 50%;
+    padding: .5rem;
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    align-items: flex-end;
+    border-radius: 6px;
+}    
+
+#newest-update-container > textarea {
+    width: 100%;
+    font-size: 18px;
+    height: 150px;
+    padding: .5rem;
+}
+
+#update-message-buttons {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+#update-message-buttons > button {
+    width: fit-content;
+    border-radius: 10px;
+    font-size: 15px;
+}
+
+#update-messages-container {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+}
+
+#newest-update-confirmation {
+    background-color: #7EBEC5;
+    color: white;
+    font-family: Arimo;
+    font-size: 25px;
+    animation-name: appear_from_right;
+    animation-duration: .3s;
+}
+
+/*******************************************************/
+/* Individual Updates */
+
+.update-message-hero {
+    padding: .25rem;
+    display: grid;
+    grid-template-columns: 150px 450px;
+    gap: 1rem;
+}
+
+.update-message-hero > div {
+    width: 450px;
+    white-space: pre-wrap;
+}

@@ -9,14 +9,13 @@ import { getAllThreads } from "../../store/thread";
 function Chat({ user }) {
     const dispatch = useDispatch();
 
-    const sessionUser = useSelector(state => state.session.user);
     const chatObjs = useSelector(state => state.users.chatProfiles)
     const chatProfiles = Object.values(chatObjs);
     const totalUnread = useSelector(state => state.threads.totalUnread)
 
     useEffect(() => {
         dispatch(getChatProfiles(user.id))
-        dispatch(getAllThreads(sessionUser.id))
+        dispatch(getAllThreads(user.id))
     }, [dispatch, user.id])
 
     const [viewChat, setViewChat] = useState(false);
@@ -40,12 +39,12 @@ function Chat({ user }) {
                 <i
                     className={`${iconName}`}
                 ></i>
-                {!viewChat && totalUnread !== undefined && totalUnread[sessionUser.id] > 0 &&
+                {!viewChat && totalUnread !== undefined && totalUnread[user.id] > 0 &&
                     <div
                         id="totalUnread"
                         className="red-bg white-text"
                     >
-                        {totalUnread[sessionUser.id]}
+                        {totalUnread[user.id]}
                     </div>
                 }
             </div>
