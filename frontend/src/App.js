@@ -37,7 +37,7 @@ function App() {
               <LoginForm />
             </Route>
             <Route path="/signup">
-              <SignupFormPage />
+              <SignupFormPage sessionUser={user} />
             </Route>
             <ProtectedRoute path="/restaurant/signup">
               <RestaurantSignUp user={user} />

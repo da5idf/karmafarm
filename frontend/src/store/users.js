@@ -14,7 +14,6 @@ export const getUserRestaurants = (userId) => async (dispatch) => {
         dispatch(hydrateUserRestaurants(restaurant))
         return restaurant;
     }
-
 }
 
 const hydrateUserRestaurants = (restaurant) => ({

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Redirect, useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
 import './SignupForm.css';
 import FormBanner from "../FormBanner";
@@ -7,11 +8,11 @@ import Prompt from "./Prompt";
 import NewUser from "./NewUser";
 import KeyForm from "./KeyForm";
 import NewRestaurant from "./NewRestaurant";
-import { useSelector } from "react-redux";
+import { getUserRestaurants } from "../../store/users";
 
-function SignUpForm() {
+function SignUpForm({ sessionUser }) {
     const history = useHistory();
-    const userRestaurant = useSelector(state => state.users.restaurant)
+    const dispatch = useDispatch();
 
     const prompt = "PROMPT";
     const key = "KEY"
@@ -23,8 +24,11 @@ function SignUpForm() {
     const [restaurant, setRestaurant] = useState(null);
 
     // if an existing user manually goes to /signup, redirect to /
-    if (!userRestaurant.id) {
-        history.push("/")
+    if (sessionUser?.id) {
+        dispatch(getUserRestaurants(sessionUser.id))
+            .then(restaurant => {
+                if (restaurant.id) history.push("/")
+            })
     }
 
     const handleCancel = () => {
