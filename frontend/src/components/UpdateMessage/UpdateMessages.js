@@ -53,6 +53,7 @@ export default function UpdateMessages() {
             setText("");
         } else {
             const updateId = updateMessages[0].id
+            console.log(text);
             dispatch(modifyLatestUpdate({ updateId, text }))
             toggleConfirm("newest-update-confirmation");
             setNewUpdate(true);

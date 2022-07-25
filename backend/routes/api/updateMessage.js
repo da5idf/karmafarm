@@ -22,6 +22,7 @@ router.post(
         const { text, userId } = req.body
 
         const newUpdate = await UpdateMessage.create({
+            userId,
             text
         })
 
@@ -47,6 +48,15 @@ router.patch(
         const update = await UpdateMessage.findByPk(updateId);
         update.text = text;
         await update.save();
+
+        const records = await User_UpdateMessage.findAll({
+            where: { userId: { [Op.not]: update.userId } }
+        })
+
+        records.forEach(async record => {
+            record.read = false;
+            await record.save();
+        })
 
         res.send(update);
     })

@@ -29,7 +29,9 @@
 }
 
 #updateMessage-modal-text {
+    overflow-wrap: break-word;
     align-self: flex-start;
+    white-space: pre-wrap;
 }
 
 #updateMessage-modal-button {
