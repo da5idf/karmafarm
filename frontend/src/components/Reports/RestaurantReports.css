@@ -1,0 +1,34 @@
+#restaurant-report-inputs {
+    width: 50%;
+    display: flex;
+    gap: 2rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+#restaurant-report-inputs > input[type=checkbox] {
+    display: none;
+}
+
+#restaurant-report-inputs > [type=checkbox] + label {
+    padding: .5rem;
+    font-size: 20px;
+    border: 1px solid black;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+#restaurant-report-inputs > [type=checkbox]:checked + label {
+    background-color: #F5DA70;
+}   
+
+#restaurant-report-inputs > label {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+#graph-container {
+    width: 100%;
+    min-height: 400px;
+}

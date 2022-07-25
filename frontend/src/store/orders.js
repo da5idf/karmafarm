@@ -192,7 +192,7 @@ const removeOrderFromStore = (orderId) => ({
 
 const initialState = {
     all: [],
-    restaurantOrders: [],
+    restaurantOrders: {},
     thisOrder: {},
 };
 
@@ -200,7 +200,7 @@ const orderReducer = (state = initialState, action) => {
     let newState;
     let newAll = [];
     let updatedOrder = {};
-    let updatedRestOrders = [];
+    let updatedRestOrders = {};
 
     switch (action.type) {
         case NEW_ORDER:

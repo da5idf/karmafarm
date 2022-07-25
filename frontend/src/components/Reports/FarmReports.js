@@ -8,16 +8,7 @@ export default function FarmReports() {
 
     return (
         <div className="page-hero">
-            <div
-                className="datepicker"
-            >
-                <input
-                    type="date"
-                    onChange={(e) => setFromDate(e.target.value)}
-                    value={fromDate}
-                    activeStartDate={new Date()}
-                />
-            </div>
+
         </div>
     )
 }

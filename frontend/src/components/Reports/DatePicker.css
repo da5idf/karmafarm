@@ -1,0 +1,16 @@
+#date-pickers {
+    display: flex;
+    align-self: flex-start;
+    gap: 3rem;
+    margin-bottom: 1rem;
+}
+
+.datepicker {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.datepicker {
+    font-size: 20px;
+}
