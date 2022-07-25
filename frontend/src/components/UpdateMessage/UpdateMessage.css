@@ -74,6 +74,12 @@
 
 .update-message-hero {
     padding: .25rem;
-    display: flex;
+    display: grid;
+    grid-template-columns: 150px 450px;
     gap: 1rem;
+}
+
+.update-message-hero > div {
+    width: 450px;
+    white-space: pre-wrap;
 }
