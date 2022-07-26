@@ -28,7 +28,13 @@
     gap: 1rem;
 }
 
+#report-query {
+    width: fit-content;
+}
+
 #graph-container {
-    width: 100%;
+    margin-top: 2rem;
+    /* width: 50%; */
     min-height: 400px;
+    max-height: 600px;
 }

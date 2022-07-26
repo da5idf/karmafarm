@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Line, Doughnut } from 'react-chartjs-2';
-import { Chart, ArcElement, CategoryScale, LinearScale, PointElement, LineElement } from 'chart.js'
+import { Chart, ArcElement, CategoryScale, LinearScale, PointElement, LineElement, Tooltip } from 'chart.js'
 
 import './RestaurantReports.css'
 import DatePicker from './DatePicker';
@@ -9,7 +9,7 @@ import { restaurantLineChart, restaurantDonutChart } from './reportFunctions';
 import { getRestaurantOrders } from '../../store/orders';
 import { getUserRestaurants } from '../../store/users';
 
-Chart.register(ArcElement, CategoryScale, LinearScale, PointElement, LineElement);
+Chart.register(ArcElement, CategoryScale, LinearScale, PointElement, LineElement, Tooltip);
 
 export default function RestaurantReports() {
     const dispatch = useDispatch();
@@ -20,19 +20,36 @@ export default function RestaurantReports() {
 
     const [fromDate, setFromDate] = useState();
     const [toDate, setToDate] = useState();
+    const [viewGraph, setViewGraph] = useState(false);
     const [lineGraph, setLineGraph] = useState(true);
+    const [data, setData] = useState({
+        labels: {},
+        datasets: []
+    });
+    const [options, setOptions] = useState({});
 
-    const generateGraph = () => {
-
+    const generateGraph = (e) => {
+        if (lineGraph) {
+            const [lineData, lineOptions] = restaurantLineChart(orders);
+            setData(lineData);
+            setOptions(lineOptions);
+        }
+        else {
+            const [donutData, donutOptions] = restaurantDonutChart(orders);
+            setData(donutData);
+            setOptions(donutOptions);
+        }
+        setViewGraph(true);
     }
 
     const handleSelection = () => {
+        setViewGraph(false);
         setLineGraph(!lineGraph);
     }
 
-    const options = {
-        maintainAspectRatio: false
-    }
+    useEffect(() => {
+
+    }, [viewGraph])
 
     useEffect(() => {
         if (!Object.values(orders).length) {
@@ -79,18 +96,23 @@ export default function RestaurantReports() {
                         Donut Graph
                     </label>
                 </div>
-                <button>
+                <button
+                    id="report-query"
+                    className="green-button"
+                    onClick={generateGraph}
+                >
                     Query Results
                 </button>
                 <div id="graph-container">
-                    {orders.length && lineGraph ?
+                    {viewGraph && lineGraph &&
                         <Line
-                            data={restaurantLineChart(orders)}
+                            data={data}
                             options={options}
                         />
-                        :
+                    }
+                    {viewGraph && !lineGraph &&
                         <Doughnut
-                            data={restaurantDonutChart(orders)}
+                            data={data}
                             options={options}
                         />
                     }
