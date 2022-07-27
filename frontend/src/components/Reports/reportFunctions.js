@@ -1,7 +1,6 @@
 import { formatDate, getOrderTotal } from "../../utils";
 
-export const restaurantLineChart = (orders) => {
-
+export const restaurantLineChart = (orders, start, end) => {
     if (!orders) return;
 
     const labels = [];
@@ -9,11 +8,16 @@ export const restaurantLineChart = (orders) => {
 
     orders.forEach(order => {
         if (order.dateOfDelivery) {
-            console.log(order);
-            // two quantities here split by '/'
-            // enables us to access both data values from context in the plugin callbacks below
-            labels.push(`Order ${order.id}/${formatDate(order.dateOfDelivery)}`);
-            dataPoints.push(getOrderTotal(order, true));
+            start = new Date(start).getTime();
+            end = new Date(end).getTime();
+            // remove timezone difference on database date string
+            let delivery = new Date(order.dateOfDelivery.split("T")[0]).getTime();
+            if (start <= delivery && end >= delivery) {
+                // two quantities here split by '/'
+                // enables us to access both data values from context in the plugin callbacks below
+                labels.push(`Order ${order.id} - ${formatDate(order.dateOfDelivery)}`);
+                dataPoints.push(getOrderTotal(order, true));
+            }
         }
     })
     const data = {
@@ -46,11 +50,11 @@ export const restaurantLineChart = (orders) => {
                 callbacks: {
                     label: function (context) {
                         // format the tooltip label to include a dollar sign
-                        return `${context.label.split("/")[0]}:  $${context.formattedValue}`
+                        return `${context.label.split(" - ")[0]}:  $${context.formattedValue}`
                     },
                     title: function (context) {
                         // for some reason context is an array here.
-                        return context[0].label.split("/")[1];
+                        return context[0].label.split(" - ")[1];
                     }
                 }
             }
@@ -59,8 +63,7 @@ export const restaurantLineChart = (orders) => {
     return [data, options]
 }
 
-export const restaurantDonutChart = (orders) => {
-    console.log("DONUT GRAPH FUNCTION")
+export const restaurantDonutChart = (orders, start, end) => {
     if (!orders) return;
 
     const products_costs = {};
@@ -79,7 +82,6 @@ export const restaurantDonutChart = (orders) => {
     })
     const labels = Object.keys(products_costs);
     const dataPoints = Object.values(products_costs);
-    console.log(dataPoints)
     const data = {
         labels,
         datasets: [
@@ -118,6 +120,10 @@ export const restaurantDonutChart = (orders) => {
                     }
                 }
             }
+        },
+        title: {
+            display: true,
+            text: "NEW TITLE"
         }
     }
 

@@ -8,7 +8,8 @@ function InvoiceItem({ record, idx }) {
         <tr>
             <td>{idx + 1}</td>
             <td>{record.Product.name}</td>
-            <td>${Number(record.weight).toFixed(2)}</td>
+            <td>{Number(record.weight).toFixed(2)}</td>
+            <td>${Number(record.Product.pricePerPound).toFixed(2)}</td>
             <td>${subTotal.toFixed(2)}</td>
         </tr>
     )

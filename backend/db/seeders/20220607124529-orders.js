@@ -17,6 +17,16 @@ module.exports = {
     return queryInterface.bulkInsert('Orders', [
       {
         restaurantId: 1,
+        submitted: true,
+        delivered: true,
+        dateOfDelivery: tenDaysAgo,
+        paid: true,
+      },
+      {
+        restaurantId: 1,
+        submitted: true,
+        delivered: true,
+        dateOfDelivery: oneDayAgo,
       },
       {
         restaurantId: 1,
@@ -25,12 +35,9 @@ module.exports = {
       },
       {
         restaurantId: 1,
-        submitted: true,
-        delivered: true,
-        dateOfDelivery: oneDayAgo,
       },
       {
-        restaurantId: 1,
+        restaurantId: 2,
         submitted: true,
         delivered: true,
         dateOfDelivery: tenDaysAgo,
@@ -38,6 +45,9 @@ module.exports = {
       },
       {
         restaurantId: 2,
+        submitted: true,
+        delivered: true,
+        dateOfDelivery: oneDayAgo,
       },
       {
         restaurantId: 2,
@@ -46,16 +56,6 @@ module.exports = {
       },
       {
         restaurantId: 2,
-        submitted: true,
-        delivered: true,
-        dateOfDelivery: oneDayAgo,
-      },
-      {
-        restaurantId: 2,
-        submitted: true,
-        delivered: true,
-        dateOfDelivery: tenDaysAgo,
-        paid: true,
       },
 
     ], {});

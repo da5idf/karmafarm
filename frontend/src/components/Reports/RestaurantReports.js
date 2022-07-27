@@ -8,6 +8,7 @@ import DatePicker from './DatePicker';
 import { restaurantLineChart, restaurantDonutChart } from './reportFunctions';
 import { getRestaurantOrders } from '../../store/orders';
 import { getUserRestaurants } from '../../store/users';
+import InfoModal from '../InfoModal/InfoModal';
 
 Chart.register(ArcElement, CategoryScale, LinearScale, PointElement, LineElement, Tooltip);
 
@@ -18,8 +19,8 @@ export default function RestaurantReports() {
     const orders = Object.values(orderObjs);
     const user = useSelector(state => state.session.user);
 
-    const [fromDate, setFromDate] = useState();
-    const [toDate, setToDate] = useState();
+    const [fromDate, setFromDate] = useState("");
+    const [toDate, setToDate] = useState("");
     const [viewGraph, setViewGraph] = useState(false);
     const [lineGraph, setLineGraph] = useState(true);
     const [data, setData] = useState({
@@ -27,15 +28,22 @@ export default function RestaurantReports() {
         datasets: []
     });
     const [options, setOptions] = useState({});
+    const [showModal, setShowModal] = useState(false);
 
     const generateGraph = (e) => {
+        // error handle if no dates have been selected
+        if (!fromDate || !toDate) {
+            setShowModal(true);
+            return
+        }
+
         if (lineGraph) {
-            const [lineData, lineOptions] = restaurantLineChart(orders);
+            const [lineData, lineOptions] = restaurantLineChart(orders, fromDate, toDate);
             setData(lineData);
             setOptions(lineOptions);
         }
         else {
-            const [donutData, donutOptions] = restaurantDonutChart(orders);
+            const [donutData, donutOptions] = restaurantDonutChart(orders, fromDate, toDate);
             setData(donutData);
             setOptions(donutOptions);
         }
@@ -60,6 +68,16 @@ export default function RestaurantReports() {
         }
     }, [dispatch, user.id, orders])
 
+    if (showModal) {
+        return (
+            <InfoModal
+                titleText={"Dates Not Selected"}
+                content={"Please select From and To dates in order to generate a graph."}
+                handleClose={() => setShowModal(false)}
+            />
+        )
+    }
+
     return (
         <div className="page-hero">
             <div className="page-content">
@@ -81,7 +99,7 @@ export default function RestaurantReports() {
                         htmlFor="restaurant-line"
                     >
                         <i className="fa-solid fa-chart-line"></i>
-                        Line Graph
+                        Order Totals Over Time
                     </label>
                     <input
                         type="checkbox"
@@ -93,7 +111,7 @@ export default function RestaurantReports() {
                         htmlFor="restaurant-donut"
                     >
                         <i className="fa-solid fa-chart-pie"></i>
-                        Donut Graph
+                        Breakdown by Product
                     </label>
                 </div>
                 <button

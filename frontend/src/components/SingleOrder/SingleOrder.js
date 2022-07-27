@@ -107,6 +107,7 @@ function SingleOrder({ order }) {
                                         <th className="invoice-table-header">Item</th>
                                         <th className="invoice-table-header">Item Name</th>
                                         <th className="invoice-table-header">Item Quantity</th>
+                                        <th className="invoice-table-header">Item Price</th>
                                         <th className="invoice-table-header">Item Subtotal</th>
                                     </tr>
 
