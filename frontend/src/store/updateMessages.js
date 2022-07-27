@@ -5,12 +5,19 @@ const GET_UPDATE_MESSAGES = "updateMessage/GET/ALL";
 const MODIFY_UPDATE_MESSAGE = "updateMessage/MODIFY";
 const DELETE_UPDATE = "updateMessage/DELETE"
 
-export const newUpdateMessage = (text, userId) => async (dispatch) => {
+export const newUpdateMessage = (text, userId, image) => async (dispatch) => {
+    const formData = new FormData();
+    formData.append("text", text);
+    formData.append("userId", userId);
+    if (image) {
+        formData.append("image", image);
+    }
+
     const response = await csrfFetch('/api/updateMessage', {
         method: "POST",
-        "Content-Type": "application/json",
+        headers: { "Content-Type": "multipart/form-data" },
         // need the userId to mark all other user's read column as false
-        body: JSON.stringify({ text, userId })
+        body: formData
     })
 
     if (response.ok) {

@@ -1,0 +1,22 @@
+#dnd-text {
+    border: 2px dashed white;
+    color: white;
+    width: 100%;
+    font-size: 20px;
+    padding: .5rem;
+    margin: .5rem 0;
+}
+
+#accepted-file-container {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+#accepted-file-left {
+    /* padding-right: 1rem */
+}
+
+#dnd-preview {
+    width: 100px;
+}

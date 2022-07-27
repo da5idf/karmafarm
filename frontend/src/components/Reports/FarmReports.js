@@ -8,7 +8,7 @@ export default function FarmReports() {
 
     return (
         <div className="page-hero">
-
+            <div className="page-title">Farm reports feature coming soon!</div>
         </div>
     )
 }

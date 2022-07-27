@@ -2,22 +2,23 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 
 import './UpdateMessageForm.css';
-import { csrfFetch } from '../../store/csrf';
 import { toggleConfirm } from '../../utils';
 import { newUpdateMessage } from '../../store/updateMessages';
+import DragAndDrop from '../DragAndDrop/DragAndDrop';
 
 export default function UpdateMessageForm({ userId }) {
     const dispatch = useDispatch();
 
     const [text, setText] = useState("");
     const [error, setError] = useState("");
+    const [file, setFile] = useState("");
 
     const submitUpdate = async (e) => {
         e.preventDefault();
 
         if (!validateUpdate()) return;
 
-        dispatch(newUpdateMessage(text, userId))
+        dispatch(newUpdateMessage(text, userId, file))
 
         toggleConfirm("weekly-msg-confirmation-modal");
         setText("");
@@ -51,6 +52,11 @@ export default function UpdateMessageForm({ userId }) {
                 minLength="10"
                 id="weekly-msg-text"
             />
+            <div
+                className="updateMessage-form-field"
+            >
+                <DragAndDrop setFile={setFile} file={file} />
+            </div>
             <div id="weekly-msg-error-submit-container">
                 <div id="weekly-msg-errors">
                     {error && <div id="weekly-msg-error">{error}</div>}

@@ -1,5 +1,4 @@
 #weekly-msg-form-hero {
-    /* width: 100%; */
     display: flex;
     flex-direction: column;
     position: relative;
@@ -13,6 +12,14 @@
 #weekly-msg-form-title {
     padding-bottom: .25rem;
     color: white;
+}
+
+.updateMessage-form-field {
+    display: flex;
+}
+
+.updateMessage-form-field > label {
+    width: 70%;
 }
 
 #weekly-msg-text {
@@ -31,7 +38,7 @@
 #weekly-msg-error-submit-container {
     display: flex;
     width: 100%;
-    justify-content: flex-end;
+    justify-content: space-between;
     align-items: flex-end;
 }
 
