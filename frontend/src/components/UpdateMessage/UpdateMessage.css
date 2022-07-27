@@ -71,15 +71,32 @@
 
 /*******************************************************/
 /* Individual Updates */
-
 .update-message-hero {
     padding: .25rem;
+    padding-bottom: 1rem;
+    margin-bottom: 1rem;
     display: grid;
     grid-template-columns: 150px 450px;
     gap: 1rem;
+    width: fit-content;
+}
+
+.update-message-hero:not(:last-of-type) {
+    border-bottom: 3px solid #73a577b5;
 }
 
 .update-message-hero > div {
-    width: 450px;
     white-space: pre-wrap;
+}
+
+.update-message-date-img {
+    display: flex;
+    flex-direction: column;
+}
+
+.update-message-img {
+    object-fit: cover;
+    object-position: center;
+    aspect-ratio: 1 / 1;
+    width: 100px;
 }

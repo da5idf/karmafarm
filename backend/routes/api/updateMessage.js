@@ -4,6 +4,7 @@ const asyncHandler = require('express-async-handler');
 const router = express.Router();
 const { UpdateMessage, User_UpdateMessage } = require('../../db/models');
 const { Op } = require('sequelize');
+const { singleMulterUpload, singlePublicFileUpload } = require('../../awsS3');
 
 router.get(
     "/",
@@ -18,12 +19,17 @@ router.get(
 
 router.post(
     "/",
+    singleMulterUpload("image"),
     asyncHandler(async (req, res, next) => {
         const { text, userId } = req.body
+        const imgUrl = await singlePublicFileUpload(req.file);
+
+        console.log("***$*$*$**$*$*$**$*$**$", imgUrl);
 
         const newUpdate = await UpdateMessage.create({
             userId,
-            text
+            text,
+            imgUrl
         })
 
         const records = await User_UpdateMessage.findAll({

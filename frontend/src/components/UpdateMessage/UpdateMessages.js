@@ -99,7 +99,10 @@ export default function UpdateMessages() {
                     <textarea
                         id="newest-update-textarea"
                         value={text}
-                        onChange={(e) => setText(e.target.value)}
+                        onChange={(e) => {
+                            console.log(e.target.value)
+                            setText(e.target.value)
+                        }}
                     />
                     <div id="update-message-buttons">
                         <button className='basic-button' onClick={handleSubmit}>{buttonText}</button>

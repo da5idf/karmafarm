@@ -8,21 +8,20 @@ export default function UpdateMessageModal({ user }) {
     const dispatch = useDispatch();
 
     const text = useSelector(state => state.userUpdateMessage.text)
-    const unread = useSelector(state => !state.userUpdateMessage.read)
 
-    // const [unread, setUnread] = useState(false)
+    const [unread, setUnread] = useState(false)
 
     useEffect(() => {
         dispatch(getUpdateMessageModal(user.id))
-        // .then(response => {
-        //     setUnread(!response.read)
-        // })
+            .then(response => {
+                setUnread(!response.read)
+            })
 
     }, [dispatch, user.id])
 
 
     const handleClose = () => {
-        // setUnread(false);
+        setUnread(false);
         dispatch(markUserUpdateMessageAsRead(user.id));
     }
 

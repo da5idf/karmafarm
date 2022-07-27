@@ -31,6 +31,8 @@ router.patch(
         const record = await User_UpdateMessage.findByPk(userId)
         record.read = true;
         await record.save();
+
+        res.send(record)
     })
 )
 
