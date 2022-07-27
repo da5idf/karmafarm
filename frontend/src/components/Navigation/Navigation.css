@@ -65,7 +65,7 @@
 
 /********************************/
 /* Font Awesome */
-#nav-hero .fa-solid,
-#nav-hero, .fa-regular {
+#nav-hero .fa-regular,
+#nav-hero .fa-solid {
     margin-right: .5rem;
 }

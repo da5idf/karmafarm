@@ -20,7 +20,7 @@ export const formatDate = (dateStr) => {
 }
 
 // script to get total price of an order
-export const getOrderTotal = (order) => {
+export const getOrderTotal = (order, number) => {
     const orderRecords = order.Orders_Products;
     const total = orderRecords.reduce((accum, record) => {
         accum += record.weight * record.Product.pricePerPound
@@ -30,6 +30,7 @@ export const getOrderTotal = (order) => {
     if (total === 0) {
         return "$0.00"
     } else {
+        if (number) return total
         return `$${total.toFixed(2)}`
     }
 }

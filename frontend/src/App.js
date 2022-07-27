@@ -13,6 +13,7 @@ import About from "./components/About/About";
 import NotFound from "./components/NotFound";
 import ProtectedRoute from "./components/ProtectedRoute";
 import RestaurantSignUp from "./components/SignupFormPage/RestaurantSignUp";
+import Reports from "./components/Reports";
 // import Chat from "./components/Chat";
 import { UpdateMessages } from "./components/UpdateMessage";
 
@@ -50,6 +51,10 @@ function App() {
               <Navigation />
               <AddProduct user={user} />
             </ProtectedRoute>
+            <ProtectedRoute exact path="/reports">
+              <Navigation />
+              <Reports user={user} />
+            </ProtectedRoute>
             <ProtectedRoute exact path="/updates">
               <Navigation />
               <UpdateMessages />
@@ -63,8 +68,9 @@ function App() {
               <NotFound />
             </Route>
           </Switch>
-        )}
-      </div>
+        )
+        }
+      </div >
     </>
   );
 }

@@ -1,4 +1,4 @@
-#updateMessage-modal-hero {
+#InfoModal-hero {
     position: relative;
     width: 500px;
     padding: 2rem;
@@ -9,7 +9,7 @@
     align-items: center;
 }
 
-#updateMessage-modal-hero .fa-x {
+#InfoModal-hero .fa-x {
     font-size: 15px;
     position: absolute;
     top: 20px;
@@ -17,7 +17,7 @@
     cursor: pointer;
 }
 
-#updateMessage-modal-title {
+#InfoModal-title {
     width: 100%;
     display: flex;
     gap: .5rem;
@@ -28,20 +28,20 @@
     border-bottom: 1px solid #c2c2c2;
 }
 
-#updateMessage-modal-text {
+#InfoModal-text {
     overflow-wrap: break-word;
     align-self: flex-start;
-    white-space: pre-wrap;
+    white-space: pre-line;
 }
 
-#updateMessage-modal-button {
+#InfoModal-button {
     width: 25%;
     margin-top: 2rem;
     font-size: 15px;
     align-self: flex-end;
 }
 
-#updateMessage-modal-button:hover {
+#InfoModal-button:hover {
     width: 25%;
     margin-top: 2rem;
     font-size: 15px;

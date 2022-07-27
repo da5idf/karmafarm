@@ -1,0 +1,39 @@
+#restaurant-report-inputs {
+    display: flex;
+    gap: 2rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+#restaurant-report-inputs > input[type=checkbox] {
+    display: none;
+}
+
+#restaurant-report-inputs > [type=checkbox] + label {
+    padding: .5rem;
+    font-size: 20px;
+    border: 1px solid black;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+#restaurant-report-inputs > [type=checkbox]:checked + label {
+    background-color: #F5DA70;
+}   
+
+#restaurant-report-inputs > label {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+#report-query {
+    width: fit-content;
+}
+
+#graph-container {
+    margin-top: 2rem;
+    /* width: 50%; */
+    min-height: 400px;
+    max-height: 600px;
+}
