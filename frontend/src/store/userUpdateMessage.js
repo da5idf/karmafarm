@@ -7,16 +7,17 @@ export const getUpdateMessageModal = (userId) => async (dispatch) => {
     const response = await csrfFetch(`/api/user_updatemessage/${userId}`);
 
     if (response.ok) {
-        const { read, text } = await response.json();
-        dispatch(hydrateUserUpdateModal(read, text));
-        return { read, text }
+        const { read, text, imgUrl } = await response.json();
+        dispatch(hydrateUserUpdateModal(read, text, imgUrl));
+        return { read, text, imgUrl }
     }
 }
 
-const hydrateUserUpdateModal = (read, text) => ({
+const hydrateUserUpdateModal = (read, text, imgUrl) => ({
     type: GET_USER_UPDATE,
     read,
-    text
+    text,
+    imgUrl
 })
 
 export const markUserUpdateMessageAsRead = (userId) => async (dispatch) => {
@@ -42,6 +43,7 @@ export default function userUpdateMessageReducer(state = initialState, action) {
         case GET_USER_UPDATE:
             newState.read = action.read;
             newState.text = action.text;
+            newState.imgUrl = action.imgUrl;
             return newState
         case MARK_UPDATE_AS_READ:
             newState.read = true;

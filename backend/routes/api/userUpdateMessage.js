@@ -17,7 +17,8 @@ router.get(
 
         res.send({
             read: record.read,
-            text: messages[0] ? messages[0].text : ""
+            text: messages[0] ? messages[0].text : "",
+            imgUrl: messages[0] ? messages[0].imgUrl : ""
         });
     })
 )
