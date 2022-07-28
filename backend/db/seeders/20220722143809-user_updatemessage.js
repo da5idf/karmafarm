@@ -13,7 +13,7 @@ module.exports = {
       },
       {
         userId: 3,
-        read: true,
+        read: false,
       },
       {
         userId: 4,

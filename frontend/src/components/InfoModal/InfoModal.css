@@ -36,6 +36,12 @@
     border-bottom: 1px solid #c2c2c2;
 }
 
+#InfoModal-img {
+    width: 40%;
+    aspect-ratio: 1 / 1;
+    margin-bottom: 2rem;
+}
+
 #InfoModal-text {
     overflow-wrap: break-word;
     align-self: flex-start;

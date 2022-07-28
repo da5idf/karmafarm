@@ -7,7 +7,7 @@ import { getUpdateMessageModal, markUserUpdateMessageAsRead } from "../../store/
 export default function UpdateMessageModal({ user }) {
     const dispatch = useDispatch();
 
-    const text = useSelector(state => state.userUpdateMessage.text)
+    const update = useSelector(state => state.userUpdateMessage)
 
     const [unread, setUnread] = useState(false)
 
@@ -28,7 +28,8 @@ export default function UpdateMessageModal({ user }) {
     return unread &&
         <InfoModal
             titleText={"An update from the farm"}
-            content={text}
+            content={update.text}
+            image={update.imgUrl}
             handleClose={handleClose}
         />
 }

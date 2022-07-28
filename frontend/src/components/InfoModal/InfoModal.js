@@ -3,7 +3,7 @@ import React from 'react';
 import './InfoModal.css'
 import { Modal } from '../../context/Modal';
 
-export default function InfoModal({ titleText, content, handleClose }) {
+export default function InfoModal({ titleText, content, image, handleClose }) {
     return (
         <Modal onClose={handleClose}>
             <div
@@ -18,6 +18,13 @@ export default function InfoModal({ titleText, content, handleClose }) {
                     className="fa-solid fa-x"
                     onClick={handleClose}
                 ></i>
+                {image &&
+                    <img
+                        id="InfoModal-img"
+                        src={image}
+                        alt=""
+                    />
+                }
                 <div
                     id="InfoModal-text"
                 >
