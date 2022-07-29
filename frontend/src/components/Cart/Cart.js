@@ -70,12 +70,15 @@ function Cart({ order, setAdding }) {
                     <div id="calendar-container">
                         <div className="page-subtitle" id="dd-title">Select your delivery day</div>
                         <Calendar
+                            view="month"
                             onChange={setDeliveryDay}
+                            showFixedNumberOfWeeks={true}
                             value={deliveryDay}
                             prev2Label={null}
                             next2Label={null}
                             activeStartDate={new Date()}
-                            tileDisabled={({ date }) => date < new Date()}
+                            tileDisabled={({ date }) => date < new Date() || date > new Date(new Date().getTime() + 1000 * 60 * 60 * 24 * 7)}
+                            onViewChange={({ action, activeStartDate, value, view }) => alert('Changed view to: ', activeStartDate, view, action, value)}
                         />
                     </div>
                     <div id="top-wrapper-right">
