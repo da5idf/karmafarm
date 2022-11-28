@@ -6,15 +6,15 @@ const tenDaysAgo = new Date(now - 10 * day)
 const oneDayAhead = new Date(now + day)
 const tenDaysAhead = new Date(now + 10 * day)
 
+let options = {};
+if (process.env.NODE_ENV === 'production') {
+  options.schema = process.env.SCHEMA;  // define your schema in options object
+}
+
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    /*
-      Add altering commands here.
-      Return a promise to correctly handle asynchronicity.
-
-      Example:
-      */
-    return queryInterface.bulkInsert('Orders', [
+    options.tableName = 'Orders';
+    return queryInterface.bulkInsert(options, [
       {
         restaurantId: 1,
         submitted: true,
@@ -62,6 +62,7 @@ module.exports = {
   },
 
   down: (queryInterface, Sequelize) => {
-    return queryInterface.bulkDelete('Orders', null, {});
+    options.tableName = 'Orders';
+    return queryInterface.bulkDelete(options);
   }
 };
