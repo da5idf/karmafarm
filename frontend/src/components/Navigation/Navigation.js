@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { NavLink, useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -8,6 +8,9 @@ import * as sessionActions from '../../store/session';
 function Navigation() {
     const dispatch = useDispatch();
     const history = useHistory();
+
+    const [showMenu, setShowMenu] = useState(true);
+
     const user = useSelector(state => state.session.user);
 
     const logout = (e) => {
@@ -16,10 +19,23 @@ function Navigation() {
         history.push("/")
     };
 
+    const closeMenu = (e) => {
+        e.preventDefault();
+        const hero = document.getElementById("nav-hero");
+        hero.classList.add("hide");
+    }
+
     if (!user) return;
 
     return (
         <div id="nav-hero">
+            {showMenu &&
+                <div id=""
+                    onClick={closeMenu}
+                >
+                    ClickMe
+                </div>
+            }
             <div id="nav-top">
                 <div id="nav-logo">Karma Farm</div>
                 <div id="nav-menu">

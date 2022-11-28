@@ -13,6 +13,17 @@
     z-index: 2000;
 }
 
+.hide {
+    animation-name: hide_navigation;
+    animation-duration: .5s;
+}
+
+@keyframes hide_navigation {
+    100% {
+        translate: -100%;
+    }
+}
+
 #nav-logo {
     font-family: Arimo, sans-serif;
     font-size: 25px;

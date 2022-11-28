@@ -37,8 +37,8 @@ const onConnection = (socket) => {
     console.log('a user connected');
 
     //upon first connect, emit to the user who connected:
-    socket.emit('welcome', 'Welcome to Slackluster!');
-    socket.emit('chat', { msg: 'Welcome to Slackluster!' });
+    socket.emit('welcome', 'Welcome to KarmaFarm!');
+    socket.emit('chat', { msg: 'Welcome to KarmaFarm!' });
 
     //upon first connect, broadcast to everyone but user who connected:
     socket.broadcast.emit('chat', { msg: 'A user has joined the chat' });
