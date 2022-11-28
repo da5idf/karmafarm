@@ -1,5 +1,4 @@
 const config = require('./index');
-
 const db = config.db;
 const username = db.username;
 const password = db.password;
@@ -24,6 +23,9 @@ module.exports = {
         require: true,
         rejectUnauthorized: false
       }
+    },
+    define: {         // define schema here
+      schema: process.env.SCHEMA
     }
   }
 };

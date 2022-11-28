@@ -1,8 +1,13 @@
 'use strict';
+let options = {};
+if (process.env.NODE_ENV === 'production') {
+  options.schema = process.env.SCHEMA;  // define your schema in options object
+}
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.bulkInsert('Products', [
+    options.tableName = 'Products';
+    return queryInterface.bulkInsert(options, [
       {
         name: 'Super Sugar Snap',
         imgUrl: 'https://karmafarm.s3.amazonaws.com/seeder/sugar_snap.jpeg',
@@ -127,6 +132,7 @@ module.exports = {
   },
 
   down: (queryInterface, Sequelize) => {
-    return queryInterface.bulkDelete('Products', null, {});
+    options.tableName = 'Products';
+    return queryInterface.bulkDelete(options);
   }
 };
