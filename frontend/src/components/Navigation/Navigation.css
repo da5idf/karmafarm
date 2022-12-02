@@ -1,7 +1,37 @@
+#hamburger {
+    font-size: 30px;
+    padding: 20px;
+    cursor: pointer;
+}
+
 #nav-hero {
+    position: relative;
+    transition: width 0.5s ease;
+}
+
+#nav-toggle {
+    position: absolute;
+    right: 0px;
+    top: 10px;
+    height: 30px;
+    width: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #ccc;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-left: 1px solid #ccc;
+    border-left: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    cursor: pointer;
+    z-index: 2001;
+}
+
+#nav-main {
     background-color: white;
     position: sticky;
-    left: 0;
+    right: 0;
     top: 0;
     display: flex;
     flex-direction: column;
@@ -11,17 +41,6 @@
     padding-top: 30px;
     border-right: 1px solid #ccc;
     z-index: 2000;
-}
-
-.hide {
-    animation-name: hide_navigation;
-    animation-duration: .5s;
-}
-
-@keyframes hide_navigation {
-    100% {
-        translate: -100%;
-    }
 }
 
 #nav-logo {
@@ -78,12 +97,12 @@
 
 #nav-copyright {
     font-size: 15px;
-    color: #aaa
+    color: #aaa;
 }
 
 /********************************/
 /* Font Awesome */
 #nav-hero .fa-regular,
 #nav-hero .fa-solid {
-    margin-right: .5rem;
+    margin-right: 0.5rem;
 }
